@@ -1,1 +1,12 @@
-.idea/
+.DS_Store
+.idea
+*.iml
+.vscode/*
+.env
+.envrc
+
+npm-debug.log
+
+dist
+coverage
+node_modules

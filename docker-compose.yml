@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  records-of-processing-activities-gui:
+    build: ../records-of-processing-activities-gui
+    image: dcatno/records-of-processing-activities-gui:latest
+    ports:
+      - 8136:8000
+    environment:
+      - OIDC_ISSUER
