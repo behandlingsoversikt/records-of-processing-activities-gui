@@ -1,7 +1,11 @@
 {
   "name": "records-of-processing-activities-gui",
   "version": "1.0.0",
-  "description": "Application for Fellesdatakatalog",
+  "description": "An application for managing records of processing activities",
+  "private": true,
+  "engines": {
+    "node": ">= 12.13.0"
+  },
   "scripts": {
     "start": "npm-run-all start:webpack",
     "start:webpack": "webpack-dev-server --hot --inline --config-register @babel/register --config webpack/dev.config.js",

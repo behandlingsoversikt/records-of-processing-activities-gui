@@ -8,8 +8,6 @@ import decode from 'jwt-decode';
 
 import config from './config';
 
-const ALLOWED_AUTHORITIES = ['organization:root:admin'];
-
 export interface AuthServiceInteface {
   init(): Promise<boolean>;
   logIn(): Promise<void>;
@@ -19,7 +17,7 @@ export interface AuthServiceInteface {
   getAuthorizationHeader(): Promise<string>;
   onUserLoad(callback: (user: User) => void): void;
   getUser(): User | null;
-  isAuthorised(): boolean;
+  isAuthorised(publisherId: string): boolean;
 }
 
 interface AccessToken {
@@ -104,21 +102,17 @@ class AuthService implements AuthServiceInteface {
     return decode(token);
   }
 
-  public isAuthorised(): boolean {
+  public isAuthorised(publisherId: string): boolean {
     return this.user
-      ? this.hasRequiredAuthorities(this.user.access_token)
+      ? this.hasRequiredAuthorities(this.user.access_token, publisherId)
       : false;
   }
 
-  public hasRequiredAuthorities(token: string): boolean {
+  public hasRequiredAuthorities(token: string, resourceId: string): boolean {
     const authorities: string[] = (
       this.decodeAccessToken(token).authorities || ''
     ).split(',');
-    return (
-      ALLOWED_AUTHORITIES.map((authority: string) =>
-        authorities.includes(authority)
-      ).filter(Boolean).length === ALLOWED_AUTHORITIES.length
-    );
+    return authorities.includes(`organization:${resourceId}:admin`);
   }
 }
 

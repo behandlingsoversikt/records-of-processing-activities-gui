@@ -5,7 +5,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import App from '../../components/app/App';
+import App from '../../components/app';
 
 function run(): void {
   render(

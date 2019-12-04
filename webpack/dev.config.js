@@ -17,7 +17,7 @@ export default merge(baseConfig, {
   },
   devServer: {
     host: '0.0.0.0',
-    port: 8140,
+    port: 8141,
     before: app => app.get('/config.js', (_, res) => res.status(204).send()),
     historyApiFallback: {
       rewrites: [

@@ -1,6 +1,7 @@
-import React, { PureComponent, Suspense } from 'react';
+import React, { PureComponent, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ListPagePure } from '../../pages/list-page/list-page-pure';
+
+const ListPage = lazy(() => import('../list-page'));
 
 export default class Router extends PureComponent {
   public render(): JSX.Element {
@@ -8,7 +9,7 @@ export default class Router extends PureComponent {
       <BrowserRouter>
         <Suspense fallback={<></>}>
           <Switch>
-            <Route exact path='/' component={ListPagePure} />
+            <Route component={ListPage} />
           </Switch>
         </Suspense>
       </BrowserRouter>
