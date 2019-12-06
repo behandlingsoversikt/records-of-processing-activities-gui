@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 
 import Headline from '../headline';
 import FDKButton from '../fdk-button';
+import BreadcrumbsBar from '../breadcrumbs-bar';
 import RecordListTable from '../record-list-table';
 import RepresentativeDropdown from '../representative-dropdown';
 
@@ -25,6 +26,7 @@ const dataProtectionOfficer: ContactDetailsInterface = {
 
 const RecordListPage = (): JSX.Element => (
   <SC.RecordListPage>
+    <BreadcrumbsBar />
     <Headline
       title='Protokoll over behandlingsaktiviter'
       subTitle='Brønnøysundsregistrene'

@@ -1,7 +1,13 @@
 export default {
   fdk: {
     colors: {
-      neutrals: { darker: '#2d3741', lightest: '#eeeff0' },
+      neutrals: {
+        darker: '#2d3741',
+        default: '#969ba0',
+        light: '#d5d7d9',
+        lighter: '#dfe1e2',
+        lightest: '#eeeff0'
+      },
       text: { default: '#2d3741', link: '#0069a5' },
       alerts: { warning: { lightest: '#fff2d8' } },
       buttons: {
