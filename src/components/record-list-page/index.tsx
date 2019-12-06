@@ -1,9 +1,12 @@
 import React, { memo } from 'react';
 
-import SC from './styled';
+import Headline from '../headline';
+import FDKButton from '../fdk-button';
 import RecordListTable from '../record-list-table';
 import RepresentativeDropdown from '../representative-dropdown';
-import Headline from '../headline';
+
+import SC from './styled';
+
 import { ContactDetailsInterface } from '../../types';
 
 const dataControllerRepresentative: ContactDetailsInterface = {
@@ -38,7 +41,10 @@ const RecordListPage = (): JSX.Element => (
         contactPerson={dataProtectionOfficer}
       />
     </SC.Representatives>
-
+    <SC.RecordListActions>
+      <FDKButton variant='primary' text='Legg til ny protokoll' />
+      <FDKButton text='Generer rapport' />
+    </SC.RecordListActions>
     <RecordListTable />
   </SC.RecordListPage>
 );

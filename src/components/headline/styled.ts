@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import Common from '../common/styled';
-
-const Headline = styled(Common.Division)``;
+const Headline = styled.div`
+  margin-bottom: 40px;
+`;
 
 const Title = styled.h1`
   font-size: 30px;

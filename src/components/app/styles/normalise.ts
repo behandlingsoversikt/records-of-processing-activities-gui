@@ -4,7 +4,7 @@ export default css`
   html,
   * {
     font-family: Heebo, sans-serif;
-    letter-spacing: 0.5px;
+    letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
