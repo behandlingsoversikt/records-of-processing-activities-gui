@@ -133,6 +133,7 @@ export default css`
   optgroup,
   select,
   textarea {
+    outline: none;
     font: inherit;
   }
 

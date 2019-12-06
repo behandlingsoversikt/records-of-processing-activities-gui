@@ -12,6 +12,10 @@ const FDKButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
     box-shadow: 0 0 0 0.2rem rgba(38, 128, 179, 0.5);
   }
 
+  &:not(:disabled):hover {
+    cursor: pointer;
+  }
+
   ${({ variant, theme }) => {
     const buttonStyles = theme.fdk.colors.buttons;
     switch (variant) {
