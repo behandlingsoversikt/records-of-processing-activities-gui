@@ -8,3 +8,4 @@ services:
       - 8140:8000
     environment:
       - OIDC_ISSUER
+      - RECORDS_OF_PROCESSING_ACTIVITIES_URL

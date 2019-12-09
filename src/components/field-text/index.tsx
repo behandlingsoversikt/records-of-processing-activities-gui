@@ -6,17 +6,23 @@ interface Props {
   required?: boolean;
   placeholder?: string;
   labelText: string;
+  value?: string;
   name: string;
 }
 
 const TextField = ({
   name,
+  value,
   placeholder,
   labelText
 }: PropsWithChildren<Props>) => (
   <SC.Field>
     <SC.Label htmlFor={name}>{labelText}</SC.Label>
-    <SC.TextField placeholder={placeholder || labelText} name={name} />
+    <SC.TextField
+      placeholder={placeholder || labelText}
+      name={name}
+      value={value}
+    />
   </SC.Field>
 );
 

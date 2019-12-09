@@ -20,7 +20,7 @@ An application for managing records of processing activities.
 - Build a Docker container using the following command:
   - `docker build -t records-of-processing-activities-gui .`
 - Run the container using the following comand:
-  - `docker run -d -p 8141:8000 -e OIDC_ISSUER records-of-processing-activities-gui`
+  - `docker run -d -p 8141:8000 -e OIDC_ISSUER -e RECORDS_OF_PROCESSING_ACTIVITIES_URL records-of-processing-activities-gui`
 
 #### Running application using Docker Compose
 
@@ -30,3 +30,4 @@ An application for managing records of processing activities.
 ## Environment Variables
 
 - `OIDC_ISSUER` - OIDC issuer URI
+- `RECORDS_OF_PROCESSING_ACTIVITIES_URL` - Base URL of Records of Processing Activities backend

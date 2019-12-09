@@ -1,8 +1,11 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'styled-components';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import AuthProvider from '../../providers/auth';
+
+import store from './redux/store';
 
 import GlobalStyles from './styles';
 import theme from './styles/theme';
@@ -14,7 +17,9 @@ export default hot(function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <AuthProvider>
-        <Router />
+        <ReduxProvider store={store}>
+          <Router />
+        </ReduxProvider>
       </AuthProvider>
     </ThemeProvider>
   );

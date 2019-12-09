@@ -27,6 +27,13 @@ const RecordListTable = styled.table`
   }
 
   th {
+    & > div {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     background: ${({ theme }) => theme.fdk.colors.neutrals.darker};
     color: white;
     font-weight: bold;
