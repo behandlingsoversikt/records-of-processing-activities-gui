@@ -1,4 +1,4 @@
-name: Build, test and deploy to production on merge to master branc
+name: Build, test and deploy to production on merge to master branch
 
 on:
   push:
@@ -46,9 +46,9 @@ jobs:
         uses: machine-learning-apps/gke-kubeconfig@master
         with:
           application_credentials: ${{ secrets.FDK_PROD_AUTODEPLOY }}
-          project_id: fdk-dev
+          project_id: fdk-prod
           location_zone: europe-north1-a
-          cluster_name: fdk-dev
+          cluster_name: fdk-prod
 
       - name: Deploy to production
         uses: docker://bitnami/kubectl:latest
