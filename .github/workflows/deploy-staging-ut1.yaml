@@ -33,7 +33,7 @@ jobs:
           location_zone: europe-north1-a
           cluster_name: fdk-dev
 
-      - name: Deploy to staging
+      - name: Deploy to staging-ut1
         uses: docker://bitnami/kubectl:latest
         env:
           KUBECONFIG: '/github/workspace/.kube/config'
