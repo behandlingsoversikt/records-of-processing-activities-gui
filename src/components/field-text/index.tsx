@@ -1,4 +1,4 @@
-import React, { memo, PropsWithChildren } from 'react';
+import React, { memo, PropsWithChildren, ChangeEvent } from 'react';
 
 import SC from './styled';
 
@@ -8,13 +8,15 @@ interface Props {
   labelText: string;
   value?: string;
   name: string;
+  onChange?: (event: ChangeEvent<any>) => void;
 }
 
 const TextField = ({
   name,
   value,
   placeholder,
-  labelText
+  labelText,
+  onChange
 }: PropsWithChildren<Props>) => (
   <SC.Field>
     <SC.Label htmlFor={name}>{labelText}</SC.Label>
@@ -22,6 +24,7 @@ const TextField = ({
       placeholder={placeholder || labelText}
       name={name}
       value={value}
+      onChange={onChange}
     />
   </SC.Field>
 );

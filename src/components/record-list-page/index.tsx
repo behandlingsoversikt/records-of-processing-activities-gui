@@ -12,21 +12,7 @@ import * as actions from './redux/actions';
 
 import SC from './styled';
 
-import { ContactDetailsInterface, RecordInterface } from '../../types';
-
-const dataControllerRepresentative: ContactDetailsInterface = {
-  name: 'Kari Normann',
-  address: 'Grev Wedels plass 9, 0153 Oslo',
-  phone: '75007501',
-  email: 'kari.normann@brreg.no'
-};
-
-const dataProtectionOfficer: ContactDetailsInterface = {
-  name: 'Hans Hansen',
-  address: 'Grev Wedels plass 9, 0153 Oslo',
-  phone: '75007501',
-  email: 'hans.hansen@brreg.no'
-};
+import { RecordInterface } from '../../types';
 
 interface Props {
   records: RecordInterface[];
@@ -48,10 +34,7 @@ const RecordListPage = ({
         title='Protokoll over behandlingsaktiviteter'
         subTitle='Brønnøysundsregistrene'
       />
-      <Representatives
-        dataControllerRepresentative={dataControllerRepresentative}
-        dataProtectionOfficer={dataProtectionOfficer}
-      />
+      <Representatives />
       <SC.RecordListActions>
         <FDKButton variant='primary' text='Legg til ny protokoll' />
         <FDKButton text='Generer rapport' />

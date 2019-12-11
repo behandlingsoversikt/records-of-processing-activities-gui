@@ -10,6 +10,12 @@ export interface RecordInterface {
 export interface ContactDetailsInterface {
   name: string;
   address?: string;
-  phone: string;
-  email: string;
+  phone?: string;
+  email?: string;
+}
+
+export interface RepresentativesInterface {
+  dataControllerRepresentative?: ContactDetailsInterface;
+  dataControllerRepresentativeInEU?: ContactDetailsInterface;
+  dataProtectionOfficer?: ContactDetailsInterface;
 }
