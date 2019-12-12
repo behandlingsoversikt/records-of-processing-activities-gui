@@ -2,15 +2,15 @@ import * as Yup from 'yup';
 
 export default Yup.object().shape({
   name: Yup.string()
-    .ensure()
-    .required('Name is required'),
+    .required('Name is required')
+    .ensure(),
   address: Yup.string()
-    .ensure()
-    .required('Address is required'),
+    .required('Address is required')
+    .ensure(),
   email: Yup.string()
-    .ensure()
-    .required('Email is required'),
+    .required('Email is required')
+    .ensure(),
   phone: Yup.string()
-    .ensure()
     .required('Phone number is required')
+    .ensure()
 });

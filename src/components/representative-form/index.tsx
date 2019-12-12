@@ -6,47 +6,24 @@ import Fieldset from '../fdk-fieldset';
 
 import SC from './styled';
 
-import validationSchema from './validation-schema';
+// import validationSchema from './validation-schema';
 
 import { ContactDetailsInterface } from '../../types';
-
-// interface FormValues {
-//   name: string;
-//   address: string;
-//   phone: string;
-//   email: string;
-// }
+import { RepresentativeType } from '../../types/enums';
 
 interface Props {
   title: string;
   subtitle: string;
+  type: RepresentativeType;
   representative: ContactDetailsInterface;
-  onChange?: () => void;
+  onChange?: (
+    type: RepresentativeType,
+    payload: ContactDetailsInterface
+  ) => void;
 }
 
-// const RepresentativeForm = ({
-//   title,
-//   subtitle,
-//   values: { name, address, phone, email }
-// }: Props): JSX.Element => (
-//   <SC.RepresentativeForm>
-//     <Fieldset title={title} subtitle={subtitle}>
-//       <TextField
-//         labelText='Navn'
-//         name='name'
-//         placeholder='Fornavn og etternavn'
-//         value={name}
-//       />
-//       <TextField labelText='Postadresse' name='address' value={address} />
-//       <SC.InlineFields>
-//         <TextField labelText='E-post' name='email' value={email} />
-//         <TextField labelText='Telefon' name='phone' value={phone} />
-//       </SC.InlineFields>
-//     </Fieldset>
-//   </SC.RepresentativeForm>
-// );
-
 const RepresentativeForm = ({
+  type,
   title,
   subtitle,
   representative: { name, address, email, phone },
@@ -59,8 +36,8 @@ const RepresentativeForm = ({
       email,
       phone
     },
-    onSubmit: () => onChange && onChange(),
-    validationSchema
+    onSubmit: (): void => onChange && onChange(type, values)
+    // validationSchema
   });
 
   const onValueChange = (e: ChangeEvent<any>) => {
@@ -104,18 +81,3 @@ const RepresentativeForm = ({
 };
 
 export default memo(RepresentativeForm);
-
-// export default memo(
-//   withFormik({
-//     mapPropsToValues: ({
-//       representative: { name, address, phone, email }
-//     }: Props) => ({
-//       name,
-//       address,
-//       email,
-//       phone
-//     }),
-//     handleSubmit: () => {},
-//     validationSchema
-//   })(RepresentativeForm)
-// );

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
@@ -6,36 +6,31 @@ import SC from './styled';
 
 import ExpansionPanel from '../expansion-panel';
 
-import TextField from '../field-text';
-import Fieldset from '../fdk-fieldset';
 import Anchor from '../anchor';
 import RepresentativeForm from '../representative-form';
 
 import * as actions from './redux/actions';
 
-import { ContactDetailsInterface } from '../../types';
-
-const dataControllerRepresentative: ContactDetailsInterface = {
-  name: 'Kari Normann',
-  address: 'Grev Wedels plass 9, 0153 Oslo',
-  phone: '75007501',
-  email: 'kari.normann@brreg.no'
-};
-
-const dataProtectionOfficer: ContactDetailsInterface = {
-  name: 'Hans Hansen',
-  address: 'Grev Wedels plass 9, 0153 Oslo',
-  phone: '75007501',
-  email: 'hans.hansen@brreg.no'
-};
+import { RepresentativeType } from '../../types/enums';
+import { RepresentativesInterface } from '../../types/domain';
 
 interface Props {
+  representatives: RepresentativesInterface;
   actions: typeof actions;
 }
 
 const Representatives = ({
-  actions: { patchRepresentativeRequested }
+  representatives: {
+    dataControllerRepresentative,
+    dataControllerRepresentativeInEU,
+    dataProtectionOfficer
+  },
+  actions: { patchRepresentativeRequested, fetchAllRepresentativesRequested }
 }: Props): JSX.Element => {
+  useEffect(() => {
+    fetchAllRepresentativesRequested();
+  }, []);
+
   return (
     <SC.Representatives>
       <ExpansionPanel
@@ -44,6 +39,7 @@ const Representatives = ({
         subtitle={dataControllerRepresentative.name}
       >
         <RepresentativeForm
+          type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
           title='Representant for behandlingsansvarlig'
           subtitle='Den korte hjelpeteksten'
           representative={dataControllerRepresentative}
@@ -60,55 +56,36 @@ const Representatives = ({
           />{' '}
           for mer informasjon.
         </SC.LegalNoticeEU>
-        <Fieldset
+        <RepresentativeForm
+          type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU}
           title='Representant for behandlingsansvarlig'
           subtitle='Den korte hjelpeteksten'
-        >
-          <TextField
-            labelText='Navn'
-            name='dcr-eu-name'
-            placeholder='Fornavn og etternavn'
-          />
-          <TextField
-            labelText='Postadresse'
-            name='dcr-eu-address'
-            placeholder='Postadresse'
-          />
-          <SC.InlineFields>
-            <TextField labelText='E-post' name='dcr-eu-email' />
-            <TextField labelText='Telefon' name='dcr-eu-phone' />
-          </SC.InlineFields>
-        </Fieldset>
+          representative={dataControllerRepresentativeInEU}
+          onChange={patchRepresentativeRequested}
+        />
       </ExpansionPanel>
       <ExpansionPanel
         required
         title='Personvernombud'
-        subtitle={dataProtectionOfficer.name}
+        subtitle={dataProtectionOfficer && dataProtectionOfficer.name}
       >
-        <Fieldset title='Personvernombud' subtitle='Den korte hjelpeteksten'>
-          <TextField
-            labelText='Navn'
-            name='dpo-name'
-            placeholder='Fornavn og etternavn'
-          />
-          <TextField
-            labelText='Postadresse'
-            name='dpo-address'
-            placeholder='Postadresse'
-          />
-          <SC.InlineFields>
-            <TextField labelText='E-post' name='dpo-email' />
-            <TextField labelText='Telefon' name='dpo-phone' />
-          </SC.InlineFields>
-        </Fieldset>
+        <RepresentativeForm
+          type={RepresentativeType.DATA_PROTECTION_OFFICER}
+          title='Personvernombud'
+          subtitle='Den korte hjelpeteksten'
+          representative={dataProtectionOfficer}
+          onChange={patchRepresentativeRequested}
+        />
       </ExpansionPanel>
     </SC.Representatives>
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  records: state.RecordsPageReducer.get('records').toJS()
-});
+const mapStateToProps = (state: any) => {
+  return {
+    representatives: state.RepresentativesReducer.get('representatives').toJS()
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(actions, dispatch)

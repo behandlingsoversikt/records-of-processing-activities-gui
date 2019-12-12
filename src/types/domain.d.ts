@@ -8,14 +8,14 @@ export interface RecordInterface {
 }
 
 export interface ContactDetailsInterface {
-  name: string;
+  name?: string;
   address?: string;
   phone?: string;
   email?: string;
 }
 
 export interface RepresentativesInterface {
-  dataControllerRepresentative?: ContactDetailsInterface;
-  dataControllerRepresentativeInEU?: ContactDetailsInterface;
-  dataProtectionOfficer?: ContactDetailsInterface;
+  dataControllerRepresentative: ContactDetailsInterface;
+  dataControllerRepresentativeInEU: ContactDetailsInterface;
+  dataProtectionOfficer: ContactDetailsInterface;
 }

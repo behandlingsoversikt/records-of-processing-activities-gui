@@ -9,8 +9,8 @@ interface Props {
 }
 
 const ExpansionPanel = ({
-  title,
-  subtitle,
+  title = '',
+  subtitle = '',
   required = false,
   children
 }: PropsWithChildren<Props>): JSX.Element => {

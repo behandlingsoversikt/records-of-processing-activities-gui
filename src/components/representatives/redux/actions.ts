@@ -1,23 +1,65 @@
 import {
+  FETCH_ALL_REPRESENTATIVES_FAILED,
+  FETCH_ALL_REPRESENTATIVES_REQUESTED,
+  FETCH_ALL_REPRESENTATIVES_SUCCEEDED,
   PATCH_REPRESENTATIVE_FAILED,
   PATCH_REPRESENTATIVE_REQUESTED,
   PATCH_REPRESENTATIVE_SUCCEEDED
 } from './action-types';
 
-// import { RepresentativesInterface } from '../../../types';
+import { RepresentativeType } from '../../../types/enums';
+import {
+  ContactDetailsInterface,
+  RepresentativesInterface
+} from '../../../types';
 
-export function patchRepresentativeRequested() {
+export function fetchAllRepresentativesRequested() {
   return {
-    type: PATCH_REPRESENTATIVE_REQUESTED
+    type: FETCH_ALL_REPRESENTATIVES_REQUESTED
   };
 }
 
-export function patchRepresentativeSucceeded() {
+export function fetchAllRepresentativesSucceeded(
+  representatives: RepresentativesInterface
+) {
   return {
-    type: PATCH_REPRESENTATIVE_SUCCEEDED
-    // payload: {
-    //   representatives
-    // }
+    type: FETCH_ALL_REPRESENTATIVES_SUCCEEDED,
+    payload: {
+      representatives
+    }
+  };
+}
+
+export function fetchAllRepresentativesFailed(message: string) {
+  return {
+    type: FETCH_ALL_REPRESENTATIVES_FAILED,
+    payload: {
+      message
+    }
+  };
+}
+
+export function patchRepresentativeRequested(
+  type: RepresentativeType,
+  payload: ContactDetailsInterface
+) {
+  return {
+    type: PATCH_REPRESENTATIVE_REQUESTED,
+    payload: {
+      type,
+      payload
+    }
+  };
+}
+
+export function patchRepresentativeSucceeded(
+  representatives: RepresentativesInterface
+) {
+  return {
+    type: PATCH_REPRESENTATIVE_SUCCEEDED,
+    payload: {
+      representatives
+    }
   };
 }
 
