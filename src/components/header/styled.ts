@@ -18,6 +18,12 @@ const Header = styled.header`
   border-bottom: 1px solid #e6e6e6;
   box-shadow: 0 0 10px -5px #ccc;
   z-index: 1000;
+  @media print {
+    border: none;
+    box-shadow: none;
+    margin-bottom: 100px;
+    position: relative;
+  }
 `;
 
 const LogoLink = styled.a`
@@ -41,6 +47,10 @@ const UserAvatar = styled.div`
 
   & > svg {
     fill: #0069a5;
+  }
+
+  @media print {
+    display: none !important;
   }
 `;
 
