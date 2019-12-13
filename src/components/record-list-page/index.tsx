@@ -29,6 +29,7 @@ const RecordListPage = ({
     fetchAllRecordsRequested();
   }, []);
 
+  const navigateToReportPage = () => push('/report');
   const navigateToNewRecordPage = () => push('/record');
 
   return (
@@ -45,7 +46,7 @@ const RecordListPage = ({
           text='Legg til ny protokoll'
           onClick={navigateToNewRecordPage}
         />
-        <FDKButton text='Generer rapport' />
+        <FDKButton text='Generer rapport' onClick={navigateToReportPage} />
       </SC.RecordListActions>
       <RecordListTable records={records} />
     </SC.RecordListPage>
