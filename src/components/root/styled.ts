@@ -11,10 +11,4 @@ const Root = styled(Common.Container)`
   margin-top: 74px;
 `;
 
-const Heading = styled.h1`
-  margin-bottom: 20px;
-  font-size: 130%;
-  font-weight: 500;
-`;
-
-export default { Root, Heading };
+export default { Root };

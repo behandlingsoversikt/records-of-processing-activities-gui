@@ -1,17 +1,17 @@
-import React, { memo, ChangeEvent } from 'react';
-import { useFormik } from 'formik';
+import React, { memo, useEffect } from 'react';
+import { withFormik, FormikProps } from 'formik';
 
 import TextField from '../field-text';
 import Fieldset from '../fdk-fieldset';
 
 import SC from './styled';
 
-// import validationSchema from './validation-schema';
+import validationSchema from './validation-schema';
 
 import { ContactDetailsInterface } from '../../types';
 import { RepresentativeType } from '../../types/enums';
 
-interface Props {
+interface Props extends FormikProps<ContactDetailsInterface> {
   title: string;
   subtitle: string;
   type: RepresentativeType;
@@ -26,53 +26,54 @@ const RepresentativeForm = ({
   type,
   title,
   subtitle,
-  representative: { name, address, email, phone },
-  onChange
+  onChange,
+  values,
+  errors,
+  touched,
+  handleChange
 }: Props): JSX.Element => {
-  const { values, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      name,
-      address,
-      email,
-      phone
-    },
-    onSubmit: (): void => onChange && onChange(type, values)
-    // validationSchema
-  });
-
-  const onValueChange = (e: ChangeEvent<any>) => {
-    handleChange(e);
-    handleSubmit(e);
-  };
+  useEffect(() => {
+    if (onChange) {
+      onChange(type, values);
+    }
+  }, [values]);
 
   return (
     <SC.RepresentativeForm>
       <Fieldset title={title} subtitle={subtitle}>
         <TextField
-          labelText='Navn'
           name='name'
+          labelText='Navn'
           placeholder='Fornavn og etternavn'
           value={values.name}
-          onChange={onValueChange}
+          error={errors.name && touched.name}
+          helperText={touched.name && errors.name}
+          onChange={handleChange}
         />
         <TextField
-          labelText='Postadresse'
           name='address'
+          labelText='Postadresse'
           value={values.address}
-          onChange={onValueChange}
+          error={errors.address && touched.address}
+          helperText={touched.address && errors.address}
+          onChange={handleChange}
         />
         <SC.InlineFields>
           <TextField
-            labelText='E-post'
             name='email'
+            labelText='E-post'
             value={values.email}
-            onChange={onValueChange}
+            error={errors.email && touched.email}
+            helperText={touched.email && errors.email}
+            onChange={handleChange}
           />
           <TextField
-            labelText='Telefon'
             name='phone'
+            labelText='Telefon'
             value={values.phone}
-            onChange={onValueChange}
+            error={errors.phone && touched.phone}
+            helperText={touched.phone && errors.phone}
+            onChange={handleChange}
           />
         </SC.InlineFields>
       </Fieldset>
@@ -80,4 +81,18 @@ const RepresentativeForm = ({
   );
 };
 
-export default memo(RepresentativeForm);
+export default memo(
+  withFormik({
+    mapPropsToValues: ({
+      representative: { name = '', address = '', email = '', phone = '' }
+    }: Props) => ({
+      name,
+      address,
+      email,
+      phone
+    }),
+    handleSubmit: () => {},
+    validationSchema,
+    displayName: 'RepresentativeForm'
+  })(RepresentativeForm as any) as any
+);

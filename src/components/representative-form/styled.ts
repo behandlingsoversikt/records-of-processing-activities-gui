@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Form } from 'formik';
 
-const RepresentativeForm = styled.form``;
+const RepresentativeForm = styled(Form)``;
 
 const InlineFields = styled.div`
   display: flex;
