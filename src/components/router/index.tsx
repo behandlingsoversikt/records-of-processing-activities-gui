@@ -1,18 +1,25 @@
-import React, { PureComponent, lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { lazy, Suspense, memo } from 'react';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-const ListPage = lazy(() => import('../list-page'));
+import Root from '../root';
+import Header from '../header';
+import Footer from '../footer';
 
-export default class Router extends PureComponent {
-  public render(): JSX.Element {
-    return (
-      <BrowserRouter>
-        <Suspense fallback={<></>}>
-          <Switch>
-            <Route component={ListPage} />
-          </Switch>
-        </Suspense>
-      </BrowserRouter>
-    );
-  }
-}
+const RecordListPage = lazy(() => import('../record-list-page'));
+
+const Router = (): JSX.Element => (
+  <BrowserRouter>
+    <Root>
+      <Header />
+      <Suspense fallback={<></>}>
+        <Switch>
+          <Route exact path='/' component={RecordListPage} />
+          <Redirect to='/' />
+        </Switch>
+      </Suspense>
+      <Footer />
+    </Root>
+  </BrowserRouter>
+);
+
+export default memo(Router);
