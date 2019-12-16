@@ -5,7 +5,7 @@ services:
     build: ../records-of-processing-activities-gui
     image: dcatno/records-of-processing-activities-gui:latest
     ports:
-      - 8140:8000
+      - 8140:8080
     environment:
       - OIDC_ISSUER
       - RECORDS_OF_PROCESSING_ACTIVITIES_URL
