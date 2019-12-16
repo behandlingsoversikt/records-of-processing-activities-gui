@@ -6,7 +6,7 @@ interface Props {
   id?: string;
   required?: boolean;
   placeholder?: string;
-  labelText: string;
+  labelText?: string;
   value?: string;
   error?: any;
   helperText?: any;
@@ -25,7 +25,7 @@ const TextField = ({
   onChange
 }: PropsWithChildren<Props>) => (
   <SC.Field error={error}>
-    <SC.Label htmlFor={name}>{labelText}</SC.Label>
+    {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
     <SC.TextField
       id={id}
       placeholder={placeholder || labelText}

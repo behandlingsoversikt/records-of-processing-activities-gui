@@ -12,13 +12,14 @@ const ExpansionPanel = ({
   title = '',
   subtitle = '',
   required = false,
-  children
+  children,
+  ...props
 }: PropsWithChildren<Props>): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
   const toggleExpansion = () => setIsExpanded(!isExpanded);
 
   return (
-    <SC.ExpansionPanel isExpanded={isExpanded}>
+    <SC.ExpansionPanel {...props} isExpanded={isExpanded}>
       <SC.Head onClick={toggleExpansion}>
         <SC.Title>{title}</SC.Title>
         {required && <SC.RequiredLabel>Obligatorisk</SC.RequiredLabel>}

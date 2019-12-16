@@ -25,8 +25,6 @@ const LogoLink = styled.a`
 `;
 
 const Container = styled(Common.Container)`
-  /* display: flex;
-  margin: 0 auto; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,6 +51,10 @@ const UserName = styled.span`
 
 const LogoutButton = styled(Button)`
   margin-left: 10px !important;
+
+  & span {
+    font-size: 1.4rem;
+  }
 `;
 
 export default {

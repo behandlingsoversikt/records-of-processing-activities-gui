@@ -5,6 +5,7 @@ const RepresentativeForm = styled(Form)``;
 
 const InlineFields = styled.div`
   display: flex;
+
   & > div:nth-of-type(n + 2) {
     margin-left: 20px;
   }

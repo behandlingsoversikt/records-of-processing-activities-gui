@@ -3,8 +3,6 @@ import styled, { css } from 'styled-components';
 const ExpansionPanel = styled.div<{ isExpanded: boolean }>`
   flex: 0 0 calc(50% - 15px);
 
-  margin-bottom: 60px;
-
   background-color: white;
   border-radius: 5px;
 

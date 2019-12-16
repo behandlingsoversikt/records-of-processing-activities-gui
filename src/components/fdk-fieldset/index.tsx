@@ -8,8 +8,13 @@ interface Props {
   subtitle: string;
 }
 
-const Fieldset = ({ title, subtitle, children }: PropsWithChildren<Props>) => (
-  <SC.Fieldset>
+const Fieldset = ({
+  title,
+  subtitle,
+  children,
+  ...props
+}: PropsWithChildren<Props>) => (
+  <SC.Fieldset {...props}>
     <SC.Legend>
       <SC.Title>{title}</SC.Title>
       <SC.Subtitle>{subtitle}</SC.Subtitle>

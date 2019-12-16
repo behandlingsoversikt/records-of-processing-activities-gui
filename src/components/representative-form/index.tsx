@@ -94,5 +94,5 @@ export default memo(
     handleSubmit: () => {},
     validationSchema,
     displayName: 'RepresentativeForm'
-  })(RepresentativeForm as any) as any
+  })(RepresentativeForm) as any
 );

@@ -1,14 +1,16 @@
-import React, { memo } from 'react';
+import React, { memo, HTMLProps } from 'react';
 
 import SC from './styled';
 
-interface Props {
+interface Props extends HTMLProps<HTMLButtonElement> {
   text: string;
   variant?: 'primary' | 'secondary';
 }
 
-const FDKButton = ({ text, variant }: Props): JSX.Element => (
-  <SC.FDKButton variant={variant}>{text}</SC.FDKButton>
+const FDKButton = ({ text, variant, onClick }: Props): JSX.Element => (
+  <SC.FDKButton variant={variant} onClick={onClick}>
+    {text}
+  </SC.FDKButton>
 );
 
 export default memo(FDKButton);

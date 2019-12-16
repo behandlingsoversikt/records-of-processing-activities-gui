@@ -6,6 +6,7 @@ import Header from '../header';
 import Footer from '../footer';
 
 const RecordListPage = lazy(() => import('../record-list-page'));
+const RecordPage = lazy(() => import('../record-page'));
 
 const Router = (): JSX.Element => (
   <BrowserRouter>
@@ -14,6 +15,7 @@ const Router = (): JSX.Element => (
       <Suspense fallback={<></>}>
         <Switch>
           <Route exact path='/' component={RecordListPage} />
+          <Route exact path='/record/:id?' component={RecordPage} />
           <Redirect to='/' />
         </Switch>
       </Suspense>

@@ -1,6 +1,7 @@
 import React, { useEffect, memo } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import { RouteComponentProps } from 'react-router-dom';
 
 import Headline from '../headline';
 import FDKButton from '../fdk-button';
@@ -14,18 +15,21 @@ import SC from './styled';
 
 import { RecordInterface } from '../../types';
 
-interface Props {
+interface Props extends RouteComponentProps {
   records: RecordInterface[];
   actions: typeof actions;
 }
 
 const RecordListPage = ({
   records,
+  history: { push },
   actions: { fetchAllRecordsRequested }
 }: Props): JSX.Element => {
   useEffect(() => {
     fetchAllRecordsRequested();
   }, []);
+
+  const navigateToNewRecordPage = () => push('/record');
 
   return (
     <SC.RecordListPage>
@@ -36,7 +40,11 @@ const RecordListPage = ({
       />
       <Representatives />
       <SC.RecordListActions>
-        <FDKButton variant='primary' text='Legg til ny protokoll' />
+        <FDKButton
+          variant='primary'
+          text='Legg til ny protokoll'
+          onClick={navigateToNewRecordPage}
+        />
         <FDKButton text='Generer rapport' />
       </SC.RecordListActions>
       <RecordListTable records={records} />
