@@ -12,7 +12,7 @@ export interface Record {
   plannedDeletion: string;
   highPrivacyRisk: boolean;
   articleSixBasis: ArticleSixBasis[];
-  otherArticles: OtherArticles[];
+  otherArticles: OtherArticles;
   businessArea: string[];
   securityMeasures: string;
   privacyProcessingSystems: string;
