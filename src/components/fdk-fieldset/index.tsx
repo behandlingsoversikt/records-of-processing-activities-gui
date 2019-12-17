@@ -9,6 +9,7 @@ interface Props {
 }
 
 const Fieldset = ({
+  required,
   title,
   subtitle,
   children,
@@ -16,7 +17,10 @@ const Fieldset = ({
 }: PropsWithChildren<Props>) => (
   <SC.Fieldset {...props}>
     <SC.Legend>
-      <SC.Title>{title}</SC.Title>
+      <SC.Inline>
+        <SC.Title>{title}</SC.Title>
+        {required && <SC.RequiredLabel text='Obligatorisk' />}
+      </SC.Inline>
       <SC.Subtitle>{subtitle}</SC.Subtitle>
     </SC.Legend>
     {children}

@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { withFormik } from 'formik';
 
 import TextField from '../field-text';
+import TextAreaField from '../field-text-area';
 
 import SC from './styled';
 
@@ -14,11 +15,7 @@ const RecordForm = () => (
         title='Daglig behandlingsanvar'
         subtitle='Den korte hjelpeteksten'
       >
-        <TextField
-          name='name'
-          labelText='Kontaktpunkt'
-          placeholder='F.eks. avdeling, rolle eller person'
-        />
+        <TextField name='name' labelText='Kontaktpunkt' />
         <SC.InlineFields>
           <TextField name='email' labelText='E-post' />
           <TextField name='phone' labelText='Telefon' />
@@ -39,7 +36,7 @@ const RecordForm = () => (
           name='name'
           labelText='Virksomheter som har felles databehandlingsansvar'
         />
-        <TextField name='email' labelText='Ansvarsfordeling' />
+        <TextAreaField name='email' labelText='Ansvarsfordeling' />
         <TextField
           name='name'
           labelText='Kontaktpunkt'
@@ -53,13 +50,22 @@ const RecordForm = () => (
     </SC.RecordFormSection>
     <SC.RecordFormSection required title='Behandlingsaktiviteter'>
       <SC.Fieldset
+        required
         title='Behandlinger gjelder'
         subtitle='Den korte hjelpeteksten'
       >
         <TextField name='name' />
       </SC.Fieldset>
       <SC.Fieldset
-        title='Katergorier av registrerte'
+        required
+        title='Formålet med behandlingsaktivitetene'
+        subtitle='Den korte hjelpeteksten'
+      >
+        <TextAreaField name='name' />
+      </SC.Fieldset>
+      <SC.Fieldset
+        required
+        title='Kategorier av registrerte'
         subtitle='Den korte hjelpeteksten'
       >
         <TextField name='name' />
@@ -91,22 +97,25 @@ const RecordForm = () => (
     </SC.RecordFormSection>
     <SC.RecordFormSection required title='Personopplysninger'>
       <SC.Fieldset
+        required
         title='Kategorier av personopplysninger'
         subtitle='Den korte hjelpeteksten'
       >
         <TextField name='name' />
       </SC.Fieldset>
       <SC.Fieldset
+        required
         title='Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak'
         subtitle='Den korte hjelpeteksten'
       >
-        <TextField name='name' />
+        <TextAreaField name='name' />
       </SC.Fieldset>
       <SC.Fieldset
+        required
         title='Planlagte tidsfrister for sletting'
         subtitle='Den korte hjelpeteksten'
       >
-        <TextField name='name' />
+        <TextAreaField name='name' />
       </SC.Fieldset>
       <SC.Fieldset
         title='Kan behandlingen innebære høy personvernrisiko?'
@@ -135,12 +144,14 @@ const RecordForm = () => (
     </SC.RecordFormSection>
     <SC.RecordFormSection required title='Overføring av personopplysningene'>
       <SC.Fieldset
+        required
         title='Kategorier av mottakere'
         subtitle='Den korte hjelpeteksten'
       >
         <TextField name='name' />
       </SC.Fieldset>
       <SC.Fieldset
+        required
         title='Overføres personopplysningene til tredjeland?'
         subtitle='Den korte hjelpeteksten'
       >

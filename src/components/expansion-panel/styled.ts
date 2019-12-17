@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import Tag from '../tag';
+
 const ExpansionPanel = styled.div<{ isExpanded: boolean }>`
   flex: 0 0 calc(50% - 15px);
 
@@ -24,13 +26,8 @@ const Subtitle = styled.h3`
   margin-top: 5px;
 `;
 
-const RequiredLabel = styled.span`
-  padding: 0 2px;
+const RequiredLabel = styled(Tag)`
   margin-left: 5px;
-  border-radius: 2px;
-
-  font-size: 14px;
-  background-color: ${({ theme }) => theme.fdk.colors.alerts.warning.lightest};
 `;
 
 const Head = styled.div`

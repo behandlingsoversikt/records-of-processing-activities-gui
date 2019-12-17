@@ -22,7 +22,7 @@ const ExpansionPanel = ({
     <SC.ExpansionPanel {...props} isExpanded={isExpanded}>
       <SC.Head onClick={toggleExpansion}>
         <SC.Title>{title}</SC.Title>
-        {required && <SC.RequiredLabel>Obligatorisk</SC.RequiredLabel>}
+        {required && <SC.RequiredLabel text='Obligatorisk' />}
         {!isExpanded && subtitle && <SC.Subtitle>{subtitle}</SC.Subtitle>}
       </SC.Head>
       {isExpanded && <SC.Body>{children}</SC.Body>}
