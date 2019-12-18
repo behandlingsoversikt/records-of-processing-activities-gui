@@ -29,5 +29,9 @@ export default {
   recipientCategories: 'Kategorier av mottakere',
   transfered: 'Overføres personvernopplysningene til et tredjeland?',
   guarantees:
-    'Garantier ved overføring til tredjeland eller internasjonale organisasjoner'
+    'Garantier ved overføring til tredjeland eller internasjonale organisasjoner',
+  dataControllerRepresentative: 'Behandlingsansvarliges representant',
+  dataControllerRepresentativeInEU:
+    'Behandlingsansvarliges representant i EU/EØS',
+  dataProtectionOfficer: 'Personvernombud'
 };
