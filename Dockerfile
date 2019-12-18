@@ -10,6 +10,7 @@ COPY --chown=app:app package.json package-lock.json ./
 RUN npm set progress=false && \
   npm config set depth 0 && \
   npm ci
+RUN npm audit
 COPY --chown=app:app .babelrc tsconfig.json jest.config.js ./
 COPY --chown=app:app webpack ./webpack
 COPY --chown=app:app test ./test
