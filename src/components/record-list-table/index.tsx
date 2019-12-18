@@ -3,7 +3,8 @@ import React, { memo } from 'react';
 import TableHead from '../table-head';
 import SC from './styled';
 
-import Record from '../record';
+import RecordRow from '../record-row';
+
 import { RecordInterface } from '../../types';
 
 interface Props {
@@ -21,7 +22,7 @@ const RecordListTable = ({ records }: Props): JSX.Element => (
     </thead>
     <tbody>
       {records.map(record => (
-        <Record key={record.id} record={record} />
+        <RecordRow key={record.id} record={record} />
       ))}
     </tbody>
   </SC.RecordListTable>
