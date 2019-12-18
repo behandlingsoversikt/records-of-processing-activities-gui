@@ -7,21 +7,21 @@ export interface Record {
   purpose: string;
   dataSubjectCategories: string[];
   personalDataCategories: string[];
-  recipientCategories: string;
+  recipientCategories: string[];
   personalDataSubjects: string;
   plannedDeletion: string;
   highPrivacyRisk: boolean;
   articleSixBasis: ArticleSixBasis[];
-  otherArticles: OtherArticles;
-  businessArea: string[];
+  otherArticles: Partial<OtherArticles>;
+  businessAreas: string[];
   securityMeasures: string;
   privacyProcessingSystems: string;
   dataProcessorContactDetails: Omit<ContactDetailsInterface, 'address'>;
   commonDataControllerContact: Partial<CommonDataControllerContact>;
-  dataTransfers: DataTransfers;
+  dataTransfers: Partial<DataTransfers>;
   title: string;
   relatedDatasets: string[];
-  dataProtectionImpactAssessment: DataProtectionImpactAssessment;
+  dataProtectionImpactAssessment: Partial<DataProtectionImpactAssessment>;
   dataProcessingAgreements: DataProcessingAgreement[];
 }
 
@@ -49,8 +49,8 @@ export interface Article {
 }
 
 export interface OtherArticles {
-  articleNine: Article;
-  articleTen: Article;
+  articleNine: Partial<Article>;
+  articleTen: Partial<Article>;
 }
 
 export interface CommonDataControllerContact {
@@ -60,10 +60,9 @@ export interface CommonDataControllerContact {
 }
 
 export interface DataTransfers {
-  transfered: boolean;
+  transferred: boolean;
   thirdCountryRecipients: string;
   guarantees: string;
-  internationalOrganizations: string;
 }
 
 export interface DataProtectionImpactAssessment {

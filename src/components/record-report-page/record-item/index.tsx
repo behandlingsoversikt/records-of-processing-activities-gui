@@ -20,7 +20,7 @@ const RecordItemPure = ({
     highPrivacyRisk = false,
     articleSixBasis,
     otherArticles,
-    businessArea,
+    businessAreas,
     securityMeasures,
     privacyProcessingSystems,
     dataProcessorContactDetails,
@@ -171,8 +171,8 @@ const RecordItemPure = ({
 
       <SC.SectionContent>
         <SC.SectionSubTitle>{localization.businessArea}</SC.SectionSubTitle>
-        {businessArea &&
-          businessArea.map(item => (
+        {businessAreas &&
+          businessAreas.map(item => (
             <div key={`businessArea-${item}`}>{item}</div>
           ))}
       </SC.SectionContent>
@@ -269,7 +269,7 @@ const RecordItemPure = ({
 
       <SC.SectionContent>
         <SC.SectionSubTitle>{localization.transfered}</SC.SectionSubTitle>
-        {dataTransfers && dataTransfers.transfered
+        {dataTransfers && dataTransfers.transferred
           ? localization.yes
           : localization.no}
         {dataTransfers && dataTransfers.thirdCountryRecipients && (

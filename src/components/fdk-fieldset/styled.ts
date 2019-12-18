@@ -4,6 +4,8 @@ import Tag from '../tag';
 
 const Fieldset = styled.fieldset`
   display: flex;
+  min-width: 0;
+
   & > div {
     margin-top: 20px;
   }
