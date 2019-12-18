@@ -10,7 +10,7 @@ export default {
         skyblue: '#e5f0f6',
         lightblue: '#8bbbd6'
       },
-      text: { default: '#2d3741', link: '#0069a5' },
+      text: { default: '#2d3741', link: '#0069a5', danger: '#d70a5a' },
       alerts: { warning: { lightest: '#fff2d8' } },
       buttons: {
         primary: { background: '#0069a5', text: '#ffffff' },
