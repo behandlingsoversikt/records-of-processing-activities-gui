@@ -5,10 +5,10 @@ import SC from './styled';
 
 import RecordRow from '../record-row';
 
-import { RecordInterface } from '../../types';
+import { Record } from '../../types';
 
 interface Props {
-  records: RecordInterface[];
+  records: Record[];
 }
 
 const RecordListTable = ({ records }: Props): JSX.Element => (

@@ -4,7 +4,7 @@ import {
   FETCH_ALL_RECORDS_SUCCEEDED
 } from './action-types';
 
-import { RecordInterface } from '../../../types';
+import { Record } from '../../../types';
 
 export function fetchAllRecordsRequested() {
   return {
@@ -12,7 +12,7 @@ export function fetchAllRecordsRequested() {
   };
 }
 
-export function fetchAllRecordsSucceeded(records: RecordInterface[]) {
+export function fetchAllRecordsSucceeded(records: Record[]) {
   return {
     type: FETCH_ALL_RECORDS_SUCCEEDED,
     payload: {

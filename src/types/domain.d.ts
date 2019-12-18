@@ -1,6 +1,6 @@
 import { RecordStatus } from './enums';
 
-export interface RecordInterface {
+export interface Record {
   id: string;
   status: RecordStatus;
   organizationId: string;
@@ -16,13 +16,13 @@ export interface RecordInterface {
   businessArea: string[];
   securityMeasures: string;
   privacyProcessingSystems: string;
-  dataProcessorContactDetails: ContactDetailsInterface;
-  commonDataControllerContact: CommonDataControllerContact;
+  dataProcessorContactDetails: Omit<ContactDetailsInterface, 'address'>;
+  commonDataControllerContact: Partial<CommonDataControllerContact>;
   dataTransfers: DataTransfers;
   title: string;
   relatedDatasets: string[];
   dataProtectionImpactAssessment: DataProtectionImpactAssessment;
-  dataProcessingAgreement: DataProcessingAgreement;
+  dataProcessingAgreements: DataProcessingAgreement[];
 }
 
 export interface ContactDetailsInterface {
@@ -56,7 +56,7 @@ export interface OtherArticles {
 export interface CommonDataControllerContact {
   companies: string;
   distributionOfResponsibilities: string;
-  contactPoints: ContactDetailsInterface[];
+  contactPoints: Omit<ContactDetailsInterface, 'address'>[];
 }
 
 export interface DataTransfers {

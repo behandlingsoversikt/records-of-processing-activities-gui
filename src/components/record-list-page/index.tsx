@@ -13,10 +13,10 @@ import * as actions from './redux/actions';
 
 import SC from './styled';
 
-import { RecordInterface } from '../../types';
+import { Record } from '../../types';
 
 interface Props extends RouteComponentProps {
-  records: RecordInterface[];
+  records: Record[];
   actions: typeof actions;
 }
 
