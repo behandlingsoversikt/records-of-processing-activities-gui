@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 
-import { RecordInterface } from '../../types/domain';
+import { Record } from '../../types/domain';
 
 interface Props {
-  record: RecordInterface;
+  record: Record;
 }
 
 const RecordRow = ({
