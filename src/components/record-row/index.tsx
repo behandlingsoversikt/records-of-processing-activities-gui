@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
+
 import { RecordInterface } from '../../types/domain';
 
 interface Props {
   record: RecordInterface;
 }
 
-const Record = ({
+const RecordRow = ({
   record: {
     title,
     dataProcessorContactDetails: { name },
@@ -19,4 +20,4 @@ const Record = ({
   </tr>
 );
 
-export default memo(Record);
+export default memo(RecordRow);
