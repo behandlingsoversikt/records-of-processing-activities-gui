@@ -4,7 +4,10 @@ const BreadcrumbsBar = styled.div`
   padding: 10px 0;
   margin-bottom: 40px;
   border-bottom: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lighter};
-  font-size: 1.4rem;
+
+  & * {
+    font-size: 1.4rem;
+  }
 
   & nav a {
     border-bottom: 1px solid ${({ theme }) => theme.fdk.colors.text.link};
