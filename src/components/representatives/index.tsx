@@ -1,18 +1,17 @@
 import React, { memo, useEffect } from 'react';
-
-import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { bindActionCreators, Dispatch } from 'redux';
+
 import SC from './styled';
 
 import ExpansionPanel from '../expansion-panel';
-
 import Anchor from '../anchor';
 import RepresentativeForm from '../representative-form';
 
 import * as actions from './redux/actions';
 
 import { RepresentativeType } from '../../types/enums';
-import { RepresentativesInterface } from '../../types/domain';
+import { RepresentativesInterface } from '../../types';
 
 interface Props {
   representatives: RepresentativesInterface;

@@ -3,10 +3,12 @@ import { Field as FormikField } from 'formik';
 
 const TextAreaField = styled(FormikField)<{ error?: boolean }>`
   width: 100%;
+  min-height: 72px;
   padding: 8px;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lightblue};
   color: ${({ theme }) => theme.fdk.colors.text.default};
+  resize: vertical;
 
   &:not(:disabled):focus {
     box-shadow: 0 0 0 0.1rem rgba(38, 128, 179, 0.5);
