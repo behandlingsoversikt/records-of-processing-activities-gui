@@ -1,20 +1,15 @@
 FROM node:alpine AS build
 RUN mkdir /app
-RUN addgroup -g 1001 -S app && \
-  adduser -u 1001 -S app -G app && \
-  chown -R app:app /app && \
-  chmod 770 /app
-USER app:app
 WORKDIR /app
-COPY --chown=app:app package.json package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm set progress=false && \
   npm config set depth 0 && \
   npm ci
 RUN npm audit
-COPY --chown=app:app .babelrc tsconfig.json jest.config.js ./
-COPY --chown=app:app webpack ./webpack
-COPY --chown=app:app test ./test
-COPY --chown=app:app src ./src
+COPY .babelrc tsconfig.json jest.config.js ./
+COPY webpack ./webpack
+COPY test ./test
+COPY src ./src
 RUN npm test
 RUN npm run build:prod
 
