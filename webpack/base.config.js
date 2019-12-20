@@ -1,12 +1,12 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { BaseHrefWebpackPlugin } from 'base-href-webpack-plugin';
 
 export default {
   entry: {
-    main: './src/entrypoints/main/index.tsx',
-    auth: './src/entrypoints/auth/index.ts'
+    main: './src/entrypoints/main/index.tsx'
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
@@ -31,12 +31,6 @@ export default {
           name: 'main.vendors',
           filename: '[name].bundle.js',
           chunks: ({ name }) => name === 'main'
-        },
-        authVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'auth.vendors',
-          filename: '[name].bundle.js',
-          chunks: ({ name }) => name === 'auth'
         }
       }
     }
@@ -122,12 +116,12 @@ export default {
       filename: 'index.html',
       favicon: './src/images/favicon.ico'
     }),
-    new HtmlWebpackPlugin({
-      entry: 'auth',
-      template: './src/entrypoints/auth/index.html',
-      filename: 'auth.html',
-      favicon: './src/images/favicon.ico'
-    }),
+    new CopyWebpackPlugin(
+      [{ from: './src/lib/auth/silent-check-sso.html', to: './' }],
+      {
+        copyUnmodified: true
+      }
+    ),
     new BaseHrefWebpackPlugin({
       baseHref: '/'
     })
