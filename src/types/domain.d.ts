@@ -74,3 +74,10 @@ export interface DataProcessingAgreement {
   dataProcessorName: string;
   agreementUrl: string;
 }
+
+export interface Organization {
+  uri: string;
+  id: string;
+  name: string;
+  orgPath: string;
+}
