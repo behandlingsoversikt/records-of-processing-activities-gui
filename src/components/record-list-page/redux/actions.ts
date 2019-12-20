@@ -6,9 +6,12 @@ import {
 
 import { Record } from '../../../types';
 
-export function fetchAllRecordsRequested() {
+export function fetchAllRecordsRequested(organizationId: string) {
   return {
-    type: FETCH_ALL_RECORDS_REQUESTED
+    type: FETCH_ALL_RECORDS_REQUESTED,
+    payload: {
+      organizationId
+    }
   };
 }
 

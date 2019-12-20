@@ -17,9 +17,13 @@ const Router = (): JSX.Element => (
       <Header />
       <Suspense fallback={<></>}>
         <Switch>
-          <Route exact path='/' component={RecordListPage} />
+          <Route exact path='/:organizationId' component={RecordListPage} />
           <Route exact path='/record/:id?' component={RecordPage} />
-          <Route exact path='/report' component={RecordReportPage} />
+          <Route
+            exact
+            path='/:organizationId/report'
+            component={RecordReportPage}
+          />
           <Redirect to='/' />
         </Switch>
       </Suspense>

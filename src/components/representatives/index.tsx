@@ -14,11 +14,13 @@ import { RepresentativeType } from '../../types/enums';
 import { RepresentativesInterface } from '../../types';
 
 interface Props {
+  organizationId?: string;
   representatives: RepresentativesInterface;
   actions: typeof actions;
 }
 
 const Representatives = ({
+  organizationId,
   representatives: {
     dataControllerRepresentative,
     dataControllerRepresentativeInEU,
@@ -27,8 +29,10 @@ const Representatives = ({
   actions: { patchRepresentativeRequested, fetchAllRepresentativesRequested }
 }: Props): JSX.Element => {
   useEffect(() => {
-    fetchAllRepresentativesRequested();
-  }, []);
+    if (organizationId) {
+      fetchAllRepresentativesRequested(organizationId);
+    }
+  }, [organizationId]);
 
   return (
     <SC.Representatives>

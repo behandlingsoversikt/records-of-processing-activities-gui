@@ -13,9 +13,12 @@ import {
   RepresentativesInterface
 } from '../../../types';
 
-export function fetchAllRepresentativesRequested() {
+export function fetchAllRepresentativesRequested(organizationId: string) {
   return {
-    type: FETCH_ALL_REPRESENTATIVES_REQUESTED
+    type: FETCH_ALL_REPRESENTATIVES_REQUESTED,
+    payload: {
+      organizationId
+    }
   };
 }
 

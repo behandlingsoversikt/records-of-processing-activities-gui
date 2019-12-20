@@ -1,4 +1,5 @@
 import React, { useEffect, memo } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 import SC from './styled';
 import Headline from '../headline';
@@ -7,16 +8,28 @@ import { Record } from '../../types';
 import { fetchAllRecordsRequested } from '../record-list-page/redux/actions';
 import { localization } from '../../lib/localization';
 
-interface Props {
+interface RouteParams {
+  organizationId: string;
+}
+
+interface Props extends RouteComponentProps<RouteParams> {
   records: Record[];
   fetchAllRecords: typeof fetchAllRecordsRequested;
 }
 
 export const RecordReportPagePure = memo(
-  ({ records, fetchAllRecords }: Props): JSX.Element => {
+  ({
+    match: {
+      params: { organizationId }
+    },
+    records,
+    fetchAllRecords
+  }: Props): JSX.Element => {
     useEffect(() => {
-      fetchAllRecords();
-    }, []);
+      if (organizationId) {
+        fetchAllRecords(organizationId);
+      }
+    }, [organizationId]);
 
     return (
       <SC.RecordReportPage>

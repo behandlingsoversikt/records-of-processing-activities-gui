@@ -45,13 +45,15 @@ function* patchRepresentativeRequested({
   }
 }
 
-function* fetchAllRepresentativesRequested() {
+function* fetchAllRepresentativesRequested({
+  payload: { organizationId }
+}: ReturnType<typeof actions.fetchAllRepresentativesRequested>) {
   try {
     const auth = yield getContext('auth');
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/910244132/representatives`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/representatives`,
       {
         headers: {
           authorization,
