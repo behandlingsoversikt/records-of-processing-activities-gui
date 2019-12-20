@@ -1,11 +1,16 @@
 dist
 coverage
 node_modules
+images
 
 .gitignore
 .dockerignore
 .eslintignore
 .huskyrc
 .lintstagedrc
-
 package-lock.json
+Dockerfile
+
+*.yml
+*.sh
+*.conf
