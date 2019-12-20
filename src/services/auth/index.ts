@@ -15,7 +15,6 @@ export interface AuthServiceInteface {
   isAuthenticated(): boolean;
   isTokenExpired(): boolean;
   getAuthorizationHeader(): Promise<string>;
-  onUserLoad(callback: (user: User) => void): void;
   getUser(): User | null;
   isAuthorised(publisherId: string): boolean;
 }
@@ -84,10 +83,6 @@ class AuthService implements AuthServiceInteface {
       return `${token_type} ${access_token}`;
     }
     return '';
-  }
-
-  public onUserLoad(callback: (user: User) => void): void {
-    this.manager.events.addUserLoaded(callback);
   }
 
   public getUser(): User | null {

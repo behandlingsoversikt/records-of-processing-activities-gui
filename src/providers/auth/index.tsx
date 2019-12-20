@@ -9,7 +9,6 @@ interface Props {}
 interface State {
   service: AuthServiceInteface;
   instantiated: boolean;
-  userLoaded: boolean;
 }
 
 class AuthProvider extends PureComponent<Props, State> {
@@ -18,18 +17,14 @@ class AuthProvider extends PureComponent<Props, State> {
 
     this.state = {
       service: AuthService,
-      instantiated: false,
-      userLoaded: false
+      instantiated: false
     };
   }
 
   public async componentDidMount(): Promise<void> {
-    const { service, userLoaded } = this.state;
-    const authenticated: boolean = await service.init();
+    const { service } = this.state;
+    await service.init();
     this.setState({ instantiated: true });
-    if (!authenticated && !userLoaded) {
-      service.onUserLoad(() => this.setState({ userLoaded: true }));
-    }
   }
 
   public render(): JSX.Element {
