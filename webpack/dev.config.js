@@ -20,10 +20,7 @@ export default merge(baseConfig, {
     port: 8141,
     before: app => app.get('/config.js', (_, res) => res.status(204).send()),
     historyApiFallback: {
-      rewrites: [
-        { from: /^\/auth/, to: '/auth.html' },
-        { from: /./, to: '/index.html' }
-      ]
+      rewrites: [{ from: /./, to: '/index.html' }]
     }
   },
   module: {

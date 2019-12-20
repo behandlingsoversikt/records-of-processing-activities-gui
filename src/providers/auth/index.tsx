@@ -1,13 +1,14 @@
 import React, { ComponentType, createContext, PureComponent } from 'react';
 
-import AuthService, { AuthServiceInteface } from '../../services/auth';
+import { authService } from '../../services/auth-service';
+import { Auth } from '../../lib/auth/auth';
 
 const AuthContext = createContext<any>(null);
 
 interface Props {}
 
 interface State {
-  service: AuthServiceInteface;
+  service: Auth;
   instantiated: boolean;
 }
 
@@ -16,14 +17,14 @@ class AuthProvider extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      service: AuthService,
+      service: authService,
       instantiated: false
     };
   }
 
   public async componentDidMount(): Promise<void> {
     const { service } = this.state;
-    await service.init();
+    await service.init({ loginRequired: true });
     this.setState({ instantiated: true });
   }
 

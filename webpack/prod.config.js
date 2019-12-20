@@ -20,14 +20,6 @@ export default merge(baseConfig, {
               .match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
               .replace('@', '')}`,
           chunks: ({ name }) => name === 'main'
-        },
-        authVendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: module =>
-            `auth.vendor.${module.context
-              .match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
-              .replace('@', '')}`,
-          chunks: ({ name }) => name === 'auth'
         }
       }
     }

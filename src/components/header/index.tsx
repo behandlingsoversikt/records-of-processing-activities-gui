@@ -2,17 +2,17 @@ import React, { memo } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { withAuth } from '../../providers/auth';
-import { AuthServiceInteface, User } from '../../services/auth';
 
 import SC from './styled';
+import { Auth } from '../../lib/auth/auth';
 
 interface Props {
-  authService: AuthServiceInteface;
+  authService: Auth;
 }
 
 const Header = ({ authService }: Props): JSX.Element => {
-  const user: User | null = authService.getUser();
-  const logOutAndRedirect = () => authService.logOut(`${location.origin}/auth`);
+  const userName = authService.getUser()?.name;
+  const logOutAndRedirect = () => authService.logout();
 
   return (
     <SC.Header>
@@ -20,10 +20,10 @@ const Header = ({ authService }: Props): JSX.Element => {
         <SC.LogoLink href='/'>
           <SC.Logo />
         </SC.LogoLink>
-        {user && (
+        {userName && (
           <SC.UserAvatar>
             <AccountCircleIcon />
-            <SC.UserName>{user.profile.name}</SC.UserName>
+            <SC.UserName>{userName}</SC.UserName>
             <SC.LogoutButton variant='outlined' onClick={logOutAndRedirect}>
               Log out
             </SC.LogoutButton>
