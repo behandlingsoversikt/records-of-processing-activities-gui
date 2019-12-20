@@ -31,3 +31,4 @@ An application for managing records of processing activities.
 
 - `OIDC_ISSUER` - OIDC issuer URI
 - `RECORDS_OF_PROCESSING_ACTIVITIES_URL` - Base URL of Records of Processing Activities backend
+- `ORGANIZATION_API` - Base URL of Organization backend
