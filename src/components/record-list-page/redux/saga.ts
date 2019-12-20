@@ -8,13 +8,15 @@ import { FETCH_ALL_RECORDS_REQUESTED } from './action-types';
 
 const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
 
-function* fetchAllRecordsRequested() {
+function* fetchAllRecordsRequested({
+  payload: { organizationId }
+}: ReturnType<typeof actions.fetchAllRecordsRequested>) {
   try {
     const auth = yield getContext('auth');
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/910244132/records`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/records`,
       {
         params: { limit: 1000 },
         headers: {

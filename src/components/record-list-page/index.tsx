@@ -15,21 +15,30 @@ import SC from './styled';
 
 import { Record } from '../../types';
 
-interface Props extends RouteComponentProps {
+interface RouteParams {
+  organizationId: string;
+}
+
+interface Props extends RouteComponentProps<RouteParams> {
   records: Record[];
   actions: typeof actions;
 }
 
 const RecordListPage = ({
+  match: {
+    params: { organizationId }
+  },
   records,
   history: { push },
   actions: { fetchAllRecordsRequested }
 }: Props): JSX.Element => {
   useEffect(() => {
-    fetchAllRecordsRequested();
-  }, []);
+    if (organizationId) {
+      fetchAllRecordsRequested(organizationId);
+    }
+  }, [organizationId]);
 
-  const navigateToReportPage = () => push('/report');
+  const navigateToReportPage = () => push(`/${organizationId}/report`);
   const navigateToNewRecordPage = () => push('/record');
 
   return (
@@ -39,7 +48,7 @@ const RecordListPage = ({
         title='Protokoll over behandlingsaktiviteter'
         subTitle='Brønnøysundsregistrene'
       />
-      <Representatives />
+      <Representatives organizationId={organizationId} />
       <SC.RecordListActions>
         <FDKButton
           variant='primary'
