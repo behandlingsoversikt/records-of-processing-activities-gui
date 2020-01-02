@@ -1,4 +1,4 @@
-import React, { memo, Fragment, useEffect } from 'react';
+import React, { memo, Fragment, useEffect, useRef } from 'react';
 import { FormikProps, withFormik, FieldArray } from 'formik';
 
 import TextField from '../field-text';
@@ -29,9 +29,12 @@ const RecordForm = ({
   onChange,
   onTitleChange
 }: Props) => {
+  const didMount = useRef(false);
   useEffect(() => {
-    if (onChange) {
+    if (onChange && didMount.current) {
       onChange(values);
+    } else {
+      didMount.current = true;
     }
   }, [values]);
 
