@@ -20,7 +20,7 @@ const Router = (): JSX.Element => (
           <Route exact path='/:organizationId' component={RecordListPage} />
           <Route
             exact
-            path='/:organizationId/record/:id?'
+            path='/:organizationId/records/:recordId?'
             component={RecordPage}
           />
           <Route

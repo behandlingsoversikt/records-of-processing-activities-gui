@@ -39,7 +39,7 @@ const RecordListPage = ({
   }, [organizationId]);
 
   const navigateToReportPage = () => push(`/${organizationId}/report`);
-  const navigateToNewRecordPage = () => push(`/${organizationId}/record`);
+  const navigateToNewRecordPage = () => push(`/${organizationId}/records`);
 
   return (
     <SC.RecordListPage>
