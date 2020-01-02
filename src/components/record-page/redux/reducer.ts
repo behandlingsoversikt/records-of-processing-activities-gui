@@ -15,7 +15,7 @@ export default function reducer(
 ) {
   switch (action.type) {
     case PATCH_RECORD_SUCCEEDED:
-      return state;
+      return state.set('record', fromJS(action.payload.record));
     default:
       return state;
   }

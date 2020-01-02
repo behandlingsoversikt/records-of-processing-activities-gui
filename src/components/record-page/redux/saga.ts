@@ -16,7 +16,9 @@ function* patchRecordRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.patch,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/records`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${
+        record.organizationId
+      }/records${record.id ? `/${record.id}` : ''}`,
       record,
       {
         headers: {
@@ -26,7 +28,7 @@ function* patchRecordRequested({
       }
     );
     if (data) {
-      yield put(actions.patchRecordSucceeded());
+      yield put(actions.patchRecordSucceeded(data));
     } else {
       yield put(actions.patchRecordFailed(JSON.stringify(message)));
     }

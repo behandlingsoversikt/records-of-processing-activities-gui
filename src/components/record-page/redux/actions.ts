@@ -15,9 +15,12 @@ export function patchRecordRequested(record: Partial<Record>) {
   };
 }
 
-export function patchRecordSucceeded() {
+export function patchRecordSucceeded(record: Record) {
   return {
-    type: PATCH_RECORD_SUCCEEDED
+    type: PATCH_RECORD_SUCCEEDED,
+    payload: {
+      record
+    }
   };
 }
 

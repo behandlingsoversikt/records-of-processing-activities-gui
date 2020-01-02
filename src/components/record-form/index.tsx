@@ -18,21 +18,24 @@ import validationSchema from './validation-schema';
 import { Record } from '../../types';
 
 interface Props extends FormikProps<Record> {
+  organizationId: string;
   record?: Partial<Record>;
   onChange?: (record: Partial<Record>) => void;
   onTitleChange?: (title: string) => void;
 }
 
 const RecordForm = ({
+  record: { id } = {},
   values,
   handleChange,
   onChange,
   onTitleChange
 }: Props) => {
   const didMount = useRef(false);
+
   useEffect(() => {
     if (onChange && didMount.current) {
-      onChange(values);
+      onChange({ ...values, id });
     } else {
       didMount.current = true;
     }
@@ -609,13 +612,15 @@ export default memo(
           thirdCountryRecipients = '',
           guarantees = ''
         } = {}
-      } = {}
+      } = {},
+      organizationId
     }: Props) => ({
       dataProcessorContactDetails: {
         name,
         email,
         phone
       },
+      organizationId,
       dataProcessingAgreements: [
         ...dataProcessingAgreements,
         { dataProcessorName: '', agreementUrl: '' }
