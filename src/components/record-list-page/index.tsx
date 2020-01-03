@@ -55,7 +55,11 @@ const RecordListPage = ({
           text='Legg til ny protokoll'
           onClick={navigateToNewRecordPage}
         />
-        <FDKButton text='Generer rapport' onClick={navigateToReportPage} />
+        <FDKButton
+          variant='secondary'
+          text='Generer rapport'
+          onClick={navigateToReportPage}
+        />
       </SC.RecordListActions>
       <RecordListTable records={records} />
     </SC.RecordListPage>

@@ -15,6 +15,7 @@ export default {
       buttons: {
         primary: { background: '#0069a5', text: '#ffffff' },
         secondary: { background: '#cce1ed', text: '#005484' },
+        default: { background: '#2d3741', text: '#ffffff' },
         shadow: '#004a73'
       }
     }

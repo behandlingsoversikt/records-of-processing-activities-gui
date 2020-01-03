@@ -11,12 +11,16 @@ import axios from 'axios';
 import env from '../../../env';
 
 import * as actions from './actions';
-import { PATCH_RECORD_REQUESTED, GET_RECORD_REQUESTED } from './action-types';
+import {
+  GET_RECORD_REQUESTED,
+  PATCH_RECORD_REQUESTED,
+  DELETE_RECORD_REQUESTED
+} from './action-types';
 
 const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
 
 function* getRecordRequested({
-  payload: { recordId, organizationId }
+  payload: { recordId, organizationId, onError }
 }: ReturnType<typeof actions.getRecordRequested>) {
   try {
     const auth = yield getContext('auth');
@@ -36,9 +40,11 @@ function* getRecordRequested({
       yield put(actions.getRecordSucceeded(data));
     } else {
       yield put(actions.getRecordFailed(JSON.stringify(message)));
+      onError();
     }
   } catch (e) {
     yield put(actions.getRecordFailed(e.message));
+    onError();
   }
 }
 
@@ -71,9 +77,37 @@ function* patchRecordRequested({
   }
 }
 
+function* deleteRecordRequested({
+  payload: { recordId, organizationId, onSuccess }
+}: ReturnType<typeof actions.deleteRecordRequested>) {
+  try {
+    const auth = yield getContext('auth');
+    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const { status, message } = yield call(
+      axios.delete,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/records/${recordId}`,
+      {
+        headers: {
+          authorization,
+          accept: 'application/json'
+        }
+      }
+    );
+    if (status === 204) {
+      yield put(actions.deleteRecordSucceeded());
+      onSuccess();
+    } else {
+      yield put(actions.deleteRecordFailed(JSON.stringify(message)));
+    }
+  } catch (e) {
+    yield put(actions.deleteRecordFailed(e.message));
+  }
+}
+
 export default function* saga() {
   yield all([
+    takeLatest(GET_RECORD_REQUESTED, getRecordRequested),
     debounce(1000, PATCH_RECORD_REQUESTED, patchRecordRequested),
-    takeLatest(GET_RECORD_REQUESTED, getRecordRequested)
+    takeLatest(DELETE_RECORD_REQUESTED, deleteRecordRequested)
   ]);
 }

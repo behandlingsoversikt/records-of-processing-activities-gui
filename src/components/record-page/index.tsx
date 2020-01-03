@@ -6,10 +6,13 @@ import { RouteComponentProps } from 'react-router-dom';
 import Headline from '../headline';
 import BreadcrumbsBar from '../breadcrumbs-bar';
 import RecordForm from '../record-form';
+import StatusBar from '../status-bar';
 
 import SC from './styled';
 
 import * as actions from './redux/actions';
+
+import { RecordStatus } from '../../types/enums';
 
 interface RouteParams {
   organizationId: string;
@@ -27,34 +30,57 @@ const RecordPage = ({
   match: {
     params: { organizationId, recordId }
   },
-  actions: { patchRecordRequested, getRecordRequested }
+  actions: {
+    getRecordRequested,
+    patchRecordRequested,
+    deleteRecordRequested,
+    resetRecord
+  }
 }: Props): JSX.Element => {
   const [recordTitle, setRecordTitle] = useState('');
+  const [canChangeUrl, setCanChangeUrl] = useState(false);
 
+  const navigateToRecordListPage = () => replace(`/${organizationId}`);
   const id = record?.get('id');
 
   useEffect(() => {
-    if (!recordId && id && recordId === id) {
-      replace(`/${organizationId}/records/${id}`);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if ((!id && recordId) || (recordId && id !== recordId)) {
-      getRecordRequested(recordId, organizationId);
+    resetRecord();
+    setCanChangeUrl(true);
+    if (recordId) {
+      getRecordRequested(recordId, organizationId, navigateToRecordListPage);
     }
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    if (!recordId && id && canChangeUrl) {
+      replace(`/${organizationId}/records/${id}`);
+    }
+  }, [record]);
+
+  const handleRecordStatusChange = (status: RecordStatus) =>
+    patchRecordRequested({ id, organizationId, status });
+
   return (
     <SC.RecordPage>
       <BreadcrumbsBar />
-      <Headline title={recordTitle} subTitle='Brønnøysundsregistrene' />
+      <Headline
+        title={recordTitle}
+        subTitle='Brønnøysundsregistrene'
+        status={record?.get('status') ?? RecordStatus.DRAFT}
+      />
       <RecordForm
         organizationId={organizationId}
         record={record}
         onChange={patchRecordRequested}
         onTitleChange={setRecordTitle}
+      />
+      <StatusBar
+        status={record?.get('status') ?? RecordStatus.DRAFT}
+        onSetStatus={handleRecordStatusChange}
+        onRecordRemove={() => {
+          deleteRecordRequested(id, organizationId, navigateToRecordListPage);
+        }}
       />
     </SC.RecordPage>
   );

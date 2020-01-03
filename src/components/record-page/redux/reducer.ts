@@ -1,7 +1,12 @@
 import { fromJS } from 'immutable';
 
 import * as actions from './actions';
-import { PATCH_RECORD_SUCCEEDED, GET_RECORD_SUCCEEDED } from './action-types';
+import {
+  GET_RECORD_SUCCEEDED,
+  PATCH_RECORD_SUCCEEDED,
+  DELETE_RECORD_SUCCEEDED,
+  RESET_RECORD
+} from './action-types';
 
 import { Actions } from '../../../types';
 
@@ -17,6 +22,9 @@ export default function reducer(
     case GET_RECORD_SUCCEEDED:
     case PATCH_RECORD_SUCCEEDED:
       return state.set('record', fromJS(action.payload.record));
+    case RESET_RECORD:
+    case DELETE_RECORD_SUCCEEDED:
+      return state.set('record', null);
     default:
       return state;
   }

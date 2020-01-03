@@ -1,11 +1,15 @@
 import styled, { css } from 'styled-components';
 
-const FDKButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
+type Variant = 'primary' | 'secondary' | 'default';
+
+const FDKButton = styled.button<{ variant?: Variant }>`
   display: inline-flex;
-  padding: 12px 18px;
+  align-items: center;
+  padding: 10px 18px;
   outline: none;
   border: none;
   border-radius: 3px;
+  line-height: 21px;
   box-shadow: 0 2px 4px rgba(45, 55, 65, 0.25);
 
   &:not(:disabled):active:focus {
@@ -25,13 +29,24 @@ const FDKButton = styled.button<{ variant?: 'primary' | 'secondary' }>`
           color: ${buttonStyles.primary.text};
         `;
       }
-      default:
+      case 'secondary': {
         return css`
           background: ${buttonStyles.secondary.background};
           color: ${buttonStyles.secondary.text};
         `;
+      }
+      default:
+        return css`
+          background: ${buttonStyles.default.background};
+          color: ${buttonStyles.default.text};
+        `;
     }
   }}
+
+  & > svg {
+    margin-right: 5px;
+    font-size: 2.1rem;
+  }
 `;
 
 export default { FDKButton };
