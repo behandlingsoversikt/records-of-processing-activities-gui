@@ -25,26 +25,34 @@ interface Props extends FormikProps<Record> {
 }
 
 const RecordForm = ({
+  record,
   values,
   handleChange,
   onChange,
   onTitleChange
 }: Props) => {
   const didMount = useRef(false);
+  const previousRecord = useRef<any>(null);
 
   useEffect(() => {
-    if (onChange && didMount.current) {
+    if (
+      onChange &&
+      didMount.current &&
+      previousRecord.current?.equals(record) === true
+    ) {
       onChange(values);
-    } else {
-      didMount.current = true;
     }
+    didMount.current = true;
+    previousRecord.current = record;
   }, [values]);
 
   useEffect(() => {
     if (onTitleChange) {
-      onTitleChange(values.title.trim());
+      onTitleChange(
+        values?.title?.trim() || 'Protokoll over behandlingsaktiviteter'
+      );
     }
-  }, [values.title]);
+  });
 
   return (
     <SC.RecordForm>
@@ -668,7 +676,5 @@ export default memo(
     handleSubmit: () => {},
     validationSchema,
     displayName: 'RecordForm'
-  })(RecordForm) as any,
-  ({ record: prevRecord }, { record: nextRecord }) =>
-    prevRecord?.equals(nextRecord)
+  })(RecordForm) as any
 );
