@@ -27,6 +27,7 @@ interface Props extends FormikProps<Record> {
 const RecordForm = ({
   record,
   values,
+  dirty,
   handleChange,
   onChange,
   onTitleChange
@@ -38,7 +39,8 @@ const RecordForm = ({
     if (
       onChange &&
       didMount.current &&
-      previousRecord.current?.equals(record) === true
+      ((!record && !previousRecord.current && dirty) ||
+        previousRecord.current?.equals(record) === true)
     ) {
       onChange(values);
     }

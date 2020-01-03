@@ -1,14 +1,22 @@
-import React, { memo, HTMLProps } from 'react';
+import React, { memo, ButtonHTMLAttributes, ComponentType } from 'react';
 
 import SC from './styled';
 
-interface Props extends HTMLProps<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'default';
+  icon?: ComponentType;
 }
 
-const FDKButton = ({ text, variant, onClick }: Props): JSX.Element => (
-  <SC.FDKButton variant={variant} onClick={onClick}>
+const FDKButton = ({
+  text,
+  variant,
+  icon: Icon,
+  onClick,
+  ...rest
+}: Props): JSX.Element => (
+  <SC.FDKButton variant={variant} onClick={onClick} {...rest}>
+    {Icon && <Icon />}
     {text}
   </SC.FDKButton>
 );
