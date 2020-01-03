@@ -19,13 +19,12 @@ import { Record } from '../../types';
 
 interface Props extends FormikProps<Record> {
   organizationId: string;
-  record?: Partial<Record>;
+  record?: any;
   onChange?: (record: Partial<Record>) => void;
   onTitleChange?: (title: string) => void;
 }
 
 const RecordForm = ({
-  record: { id } = {},
   values,
   handleChange,
   onChange,
@@ -35,7 +34,7 @@ const RecordForm = ({
 
   useEffect(() => {
     if (onChange && didMount.current) {
-      onChange({ ...values, id });
+      onChange(values);
     } else {
       didMount.current = true;
     }
@@ -571,19 +570,23 @@ const RecordForm = ({
 
 export default memo(
   withFormik({
-    mapPropsToValues: ({
-      record: {
+    enableReinitialize: true,
+    mapPropsToValues: ({ record: immutableRecord, organizationId }: Props) => {
+      const {
+        id,
         dataProcessorContactDetails: { name = '', email = '', phone = '' } = {},
-        dataProcessingAgreements = [],
+        dataProcessingAgreements = [
+          { dataProcessorName: '', agreementUrl: '' }
+        ],
         commonDataControllerContact: {
           companies = '',
           distributionOfResponsibilities = '',
-          contactPoints = []
+          contactPoints = [{ name: '', email: '', phone: '' }]
         } = {},
         title = '',
         purpose = '',
         dataSubjectCategories = [],
-        articleSixBasis = [],
+        articleSixBasis = [{ legality: '', referenceUrl: '' }],
         otherArticles: {
           articleNine: {
             checked: articleNineChecked = undefined,
@@ -612,59 +615,60 @@ export default memo(
           thirdCountryRecipients = '',
           guarantees = ''
         } = {}
-      } = {},
-      organizationId
-    }: Props) => ({
-      dataProcessorContactDetails: {
-        name,
-        email,
-        phone
-      },
-      organizationId,
-      dataProcessingAgreements: [
-        ...dataProcessingAgreements,
-        { dataProcessorName: '', agreementUrl: '' }
-      ],
-      commonDataControllerContact: {
-        companies,
-        distributionOfResponsibilities,
-        contactPoints: [...contactPoints, { name: '', email: '', phone: '' }]
-      },
-      title,
-      purpose,
-      dataSubjectCategories: [...dataSubjectCategories],
-      articleSixBasis: [...articleSixBasis, { legality: '', referenceUrl: '' }],
-      otherArticles: {
-        articleNine: {
-          checked: articleNineChecked,
-          referenceUrl: articleNineReferenceUrl
+      } = (immutableRecord?.toJS() ?? {}) as Partial<Record>;
+
+      return {
+        id,
+        dataProcessorContactDetails: {
+          name,
+          email,
+          phone
         },
-        articleTen: {
-          checked: articleTenChecked,
-          referenceUrl: articleTenReferenceUrl
+        organizationId,
+        dataProcessingAgreements,
+        commonDataControllerContact: {
+          companies,
+          distributionOfResponsibilities,
+          contactPoints
+        },
+        title,
+        purpose,
+        dataSubjectCategories,
+        articleSixBasis,
+        otherArticles: {
+          articleNine: {
+            checked: articleNineChecked,
+            referenceUrl: articleNineReferenceUrl
+          },
+          articleTen: {
+            checked: articleTenChecked,
+            referenceUrl: articleTenReferenceUrl
+          }
+        },
+        businessAreas,
+        relatedDatasets,
+        personalDataCategories,
+        securityMeasures,
+        plannedDeletion,
+        highPrivacyRisk,
+        dataProtectionImpactAssessment: {
+          conducted,
+          assessmentReportUrl
+        },
+        personalDataSubjects,
+        privacyProcessingSystems,
+        recipientCategories,
+        dataTransfers: {
+          transferred,
+          thirdCountryRecipients,
+          guarantees
         }
-      },
-      businessAreas: [...businessAreas],
-      relatedDatasets: [...relatedDatasets],
-      personalDataCategories: [...personalDataCategories],
-      securityMeasures,
-      plannedDeletion,
-      highPrivacyRisk,
-      dataProtectionImpactAssessment: {
-        conducted,
-        assessmentReportUrl
-      },
-      personalDataSubjects,
-      privacyProcessingSystems,
-      recipientCategories: [...recipientCategories],
-      dataTransfers: {
-        transferred,
-        thirdCountryRecipients,
-        guarantees
-      }
-    }),
+      };
+    },
     handleSubmit: () => {},
     validationSchema,
     displayName: 'RecordForm'
-  })(RecordForm) as any
+  })(RecordForm) as any,
+  ({ record: prevRecord }, { record: nextRecord }) =>
+    prevRecord?.equals(nextRecord)
 );

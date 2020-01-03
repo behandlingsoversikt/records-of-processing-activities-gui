@@ -1,12 +1,46 @@
-import { all, call, debounce, getContext, put } from 'redux-saga/effects';
+import {
+  all,
+  call,
+  debounce,
+  takeLatest,
+  getContext,
+  put
+} from 'redux-saga/effects';
 import axios from 'axios';
 
 import env from '../../../env';
 
 import * as actions from './actions';
-import { PATCH_RECORD_REQUESTED } from './action-types';
+import { PATCH_RECORD_REQUESTED, GET_RECORD_REQUESTED } from './action-types';
 
 const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
+
+function* getRecordRequested({
+  payload: { recordId, organizationId }
+}: ReturnType<typeof actions.getRecordRequested>) {
+  try {
+    const auth = yield getContext('auth');
+    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+
+    const { data, message } = yield call(
+      axios.get,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/records/${recordId}`,
+      {
+        headers: {
+          authorization,
+          accept: 'application/json'
+        }
+      }
+    );
+    if (data) {
+      yield put(actions.getRecordSucceeded(data));
+    } else {
+      yield put(actions.getRecordFailed(JSON.stringify(message)));
+    }
+  } catch (e) {
+    yield put(actions.getRecordFailed(e.message));
+  }
+}
 
 function* patchRecordRequested({
   payload: { record }
@@ -38,5 +72,8 @@ function* patchRecordRequested({
 }
 
 export default function* saga() {
-  yield all([debounce(1000, PATCH_RECORD_REQUESTED, patchRecordRequested)]);
+  yield all([
+    debounce(1000, PATCH_RECORD_REQUESTED, patchRecordRequested),
+    takeLatest(GET_RECORD_REQUESTED, getRecordRequested)
+  ]);
 }

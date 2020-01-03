@@ -11,15 +11,13 @@ import SC from './styled';
 
 import * as actions from './redux/actions';
 
-import { Record } from '../../types';
-
 interface RouteParams {
   organizationId: string;
   recordId?: string;
 }
 
 interface Props extends RouteComponentProps<RouteParams> {
-  record?: Partial<Record>;
+  record?: any;
   actions: typeof actions;
 }
 
@@ -29,18 +27,26 @@ const RecordPage = ({
   match: {
     params: { organizationId, recordId }
   },
-  actions: { patchRecordRequested }
+  actions: { patchRecordRequested, getRecordRequested }
 }: Props): JSX.Element => {
   const defaultTitle: string = 'Protokoll over behandlingsaktiviteter';
   const [recordTitle, setRecordTitle] = useState(defaultTitle);
   const handleTitleChange = (title: string) =>
     setRecordTitle(title || defaultTitle);
 
+  const id = record?.get('id');
+
   useEffect(() => {
-    if (!recordId && record?.id) {
-      push(`/${organizationId}/records/${record.id}`);
+    if (!recordId && id) {
+      push(`/${organizationId}/records/${id}`);
     }
-  }, [record?.id]);
+  }, [id]);
+
+  useEffect(() => {
+    if (!record?.get('id') && recordId) {
+      getRecordRequested(recordId, organizationId);
+    }
+  }, []);
 
   return (
     <SC.RecordPage>
@@ -56,13 +62,9 @@ const RecordPage = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    record: state.RecordPageReducer.get('record')
-      ? state.RecordPageReducer.get('record').toJS()
-      : undefined
-  };
-};
+const mapStateToProps = (state: any) => ({
+  record: state.RecordPageReducer.get('record')
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(actions, dispatch)
