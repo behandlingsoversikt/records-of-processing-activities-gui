@@ -23,7 +23,7 @@ interface Props extends RouteComponentProps<RouteParams> {
 
 const RecordPage = ({
   record,
-  history: { push },
+  history: { replace },
   match: {
     params: { organizationId, recordId }
   },
@@ -38,7 +38,7 @@ const RecordPage = ({
 
   useEffect(() => {
     if (!recordId && id) {
-      push(`/${organizationId}/records/${id}`);
+      replace(`/${organizationId}/records/${id}`);
     }
   }, [id]);
 
