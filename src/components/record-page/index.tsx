@@ -37,13 +37,13 @@ const RecordPage = ({
   const id = record?.get('id');
 
   useEffect(() => {
-    if (!recordId && id) {
+    if (!recordId && id && recordId === id) {
       replace(`/${organizationId}/records/${id}`);
     }
   }, [id]);
 
   useEffect(() => {
-    if (!record?.get('id') && recordId) {
+    if ((!id && recordId) || (recordId && id !== recordId)) {
       getRecordRequested(recordId, organizationId);
     }
   }, []);
