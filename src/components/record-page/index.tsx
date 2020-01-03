@@ -29,10 +29,7 @@ const RecordPage = ({
   },
   actions: { patchRecordRequested, getRecordRequested }
 }: Props): JSX.Element => {
-  const defaultTitle: string = 'Protokoll over behandlingsaktiviteter';
-  const [recordTitle, setRecordTitle] = useState(defaultTitle);
-  const handleTitleChange = (title: string) =>
-    setRecordTitle(title || defaultTitle);
+  const [recordTitle, setRecordTitle] = useState('');
 
   const id = record?.get('id');
 
@@ -46,6 +43,7 @@ const RecordPage = ({
     if ((!id && recordId) || (recordId && id !== recordId)) {
       getRecordRequested(recordId, organizationId);
     }
+    window.scrollTo(0, 0);
   }, []);
 
   return (
@@ -56,7 +54,7 @@ const RecordPage = ({
         organizationId={organizationId}
         record={record}
         onChange={patchRecordRequested}
-        onTitleChange={handleTitleChange}
+        onTitleChange={setRecordTitle}
       />
     </SC.RecordPage>
   );
