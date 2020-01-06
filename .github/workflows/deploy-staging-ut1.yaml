@@ -1,4 +1,4 @@
-name: Deploy to staging when pull request is created
+name: Deploy to ut1
 
 on:
   repository_dispatch:
