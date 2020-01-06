@@ -62,3 +62,4 @@ jobs:
         with:
           token: ${{ secrets.DISPATCH_TOKEN }}
           event-type: deploy-ut1
+          client-payload: '{"sha": "${{ github.sha }}"}'
