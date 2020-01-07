@@ -18,13 +18,13 @@ interface Props {
 const Radio = ({ name, value, options, onChange }: Props): JSX.Element => (
   <SC.Radio>
     {options.map(({ label, value: optionValue }) => (
-      <SC.Option key={`${label}-${optionValue}`}>
+      <SC.Option key={`${name}-${optionValue}`}>
         <Field
           type='radio'
           name={name}
           value={optionValue}
           checked={`${optionValue}` === `${value}`}
-          id={label}
+          id={`${name}-${optionValue}`}
           onChange={onChange}
         />
         <label htmlFor={label}>{label}</label>

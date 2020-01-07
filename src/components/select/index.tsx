@@ -79,7 +79,7 @@ const Select = ({
         onChange={() => {}}
       >
         {options.map(({ label, value: optionValue }) => (
-          <option key={`${label}-${optionValue}`} value={optionValue}>
+          <option key={`${name}-${optionValue}`} value={optionValue}>
             {label}
           </option>
         ))}

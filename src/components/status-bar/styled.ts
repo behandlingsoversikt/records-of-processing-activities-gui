@@ -23,6 +23,7 @@ const StatusBarBody = styled(Common.Container)`
 const ButtonGroup = styled.div`
   display: flex;
   align-items: center;
+  margin-left: auto;
 `;
 
 const StatusButton = styled(FDKButton)`
