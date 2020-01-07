@@ -65,6 +65,7 @@ const Representatives = ({
           title='Representant for behandlingsansvarlig'
           subtitle='Den korte hjelpeteksten'
           representative={dataControllerRepresentativeInEU}
+          organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
       </ExpansionPanel>
@@ -78,6 +79,7 @@ const Representatives = ({
           title='Personvernombud'
           subtitle='Den korte hjelpeteksten'
           representative={dataProtectionOfficer}
+          organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
       </ExpansionPanel>
