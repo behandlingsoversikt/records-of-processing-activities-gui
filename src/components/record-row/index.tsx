@@ -1,9 +1,11 @@
 import React, { memo } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
+import RecordStatusIndicator from '../record-status-indicator';
+
 import SC from './styled';
 
-import { Record } from '../../types/domain';
+import { Record } from '../../types';
 
 interface Props extends RouteComponentProps {
   record: Record;
@@ -24,7 +26,9 @@ const RecordRow = ({
     <SC.RecordRow onClick={navigateToRecord}>
       <td>{title}</td>
       <td>{name}</td>
-      <td>{status}</td>
+      <td>
+        <RecordStatusIndicator status={status} />
+      </td>
     </SC.RecordRow>
   );
 };
