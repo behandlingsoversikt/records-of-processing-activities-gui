@@ -1,4 +1,4 @@
-import React, { memo, Fragment, useEffect, useRef } from 'react';
+import React, { memo, Fragment, useEffect, useRef, useState } from 'react';
 import { FormikProps, withFormik, FieldArray } from 'formik';
 
 import TextField from '../field-text';
@@ -12,6 +12,8 @@ import SC from './styled';
 
 import AddIcon from '../../images/icon-add.svg';
 import RemoveIcon from '../../images/icon-remove.svg';
+import ExpandAllUpIcon from '../../images/expand-all-up.svg';
+import ExpandAllDownIcon from '../../images/expand-all-down.svg';
 
 import validationSchema from './validation-schema';
 
@@ -32,8 +34,16 @@ const RecordForm = ({
   onChange,
   onTitleChange
 }: Props) => {
+  const [allExpanded, setAllExpanded] = useState(false);
+  const [isExpandAllDirty, setIsExpandAllDirty] = useState(false);
+
   const didMount = useRef(false);
   const previousRecord = useRef<any>(null);
+
+  const toggleAllExpanded = () => {
+    setIsExpandAllDirty(true);
+    setAllExpanded(!allExpanded);
+  };
 
   useEffect(() => {
     if (
@@ -58,7 +68,14 @@ const RecordForm = ({
 
   return (
     <SC.RecordForm>
-      <SC.RecordFormSection title='Behandlingsansvar og databehandler'>
+      <SC.ExpandAllButton as='a' onClick={toggleAllExpanded}>
+        <span>{allExpanded ? 'Skjul alle' : 'Vis alle'}</span>
+        {allExpanded ? <ExpandAllUpIcon /> : <ExpandAllDownIcon />}
+      </SC.ExpandAllButton>
+      <SC.RecordFormSection
+        title='Behandlingsansvar og databehandler'
+        isExpanded={isExpandAllDirty ? allExpanded : true}
+      >
         <SC.Fieldset
           title='Daglig behandlingsanvar'
           subtitle='Den korte hjelpeteksten'
@@ -218,7 +235,11 @@ const RecordForm = ({
           />
         </SC.Fieldset>
       </SC.RecordFormSection>
-      <SC.RecordFormSection required title='Behandlingsaktiviteter'>
+      <SC.RecordFormSection
+        required
+        title='Behandlingsaktiviteter'
+        isExpanded={allExpanded}
+      >
         <SC.Fieldset
           required
           title='Behandlinger gjelder'
@@ -427,7 +448,11 @@ const RecordForm = ({
           />
         </SC.Fieldset>
       </SC.RecordFormSection>
-      <SC.RecordFormSection required title='Personopplysninger'>
+      <SC.RecordFormSection
+        required
+        title='Personopplysninger'
+        isExpanded={allExpanded}
+      >
         <SC.Fieldset
           required
           title='Kategorier av personopplysninger'
@@ -524,7 +549,11 @@ const RecordForm = ({
           />
         </SC.Fieldset>
       </SC.RecordFormSection>
-      <SC.RecordFormSection required title='Overføring av personopplysningene'>
+      <SC.RecordFormSection
+        required
+        title='Overføring av personopplysningene'
+        isExpanded={allExpanded}
+      >
         <SC.Fieldset
           required
           title='Kategorier av mottakere'

@@ -1,4 +1,4 @@
-import React, { memo, PropsWithChildren, useState } from 'react';
+import React, { memo, PropsWithChildren, useState, useEffect } from 'react';
 
 import SC from './styled';
 
@@ -6,17 +6,21 @@ interface Props {
   title: string;
   subtitle?: string;
   required?: boolean;
+  isExpanded?: boolean;
 }
 
 const ExpansionPanel = ({
   title = '',
   subtitle = '',
   required = false,
+  isExpanded: isExpandedProp = false,
   children,
   ...props
 }: PropsWithChildren<Props>): JSX.Element => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(isExpandedProp);
   const toggleExpansion = () => setIsExpanded(!isExpanded);
+
+  useEffect(() => setIsExpanded(isExpandedProp), [isExpandedProp]);
 
   return (
     <SC.ExpansionPanel {...props} isExpanded={isExpanded}>
