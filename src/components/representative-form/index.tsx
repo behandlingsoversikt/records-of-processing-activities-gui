@@ -36,7 +36,7 @@ const RepresentativeForm = ({
   handleChange
 }: Props): JSX.Element => {
   useEffect(() => {
-    if (onChange) {
+    if (onChange && organizationId) {
       onChange(type, values, organizationId);
     }
   }, [values]);
