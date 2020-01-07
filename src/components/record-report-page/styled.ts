@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 const RecordReportPage = styled(Container)`
   font-size: 2rem;
   line-height: 1.5em;
-  padding-top: 2em;
 
   @media print {
     color: 000;

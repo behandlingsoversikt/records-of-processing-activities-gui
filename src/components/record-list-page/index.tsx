@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 
+import env from '../../env';
+
 import Headline from '../headline';
 import FDKButton from '../fdk-button';
 import BreadcrumbsBar from '../breadcrumbs-bar';
@@ -14,6 +16,8 @@ import * as actions from './redux/actions';
 import SC from './styled';
 
 import { Record } from '../../types';
+
+const { FDK_REGISTRATION_BASE_URI } = env;
 
 interface RouteParams {
   organizationId: string;
@@ -43,7 +47,15 @@ const RecordListPage = ({
 
   return (
     <SC.RecordListPage>
-      <BreadcrumbsBar />
+      <BreadcrumbsBar
+        breadcrumbs={[
+          {
+            title: 'Alle kataloger',
+            url: FDK_REGISTRATION_BASE_URI
+          },
+          { title: 'Protokoller', current: true }
+        ]}
+      />
       <Headline
         title='Protokoll over behandlingsaktiviteter'
         subTitle='Brønnøysundsregistrene'
