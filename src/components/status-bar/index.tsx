@@ -9,12 +9,14 @@ import { RecordStatus } from '../../types/enums';
 
 interface Props {
   status: RecordStatus;
+  updatedAt: string;
   onSetStatus: (status: RecordStatus) => void;
   onRecordRemove: () => void;
 }
 
 const StatusBar = ({
   status,
+  updatedAt,
   onSetStatus,
   onRecordRemove
 }: Props): JSX.Element => {
@@ -26,7 +28,9 @@ const StatusBar = ({
   return (
     <SC.StatusBar>
       <SC.StatusBarBody>
-        {!showConfirmDeleteMessage && <span>Big text big dreams</span>}
+        {!showConfirmDeleteMessage && updatedAt && (
+          <span>{`Sist endret: ${new Date(updatedAt).toLocaleString()}`}</span>
+        )}
         {showConfirmDeleteMessage && (
           <span>Er du sikker du vil slette denne behandlingsaktiviteten?</span>
         )}

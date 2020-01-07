@@ -76,6 +76,7 @@ const RecordPage = ({
         onTitleChange={setRecordTitle}
       />
       <StatusBar
+        updatedAt={record?.get('updatedAt')}
         status={record?.get('status') ?? RecordStatus.DRAFT}
         onSetStatus={handleRecordStatusChange}
         onRecordRemove={() => {

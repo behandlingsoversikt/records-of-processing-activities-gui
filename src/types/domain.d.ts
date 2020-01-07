@@ -23,6 +23,7 @@ export interface Record {
   relatedDatasets: string[];
   dataProtectionImpactAssessment: Partial<DataProtectionImpactAssessment>;
   dataProcessingAgreements: DataProcessingAgreement[];
+  updatedAt: string;
 }
 
 export interface ContactDetailsInterface {
