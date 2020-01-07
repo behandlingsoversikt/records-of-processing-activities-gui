@@ -16,7 +16,7 @@ function* fetchAllRecordsRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/records`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records`,
       {
         params: { limit: 1000 },
         headers: {

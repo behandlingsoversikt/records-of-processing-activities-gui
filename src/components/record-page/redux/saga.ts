@@ -28,7 +28,7 @@ function* getRecordRequested({
 
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/records/${recordId}`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
       {
         headers: {
           authorization,
@@ -56,7 +56,7 @@ function* patchRecordRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.patch,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${
         record.organizationId
       }/records${record.id ? `/${record.id}` : ''}`,
       record,

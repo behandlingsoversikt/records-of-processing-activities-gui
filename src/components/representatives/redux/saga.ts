@@ -26,7 +26,7 @@ function* patchRepresentativeRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.patch,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/representatives`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,
       { [field]: payload },
       {
         headers: {
@@ -53,7 +53,7 @@ function* fetchAllRepresentativesRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/representatives`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,
       {
         headers: {
           authorization,
