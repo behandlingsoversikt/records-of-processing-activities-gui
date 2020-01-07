@@ -1,9 +1,11 @@
 import React, { lazy, Suspense, memo } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import Root from '../root';
 import Header from '../header';
 import Footer from '../footer';
+
+import ProtectedRoute from '../protected-route';
 
 const RecordListPage = lazy(() => import('../record-list-page'));
 const RecordPage = lazy(() => import('../record-page'));
@@ -17,13 +19,17 @@ const Router = (): JSX.Element => (
       <Header />
       <Suspense fallback={<></>}>
         <Switch>
-          <Route exact path='/:organizationId' component={RecordListPage} />
-          <Route
+          <ProtectedRoute
+            exact
+            path='/:organizationId'
+            component={RecordListPage}
+          />
+          <ProtectedRoute
             exact
             path='/:organizationId/records/:recordId?'
             component={RecordPage}
           />
-          <Route
+          <ProtectedRoute
             exact
             path='/:organizationId/report'
             component={RecordReportPage}
