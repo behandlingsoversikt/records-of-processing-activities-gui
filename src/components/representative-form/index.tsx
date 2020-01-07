@@ -16,9 +16,11 @@ interface Props extends FormikProps<ContactDetailsInterface> {
   subtitle: string;
   type: RepresentativeType;
   representative: ContactDetailsInterface;
+  organizationId: string;
   onChange?: (
     type: RepresentativeType,
-    payload: ContactDetailsInterface
+    payload: ContactDetailsInterface,
+    organizationId: string
   ) => void;
 }
 
@@ -26,6 +28,7 @@ const RepresentativeForm = ({
   type,
   title,
   subtitle,
+  organizationId,
   onChange,
   values,
   errors,
@@ -34,7 +37,7 @@ const RepresentativeForm = ({
 }: Props): JSX.Element => {
   useEffect(() => {
     if (onChange) {
-      onChange(type, values);
+      onChange(type, values, organizationId);
     }
   }, [values]);
 

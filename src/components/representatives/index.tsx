@@ -46,6 +46,7 @@ const Representatives = ({
           title='Representant for behandlingsansvarlig'
           subtitle='Den korte hjelpeteksten'
           representative={dataControllerRepresentative}
+          organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
         <SC.LegalNoticeEU>

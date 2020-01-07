@@ -44,13 +44,15 @@ export function fetchAllRepresentativesFailed(message: string) {
 
 export function patchRepresentativeRequested(
   type: RepresentativeType,
-  payload: ContactDetailsInterface
+  payload: ContactDetailsInterface,
+  organizationId: string
 ) {
   return {
     type: PATCH_REPRESENTATIVE_REQUESTED,
     payload: {
       type,
-      payload
+      payload,
+      organizationId
     }
   };
 }

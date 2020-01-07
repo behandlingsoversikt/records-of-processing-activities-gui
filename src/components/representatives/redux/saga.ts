@@ -19,14 +19,14 @@ import {
 const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
 
 function* patchRepresentativeRequested({
-  payload: { type: field, payload }
+  payload: { type: field, payload, organizationId }
 }: ReturnType<typeof actions.patchRepresentativeRequested>) {
   try {
     const auth = yield getContext('auth');
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.patch,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/910244132/representatives`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/representatives`,
       { [field]: payload },
       {
         headers: {
