@@ -1,8 +1,11 @@
 import React, { useEffect, memo } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
+import env from '../../env';
+
 import SC from './styled';
 import Headline from '../headline';
+import BreadcrumbsBar from '../breadcrumbs-bar';
 import { RecordItem } from './record-item';
 import { Record, RepresentativesInterface, Organization } from '../../types';
 import { fetchAllRecordsRequested } from '../record-list-page/redux/actions';
@@ -23,6 +26,8 @@ interface Props extends RouteComponentProps<RouteParams> {
   fetchAllRepresentatives: typeof fetchAllRepresentativesRequested;
   fetchOrganization: typeof fetchOrganizationRequested;
 }
+
+const { FDK_REGISTRATION_BASE_URI } = env;
 
 export const RecordReportPagePure = memo(
   ({
@@ -46,6 +51,22 @@ export const RecordReportPagePure = memo(
 
     return (
       <SC.RecordReportPage>
+        <BreadcrumbsBar
+          breadcrumbs={[
+            {
+              title: 'Alle kataloger',
+              url: FDK_REGISTRATION_BASE_URI
+            },
+            {
+              title: 'Protokoller',
+              url: `${location.origin}/${organizationId}`
+            },
+            {
+              title: 'Rapport',
+              current: true
+            }
+          ]}
+        />
         <Headline
           title={localization.protocol}
           subTitle={organization.name || ''}
