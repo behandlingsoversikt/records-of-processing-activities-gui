@@ -18,6 +18,13 @@ const BreadcrumbsBar = styled.div`
   & nav a:hover {
     text-decoration: none;
   }
+
+  & nav li:last-of-type {
+    flex: 1 1 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 export default { BreadcrumbsBar };
