@@ -25,7 +25,7 @@ function* fetchAllRecordsRequested({
         }
       }
     );
-    if (data && data.hits && data.hits.length > 0) {
+    if (data && data.hits) {
       yield put(actions.fetchAllRecordsSucceeded(data.hits));
     } else {
       yield put(actions.fetchAllRecordsFailed(JSON.stringify(message)));
