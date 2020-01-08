@@ -14,10 +14,10 @@ interface Props {
 
 const Headline = ({ title, subTitle, status }: Props): JSX.Element => (
   <SC.Headline>
-    <SC.Title>
-      {title}
+    <SC.TitleWrapper>
+      <SC.Title>{title}</SC.Title>
       {status && <RecordStatusIndicator status={status} />}
-    </SC.Title>
+    </SC.TitleWrapper>
     <SC.SubTitle>{subTitle}</SC.SubTitle>
   </SC.Headline>
 );
