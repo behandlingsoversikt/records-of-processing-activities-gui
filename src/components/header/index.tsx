@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
+import env from '../../env';
+
 import { withAuth } from '../../providers/auth';
 
 import SC from './styled';
@@ -10,6 +12,8 @@ interface Props {
   authService: Auth;
 }
 
+const { FDK_REGISTRATION_BASE_URI } = env;
+
 const Header = ({ authService }: Props): JSX.Element => {
   const userName = authService.getUser()?.name;
   const logOutAndRedirect = () => authService.logout();
@@ -17,7 +21,7 @@ const Header = ({ authService }: Props): JSX.Element => {
   return (
     <SC.Header>
       <SC.Container>
-        <SC.LogoLink href='/'>
+        <SC.LogoLink href={FDK_REGISTRATION_BASE_URI}>
           <SC.Logo />
         </SC.LogoLink>
         {userName && (

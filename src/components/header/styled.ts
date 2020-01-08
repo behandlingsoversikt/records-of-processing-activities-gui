@@ -3,7 +3,12 @@ import Button from '@material-ui/core/Button';
 
 import Common from '../common/styled';
 
-import FdkLogo from '../../images/fdk-gdpr-logo.svg';
+import FdkRegistrationLogo from '../../images/fdk-registration-logo.svg';
+import FdkRegistrationDemoLogo from '../../images/fdk-registration-demo-logo.svg';
+
+const FdkLogo = location.host.includes('demo')
+  ? FdkRegistrationDemoLogo
+  : FdkRegistrationLogo;
 
 const Header = styled.header`
   display: flex;
@@ -38,7 +43,6 @@ const Container = styled(Common.Container)`
 
 const Logo = styled(FdkLogo)`
   height: 100%;
-  /* width: 127px; TODO: FIX */
 `;
 
 const UserAvatar = styled.div`
