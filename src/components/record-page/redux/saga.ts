@@ -85,7 +85,7 @@ function* deleteRecordRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { status, message } = yield call(
       axios.delete,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/organizations/${organizationId}/records/${recordId}`,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
       {
         headers: {
           authorization,
