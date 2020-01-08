@@ -1,5 +1,8 @@
 import React, { memo, PropsWithChildren, useState, useEffect } from 'react';
 
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+
 import SC from './styled';
 
 interface Props {
@@ -25,8 +28,17 @@ const ExpansionPanel = ({
   return (
     <SC.ExpansionPanel {...props} isExpanded={isExpanded}>
       <SC.Head onClick={toggleExpansion}>
-        <SC.Title>{title}</SC.Title>
-        {required && <SC.RequiredLabel text='Obligatorisk' />}
+        <SC.TitleWrapper>
+          <SC.Description>
+            <SC.Title>{title}</SC.Title>
+            {required && <SC.RequiredLabel text='Obligatorisk' />}
+          </SC.Description>
+          {isExpanded ? (
+            <ExpandLess fontSize='large' />
+          ) : (
+            <ExpandMore fontSize='large' />
+          )}
+        </SC.TitleWrapper>
         {!isExpanded && subtitle && <SC.Subtitle>{subtitle}</SC.Subtitle>}
       </SC.Head>
       {isExpanded && <SC.Body>{children}</SC.Body>}

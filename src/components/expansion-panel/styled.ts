@@ -27,14 +27,33 @@ const Subtitle = styled.h3`
 `;
 
 const RequiredLabel = styled(Tag)`
+  padding: 2px;
   margin-left: 5px;
 `;
 
 const Head = styled.div`
+  display: flex;
+  flex-direction: column;
+
   user-select: none;
   padding: 30px;
 
   cursor: pointer;
+
+  & svg {
+    fill: ${({ theme }) => theme.fdk.colors.text.link};
+  }
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Description = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Body = styled.div`
@@ -45,6 +64,8 @@ const Body = styled.div`
 export default {
   ExpansionPanel,
   RequiredLabel,
+  TitleWrapper,
+  Description,
   Title,
   Subtitle,
   Head,
