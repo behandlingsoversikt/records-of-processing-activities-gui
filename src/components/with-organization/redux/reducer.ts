@@ -6,7 +6,7 @@ import { FETCH_ORGANIZATION_SUCCEEDED } from './action-types';
 import { Actions } from '../../../types';
 
 const initialState = fromJS({
-  organization: {}
+  organization: null
 });
 
 export default function reducer(

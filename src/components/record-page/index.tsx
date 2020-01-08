@@ -5,6 +5,10 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import env from '../../env';
 
+import withOrganization, {
+  Props as OrganizationProps
+} from '../with-organization';
+
 import Headline from '../headline';
 import BreadcrumbsBar from '../breadcrumbs-bar';
 import RecordForm from '../record-form';
@@ -23,13 +27,14 @@ interface RouteParams {
   recordId?: string;
 }
 
-interface Props extends RouteComponentProps<RouteParams> {
+interface Props extends OrganizationProps, RouteComponentProps<RouteParams> {
   record?: any;
   actions: typeof actions;
 }
 
 const RecordPage = ({
   record,
+  organization,
   history: { replace },
   match: {
     params: { organizationId, recordId }
@@ -39,13 +44,20 @@ const RecordPage = ({
     patchRecordRequested,
     deleteRecordRequested,
     resetRecord
-  }
+  },
+  organizationActions: { fetchOrganizationRequested }
 }: Props): JSX.Element => {
   const [recordTitle, setRecordTitle] = useState('');
   const [canChangeUrl, setCanChangeUrl] = useState(false);
 
   const navigateToRecordListPage = () => replace(`/${organizationId}`);
   const id = record?.get('id');
+
+  useEffect(() => {
+    if (organizationId) {
+      fetchOrganizationRequested(organizationId);
+    }
+  }, [organizationId]);
 
   useEffect(() => {
     resetRecord();
@@ -82,7 +94,7 @@ const RecordPage = ({
       />
       <Headline
         title={recordTitle}
-        subTitle='Brønnøysundsregistrene'
+        subTitle={organization?.name ?? ''}
         status={record?.get('status') ?? RecordStatus.DRAFT}
       />
       <RecordForm
@@ -111,4 +123,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(actions, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(RecordPage));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(withOrganization(RecordPage)));
