@@ -8,13 +8,13 @@ import { FETCH_ORGANIZATION_REQUESTED } from './action-types';
 
 const { ORGANIZATION_API } = env;
 
-function* fetchPublisherRequested({
-  payload: { orgId }
+function* fetchOrganizationRequested({
+  payload: { id }
 }: ReturnType<typeof actions.fetchOrganizationRequested>) {
   try {
     const { data, message } = yield call(
       axios.get,
-      `${ORGANIZATION_API}/organizations/${orgId}`,
+      `${ORGANIZATION_API}/organizations/${id}`,
       {
         headers: {
           accept: 'application/json'
@@ -33,6 +33,6 @@ function* fetchPublisherRequested({
 
 export default function* saga() {
   yield all([
-    takeLatest(FETCH_ORGANIZATION_REQUESTED, fetchPublisherRequested)
+    takeLatest(FETCH_ORGANIZATION_REQUESTED, fetchOrganizationRequested)
   ]);
 }

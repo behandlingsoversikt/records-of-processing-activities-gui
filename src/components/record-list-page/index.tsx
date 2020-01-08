@@ -5,6 +5,10 @@ import { RouteComponentProps } from 'react-router-dom';
 
 import env from '../../env';
 
+import withOrganization, {
+  Props as OrganizationProps
+} from '../with-organization';
+
 import Headline from '../headline';
 import FDKButton from '../fdk-button';
 import BreadcrumbsBar from '../breadcrumbs-bar';
@@ -23,21 +27,24 @@ interface RouteParams {
   organizationId: string;
 }
 
-interface Props extends RouteComponentProps<RouteParams> {
+interface Props extends OrganizationProps, RouteComponentProps<RouteParams> {
   records: Record[];
   actions: typeof actions;
 }
 
 const RecordListPage = ({
+  records,
+  organization,
+  history: { push },
   match: {
     params: { organizationId }
   },
-  records,
-  history: { push },
-  actions: { fetchAllRecordsRequested }
+  actions: { fetchAllRecordsRequested },
+  organizationActions: { fetchOrganizationRequested }
 }: Props): JSX.Element => {
   useEffect(() => {
     if (organizationId) {
+      fetchOrganizationRequested(organizationId);
       fetchAllRecordsRequested(organizationId);
     }
   }, [organizationId]);
@@ -58,7 +65,7 @@ const RecordListPage = ({
       />
       <Headline
         title='Protokoll over behandlingsaktiviteter'
-        subTitle='Brønnøysundsregistrene'
+        subTitle={organization?.name ?? ''}
       />
       <Representatives organizationId={organizationId} />
       <SC.RecordListActions>
@@ -89,4 +96,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(memo(RecordListPage));
+)(memo(withOrganization(RecordListPage)));

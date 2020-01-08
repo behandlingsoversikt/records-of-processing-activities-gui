@@ -6,11 +6,11 @@ import {
 
 import { Organization } from '../../../types';
 
-export function fetchOrganizationRequested(orgId: string) {
+export function fetchOrganizationRequested(id: string) {
   return {
     type: FETCH_ORGANIZATION_REQUESTED,
     payload: {
-      orgId
+      id
     }
   };
 }
