@@ -1,10 +1,22 @@
 import {
   FETCH_ALL_RECORDS_FAILED,
   FETCH_ALL_RECORDS_REQUESTED,
-  FETCH_ALL_RECORDS_SUCCEEDED
+  FETCH_ALL_RECORDS_SUCCEEDED,
+  SORT_RECORDS
 } from './action-types';
 
 import { Record } from '../../../types';
+import { SortOrder } from '../../../types/enums';
+
+export function sortRecords(field: string[], order: SortOrder) {
+  return {
+    type: SORT_RECORDS,
+    payload: {
+      field,
+      order
+    }
+  };
+}
 
 export function fetchAllRecordsRequested(organizationId: string) {
   return {

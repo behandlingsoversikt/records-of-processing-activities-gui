@@ -7,12 +7,13 @@ import withOrganization, {
   Props as OrganizationProps
 } from '../with-organization';
 
+import withRecords, { Props as RecordsProps } from '../with-records';
+
 import SC from './styled';
 import Headline from '../headline';
 import BreadcrumbsBar from '../breadcrumbs-bar';
 import { RecordItem } from './record-item';
-import { Record, RepresentativesInterface } from '../../types';
-import { fetchAllRecordsRequested } from '../record-list-page/redux/actions';
+import { RepresentativesInterface } from '../../types';
 import { localization } from '../../lib/localization';
 import { fetchAllRepresentativesRequested } from '../representatives/redux/actions';
 import { ReportRepresentatives } from './report-representatives';
@@ -21,9 +22,10 @@ interface RouteParams {
   organizationId: string;
 }
 
-interface Props extends OrganizationProps, RouteComponentProps<RouteParams> {
-  records: Record[];
-  fetchAllRecords: typeof fetchAllRecordsRequested;
+interface Props
+  extends RecordsProps,
+    OrganizationProps,
+    RouteComponentProps<RouteParams> {
   representatives: RepresentativesInterface;
   fetchAllRepresentatives: typeof fetchAllRepresentativesRequested;
 }
@@ -37,13 +39,13 @@ const RecordReportPage = ({
   match: {
     params: { organizationId }
   },
-  fetchAllRecords,
   fetchAllRepresentatives,
-  organizationActions: { fetchOrganizationRequested }
+  organizationActions: { fetchOrganizationRequested },
+  recordsActions: { fetchAllRecordsRequested }
 }: Props): JSX.Element => {
   useEffect(() => {
     if (organizationId) {
-      fetchAllRecords(organizationId);
+      fetchAllRecordsRequested(organizationId);
       fetchAllRepresentatives(organizationId);
       fetchOrganizationRequested(organizationId);
     }
@@ -83,4 +85,4 @@ const RecordReportPage = ({
   );
 };
 
-export default memo(withOrganization(RecordReportPage));
+export default memo(withRecords(withOrganization(RecordReportPage)));

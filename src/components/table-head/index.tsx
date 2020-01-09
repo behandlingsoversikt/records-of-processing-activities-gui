@@ -1,30 +1,41 @@
 import React, { memo } from 'react';
+import ArrowDropUp from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 
-import { ArrowDropUp, ArrowDropDown } from '@material-ui/icons';
+import withRecords, { Props as RecordsProps } from '../with-records';
 
 import SC from './styled';
+import { SortOrder } from '../../types/enums';
 
-interface Props {
+interface Props extends RecordsProps {
   title: string;
-  sortable?: boolean;
+  fieldSelector: string[];
 }
 
-const TableHead = ({ title, sortable = false }: Props): JSX.Element => (
+const TableHead = ({
+  title,
+  fieldSelector,
+  recordsActions: { sortRecords }
+}: Props): JSX.Element => (
   <th>
     <div>
       <span>{title}</span>
-      {sortable && (
-        <SC.SortButtons>
-          <button type='button'>
-            <ArrowDropUp />
-          </button>
-          <button type='button'>
-            <ArrowDropDown />
-          </button>
-        </SC.SortButtons>
-      )}
+      <SC.SortButtons>
+        <button
+          type='button'
+          onClick={() => sortRecords(fieldSelector, SortOrder.ASC)}
+        >
+          <ArrowDropUp fontSize='large' />
+        </button>
+        <button
+          type='button'
+          onClick={() => sortRecords(fieldSelector, SortOrder.DSC)}
+        >
+          <ArrowDropDown fontSize='large' />
+        </button>
+      </SC.SortButtons>
     </div>
   </th>
 );
 
-export default memo(TableHead);
+export default memo(withRecords(TableHead));

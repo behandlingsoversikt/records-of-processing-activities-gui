@@ -8,3 +8,8 @@ export enum RepresentativeType {
   DATA_CONTROLLER_REPRESENTATIVE = 'dataControllerRepresentative',
   DATA_CONTROLLER_REPRESENTATIVE_IN_EU = 'dataControllerRepresentativeInEU'
 }
+
+export enum SortOrder {
+  ASC,
+  DSC
+}

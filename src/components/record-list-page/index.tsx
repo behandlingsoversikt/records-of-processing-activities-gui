@@ -1,6 +1,4 @@
 import React, { useEffect, memo } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 
 import env from '../../env';
@@ -9,13 +7,13 @@ import withOrganization, {
   Props as OrganizationProps
 } from '../with-organization';
 
+import withRecords, { Props as RecordsProps } from '../with-records';
+
 import Headline from '../headline';
 import FDKButton from '../fdk-button';
 import BreadcrumbsBar from '../breadcrumbs-bar';
 import Representatives from '../representatives';
 import RecordListTable from '../record-list-table';
-
-import * as actions from './redux/actions';
 
 import SC from './styled';
 
@@ -27,9 +25,11 @@ interface RouteParams {
   organizationId: string;
 }
 
-interface Props extends OrganizationProps, RouteComponentProps<RouteParams> {
+interface Props
+  extends RecordsProps,
+    OrganizationProps,
+    RouteComponentProps<RouteParams> {
   records: Record[];
-  actions: typeof actions;
 }
 
 const RecordListPage = ({
@@ -39,7 +39,7 @@ const RecordListPage = ({
   match: {
     params: { organizationId }
   },
-  actions: { fetchAllRecordsRequested },
+  recordsActions: { fetchAllRecordsRequested },
   organizationActions: { fetchOrganizationRequested }
 }: Props): JSX.Element => {
   useEffect(() => {
@@ -85,15 +85,4 @@ const RecordListPage = ({
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  records: state.RecordsPageReducer.get('records').toJS()
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  actions: bindActionCreators(actions, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(withOrganization(RecordListPage)));
+export default memo(withRecords(withOrganization(RecordListPage)));
