@@ -1,11 +1,17 @@
-import React, { memo, PropsWithChildren, useState, useEffect } from 'react';
+import React, {
+  memo,
+  PropsWithChildren,
+  useState,
+  useEffect,
+  HTMLAttributes
+} from 'react';
 
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 
 import SC from './styled';
 
-interface Props {
+interface Props extends HTMLAttributes<any> {
   title: string;
   subtitle?: string;
   required?: boolean;
