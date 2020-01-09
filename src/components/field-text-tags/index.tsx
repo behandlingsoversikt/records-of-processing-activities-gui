@@ -41,7 +41,7 @@ const TextTagsField = ({
     if (
       inputValue &&
       inputValue.trim() &&
-      (e.keyCode === 9 || e.keyCode === 13 || e.keyCode === 32)
+      (e.keyCode === 9 || e.keyCode === 13)
     ) {
       e.preventDefault();
       onAddTag(inputValue.trim());
@@ -55,30 +55,29 @@ const TextTagsField = ({
     }
   };
   return (
-    <SC.Field error={error}>
+    <SC.Field>
       {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-      <SC.TagsWithInput>
-        {value && value.length > 0 && (
-          <SC.Tags>
-            {value.map((tag, index) => (
-              <SC.Tag key={`${tag}-${index}`}>
-                <span>{tag}</span>
-                <RemoveIcon onClick={() => onRemoveTag(index)} />
-              </SC.Tag>
-            ))}
-          </SC.Tags>
-        )}
-        <SC.TextTagsField
-          id={id}
-          placeholder={placeholder || labelText}
-          name={name}
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyPress}
-          onBlur={handleBlur}
-        />
-      </SC.TagsWithInput>
-      {helperText && <SC.HelperText>{helperText}</SC.HelperText>}
+      <SC.TextTagsField
+        id={id}
+        placeholder={placeholder || labelText}
+        name={name}
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
+        onBlur={handleBlur}
+        error={error}
+      />
+      {helperText && <SC.HelperText error={error}>{helperText}</SC.HelperText>}
+      {value && value.length > 0 && (
+        <SC.Tags>
+          {value.map((tag, index) => (
+            <SC.Tag key={`${tag}-${index}`}>
+              <span>{tag}</span>
+              <RemoveIcon onClick={() => onRemoveTag(index)} />
+            </SC.Tag>
+          ))}
+        </SC.Tags>
+      )}
     </SC.Field>
   );
 };
