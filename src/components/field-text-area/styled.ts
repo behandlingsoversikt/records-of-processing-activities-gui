@@ -23,7 +23,7 @@ const Label = styled.label`
 const HelperText = styled.p`
   margin-top: 5px;
   margin-left: 8px;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
 `;
 
 const Field = styled.div<{ error?: boolean }>`
