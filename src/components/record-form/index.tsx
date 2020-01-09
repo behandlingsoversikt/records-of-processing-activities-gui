@@ -34,15 +34,17 @@ const RecordForm = ({
   onChange,
   onTitleChange
 }: Props) => {
-  const [allExpanded, setAllExpanded] = useState(false);
+  const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
   const [isExpandAllDirty, setIsExpandAllDirty] = useState(false);
 
   const didMount = useRef(false);
   const previousRecord = useRef<any>(null);
 
+  const allFieldsExpanded = allExpanded.every(Boolean);
+
   const toggleAllExpanded = () => {
     setIsExpandAllDirty(true);
-    setAllExpanded(!allExpanded);
+    setAllExpanded(allExpanded.map(() => !allFieldsExpanded));
   };
 
   useEffect(() => {
@@ -69,12 +71,21 @@ const RecordForm = ({
   return (
     <SC.RecordForm>
       <SC.ExpandAllButton as='a' onClick={toggleAllExpanded}>
-        <span>{allExpanded ? 'Skjul alle' : 'Vis alle'}</span>
-        {allExpanded ? <ExpandAllUpIcon /> : <ExpandAllDownIcon />}
+        <span>
+          {allFieldsExpanded ? 'Lukk alle felter' : 'Åpne alle felter'}
+        </span>
+        {allFieldsExpanded ? <ExpandAllUpIcon /> : <ExpandAllDownIcon />}
       </SC.ExpandAllButton>
       <SC.RecordFormSection
         title='Behandlingsansvar og databehandler'
-        isExpanded={isExpandAllDirty ? allExpanded : true}
+        isExpanded={isExpandAllDirty ? allExpanded[0] : true}
+        onClick={() =>
+          setAllExpanded(
+            allExpanded.map((expanded, index) =>
+              index === 0 ? !expanded : expanded
+            )
+          )
+        }
       >
         <SC.Fieldset
           title='Daglig behandlingsanvar'
@@ -238,7 +249,14 @@ const RecordForm = ({
       <SC.RecordFormSection
         required
         title='Behandlingsaktiviteter'
-        isExpanded={allExpanded}
+        isExpanded={allExpanded[1]}
+        onClick={() =>
+          setAllExpanded(
+            allExpanded.map((expanded, index) =>
+              index === 1 ? !expanded : expanded
+            )
+          )
+        }
       >
         <SC.Fieldset
           required
@@ -451,7 +469,14 @@ const RecordForm = ({
       <SC.RecordFormSection
         required
         title='Personopplysninger'
-        isExpanded={allExpanded}
+        isExpanded={allExpanded[2]}
+        onClick={() =>
+          setAllExpanded(
+            allExpanded.map((expanded, index) =>
+              index === 2 ? !expanded : expanded
+            )
+          )
+        }
       >
         <SC.Fieldset
           required
@@ -552,7 +577,14 @@ const RecordForm = ({
       <SC.RecordFormSection
         required
         title='Overføring av personopplysningene'
-        isExpanded={allExpanded}
+        isExpanded={allExpanded[3]}
+        onClick={() =>
+          setAllExpanded(
+            allExpanded.map((expanded, index) =>
+              index === 3 ? !expanded : expanded
+            )
+          )
+        }
       >
         <SC.Fieldset
           required
