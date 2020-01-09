@@ -1,13 +1,13 @@
 import { all } from 'redux-saga/effects';
 
-import recordsPageSaga from '../../record-list-page/redux/saga';
+import recordsSaga from '../../with-records/redux/saga';
 import representativesSaga from '../../representatives/redux/saga';
 import recordPageSaga from '../../record-page/redux/saga';
 import organizationSaga from '../../with-organization/redux/saga';
 
 export default function* saga(): Generator {
   yield all([
-    recordsPageSaga(),
+    recordsSaga(),
     representativesSaga(),
     recordPageSaga(),
     organizationSaga()

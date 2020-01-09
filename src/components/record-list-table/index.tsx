@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import TableHead from '../table-head';
+
 import SC from './styled';
 
 import RecordRow from '../record-row';
@@ -15,9 +16,12 @@ const RecordListTable = ({ records }: Props): JSX.Element => (
   <SC.RecordListTable>
     <thead>
       <tr>
-        <TableHead sortable title='Navn/tittel' />
-        <TableHead sortable title='Daglig behandlingsansvarlig' />
-        <TableHead sortable title='Status' />
+        <TableHead fieldSelector={['title']} title='Navn/tittel' />
+        <TableHead
+          fieldSelector={['dataProcessorContactDetails', 'name']}
+          title='Daglig behandlingsansvarlig'
+        />
+        <TableHead fieldSelector={['status']} title='Status' />
       </tr>
     </thead>
     <tbody>
