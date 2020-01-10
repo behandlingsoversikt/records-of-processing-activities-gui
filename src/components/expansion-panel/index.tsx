@@ -23,6 +23,7 @@ const ExpansionPanel = ({
   subtitle = '',
   required = false,
   isExpanded: isExpandedProp = false,
+  onClick,
   children,
   ...props
 }: PropsWithChildren<Props>): JSX.Element => {
@@ -33,7 +34,7 @@ const ExpansionPanel = ({
 
   return (
     <SC.ExpansionPanel {...props} isExpanded={isExpanded}>
-      <SC.Head onClick={toggleExpansion}>
+      <SC.Head onClick={onClick ?? toggleExpansion}>
         <SC.TitleWrapper>
           <SC.Description>
             <SC.Title>{title}</SC.Title>
