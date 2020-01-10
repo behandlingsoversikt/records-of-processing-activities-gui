@@ -35,17 +35,14 @@ const RecordForm = ({
   onTitleChange
 }: Props) => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
-  const [isExpandAllDirty, setIsExpandAllDirty] = useState(false);
 
   const didMount = useRef(false);
   const previousRecord = useRef<any>(null);
 
   const allFieldsExpanded = allExpanded.every(Boolean);
 
-  const toggleAllExpanded = () => {
-    setIsExpandAllDirty(true);
+  const toggleAllExpanded = () =>
     setAllExpanded(allExpanded.map(() => !allFieldsExpanded));
-  };
 
   useEffect(() => {
     if (
@@ -66,7 +63,7 @@ const RecordForm = ({
         values?.title?.trim() || 'Protokoll over behandlingsaktiviteter'
       );
     }
-  });
+  }, [values?.title]);
 
   return (
     <SC.RecordForm>
@@ -78,7 +75,7 @@ const RecordForm = ({
       </SC.ExpandAllButton>
       <SC.RecordFormSection
         title='Behandlingsansvar og databehandler'
-        isExpanded={isExpandAllDirty ? allExpanded[0] : true}
+        isExpanded={allExpanded[0]}
         onClick={() =>
           setAllExpanded(
             allExpanded.map((expanded, index) =>

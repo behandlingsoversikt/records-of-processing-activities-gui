@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Representatives = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
 `;
 
