@@ -42,7 +42,7 @@
     "@material-ui/icons": "^4.5.1",
     "axios": "^0.19.0",
     "core-js": "^3.2.1",
-    "formik": "^2.0.7",
+    "formik": "^2.1.2",
     "immutable": "^4.0.0-rc.12",
     "keycloak-js": "^8.0.1",
     "react": "^16.10.1",

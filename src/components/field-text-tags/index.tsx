@@ -10,6 +10,8 @@ import SC from './styled';
 
 import RemoveIcon from '../../images/icon-remove.svg';
 
+import { KeyCode } from '../../types/enums';
+
 interface Props {
   id?: string;
   required?: boolean;
@@ -39,9 +41,8 @@ const TextTagsField = ({
     setInputValue(e.target.value);
   const handleKeyPress = (e: KeyboardEvent) => {
     if (
-      inputValue &&
-      inputValue.trim() &&
-      (e.keyCode === 9 || e.keyCode === 13)
+      inputValue?.trim() &&
+      (e.keyCode === KeyCode.TAB || e.keyCode === KeyCode.ENTER)
     ) {
       e.preventDefault();
       onAddTag(inputValue.trim());
