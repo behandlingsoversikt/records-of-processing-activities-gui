@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width: 1140px;
+  width: 100%;
   max-width: 1140px;
+  overflow-wrap: break-word;
 `;
 
 const Division = styled.div`
