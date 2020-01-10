@@ -8,6 +8,7 @@ import SC from './styled';
 import { RecordStatus } from '../../types/enums';
 
 interface Props {
+  recordId?: string;
   status: RecordStatus;
   updatedAt: string;
   onSetStatus: (status: RecordStatus) => void;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const StatusBar = ({
+  recordId,
   status,
   updatedAt,
   onSetStatus,
@@ -53,7 +55,7 @@ const StatusBar = ({
               />
               <SC.RemoveButton
                 as='a'
-                disabled={status === RecordStatus.APPROVED}
+                disabled={!recordId || status === RecordStatus.APPROVED}
                 onClick={() => {
                   setShowConfirmDeleteMessage(true);
                 }}

@@ -1,4 +1,4 @@
-import { RecordStatus } from './enums';
+import { RecordStatus, DatasetStatus } from './enums';
 
 export interface Record {
   id: string;
@@ -81,4 +81,14 @@ export interface Organization {
   id: string;
   name: string;
   orgPath: string;
+}
+
+interface TranslatableField {
+  [key: string]: string;
+}
+
+export interface Dataset {
+  id: string;
+  title: TranslatableField;
+  registrationStatus: DatasetStatus;
 }

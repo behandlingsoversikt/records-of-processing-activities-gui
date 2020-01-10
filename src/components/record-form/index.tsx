@@ -1,9 +1,21 @@
-import React, { memo, Fragment, useEffect, useRef, useState } from 'react';
+import React, {
+  memo,
+  Fragment,
+  useEffect,
+  useRef,
+  useState,
+  ChangeEvent
+} from 'react';
 import { FormikProps, withFormik, FieldArray } from 'formik';
+
+import { localization } from '../../lib/localization';
+
+import withDatasets, { Props as DatasetsProps } from '../with-datasets';
 
 import TextField from '../field-text';
 import TextAreaField from '../field-text-area';
 import TextTagsField from '../field-text-tags';
+import TextTagsSearchField from '../field-text-tags-search';
 import Radio from '../radio';
 import Checkbox from '../checkbox';
 import Select from '../select';
@@ -17,10 +29,10 @@ import ExpandAllDownIcon from '../../images/expand-all-down.svg';
 
 import validationSchema from './validation-schema';
 
-import { Record } from '../../types';
-import { localization } from '../../lib/localization';
+import { Record, Dataset } from '../../types';
+import { DatasetStatus } from '../../types/enums';
 
-interface Props extends FormikProps<Record> {
+interface Props extends DatasetsProps, FormikProps<Record> {
   organizationId: string;
   record?: any;
   onChange?: (record: Partial<Record>) => void;
@@ -28,17 +40,26 @@ interface Props extends FormikProps<Record> {
 }
 
 const RecordForm = ({
+  organizationId,
   record,
+  datasets,
   values,
   dirty,
   handleChange,
   onChange,
-  onTitleChange
-}: Props) => {
+  onTitleChange,
+  datasetsActions: { fetchAllDatasetsRequested }
+}: Props): JSX.Element | null => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
+  const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
+  const [isWaitingForSuggestions, setIsWaitingForSuggestions] = useState(false);
 
   const didMount = useRef(false);
   const previousRecord = useRef<any>(null);
+
+  useEffect(() => {
+    fetchAllDatasetsRequested(organizationId);
+  }, []);
 
   const allFieldsExpanded = allExpanded.every(Boolean);
 
@@ -66,7 +87,7 @@ const RecordForm = ({
     }
   }, [values?.title]);
 
-  return (
+  return datasets.length > 0 ? (
     <SC.RecordForm>
       <SC.ExpandAllButton as='a' onClick={toggleAllExpanded}>
         <span>
@@ -462,9 +483,49 @@ const RecordForm = ({
           <FieldArray
             name='relatedDatasets'
             render={arrayHelpers => (
-              <TextTagsField
+              <TextTagsSearchField
                 name='relatedDatasets'
-                value={values.relatedDatasets}
+                value={values.relatedDatasets.map(id => {
+                  return {
+                    label:
+                      datasets.find(
+                        ({ id: datasetId }: Dataset) => datasetId === id
+                      )?.title[localization.getLanguage()] ?? '',
+                    value: id
+                  };
+                })}
+                onChange={({
+                  target: { value: query }
+                }: ChangeEvent<HTMLInputElement>) => {
+                  if (query) {
+                    setIsWaitingForSuggestions(true);
+                    setDatasetSuggestions(
+                      datasets
+                        .filter(
+                          ({ id, registrationStatus, title }) =>
+                            [
+                              DatasetStatus.APPROVE,
+                              DatasetStatus.PUBLISH
+                            ].includes(registrationStatus) &&
+                            !values.relatedDatasets.includes(id) &&
+                            (Object.values(
+                              title
+                            ) as string[]).some((localTitle: string): boolean =>
+                              localTitle
+                                .toLowerCase()
+                                .includes(query.toLowerCase())
+                            )
+                        )
+                        .slice(0, 5)
+                    );
+                    setIsWaitingForSuggestions(false);
+                  }
+                }}
+                isLoadingSuggestions={isWaitingForSuggestions}
+                suggestions={datasetSuggestions.map(({ id: value, title }) => ({
+                  label: title[localization.getLanguage()],
+                  value
+                }))}
                 onAddTag={(tag: string) => arrayHelpers.push(tag)}
                 onRemoveTag={(index: number) => arrayHelpers.remove(index)}
               />
@@ -652,108 +713,117 @@ const RecordForm = ({
         )}
       </SC.RecordFormSection>
     </SC.RecordForm>
-  );
+  ) : null;
 };
 
 export default memo(
-  withFormik({
-    enableReinitialize: true,
-    mapPropsToValues: ({ record: immutableRecord, organizationId }: Props) => {
-      const {
-        id,
-        dataProcessorContactDetails: { name = '', email = '', phone = '' } = {},
-        dataProcessingAgreements = [
-          { dataProcessorName: '', agreementUrl: '' }
-        ],
-        commonDataControllerContact: {
-          companies = '',
-          distributionOfResponsibilities = '',
-          contactPoints = [{ name: '', email: '', phone: '' }]
-        } = {},
-        title = '',
-        purpose = '',
-        dataSubjectCategories = [],
-        articleSixBasis = [{ legality: '', referenceUrl: '' }],
-        otherArticles: {
-          articleNine: {
-            checked: articleNineChecked = undefined,
-            referenceUrl: articleNineReferenceUrl = ''
+  withDatasets(
+    withFormik<Props, Partial<Record>>({
+      enableReinitialize: true,
+      mapPropsToValues: ({
+        record: immutableRecord,
+        organizationId
+      }: Props) => {
+        const {
+          id,
+          dataProcessorContactDetails: {
+            name = '',
+            email = '',
+            phone = ''
           } = {},
-          articleTen: {
-            checked: articleTenChecked = undefined,
-            referenceUrl: articleTenReferenceUrl = ''
+          dataProcessingAgreements = [
+            { dataProcessorName: '', agreementUrl: '' }
+          ],
+          commonDataControllerContact: {
+            companies = '',
+            distributionOfResponsibilities = '',
+            contactPoints = [{ name: '', email: '', phone: '' }]
+          } = {},
+          title = '',
+          purpose = '',
+          dataSubjectCategories = [],
+          articleSixBasis = [{ legality: '', referenceUrl: '' }],
+          otherArticles: {
+            articleNine: {
+              checked: articleNineChecked = undefined,
+              referenceUrl: articleNineReferenceUrl = ''
+            } = {},
+            articleTen: {
+              checked: articleTenChecked = undefined,
+              referenceUrl: articleTenReferenceUrl = ''
+            } = {}
+          } = {},
+          businessAreas = [],
+          relatedDatasets = [],
+          personalDataCategories = [],
+          securityMeasures = '',
+          plannedDeletion = '',
+          highPrivacyRisk = undefined,
+          dataProtectionImpactAssessment: {
+            conducted = undefined,
+            assessmentReportUrl = ''
+          } = {},
+          personalDataSubjects = '',
+          privacyProcessingSystems = '',
+          recipientCategories = [],
+          dataTransfers: {
+            transferred = undefined,
+            thirdCountryRecipients = '',
+            guarantees = ''
           } = {}
-        } = {},
-        businessAreas = [],
-        relatedDatasets = [],
-        personalDataCategories = [],
-        securityMeasures = '',
-        plannedDeletion = '',
-        highPrivacyRisk = undefined,
-        dataProtectionImpactAssessment: {
-          conducted = undefined,
-          assessmentReportUrl = ''
-        } = {},
-        personalDataSubjects = '',
-        privacyProcessingSystems = '',
-        recipientCategories = [],
-        dataTransfers: {
-          transferred = undefined,
-          thirdCountryRecipients = '',
-          guarantees = ''
-        } = {}
-      } = (immutableRecord?.toJS() ?? {}) as Partial<Record>;
+        } = (immutableRecord?.toJS() ?? {}) as Partial<Record>;
 
-      return {
-        id,
-        dataProcessorContactDetails: {
-          name,
-          email,
-          phone
-        },
-        organizationId,
-        dataProcessingAgreements,
-        commonDataControllerContact: {
-          companies,
-          distributionOfResponsibilities,
-          contactPoints
-        },
-        title,
-        purpose,
-        dataSubjectCategories,
-        articleSixBasis,
-        otherArticles: {
-          articleNine: {
-            checked: articleNineChecked,
-            referenceUrl: articleNineReferenceUrl
+        return {
+          id,
+          dataProcessorContactDetails: {
+            name,
+            email,
+            phone
           },
-          articleTen: {
-            checked: articleTenChecked,
-            referenceUrl: articleTenReferenceUrl
+          organizationId,
+          dataProcessingAgreements,
+          commonDataControllerContact: {
+            companies,
+            distributionOfResponsibilities,
+            contactPoints
+          },
+          title,
+          purpose,
+          dataSubjectCategories,
+          articleSixBasis,
+          otherArticles: {
+            articleNine: {
+              checked: articleNineChecked,
+              referenceUrl: articleNineReferenceUrl
+            },
+            articleTen: {
+              checked: articleTenChecked,
+              referenceUrl: articleTenReferenceUrl
+            }
+          },
+          businessAreas,
+          relatedDatasets,
+          personalDataCategories,
+          securityMeasures,
+          plannedDeletion,
+          highPrivacyRisk,
+          dataProtectionImpactAssessment: {
+            conducted,
+            assessmentReportUrl
+          },
+          personalDataSubjects,
+          privacyProcessingSystems,
+          recipientCategories,
+          dataTransfers: {
+            transferred,
+            thirdCountryRecipients,
+            guarantees
           }
-        },
-        businessAreas,
-        relatedDatasets,
-        personalDataCategories,
-        securityMeasures,
-        plannedDeletion,
-        highPrivacyRisk,
-        dataProtectionImpactAssessment: {
-          conducted,
-          assessmentReportUrl
-        },
-        personalDataSubjects,
-        privacyProcessingSystems,
-        recipientCategories,
-        dataTransfers: {
-          transferred,
-          thirdCountryRecipients,
-          guarantees
-        }
-      };
-    },
-    handleSubmit: () => {},
-    validationSchema,
-    displayName: 'RecordForm'
-  })(RecordForm) as any
+        };
+      },
+      handleSubmit: () => {},
+      validationSchema,
+      displayName: 'RecordForm'
+    })(RecordForm)
+  )
 );

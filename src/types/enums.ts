@@ -3,6 +3,12 @@ export enum RecordStatus {
   APPROVED = 'APPROVED'
 }
 
+export enum DatasetStatus {
+  DRAFT = 'DRAFT',
+  APPROVE = 'APPROVE',
+  PUBLISH = 'PUBLISH'
+}
+
 export enum RepresentativeType {
   DATA_PROTECTION_OFFICER = 'dataProtectionOfficer',
   DATA_CONTROLLER_REPRESENTATIVE = 'dataControllerRepresentative',
@@ -12,4 +18,12 @@ export enum RepresentativeType {
 export enum SortOrder {
   ASC,
   DSC
+}
+
+export enum KeyCode {
+  TAB = 9,
+  ENTER = 13,
+  SPACE = 32,
+  ARROW_UP = 38,
+  ARROW_DOWN = 40
 }
