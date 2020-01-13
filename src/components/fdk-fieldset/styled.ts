@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Tag from '../tag';
 
@@ -18,11 +18,22 @@ const Legend = styled.legend`
   padding: 15px;
   background: ${({ theme }) => theme.fdk.colors.neutrals.skyblue};
   border-radius: 5px;
+
+  & svg {
+    fill: ${({ theme }) => theme.fdk.colors.text.link};
+    font-size: 1.8rem;
+  }
 `;
 
-const Inline = styled.div`
+const Inline = styled.div<{ justifyContent?: string }>`
+  margin-top: 5px;
   display: flex;
-  align-items: center;
+  align-items: start;
+  ${({ justifyContent }) =>
+    justifyContent &&
+    css`
+      justify-content: ${justifyContent};
+    `}
 `;
 
 const Title = styled.b`
@@ -34,9 +45,31 @@ const RequiredLabel = styled(Tag)`
 `;
 
 const Subtitle = styled.small`
-  margin-top: 5px;
   font-size: 15px;
   font-weight: 300;
 `;
 
-export default { Fieldset, Legend, Inline, Title, RequiredLabel, Subtitle };
+const Description = styled.p`
+  margin-top: 5px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  & a {
+    color: ${({ theme }) => theme.fdk.colors.text.link};
+  }
+`;
+
+const Expand = styled.button`
+  background-color: transparent;
+  border: none;
+`;
+
+export default {
+  Fieldset,
+  Legend,
+  Inline,
+  Title,
+  RequiredLabel,
+  Subtitle,
+  Description,
+  Expand
+};
