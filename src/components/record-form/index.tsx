@@ -32,7 +32,8 @@ const RecordForm = ({
   dirty,
   handleChange,
   onChange,
-  onTitleChange
+  onTitleChange,
+  setFieldValue
 }: Props) => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
 
@@ -525,7 +526,7 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={() => setFieldValue('highPrivacyRisk', values.highPrivacyRisk)}
           />
         </SC.Fieldset>
         <SC.Fieldset
