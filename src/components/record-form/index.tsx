@@ -32,7 +32,8 @@ const RecordForm = ({
   dirty,
   handleChange,
   onChange,
-  onTitleChange
+  onTitleChange,
+  setFieldValue
 }: Props) => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
 
@@ -525,7 +526,7 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={() => setFieldValue('highPrivacyRisk', !values.highPrivacyRisk)}
           />
         </SC.Fieldset>
         <SC.Fieldset
@@ -539,7 +540,7 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={() => setFieldValue('dataProtectionImpactAssessment.conducted', !values.dataProtectionImpactAssessment.conducted)}
           />
           {`${values.dataProtectionImpactAssessment.conducted}` === 'true' && (
             <TextField
@@ -612,7 +613,7 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={() => setFieldValue('dataTransfers.transferred', !values.dataTransfers.transferred)}
           />
           {`${values.dataTransfers.transferred}` === 'true' && (
             <>
@@ -670,16 +671,16 @@ export default memo(
         personalDataCategories = [],
         securityMeasures = '',
         plannedDeletion = '',
-        highPrivacyRisk = undefined,
+        highPrivacyRisk = false,
         dataProtectionImpactAssessment: {
-          conducted = undefined,
+          conducted = false,
           assessmentReportUrl = ''
         } = {},
         personalDataSubjects = '',
         privacyProcessingSystems = '',
         recipientCategories = [],
         dataTransfers: {
-          transferred = undefined,
+          transferred = false,
           thirdCountryRecipients = '',
           guarantees = ''
         } = {}
