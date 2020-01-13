@@ -5,7 +5,7 @@ import { fetchAllRepresentativesRequested } from '../representatives/redux/actio
 import RecordReportPagePure from './record-report-page-pure';
 
 const mapStateToProps = (state: any) => ({
-  records: state.RecordsPageReducer.get('records').toJS(),
+  records: state.RecordsReducer.get('records').toJS(),
   representatives: state.RepresentativesReducer.get('representatives').toJS()
 });
 
