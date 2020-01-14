@@ -14,6 +14,7 @@ import { RepresentativeType } from '../../types/enums';
 interface Props extends FormikProps<ContactDetailsInterface> {
   title: string;
   subtitle: string;
+  description?: any;
   type: RepresentativeType;
   representative: ContactDetailsInterface;
   organizationId: string;
@@ -28,6 +29,7 @@ const RepresentativeForm = ({
   type,
   title,
   subtitle,
+  description,
   organizationId,
   onChange,
   values,
@@ -43,7 +45,7 @@ const RepresentativeForm = ({
 
   return (
     <SC.RepresentativeForm>
-      <Fieldset title={title} subtitle={subtitle}>
+      <Fieldset title={title} subtitle={subtitle} description={description}>
         <TextField
           name='name'
           labelText='Navn'

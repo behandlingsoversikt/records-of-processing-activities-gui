@@ -12,6 +12,7 @@ import * as actions from './redux/actions';
 
 import { RepresentativeType } from '../../types/enums';
 import { RepresentativesInterface } from '../../types';
+import { localization } from '../../lib/localization';
 
 interface Props {
   organizationId?: string;
@@ -44,7 +45,8 @@ const Representatives = ({
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
           title='Representant for behandlingsansvarlig'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataControllerRepresentativeAbstract}
+          description={localization.dataControllerRepresentativeDescription}
           representative={dataControllerRepresentative}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
@@ -63,7 +65,8 @@ const Representatives = ({
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU}
           title='Representant for behandlingsansvarlig'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataControllerRepresentativeAbstract}
+          description={localization.dataControllerRepresentativeDescription}
           representative={dataControllerRepresentativeInEU}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
@@ -77,7 +80,8 @@ const Representatives = ({
         <RepresentativeForm
           type={RepresentativeType.DATA_PROTECTION_OFFICER}
           title='Personvernombud'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataControllerRepresentativeInEUAbstract}
+          description={localization.dataControllerRepresentativeInEUDescription}
           representative={dataProtectionOfficer}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
