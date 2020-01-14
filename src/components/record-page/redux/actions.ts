@@ -11,7 +11,22 @@ import {
   RESET_RECORD
 } from './action-types';
 
+import { stringToBoolean } from '../../../lib/boolean-converter';
 import { Record } from '../../../types';
+
+const convertToPatchValues = (formValues: Partial<Record>) => {
+  formValues.highPrivacyRisk = stringToBoolean(formValues.highPrivacyRisk);
+  
+  if(formValues.dataTransfers) {
+    formValues.dataTransfers.transferred = stringToBoolean(formValues.dataTransfers?.transferred);
+  }
+
+  if(formValues.dataProtectionImpactAssessment) {
+    formValues.dataProtectionImpactAssessment.conducted = stringToBoolean(formValues.dataProtectionImpactAssessment?.conducted);
+  }
+
+  return formValues;
+}
 
 export function getRecordRequested(
   recordId: string,
@@ -50,7 +65,7 @@ export function patchRecordRequested(record: Partial<Record>) {
   return {
     type: PATCH_RECORD_REQUESTED,
     payload: {
-      record
+      record: convertToPatchValues(record)
     }
   };
 }
