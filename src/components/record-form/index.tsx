@@ -18,6 +18,7 @@ import ExpandAllDownIcon from '../../images/expand-all-down.svg';
 import validationSchema from './validation-schema';
 
 import { Record } from '../../types';
+import { localization } from '../../lib/localization';
 
 interface Props extends FormikProps<Record> {
   organizationId: string;
@@ -86,7 +87,7 @@ const RecordForm = ({
       >
         <SC.Fieldset
           title='Daglig behandlingsanvar'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataProcessorContactDetailsAbstract}
         >
           <TextField
             name='dataProcessorContactDetails.name'
@@ -111,7 +112,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Databehandlere og databehandleravtaler'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataProcessingAgreementsAbstract}
+          description={localization.dataProcessingAgreementsDescription}
         >
           <FieldArray
             name='dataProcessingAgreements'
@@ -163,7 +165,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Felles databehandlingsansvar'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.commonDataControllerContactAbstract}
+          description={localization.commonDataControllerContactDescription}
         >
           <TextField
             name='commonDataControllerContact.companies'
@@ -258,7 +261,8 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Behandlinger gjelder'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.titleAbstract}
+          description={localization.titleDescription}
         >
           <TextField
             name='title'
@@ -269,7 +273,8 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Formålet med behandlingsaktivitetene'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.purposeAbstract}
+          description={localization.purposeDescription}
         >
           <TextAreaField
             name='purpose'
@@ -280,7 +285,8 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Kategorier av registrerte'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataSubjectCategoriesAbstract}
+          description={localization.dataSubjectCategoriesDescription}
         >
           <FieldArray
             name='dataSubjectCategories'
@@ -296,7 +302,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Behandlingsgrunnlag etter artikkel 6'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.articleSixBasisAbstract}
+          description={localization.articleSixBasisDescription}
         >
           <FieldArray
             name='articleSixBasis'
@@ -383,7 +390,7 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Behandlingsgrunnlag etter artikkel 9 eller 10'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.otherArticlesAbstract}
         >
           <Checkbox
             name='otherArticles.articleNine.checked'
@@ -432,7 +439,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Funksjonsområde behandlingen faller inn under'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.businessAreasAbstract}
+          description={localization.businessAreasDescription}
         >
           <FieldArray
             name='businessAreas'
@@ -448,7 +456,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Tilhørende datasett'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.relatedDatasetsAbstract}
+          description={localization.relatedDatasetsDescription}
         >
           <FieldArray
             name='relatedDatasets'
@@ -478,7 +487,8 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Kategorier av personopplysninger'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.personalDataCategoriesAbstract}
+          description={localization.personalDataCategoriesDescription}
         >
           <FieldArray
             name='personalDataCategories'
@@ -495,7 +505,7 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.securityMeasuresAbstract}
         >
           <TextAreaField
             name='securityMeasures'
@@ -506,7 +516,7 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Planlagte tidsfrister for sletting'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.plannedDeletionAbstract}
         >
           <TextAreaField
             name='plannedDeletion'
@@ -516,7 +526,7 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Kan behandlingen innebære høy personvernrisiko?'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.highPrivacyRiskAbstract}
         >
           <Radio
             name='highPrivacyRisk'
@@ -530,7 +540,7 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Er det gjennomført risikovurdering?'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.dataProtectionImpactAssessmentAbstract}
         >
           <Radio
             name='dataProtectionImpactAssessment.conducted'
@@ -552,7 +562,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Kilder til personopplysningene'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.personalDataSubjectsAbstract}
+          description={localization.personalDataSubjectsDescription}
         >
           <TextField
             name='personalDataSubjects'
@@ -562,7 +573,8 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           title='Systemer i din virksomhet som behandler personopplysningene'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.privacyProcessingSystemsAbstract}
+          description={localization.privacyProcessingSystemsDescription}
         >
           <TextField
             name='privacyProcessingSystems'
@@ -586,7 +598,8 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Kategorier av mottakere'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.recipientCategoriesAbstract}
+          description={localization.recipientCategoriesDescription}
         >
           <FieldArray
             name='recipientCategories'
@@ -603,7 +616,7 @@ const RecordForm = ({
         <SC.Fieldset
           required
           title='Overføres personopplysningene til tredjeland?'
-          subtitle='Den korte hjelpeteksten'
+          subtitle={localization.transferredAbstract}
         >
           <Radio
             name='dataTransfers.transferred'
@@ -622,15 +635,21 @@ const RecordForm = ({
                 labelText='Oppgi hvilke(t) tredjeland personopplysningene overføres til'
                 onChange={handleChange}
               />
-              <TextField
-                name='dataTransfers.guarantees'
-                value={values.dataTransfers.guarantees}
-                labelText='Det gis garanti for at personopplysningene behandles etter norske regler'
-                onChange={handleChange}
-              />
             </>
           )}
         </SC.Fieldset>
+        {`${values.dataTransfers.transferred}` === 'true' && (
+          <SC.Fieldset
+            title='Det gis garanti for at personopplysningene behandles etter norske regler'
+            subtitle={localization.guaranteesAbstract}
+          >
+            <TextField
+              name='dataTransfers.guarantees'
+              value={values.dataTransfers.guarantees}
+              onChange={handleChange}
+            />
+          </SC.Fieldset>
+        )}
       </SC.RecordFormSection>
     </SC.RecordForm>
   );
