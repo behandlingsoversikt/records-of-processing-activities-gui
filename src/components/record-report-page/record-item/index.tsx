@@ -127,8 +127,9 @@ const RecordItemPure = ({
         {articleSixBasis &&
           articleSixBasis.map((item, index) => (
             <Fragment key={`articleSixBasis-${index}`}>
-              {item.referenceUrl && (
+              {item.legality && (
                 <div>
+                  <span>{item.legality}: </span>
                   <a
                     title={item.referenceUrl}
                     href={item.referenceUrl}
@@ -147,25 +148,31 @@ const RecordItemPure = ({
         {otherArticles &&
           otherArticles.articleNine &&
           otherArticles.articleNine.checked && (
-            <a
-              title={otherArticles.articleNine.referenceUrl}
-              href={otherArticles.articleNine.referenceUrl}
-              rel='noopener noreferrer'
-            >
-              {otherArticles.articleNine.referenceUrl}
-            </a>
+            <div>
+              <span>{localization.articleNine}: </span>
+              <a
+                title={otherArticles.articleNine.referenceUrl}
+                href={otherArticles.articleNine.referenceUrl}
+                rel='noopener noreferrer'
+              >
+                {otherArticles.articleNine.referenceUrl}
+              </a>
+            </div>
           )}
 
         {otherArticles &&
           otherArticles.articleTen &&
           otherArticles.articleTen.checked && (
-            <a
-              title={otherArticles.articleTen.referenceUrl}
-              href={otherArticles.articleTen.referenceUrl}
-              rel='noopener noreferrer'
-            >
-              {otherArticles.articleTen.referenceUrl}
-            </a>
+            <div>
+              <span>{localization.articleTen}: </span>
+              <a
+                title={otherArticles.articleTen.referenceUrl}
+                href={otherArticles.articleTen.referenceUrl}
+                rel='noopener noreferrer'
+              >
+                {otherArticles.articleTen.referenceUrl}
+              </a>
+            </div>
           )}
       </SC.SectionContent>
 

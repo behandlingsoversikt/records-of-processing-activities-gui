@@ -33,5 +33,7 @@ export default {
   dataControllerRepresentative: 'Behandlingsansvarliges representant',
   dataControllerRepresentativeInEU:
     'Behandlingsansvarliges representant i EU/EØS',
-  dataProtectionOfficer: 'Personvernombud'
+  dataProtectionOfficer: 'Personvernombud',
+  articleNine: 'Artikkel 9',
+  articleTen: 'Artikkel 10'
 };
