@@ -71,7 +71,7 @@ const RecordListPage = ({
       <SC.RecordListActions>
         <FDKButton
           variant='primary'
-          text='Legg til ny protokoll'
+          text='Legg til behandlingsaktivitet'
           onClick={navigateToNewRecordPage}
         />
         <FDKButton
