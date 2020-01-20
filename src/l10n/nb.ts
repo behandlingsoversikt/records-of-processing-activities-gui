@@ -16,6 +16,7 @@ export default {
   otherArticles: 'Behandlingsgrunnlag artikkel 9 eller 10',
   businessArea: 'Funksjonsområde behandlingen faller inn under',
   relatedDatasets: 'Tilhørende datasett',
+  relatedDatasetsPlaceholder: 'Søk etter datasettbeskrivelser',
   personalDataCategories: 'Kategorier av personopplysninger',
   securityMeasures:
     'Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak',
