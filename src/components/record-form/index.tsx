@@ -521,6 +521,7 @@ const RecordForm = ({
                     setIsWaitingForSuggestions(false);
                   }
                 }}
+                placeholder={localization.relatedDatasetsPlaceholder}
                 isLoadingSuggestions={isWaitingForSuggestions}
                 suggestions={datasetSuggestions.map(({ id: value, title }) => ({
                   label: title[localization.getLanguage()],
