@@ -40,7 +40,7 @@ const Representatives = ({
       <ExpansionPanel
         required
         title='Representant for behandlingsansvarlig'
-        subtitle={dataControllerRepresentative.name}
+        subtitle={dataControllerRepresentative?.name}
       >
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
@@ -75,7 +75,7 @@ const Representatives = ({
       <ExpansionPanel
         required
         title='Personvernombud'
-        subtitle={dataProtectionOfficer && dataProtectionOfficer.name}
+        subtitle={dataProtectionOfficer?.name}
       >
         <RepresentativeForm
           type={RepresentativeType.DATA_PROTECTION_OFFICER}
