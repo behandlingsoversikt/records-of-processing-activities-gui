@@ -27,7 +27,7 @@ const Radio = ({ name, value, options, onChange }: Props): JSX.Element => (
           id={`${name}-${optionValue}`}
           onChange={onChange}
         />
-        <label htmlFor={label}>{label}</label>
+        <label htmlFor={`${name}-${optionValue}`}>{label}</label>
       </SC.Option>
     ))}
   </SC.Radio>
