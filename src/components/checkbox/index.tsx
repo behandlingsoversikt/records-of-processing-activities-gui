@@ -5,19 +5,23 @@ import SC from './styled';
 
 interface Props {
   name: string;
-  value: any;
+  checked: boolean;
   labelText: string;
-  onChange?: (event: ChangeEvent<any>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox = ({ name, value, labelText, onChange }: Props): JSX.Element => (
+const Checkbox = ({
+  name,
+  checked,
+  labelText,
+  onChange
+}: Props): JSX.Element => (
   <SC.Checkbox>
     <Field
       id={name}
       type='checkbox'
       name={name}
-      value={value}
-      checked={`${value}` === 'true'}
+      checked={!!checked}
       onChange={onChange}
     />
     <label htmlFor={name}>{labelText}</label>

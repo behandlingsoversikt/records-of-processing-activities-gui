@@ -415,44 +415,28 @@ const RecordForm = ({
         >
           <Checkbox
             name='otherArticles.articleNine.checked'
-            value={
-              values.otherArticles.articleNine &&
-              values.otherArticles.articleNine.checked
-            }
+            checked={!!values.otherArticles?.articleNine?.checked}
             labelText='Artikkel 9 - Behandling av særlige kategorier av personopplysninger'
             onChange={handleChange}
           />
-          {`${values.otherArticles.articleNine &&
-            values.otherArticles.articleNine.checked}` === 'true' && (
+          {values.otherArticles?.articleNine?.checked && (
             <TextField
               name='otherArticles.articleNine.referenceUrl'
-              value={
-                values.otherArticles.articleNine
-                  ? values.otherArticles.articleNine.referenceUrl
-                  : ''
-              }
+              value={values.otherArticles?.articleNine?.referenceUrl ?? ''}
               labelText='Henvisning til annen lovgivning, dersom relevant'
               onChange={handleChange}
             />
           )}
           <Checkbox
             name='otherArticles.articleTen.checked'
-            value={
-              values.otherArticles.articleTen &&
-              values.otherArticles.articleTen.checked
-            }
+            checked={!!values.otherArticles?.articleTen?.checked}
             labelText='Artikkel 10 - Behandling av personopplysninger om straffedommer og lovovertredelser'
             onChange={handleChange}
           />
-          {`${values.otherArticles.articleTen &&
-            values.otherArticles.articleTen.checked}` === 'true' && (
+          {values.otherArticles?.articleTen?.checked && (
             <TextField
               name='otherArticles.articleTen.referenceUrl'
-              value={
-                values.otherArticles.articleTen
-                  ? values.otherArticles.articleTen.referenceUrl
-                  : ''
-              }
+              value={values.otherArticles?.articleTen?.referenceUrl ?? ''}
               labelText='Henvisning til annen lovgivning, dersom relevant'
               onChange={handleChange}
             />
@@ -746,11 +730,11 @@ export default memo(
           articleSixBasis = [{ legality: '', referenceUrl: '' }],
           otherArticles: {
             articleNine: {
-              checked: articleNineChecked = undefined,
+              checked: articleNineChecked = false,
               referenceUrl: articleNineReferenceUrl = ''
             } = {},
             articleTen: {
-              checked: articleTenChecked = undefined,
+              checked: articleTenChecked = false,
               referenceUrl: articleTenReferenceUrl = ''
             } = {}
           } = {},
