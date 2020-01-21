@@ -48,7 +48,8 @@ const RecordForm = ({
   handleChange,
   onChange,
   onTitleChange,
-  datasetsActions: { fetchAllDatasetsRequested }
+  datasetsActions: { fetchAllDatasetsRequested },
+  setFieldValue
 }: Props): JSX.Element | null => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
@@ -65,6 +66,13 @@ const RecordForm = ({
 
   const toggleAllExpanded = () =>
     setAllExpanded(allExpanded.map(() => !allFieldsExpanded));
+
+  const handleBooleanRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (['true', 'false'].includes(e.target.value)) {
+      e.persist();
+      setFieldValue(e.target.name, e.target.value === 'true', true);
+    }
+  };
 
   useEffect(() => {
     if (
@@ -581,7 +589,7 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={handleBooleanRadioChange}
           />
         </SC.Fieldset>
         <SC.Fieldset
@@ -595,9 +603,9 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={handleBooleanRadioChange}
           />
-          {`${values.dataProtectionImpactAssessment.conducted}` === 'true' && (
+          {values.dataProtectionImpactAssessment.conducted && (
             <TextField
               name='dataProtectionImpactAssessment.assessmentReportUrl'
               value={values.dataProtectionImpactAssessment.assessmentReportUrl}
@@ -671,20 +679,18 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
-            onChange={handleChange}
+            onChange={handleBooleanRadioChange}
           />
-          {`${values.dataTransfers.transferred}` === 'true' && (
-            <>
-              <TextField
-                name='dataTransfers.thirdCountryRecipients'
-                value={values.dataTransfers.thirdCountryRecipients}
-                labelText='Oppgi hvilke(t) tredjeland personopplysningene overføres til'
-                onChange={handleChange}
-              />
-            </>
+          {values.dataTransfers.transferred && (
+            <TextField
+              name='dataTransfers.thirdCountryRecipients'
+              value={values.dataTransfers.thirdCountryRecipients}
+              labelText='Oppgi hvilke(t) tredjeland personopplysningene overføres til'
+              onChange={handleChange}
+            />
           )}
         </SC.Fieldset>
-        {`${values.dataTransfers.transferred}` === 'true' && (
+        {values.dataTransfers.transferred && (
           <SC.Fieldset
             title='Det gis garanti for at personopplysningene behandles etter norske regler'
             subtitle={localization.guaranteesAbstract}
