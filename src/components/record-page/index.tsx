@@ -78,7 +78,7 @@ const RecordPage = ({
   }, [record]);
 
   const handleRecordStatusChange = (status: RecordStatus) => {
-    if (formIsValid) {
+    if (formIsValid || status === RecordStatus.DRAFT) {
       setRecordStatus(status);
     }
   };
