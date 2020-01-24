@@ -10,7 +10,7 @@ import { RecordStatus } from '../../types/enums';
 interface Props {
   recordId?: string;
   status: RecordStatus;
-  updatedAt: string;
+  updatedAt?: string;
   onSetStatus: (status: RecordStatus) => void;
   onRecordRemove: () => void;
 }
