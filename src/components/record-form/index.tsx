@@ -29,10 +29,14 @@ import ExpandAllDownIcon from '../../images/expand-all-down.svg';
 
 import validationSchema from './validation-schema';
 
+import { mapRecordToValues } from './utils';
+
 import { Record, Dataset } from '../../types';
 import { DatasetStatus } from '../../types/enums';
 
-interface Props extends DatasetsProps, FormikProps<Record> {
+type FormValues = Omit<Record, 'updatedAt'>;
+
+interface Props extends DatasetsProps, FormikProps<FormValues> {
   organizationId: string;
   record?: any;
   onChange?: (record: Partial<Record>) => void;
@@ -721,109 +725,9 @@ const RecordForm = ({
 
 export default memo(
   withDatasets(
-    withFormik<Props, Partial<Record>>({
-      enableReinitialize: true,
-      mapPropsToValues: ({
-        record: immutableRecord,
-        organizationId
-      }: Props) => {
-        const {
-          id,
-          dataProcessorContactDetails: {
-            name = '',
-            email = '',
-            phone = ''
-          } = {},
-          dataProcessingAgreements = [
-            { dataProcessorName: '', agreementUrl: '' }
-          ],
-          commonDataControllerContact: {
-            companies = '',
-            distributionOfResponsibilities = '',
-            contactPoints = [{ name: '', email: '', phone: '' }]
-          } = {},
-          title = '',
-          purpose = '',
-          dataSubjectCategories = [],
-          articleSixBasis = [{ legality: '', referenceUrl: '' }],
-          otherArticles: {
-            articleNine: {
-              checked: articleNineChecked = false,
-              referenceUrl: articleNineReferenceUrl = ''
-            } = {},
-            articleTen: {
-              checked: articleTenChecked = false,
-              referenceUrl: articleTenReferenceUrl = ''
-            } = {}
-          } = {},
-          businessAreas = [],
-          relatedDatasets = [],
-          personalDataCategories = [],
-          securityMeasures = '',
-          plannedDeletion = '',
-          highPrivacyRisk = undefined,
-          dataProtectionImpactAssessment: {
-            conducted = undefined,
-            assessmentReportUrl = ''
-          } = {},
-          personalDataSubjects = '',
-          privacyProcessingSystems = '',
-          recipientCategories = [],
-          dataTransfers: {
-            transferred = undefined,
-            thirdCountryRecipients = '',
-            guarantees = ''
-          } = {}
-        } = (immutableRecord?.toJS() ?? {}) as Partial<Record>;
-
-        return {
-          id,
-          dataProcessorContactDetails: {
-            name,
-            email,
-            phone
-          },
-          organizationId,
-          dataProcessingAgreements,
-          commonDataControllerContact: {
-            companies,
-            distributionOfResponsibilities,
-            contactPoints
-          },
-          title,
-          purpose,
-          dataSubjectCategories,
-          articleSixBasis,
-          otherArticles: {
-            articleNine: {
-              checked: articleNineChecked,
-              referenceUrl: articleNineReferenceUrl
-            },
-            articleTen: {
-              checked: articleTenChecked,
-              referenceUrl: articleTenReferenceUrl
-            }
-          },
-          businessAreas,
-          relatedDatasets,
-          personalDataCategories,
-          securityMeasures,
-          plannedDeletion,
-          highPrivacyRisk,
-          dataProtectionImpactAssessment: {
-            conducted,
-            assessmentReportUrl
-          },
-          personalDataSubjects,
-          privacyProcessingSystems,
-          recipientCategories,
-          dataTransfers: {
-            transferred,
-            thirdCountryRecipients,
-            guarantees
-          }
-        };
-      },
+    withFormik<Props, FormValues>({
+      mapPropsToValues: ({ record, organizationId }: Props) =>
+        mapRecordToValues(record ?? {}, organizationId),
       handleSubmit: () => {},
       validationSchema,
       displayName: 'RecordForm'
