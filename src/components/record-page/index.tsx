@@ -49,6 +49,7 @@ const RecordPage = ({
 }: Props): JSX.Element => {
   const [recordTitle, setRecordTitle] = useState('');
   const [canChangeUrl, setCanChangeUrl] = useState(false);
+  const [formIsValid, setFormValidity] = useState(false);
 
   const navigateToRecordListPage = () => replace(`/${organizationId}`);
   const id = record?.get('id');
@@ -102,11 +103,13 @@ const RecordPage = ({
         record={record}
         onChange={patchRecordRequested}
         onTitleChange={setRecordTitle}
+        onValidityChange={setFormValidity}
       />
       <StatusBar
         recordId={recordId}
         updatedAt={record?.get('updatedAt')}
         status={record?.get('status') ?? RecordStatus.DRAFT}
+        canBeApproved={formIsValid}
         onSetStatus={handleRecordStatusChange}
         onRecordRemove={() => {
           deleteRecordRequested(id, organizationId, navigateToRecordListPage);
