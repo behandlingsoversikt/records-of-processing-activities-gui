@@ -56,7 +56,7 @@ const TextTagsField = ({
     }
   };
   return (
-    <SC.Field>
+    <SC.Field error={error}>
       {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
       <SC.TextTagsField
         id={id}
@@ -66,7 +66,6 @@ const TextTagsField = ({
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
         onBlur={handleBlur}
-        error={error}
       />
       {helperText && <SC.HelperText error={error}>{helperText}</SC.HelperText>}
       {value && value.length > 0 && (

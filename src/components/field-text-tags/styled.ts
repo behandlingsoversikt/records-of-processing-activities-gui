@@ -1,9 +1,21 @@
 import styled, { css } from 'styled-components';
 import { Field as FormikField } from 'formik';
 
-const Field = styled.div`
+const Field = styled.div<{ error?: boolean }>`
   display: flex;
   flex-direction: column;
+
+  ${({ error }) =>
+    error &&
+    css`
+      & input {
+        border-color: red;
+
+        &:not(:disabled):focus {
+          box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.5);
+        }
+      }
+    `}
 `;
 
 const Label = styled.label`
@@ -11,7 +23,7 @@ const Label = styled.label`
   margin-bottom: 5px;
 `;
 
-const TextTagsField = styled(FormikField)<{ error?: boolean }>`
+const TextTagsField = styled(FormikField)`
   display: block;
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lightblue};
@@ -22,16 +34,6 @@ const TextTagsField = styled(FormikField)<{ error?: boolean }>`
   &:not(:disabled):focus {
     box-shadow: 0 0 0 0.1rem rgba(38, 128, 179, 0.5);
   }
-
-  ${({ error }) =>
-    error &&
-    css`
-      border-color: red;
-
-      &:not(:disabled):focus {
-        box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.5);
-      }
-    `}
 `;
 
 const HelperText = styled.p<{ error?: boolean }>`
