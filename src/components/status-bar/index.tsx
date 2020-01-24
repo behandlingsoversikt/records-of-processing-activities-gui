@@ -11,6 +11,7 @@ interface Props {
   recordId?: string;
   status: RecordStatus;
   updatedAt?: string;
+  canBeApproved: boolean;
   onSetStatus: (status: RecordStatus) => void;
   onRecordRemove: () => void;
 }
@@ -20,6 +21,7 @@ const StatusBar = ({
   status,
   updatedAt,
   onSetStatus,
+  canBeApproved,
   onRecordRemove
 }: Props): JSX.Element => {
   const [showConfirmDeleteMessage, setShowConfirmDeleteMessage] = useState(
@@ -47,8 +49,11 @@ const StatusBar = ({
               />
               <SC.StatusButton
                 variant={
-                  status === RecordStatus.APPROVED ? 'primary' : 'default'
+                  status === RecordStatus.APPROVED && canBeApproved
+                    ? 'primary'
+                    : 'default'
                 }
+                disabled={!canBeApproved}
                 text='Godkjent'
                 icon={CheckBoxOutlinedIcon}
                 onClick={setStatusToApproved}
