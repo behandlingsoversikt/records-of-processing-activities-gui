@@ -56,11 +56,14 @@ const RecordForm = ({
   datasetsActions: { fetchAllDatasetsRequested },
   recordActions: { patchRecordRequested: patchRecord },
   values,
+  errors,
+  touched,
   isValid,
   validateForm,
   handleChange,
   setValues,
-  setFieldValue
+  setFieldValue,
+  setFieldTouched
 }: Props): JSX.Element | null => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
@@ -78,6 +81,7 @@ const RecordForm = ({
   const isMounted = mounted.current;
   const isRecordLoaded = recordLoaded.current;
   const allFieldsExpanded = allExpanded.every(Boolean);
+  const isApproved = record?.status === RecordStatus.APPROVED;
 
   const toggleAllExpanded = () =>
     setAllExpanded(allExpanded.map(() => !allFieldsExpanded));
@@ -356,6 +360,8 @@ const RecordForm = ({
           <TextField
             name='title'
             value={values.title}
+            error={isApproved && touched.title && errors.title}
+            helperText={isApproved && touched.title && errors.title}
             onChange={handleChange}
           />
         </SC.Fieldset>
@@ -368,6 +374,8 @@ const RecordForm = ({
           <TextAreaField
             name='purpose'
             value={values.purpose}
+            error={isApproved && touched.purpose && errors.purpose}
+            helperText={isApproved && touched.purpose && errors.purpose}
             onChange={handleChange}
           />
         </SC.Fieldset>
@@ -383,8 +391,24 @@ const RecordForm = ({
               <TextTagsField
                 name='dataSubjectCategories'
                 value={values.dataSubjectCategories}
-                onAddTag={(tag: string) => arrayHelpers.push(tag)}
-                onRemoveTag={(index: number) => arrayHelpers.remove(index)}
+                error={
+                  isApproved &&
+                  touched.dataSubjectCategories &&
+                  errors.dataSubjectCategories
+                }
+                helperText={
+                  isApproved &&
+                  touched.dataSubjectCategories &&
+                  errors.dataSubjectCategories
+                }
+                onAddTag={(tag: string) => {
+                  arrayHelpers.push(tag);
+                  setFieldTouched('dataSubjectCategories', true, true);
+                }}
+                onRemoveTag={(index: number) => {
+                  arrayHelpers.remove(index);
+                  setFieldTouched('dataSubjectCategories', true, true);
+                }}
               />
             )}
           />
@@ -610,8 +634,24 @@ const RecordForm = ({
               <TextTagsField
                 name='personalDataCategories'
                 value={values.personalDataCategories}
-                onAddTag={(tag: string) => arrayHelpers.push(tag)}
-                onRemoveTag={(index: number) => arrayHelpers.remove(index)}
+                error={
+                  isApproved &&
+                  touched.personalDataCategories &&
+                  errors.personalDataCategories
+                }
+                helperText={
+                  isApproved &&
+                  touched.personalDataCategories &&
+                  errors.personalDataCategories
+                }
+                onAddTag={(tag: string) => {
+                  arrayHelpers.push(tag);
+                  setFieldTouched('personalDataCategories', true, true);
+                }}
+                onRemoveTag={(index: number) => {
+                  arrayHelpers.remove(index);
+                  setFieldTouched('personalDataCategories', true, true);
+                }}
               />
             )}
           />
@@ -624,6 +664,12 @@ const RecordForm = ({
           <TextAreaField
             name='securityMeasures'
             value={values.securityMeasures}
+            error={
+              isApproved && touched.securityMeasures && errors.securityMeasures
+            }
+            helperText={
+              isApproved && touched.securityMeasures && errors.securityMeasures
+            }
             onChange={handleChange}
           />
         </SC.Fieldset>
@@ -635,6 +681,12 @@ const RecordForm = ({
           <TextAreaField
             name='plannedDeletion'
             value={values.plannedDeletion}
+            error={
+              isApproved && touched.plannedDeletion && errors.plannedDeletion
+            }
+            helperText={
+              isApproved && touched.plannedDeletion && errors.plannedDeletion
+            }
             onChange={handleChange}
           />
         </SC.Fieldset>
@@ -721,8 +773,24 @@ const RecordForm = ({
               <TextTagsField
                 name='recipientCategories'
                 value={values.recipientCategories}
-                onAddTag={(tag: string) => arrayHelpers.push(tag)}
-                onRemoveTag={(index: number) => arrayHelpers.remove(index)}
+                error={
+                  isApproved &&
+                  touched.recipientCategories &&
+                  errors.recipientCategories
+                }
+                helperText={
+                  isApproved &&
+                  touched.recipientCategories &&
+                  errors.recipientCategories
+                }
+                onAddTag={(tag: string) => {
+                  arrayHelpers.push(tag);
+                  setFieldTouched('recipientCategories', true, true);
+                }}
+                onRemoveTag={(index: number) => {
+                  arrayHelpers.remove(index);
+                  setFieldTouched('recipientCategories', true, true);
+                }}
               />
             )}
           />
@@ -739,6 +807,16 @@ const RecordForm = ({
               { label: 'Nei', value: false },
               { label: 'Ja', value: true }
             ]}
+            error={
+              isApproved &&
+              touched.dataTransfers?.transferred &&
+              errors.dataTransfers?.transferred
+            }
+            helperText={
+              isApproved &&
+              touched?.dataTransfers?.transferred &&
+              errors?.dataTransfers?.transferred
+            }
             onChange={handleBooleanRadioChange}
           />
           {values.dataTransfers.transferred && (
