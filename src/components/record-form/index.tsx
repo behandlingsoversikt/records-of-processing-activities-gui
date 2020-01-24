@@ -37,6 +37,7 @@ interface Props extends DatasetsProps, FormikProps<Record> {
   record?: any;
   onChange?: (record: Partial<Record>) => void;
   onTitleChange?: (title: string) => void;
+  onValidityChange?: (isValid: boolean) => void;
 }
 
 const RecordForm = ({
@@ -48,7 +49,9 @@ const RecordForm = ({
   handleChange,
   onChange,
   onTitleChange,
+  onValidityChange,
   datasetsActions: { fetchAllDatasetsRequested },
+  isValid,
   setFieldValue
 }: Props): JSX.Element | null => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
@@ -57,11 +60,14 @@ const RecordForm = ({
 
   const didMount = useRef(false);
   const previousRecord = useRef<any>(null);
+  const mounted = useRef(false);
 
   useEffect(() => {
     fetchAllDatasetsRequested(organizationId);
+    mounted.current = true;
   }, []);
 
+  const isMounted = mounted.current;
   const allFieldsExpanded = allExpanded.every(Boolean);
 
   const toggleAllExpanded = () =>
@@ -86,6 +92,12 @@ const RecordForm = ({
     didMount.current = true;
     previousRecord.current = record;
   }, [values]);
+
+  useEffect(() => {
+    if (isMounted && onValidityChange) {
+      onValidityChange(isValid);
+    }
+  }, [values, isValid]);
 
   useEffect(() => {
     if (onTitleChange) {
