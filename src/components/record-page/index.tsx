@@ -1,6 +1,4 @@
 import React, { memo, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
 
 import env from '../../env';
@@ -8,6 +6,7 @@ import env from '../../env';
 import withOrganization, {
   Props as OrganizationProps
 } from '../with-organization';
+import withRecord, { Props as RecordProps } from '../with-record';
 
 import Headline from '../headline';
 import BreadcrumbsBar from '../breadcrumbs-bar';
@@ -15,8 +14,6 @@ import RecordForm from '../record-form';
 import StatusBar from '../status-bar';
 
 import SC from './styled';
-
-import * as actions from './redux/actions';
 
 import { RecordStatus } from '../../types/enums';
 
@@ -27,10 +24,10 @@ interface RouteParams {
   recordId?: string;
 }
 
-interface Props extends OrganizationProps, RouteComponentProps<RouteParams> {
-  record?: any;
-  actions: typeof actions;
-}
+interface Props
+  extends OrganizationProps,
+    RecordProps,
+    RouteComponentProps<RouteParams> {}
 
 const RecordPage = ({
   record,
@@ -39,20 +36,22 @@ const RecordPage = ({
   match: {
     params: { organizationId, recordId }
   },
-  actions: {
-    getRecordRequested,
-    patchRecordRequested,
-    deleteRecordRequested,
+  recordActions: {
+    getRecordRequested: getRecord,
+    deleteRecordRequested: deleteRecord,
     resetRecord
   },
   organizationActions: { fetchOrganizationRequested }
 }: Props): JSX.Element => {
   const [recordTitle, setRecordTitle] = useState('');
+  const [recordStatus, setRecordStatus] = useState(
+    record?.status ?? RecordStatus.DRAFT
+  );
   const [canChangeUrl, setCanChangeUrl] = useState(false);
   const [formIsValid, setFormValidity] = useState(false);
 
   const navigateToRecordListPage = () => replace(`/${organizationId}`);
-  const id = record?.get('id');
+  const id = record?.id;
 
   useEffect(() => {
     if (organizationId) {
@@ -64,7 +63,7 @@ const RecordPage = ({
     resetRecord();
     setCanChangeUrl(true);
     if (recordId) {
-      getRecordRequested(recordId, organizationId, navigateToRecordListPage);
+      getRecord(recordId, organizationId, navigateToRecordListPage);
     }
     window.scrollTo(0, 0);
   }, []);
@@ -73,10 +72,16 @@ const RecordPage = ({
     if (!recordId && id && canChangeUrl) {
       replace(`/${organizationId}/records/${id}`);
     }
+    if (record?.status && record.status !== recordStatus) {
+      setRecordStatus(record.status);
+    }
   }, [record]);
 
-  const handleRecordStatusChange = (status: RecordStatus) =>
-    patchRecordRequested({ id, organizationId, status });
+  const handleRecordStatusChange = (status: RecordStatus) => {
+    if (formIsValid) {
+      setRecordStatus(status);
+    }
+  };
 
   return (
     <SC.RecordPage>
@@ -96,38 +101,27 @@ const RecordPage = ({
       <Headline
         title={recordTitle}
         subTitle={organization?.name ?? ''}
-        status={record?.get('status') ?? RecordStatus.DRAFT}
+        status={recordStatus}
       />
       <RecordForm
         organizationId={organizationId}
-        record={record}
-        onChange={patchRecordRequested}
+        recordStatus={recordStatus}
         onTitleChange={setRecordTitle}
+        onStatusChange={setRecordStatus}
         onValidityChange={setFormValidity}
       />
       <StatusBar
         recordId={recordId}
-        updatedAt={record?.get('updatedAt')}
-        status={record?.get('status') ?? RecordStatus.DRAFT}
         canBeApproved={formIsValid}
+        updatedAt={record?.updatedAt}
+        status={recordStatus}
         onSetStatus={handleRecordStatusChange}
-        onRecordRemove={() => {
-          deleteRecordRequested(id, organizationId, navigateToRecordListPage);
-        }}
+        onRecordRemove={() =>
+          id && deleteRecord(id, organizationId, navigateToRecordListPage)
+        }
       />
     </SC.RecordPage>
   );
 };
 
-const mapStateToProps = (state: any) => ({
-  record: state.RecordPageReducer.get('record')
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  actions: bindActionCreators(actions, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(withOrganization(RecordPage)));
+export default memo(withOrganization(withRecord(RecordPage)));
