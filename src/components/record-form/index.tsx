@@ -7,10 +7,12 @@ import React, {
   ChangeEvent
 } from 'react';
 import { FormikProps, withFormik, FieldArray } from 'formik';
+import { compare, Operation } from 'fast-json-patch';
 
 import { localization } from '../../lib/localization';
 
 import withDatasets, { Props as DatasetsProps } from '../with-datasets';
+import withRecord, { Props as RecordProps } from '../with-record';
 
 import TextField from '../field-text';
 import TextAreaField from '../field-text-area';
@@ -32,39 +34,41 @@ import validationSchema from './validation-schema';
 import { mapRecordToValues } from './utils';
 
 import { Record, Dataset } from '../../types';
-import { DatasetStatus } from '../../types/enums';
+import { DatasetStatus, RecordStatus } from '../../types/enums';
 
 type FormValues = Omit<Record, 'updatedAt'>;
 
-interface Props extends DatasetsProps, FormikProps<FormValues> {
+interface Props extends DatasetsProps, RecordProps, FormikProps<FormValues> {
   organizationId: string;
-  record?: any;
-  onChange?: (record: Partial<Record>) => void;
+  recordStatus: RecordStatus;
   onTitleChange?: (title: string) => void;
+  onStatusChange?: (status: RecordStatus) => void;
   onValidityChange?: (isValid: boolean) => void;
 }
 
 const RecordForm = ({
   organizationId,
   record,
+  recordStatus,
   datasets,
-  values,
-  dirty,
-  handleChange,
-  onChange,
   onTitleChange,
   onValidityChange,
   datasetsActions: { fetchAllDatasetsRequested },
+  recordActions: { patchRecordRequested: patchRecord },
+  values,
   isValid,
+  validateForm,
+  handleChange,
+  setValues,
   setFieldValue
 }: Props): JSX.Element | null => {
   const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
   const [isWaitingForSuggestions, setIsWaitingForSuggestions] = useState(false);
 
-  const didMount = useRef(false);
-  const previousRecord = useRef<any>(null);
   const mounted = useRef(false);
+  const recordLoaded = useRef(false);
+  const previousRecord = useRef<FormValues>(values);
 
   useEffect(() => {
     fetchAllDatasetsRequested(organizationId);
@@ -72,6 +76,7 @@ const RecordForm = ({
   }, []);
 
   const isMounted = mounted.current;
+  const isRecordLoaded = recordLoaded.current;
   const allFieldsExpanded = allExpanded.every(Boolean);
 
   const toggleAllExpanded = () =>
@@ -85,23 +90,62 @@ const RecordForm = ({
   };
 
   useEffect(() => {
-    if (
-      onChange &&
-      didMount.current &&
-      ((!record && !previousRecord.current && dirty) ||
-        previousRecord.current?.equals(record) === true)
-    ) {
-      onChange(values);
+    if (record) {
+      const recordValues = mapRecordToValues(record, organizationId);
+      if (!isRecordLoaded) {
+        setValues(recordValues, true);
+        previousRecord.current = recordValues;
+        recordLoaded.current = true;
+      } else {
+        const previousRecordStatus = record?.status;
+        const nextRecordStatus = previousRecord.current.status;
+        if (previousRecordStatus !== nextRecordStatus) {
+          setValues(recordValues, true);
+          previousRecord.current = recordValues;
+        }
+      }
     }
-    didMount.current = true;
-    previousRecord.current = record;
-  }, [values]);
+  }, [record]);
+
+  useEffect(() => {
+    if (isMounted) {
+      const previousRecordStatus = record?.status;
+      const nextRecordStatus = recordStatus;
+      if (previousRecordStatus !== nextRecordStatus) {
+        const newValues = { ...values, status: nextRecordStatus };
+        if (
+          previousRecordStatus === RecordStatus.DRAFT &&
+          nextRecordStatus === RecordStatus.APPROVED
+        ) {
+          if (isValid) {
+            patchRecord(newValues);
+          }
+        } else {
+          patchRecord(newValues);
+        }
+      }
+    }
+  }, [recordStatus]);
 
   useEffect(() => {
     if (isMounted && onValidityChange) {
       onValidityChange(isValid);
     }
   }, [values, isValid]);
+
+  useEffect(() => {
+    const validateAndSave = async () => {
+      const diff: Operation[] = compare(previousRecord.current, values);
+      const hasErrors = Object.keys(await validateForm(values)).length > 0;
+      if (
+        diff.length > 0 &&
+        !(record?.status === RecordStatus.APPROVED && hasErrors)
+      ) {
+        patchRecord(values);
+      }
+    };
+    validateAndSave();
+  }, [values]);
 
   useEffect(() => {
     if (onTitleChange) {
@@ -725,12 +769,14 @@ const RecordForm = ({
 
 export default memo(
   withDatasets(
-    withFormik<Props, FormValues>({
-      mapPropsToValues: ({ record, organizationId }: Props) =>
-        mapRecordToValues(record ?? {}, organizationId),
-      handleSubmit: () => {},
-      validationSchema,
-      displayName: 'RecordForm'
-    })(RecordForm)
+    withRecord(
+      withFormik<Props, FormValues>({
+        mapPropsToValues: ({ record, organizationId }: Props) =>
+          mapRecordToValues(record ?? {}, organizationId),
+        handleSubmit: () => {},
+        validationSchema,
+        displayName: 'RecordForm'
+      })(RecordForm)
+    )
   )
 );
