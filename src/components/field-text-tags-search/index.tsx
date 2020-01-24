@@ -129,7 +129,7 @@ const TextTagsSearchField = ({
   return (
     <SC.Field>
       {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-      <SC.FieldWrapper>
+      <SC.FieldWrapper error={error}>
         <SC.TextTagsSearchField
           id={id}
           placeholder={placeholder || labelText}
@@ -139,7 +139,6 @@ const TextTagsSearchField = ({
           onKeyDown={handleKeyPress}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          error={error}
         />
         {isLoadingSuggestions && (
           <SC.Spinner>

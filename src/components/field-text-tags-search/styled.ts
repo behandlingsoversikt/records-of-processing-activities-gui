@@ -11,12 +11,24 @@ const Label = styled.label`
   margin-bottom: 5px;
 `;
 
-const FieldWrapper = styled.div`
+const FieldWrapper = styled.div<{ error?: boolean }>`
   position: relative;
   max-height: 36.4px;
+
+  ${({ error }) =>
+    error &&
+    css`
+      & input {
+        border-color: red;
+
+        &:not(:disabled):focus {
+          box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.5);
+        }
+      }
+    `}
 `;
 
-const TextTagsSearchField = styled(FormikField)<{ error?: boolean }>`
+const TextTagsSearchField = styled(FormikField)`
   display: block;
   width: 100%;
   padding: 8px;
@@ -28,16 +40,6 @@ const TextTagsSearchField = styled(FormikField)<{ error?: boolean }>`
   &:not(:disabled):focus {
     box-shadow: 0 0 0 0.1rem rgba(38, 128, 179, 0.5);
   }
-
-  ${({ error }) =>
-    error &&
-    css`
-      border-color: red;
-
-      &:not(:disabled):focus {
-        box-shadow: 0 0 0 0.1rem rgba(255, 0, 0, 0.5);
-      }
-    `}
 `;
 
 const Spinner = styled.span`
