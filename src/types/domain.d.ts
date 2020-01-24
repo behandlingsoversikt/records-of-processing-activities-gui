@@ -1,7 +1,7 @@
 import { RecordStatus, DatasetStatus } from './enums';
 
 export interface Record {
-  id: string;
+  id?: string;
   status: RecordStatus;
   organizationId: string;
   purpose: string;
@@ -10,7 +10,7 @@ export interface Record {
   recipientCategories: string[];
   personalDataSubjects: string;
   plannedDeletion: string;
-  highPrivacyRisk: boolean;
+  highPrivacyRisk?: boolean;
   articleSixBasis: ArticleSixBasis[];
   otherArticles: Partial<OtherArticles>;
   businessAreas: string[];
