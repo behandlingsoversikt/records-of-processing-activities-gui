@@ -36,6 +36,14 @@ const StatusButton = styled(FDKButton)`
   &:last-of-type {
     border-radius: 0 3px 3px 0;
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+    `}
 `;
 
 const RemoveButton = styled.button<{ disabled?: boolean }>`
