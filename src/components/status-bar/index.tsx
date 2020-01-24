@@ -43,6 +43,7 @@ const StatusBar = ({
             <>
               <SC.StatusButton
                 variant={status === RecordStatus.DRAFT ? 'primary' : 'default'}
+                selected={status === RecordStatus.DRAFT}
                 text='Utkast'
                 icon={CreateIconOutlined}
                 onClick={setStatusToDraft}
@@ -53,6 +54,7 @@ const StatusBar = ({
                     ? 'primary'
                     : 'default'
                 }
+                selected={status === RecordStatus.APPROVED}
                 disabled={!canBeApproved}
                 text='Godkjent'
                 icon={CheckBoxOutlinedIcon}

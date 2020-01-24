@@ -26,7 +26,7 @@ const ButtonGroup = styled.div`
   margin-left: auto;
 `;
 
-const StatusButton = styled(FDKButton)`
+const StatusButton = styled(FDKButton)<{ selected?: boolean }>`
   border-radius: 0;
 
   &:first-of-type {
@@ -43,6 +43,12 @@ const StatusButton = styled(FDKButton)`
       opacity: 0.5;
       pointer-events: none;
       cursor: not-allowed;
+    `}
+
+  ${({ selected }) =>
+    selected &&
+    css`
+      cursor: default !important;
     `}
 `;
 
