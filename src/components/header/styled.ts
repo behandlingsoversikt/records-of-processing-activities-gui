@@ -61,10 +61,12 @@ const UserAvatar = styled.div`
 const UserName = styled.span`
   margin-left: 5px;
   text-transform: capitalize;
+  white-space: nowrap;
 `;
 
 const LogoutButton = styled(Button)`
   margin-left: 10px !important;
+  white-space: nowrap;
 
   & span {
     font-size: 1.4rem;
