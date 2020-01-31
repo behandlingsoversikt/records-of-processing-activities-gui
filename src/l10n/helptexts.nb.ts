@@ -40,7 +40,7 @@ Eksempel på utfylling kan være “arbeidssøkere”, “elever”, “kunder�
   highPrivacyRiskAbstract: `Gjør en vurdering av dette, blant annet med hensyn til eventuell gjennomføring av vurdering av personvernkonsekvenser (DPIA)`,
   dataProtectionImpactAssessmentAbstract: `Hvis du velger Ja, kan du vurdere å lenke til en vurdering av personvernkonsekvenser (DPIA). `,
   personalDataSubjectsAbstract: `Kilder til opplysningene kan for eksempel være den registrerte selv, egen virksomhet, eller andre.`,
-  personalDataSubjectsDescription: `Dersom opplysningene er hentet fra andre, skriv hvilken kilde personopplysningene stammer fra, og, dersom det er relevant, om de stammer fra offentlig tilgjengelige kilder, jfr. Artikkel 14 nr. 2. Bokstav f. Eksempel`,
+  personalDataSubjectsDescription: `Dersom opplysningene er hentet fra andre, skriv hvilken kilde personopplysningene stammer fra, og, dersom det er relevant, om de stammer fra offentlig tilgjengelige kilder, jfr. Artikkel 14 nr. 2. Bokstav f.`,
   privacyProcessingSystemsAbstract: `Skriv inn hvilke systemer som behandler opplysningene.`,
   privacyProcessingSystemsDescription: `Eksempel på utfylling kan være “CRM” eller “Sak/arkiv”.`,
   recipientCategoriesAbstract: `En “mottaker” er en fysisk eller juridisk person, offentlig myndighet, institusjon eller ethvert annet organ som personopplysninger utleveres til, enten det dreier seg om en tredjepart eller ikke.

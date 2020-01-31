@@ -353,7 +353,7 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
-          title='Behandlinger gjelder'
+          title='Behandlingen gjelder'
           subtitle={localization.titleAbstract}
           description={localization.titleDescription}
         >
@@ -824,18 +824,38 @@ const RecordForm = ({
               name='dataTransfers.thirdCountryRecipients'
               value={values.dataTransfers.thirdCountryRecipients}
               labelText='Oppgi hvilke(t) tredjeland personopplysningene overføres til'
+              error={
+                isApproved &&
+                touched.dataTransfers?.thirdCountryRecipients &&
+                errors.dataTransfers?.thirdCountryRecipients
+              }
+              helperText={
+                isApproved &&
+                touched?.dataTransfers?.thirdCountryRecipients &&
+                errors?.dataTransfers?.thirdCountryRecipients
+              }
               onChange={handleChange}
             />
           )}
         </SC.Fieldset>
         {values.dataTransfers.transferred && (
           <SC.Fieldset
-            title='Det gis garanti for at personopplysningene behandles etter norske regler'
+            title='Nødvendige garantier ved overføring til tredjeland eller internasjonale organisasjoner'
             subtitle={localization.guaranteesAbstract}
           >
             <TextField
               name='dataTransfers.guarantees'
               value={values.dataTransfers.guarantees}
+              error={
+                isApproved &&
+                touched.dataTransfers?.guarantees &&
+                errors.dataTransfers?.guarantees
+              }
+              helperText={
+                isApproved &&
+                touched?.dataTransfers?.guarantees &&
+                errors?.dataTransfers?.guarantees
+              }
               onChange={handleChange}
             />
           </SC.Fieldset>

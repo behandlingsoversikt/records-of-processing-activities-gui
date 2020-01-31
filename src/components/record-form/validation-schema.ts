@@ -29,6 +29,22 @@ export default Yup.object().shape({
     .min(1, 'Feltet må fylles ut')
     .required('Feltet må fylles ut'),
   dataTransfers: Yup.object().shape({
-    transferred: Yup.boolean().required('Feltet må fylles ut')
+    transferred: Yup.boolean().required('Feltet må fylles ut'),
+    thirdCountryRecipients: Yup.string()
+      .ensure()
+      .when('transferred', {
+        is: true,
+        then: Yup.string()
+          .ensure()
+          .required('Feltet må fylles ut')
+      }),
+    guarantees: Yup.string()
+      .ensure()
+      .when('transferred', {
+        is: true,
+        then: Yup.string()
+          .ensure()
+          .required('Feltet må fylles ut')
+      })
   })
 });
