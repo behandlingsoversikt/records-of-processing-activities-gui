@@ -1,4 +1,4 @@
-import React, { memo, ChangeEvent, useState, useRef } from 'react';
+import React, { memo, ChangeEvent, useState, useRef, useEffect } from 'react';
 
 import SC from './styled';
 
@@ -28,6 +28,7 @@ const Select = ({
   const currentOption = options.find(
     ({ value: optionValue }) => `${value}` === `${optionValue}`
   );
+  const selectElement = useRef<HTMLDivElement>(null);
   const inputElement = useRef<HTMLSelectElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [selectValue, setSelectValue] = useState(value);
@@ -36,8 +37,21 @@ const Select = ({
   );
   const toggleExpandedState = () => setIsExpanded(!isExpanded);
 
+  const handleClickOutside = (e: MouseEvent) => {
+    if (!selectElement?.current?.contains(e.target as any)) {
+      setIsExpanded(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
+
   return (
-    <SC.Select onClick={toggleExpandedState}>
+    <SC.Select ref={selectElement} onClick={toggleExpandedState}>
       {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
       <SC.SelectButton type='button'>
         <span>{currentOption ? currentOption.label : selectLabel}</span>
