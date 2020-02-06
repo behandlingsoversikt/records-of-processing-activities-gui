@@ -12,6 +12,7 @@ interface Props {
   name: string;
   value: any;
   error?: any;
+  labelText?: string;
   helperText?: any;
   options: Option[];
   onChange?: (event: ChangeEvent<any>) => void;
@@ -21,11 +22,14 @@ const Radio = ({
   name,
   value,
   error,
+  labelText,
   helperText,
   options,
-  onChange
+  onChange,
+  ...props
 }: Props): JSX.Element => (
-  <SC.Radio>
+  <SC.Radio {...props}>
+    {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
     <SC.Options>
       {options.map(({ label, value: optionValue }) => (
         <SC.Option key={`${name}-${optionValue}`}>

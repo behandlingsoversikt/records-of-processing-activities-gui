@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import { Form } from 'formik';
 
+import RadioBase from '../radio';
+
 const RepresentativeForm = styled(Form)``;
+
+const Radio = styled(RadioBase)`
+  margin-bottom: 30px;
+`;
 
 const InlineFields = styled.div`
   display: flex;
@@ -17,5 +23,6 @@ const InlineFields = styled.div`
 
 export default {
   RepresentativeForm,
+  Radio,
   InlineFields
 };

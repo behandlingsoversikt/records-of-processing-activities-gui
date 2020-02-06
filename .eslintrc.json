@@ -65,6 +65,7 @@
     "react/no-array-index-key": "off",
     "react/no-unused-state": "off",
     "react/jsx-curly-newline": "off",
+    "react/prop-types": "off",
     "no-restricted-globals": "off",
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
