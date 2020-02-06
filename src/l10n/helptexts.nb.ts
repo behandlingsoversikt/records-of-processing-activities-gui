@@ -1,12 +1,7 @@
 export const helptextsNb = {
   dataControllerRepresentativeAbstract:
     'Behandlingsansvarliges representant er ofte virksomhetens øverste leder.',
-  dataControllerRepresentativeDescription: `En “behandlingsansvarlig” er en fysisk eller juridisk person, en offentlig myndighet, en institusjon eller ethvert annet organ som alene eller sammen med andre bestemmer formålet med behandlingen av personopplysninger og hvilke midler som skal benyttes; når formålet med og midlene for behandlingen er fastsatt i unionsretten eller i medlemsstatenes nasjonale rett, kan den behandlingsansvarlige, eller de særlige kriteriene for utpeking av vedkommende, fastsettes i unionsretten eller i medlemsstatenes nasjonale rett, jfr. Artikkel 4 nr 7.  
-
-Dersom den behandlingsansvarlige er etablert utenfor EØS-området, skal den utpeke en representant.  
-En “representant” en fysisk eller juridisk person som er etablert i Unionen, som den behandlingsansvarlige eller databehandleren har utpekt skriftlig i henhold til artikkel 27, og som representerer den behandlingsansvarlige eller databehandleren med hensyn til de forpliktelser de har i henhold til personvernforordningen.
-
-Les mer på [Datatilsynets nettsider](https://datatilsynet.no)`,
+  dataControllerRepresentativeDescription: ` En “behandlingsansvarlig” er en fysisk eller juridisk person, en offentlig myndighet, en institusjon eller ethvert annet organ som alene eller sammen med andre bestemmer formålet med behandlingen av personopplysninger og hvilke midler som skal benyttes; når formålet med og midlene for behandlingen er fastsatt i unionsretten eller i medlemsstatenes nasjonale rett, kan den behandlingsansvarlige, eller de særlige kriteriene for utpeking av vedkommende, fastsettes i unionsretten eller i medlemsstatenes nasjonale rett, jfr. Artikkel 4 nr 7.`,
   dataControllerRepresentativeInEUAbstract: `Dersom den behandlingsansvarlige er etablert utenfor EØS-området, skal den utpeke en representant.`,
   dataControllerRepresentativeInEUDescription: `En “representant” en fysisk eller juridisk person som er etablert i Unionen, som den behandlingsansvarlige eller databehandleren har utpekt skriftlig i henhold til artikkel 27, og som representerer den behandlingsansvarlige eller databehandleren med hensyn til de forpliktelser de har i henhold til personvernforordningen. Les mer på [Datatilsynets nettsider](https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/)`,
   commonDataControllerContactAbstract: `Dersom to eller flere behandlingsansvarlige i fellesskap fastsetter formålene med og midlene for behandlingen, skal de være felles behandlingsansvarlige, jfr. Artikkel 26 nr 1. `,
