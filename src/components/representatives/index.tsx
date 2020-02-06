@@ -44,7 +44,7 @@ const Representatives = ({
       >
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
-          title='Representant for behandlingsansvarlig'
+          title='Behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeAbstract}
           description={localization.dataControllerRepresentativeDescription}
           representative={dataControllerRepresentative}
