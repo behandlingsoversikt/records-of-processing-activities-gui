@@ -65,8 +65,8 @@ const Representatives = ({
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU}
           title='Representant for behandlingsansvarlig'
-          subtitle={localization.dataControllerRepresentativeAbstract}
-          description={localization.dataControllerRepresentativeDescription}
+          subtitle={localization.dataControllerRepresentativeInEUAbstract}
+          description={localization.dataControllerRepresentativeInEUDescription}
           representative={dataControllerRepresentativeInEU}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
