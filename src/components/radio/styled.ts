@@ -1,6 +1,14 @@
 import styled, { css } from 'styled-components';
 
-const Radio = styled.div``;
+const Radio = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
 
 const Options = styled.div`
   display: flex;
@@ -33,4 +41,4 @@ const HelperText = styled.p<{ error?: boolean }>`
     `}
 `;
 
-export default { Radio, Options, Option, HelperText };
+export default { Radio, Label, Options, Option, HelperText };

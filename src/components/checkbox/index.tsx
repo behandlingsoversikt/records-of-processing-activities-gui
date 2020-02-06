@@ -14,9 +14,10 @@ const Checkbox = ({
   name,
   checked,
   labelText,
-  onChange
+  onChange,
+  ...props
 }: Props): JSX.Element => (
-  <SC.Checkbox>
+  <SC.Checkbox {...props}>
     <Field
       id={name}
       type='checkbox'
