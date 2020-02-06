@@ -39,7 +39,7 @@ const Representatives = ({
     <SC.Representatives>
       <ExpansionPanel
         required
-        title='Representant for behandlingsansvarlig'
+        title='Behandlingsansvarlig'
         subtitle={dataControllerRepresentative?.name}
       >
         <RepresentativeForm
