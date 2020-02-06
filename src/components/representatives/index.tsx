@@ -39,12 +39,12 @@ const Representatives = ({
     <SC.Representatives>
       <ExpansionPanel
         required
-        title='Representant for behandlingsansvarlig'
+        title='Behandlingsansvarlig'
         subtitle={dataControllerRepresentative?.name}
       >
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
-          title='Representant for behandlingsansvarlig'
+          title='Behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeAbstract}
           description={localization.dataControllerRepresentativeDescription}
           representative={dataControllerRepresentative}
@@ -65,8 +65,8 @@ const Representatives = ({
         <RepresentativeForm
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU}
           title='Representant for behandlingsansvarlig'
-          subtitle={localization.dataControllerRepresentativeAbstract}
-          description={localization.dataControllerRepresentativeDescription}
+          subtitle={localization.dataControllerRepresentativeInEUAbstract}
+          description={localization.dataControllerRepresentativeInEUDescription}
           representative={dataControllerRepresentativeInEU}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
