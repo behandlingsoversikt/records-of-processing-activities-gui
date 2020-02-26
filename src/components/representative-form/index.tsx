@@ -1,5 +1,5 @@
-import React, { memo, useEffect, useState, ChangeEvent } from 'react';
-import { withFormik, FormikProps } from 'formik';
+import React, { ChangeEvent, memo, useEffect, useState } from 'react';
+import { FormikProps, withFormik } from 'formik';
 
 import TextField from '../field-text';
 import Fieldset from '../fdk-fieldset';
