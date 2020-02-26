@@ -40,6 +40,12 @@ const RepresentativeForm = ({
   const isEURepresentative =
     type === RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU;
 
+  const isControllerRepresentative =
+    type === RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE;
+
+  const isDataProtectionOfficer =
+    type === RepresentativeType.DATA_PROTECTION_OFFICER;
+
   const [hasEURepresentative, setHasEURepresentative] = useState(
     isEURepresentative
       ? !!(values.name || values.address || values.email || values.phone)
@@ -64,7 +70,11 @@ const RepresentativeForm = ({
       title={title}
       subtitle={subtitle}
       description={description}
-      required={isEURepresentative}
+      required={
+        isEURepresentative ||
+        isControllerRepresentative ||
+        isDataProtectionOfficer
+      }
     >
       <TextField
         name='name'
