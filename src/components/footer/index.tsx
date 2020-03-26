@@ -8,7 +8,7 @@ const Footer = (): JSX.Element => (
   <SC.Footer>
     <div>
       <Anchor
-        href='https://www.brreg.no/personvernerklaering'
+        href='https://www.digdir.no/om-oss/personvernerklaering/706'
         text='Informasjonskapsler og personvern'
         external
       />
@@ -19,8 +19,8 @@ const Footer = (): JSX.Element => (
     </div>
     <div>
       <Anchor
-        href='mailto:fellesdatakatalog@brreg.no'
-        text='Kontakt: fellesdatakatalog@brreg.no'
+        href='mailto:digdir@fellesdatakatalog.no'
+        text='Kontakt: digdir@fellesdatakatalog.no'
       />
     </div>
   </SC.Footer>
