@@ -8,12 +8,13 @@ interface EnvironmentVariables {
 }
 
 const env = ((window as any).env || {
-  OIDC_ISSUER: 'https://sso.it1.fellesdatakatalog.brreg.no/auth/realms/fdk',
+  OIDC_ISSUER:
+    'https://sso.staging.fellesdatakatalog.digdir.no/auth/realms/fdk',
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: 'http://localhost:7135',
   FDK_REGISTRATION_BASE_URI:
-    'https://registrering.it1.fellesdatakatalog.brreg.no',
+    'https://registrering.staging.fellesdatakatalog.digdir.no',
   ORGANIZATION_API:
-    'https://organization-catalogue.it1.fellesdatakatalog.brreg.no'
+    'https://organization-catalogue.staging.fellesdatakatalog.digdir.no'
 }) as EnvironmentVariables;
 
 export default { ...env } as Configuration;
