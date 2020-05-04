@@ -19,8 +19,8 @@ const Footer = (): JSX.Element => (
     </div>
     <div>
       <Anchor
-        href='mailto:digdir@fellesdatakatalog.no'
-        text='Kontakt: digdir@fellesdatakatalog.no'
+        href='mailto:fellesdatakatalog@digdir.no'
+        text='Kontakt: fellesdatakatalog@digdir.no'
       />
     </div>
   </SC.Footer>
