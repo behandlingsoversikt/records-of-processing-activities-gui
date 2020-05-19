@@ -185,7 +185,7 @@ const RecordForm = ({
           <TextField
             name='dataProcessorContactDetails.name'
             value={values.dataProcessorContactDetails.name}
-            labelText='Kontaktpunkt'
+            labelText='Navn på behandlingsansvarlig'
             onChange={handleChange}
           />
           <SC.InlineFields>
@@ -257,14 +257,14 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
-          title='Felles databehandlingsansvar'
+          title='Felles behandlingsansvar'
           subtitle={localization.commonDataControllerContactAbstract}
           description={localization.commonDataControllerContactDescription}
         >
           <TextField
             name='commonDataControllerContact.companies'
             value={values.commonDataControllerContact.companies}
-            labelText='Virksomheter som har felles databehandlingsansvar'
+            labelText='Virksomheter som har felles behandlingsansvar'
             onChange={handleChange}
           />
           <TextField
@@ -414,7 +414,7 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
-          title='Behandlingsgrunnlag etter artikkel 6'
+          title='Behandlingsgrunnlag artikkel 6'
           subtitle={localization.articleSixBasisAbstract}
           description={localization.articleSixBasisDescription}
         >
@@ -468,7 +468,7 @@ const RecordForm = ({
                         <TextField
                           name={`articleSixBasis[${index}].referenceUrl`}
                           value={referenceUrl}
-                          labelText='Henvisning til rettslig forpliktelse, berettighet, interesse mv'
+                          labelText='Henvisning til rettslig forpliktelse, berettiget interesse med videre'
                           onChange={handleChange}
                         />
                       )}
@@ -502,7 +502,7 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
-          title='Behandlingsgrunnlag etter artikkel 9 eller 10'
+          title='Behandlingsgrunnlag artikkel 9 og 10'
           subtitle={localization.otherArticlesAbstract}
         >
           <Checkbox
@@ -515,7 +515,7 @@ const RecordForm = ({
             <TextField
               name='otherArticles.articleNine.referenceUrl'
               value={values.otherArticles?.articleNine?.referenceUrl ?? ''}
-              labelText='Henvisning til annen lovgivning, dersom relevant'
+              labelText='Henvisning til aktuell lovgivning'
               onChange={handleChange}
             />
           )}
@@ -529,7 +529,7 @@ const RecordForm = ({
             <TextField
               name='otherArticles.articleTen.referenceUrl'
               value={values.otherArticles?.articleTen?.referenceUrl ?? ''}
-              labelText='Henvisning til annen lovgivning, dersom relevant'
+              labelText='Henvisning til aktuell lovgivning'
               onChange={handleChange}
             />
           )}
