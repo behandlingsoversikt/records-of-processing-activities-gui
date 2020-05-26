@@ -65,7 +65,7 @@ const RecordForm = ({
   setFieldValue,
   setFieldTouched
 }: Props): JSX.Element | null => {
-  const [allExpanded, setAllExpanded] = useState([true, false, false, false]);
+  const [allExpanded, setAllExpanded] = useState([false, false, false, false]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
   const [isWaitingForSuggestions, setIsWaitingForSuggestions] = useState(false);
 
