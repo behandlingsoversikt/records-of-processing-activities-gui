@@ -120,7 +120,7 @@ const RepresentativeForm = ({
         <SC.Radio
           name='hasEURepresentative'
           value={hasEURepresentative}
-          labelText='Er behandlingsansvarlig eller databehandler etablert utenfor EU/EØS?'
+          labelText='Er behandlingsansvarlig etablert utenfor EU/EØS?'
           options={[
             { label: 'Ja', value: true },
             { label: 'Nei', value: false }
