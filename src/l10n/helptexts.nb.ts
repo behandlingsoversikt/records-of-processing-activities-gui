@@ -20,7 +20,8 @@ Les mer om personvernprinsippene på [Datatilsynets nettsider](https://datatilsy
 
 Det må finnes et behandlingsgrunnlag for behandling av hver enkelt personopplysning til hvert enkelt formål. Dersom flere behandlingsgrunnlag kan passe, må virksomheten bestemme seg for ett grunnlag per formål.  `,
   otherArticlesAbstract: `Det må foreligge et særskilt grunnlag i tillegg til behandlingsgrunnlag for å behandle denne typen opplysninger. Skriv inn henvisning også til annen lovgivning, dersom relevant.  `,
-  otherArticlesDescription: `Les mer på: https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/behandlingsgrunnlag/veileder-om-behandlingsgrunnlag/?id=10832`,
+  otherArticlesDescription:
+    'Les mer på [Datatilsynets nettsider](https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/behandlingsgrunnlag/veileder-om-behandlingsgrunnlag/?id=10832).',
   dataSubjectCategoriesAbstract: `En “registrert” er en identifiserbar fysisk person er en person som direkte eller indirekte kan identifiseres, særlig ved hjelp av en identifikator, jfr. Artikkel 4 nr. 1. `,
   dataSubjectCategoriesDescription: `Identifikatorer kan være for eksempelet navn, et identifikasjonsnummer, lokaliseringsopplysninger, en nettidentifikator eller ett eller flere elementer som er spesifikke for nevnte fysiske persons fysiske, fysiologiske, genetiske, psykiske, økonomiske, kulturelle eller sosiale identitet, jfr artikkel 4 nr. 1.
 

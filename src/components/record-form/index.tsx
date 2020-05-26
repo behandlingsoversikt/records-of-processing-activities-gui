@@ -504,6 +504,7 @@ const RecordForm = ({
         <SC.Fieldset
           title='Behandlingsgrunnlag artikkel 9 og 10'
           subtitle={localization.otherArticlesAbstract}
+          description={localization.otherArticlesDescription}
         >
           <Checkbox
             name='otherArticles.articleNine.checked'
