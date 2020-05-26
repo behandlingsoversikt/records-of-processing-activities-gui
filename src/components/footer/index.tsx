@@ -13,10 +13,7 @@ const Footer = (): JSX.Element => (
         external
       />
     </div>
-    <div>
-      Dette er et samarbeidsprosjekt mellom Brønnøysundregistrene, Difi og
-      øvrige SKATE-etater.
-    </div>
+    <div>Digitaliseringsdirektoratet forvalter Felles Datakatalog.</div>
     <div>
       <Anchor
         href='mailto:fellesdatakatalog@digdir.no'
