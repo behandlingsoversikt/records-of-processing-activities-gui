@@ -464,7 +464,7 @@ const RecordForm = ({
                         noOptionLabel='Velg artikkel fra listen'
                         onChange={handleChange}
                       />
-                      {['6.1.a', '6.1.b'].includes(legality) && (
+                      {['6.1.c', '6.1.e', '6.1.f'].includes(legality) && (
                         <TextField
                           name={`articleSixBasis[${index}].referenceUrl`}
                           value={referenceUrl}
