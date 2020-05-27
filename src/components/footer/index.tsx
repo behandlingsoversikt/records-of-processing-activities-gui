@@ -13,7 +13,7 @@ const Footer = (): JSX.Element => (
         external
       />
     </div>
-    <div>Digitaliseringsdirektoratet forvalter Felles Datakatalog.</div>
+    <div>Digitaliseringsdirektoratet forvalter Felles datakatalog.</div>
     <div>
       <Anchor
         href='mailto:fellesdatakatalog@digdir.no'
