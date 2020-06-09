@@ -1,15 +1,14 @@
-import path from 'path';
+import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import { BaseHrefWebpackPlugin } from 'base-href-webpack-plugin';
 
 export default {
   entry: {
     main: './src/entrypoints/main/index.tsx'
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: resolve(__dirname, '../dist'),
     publicPath: '/'
   },
   resolve: {
@@ -43,7 +42,7 @@ export default {
           {
             loader: 'babel-loader',
             options: {
-              configFile: path.resolve(__dirname, '../.babelrc')
+              configFile: resolve(__dirname, '../.babelrc')
             }
           },
           'ts-loader'
@@ -92,38 +91,15 @@ export default {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new (class ChunksFromEntryPlugin {
-      apply(compiler) {
-        compiler.hooks.emit.tap('ChunksFromEntryPlugin', compilation => {
-          compilation.hooks.htmlWebpackPluginAlterChunks.tap(
-            'ChunksFromEntryPlugin',
-            (_, { plugin }) =>
-              compilation.entrypoints
-                .get(plugin.options.entry)
-                .chunks.map(chunk => ({
-                  names: chunk.name ? [chunk.name] : [],
-                  files: chunk.files.slice(),
-                  size: chunk.modulesSize(),
-                  hash: chunk.hash
-                }))
-          );
-        });
-      }
-    })(),
     new HtmlWebpackPlugin({
-      entry: 'main',
       template: './src/entrypoints/main/index.html',
       filename: 'index.html',
-      favicon: './src/images/favicon.ico'
+      favicon: './src/images/favicon.ico',
+      base: '/',
+      chunks: ['main']
     }),
-    new CopyWebpackPlugin(
-      [{ from: './src/lib/auth/silent-check-sso.html', to: './' }],
-      {
-        copyUnmodified: true
-      }
-    ),
-    new BaseHrefWebpackPlugin({
-      baseHref: '/'
+    new CopyWebpackPlugin({
+      patterns: [{ from: './src/lib/auth/silent-check-sso.html', to: './' }]
     })
   ]
 };
