@@ -26,7 +26,7 @@ export interface User {
 }
 
 export class Auth {
-  private readonly kc: KeycloakInstance<'native'>;
+  private readonly kc: KeycloakInstance;
 
   constructor(private readonly conf: AuthConfiguration) {
     const [url, realm] = conf.oidcIssuer.split('/realms/');
@@ -43,8 +43,7 @@ export class Auth {
   }) => Promise<boolean> = async ({ loginRequired }) => {
     const keycloakInitOptions: KeycloakInitOptions = {
       onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: this.conf.silentCheckSsoRedirectUri,
-      promiseType: 'native'
+      silentCheckSsoRedirectUri: this.conf.silentCheckSsoRedirectUri
     };
     await this.kc.init(keycloakInitOptions).catch(console.error);
     if (loginRequired && !this.isAuthenticated()) {
@@ -54,10 +53,7 @@ export class Auth {
   };
 
   login: () => Promise<void> = () =>
-    this.kc
-      .login()
-      .then()
-      .catch(console.error);
+    this.kc.login().then().catch(console.error);
 
   logout: () => Promise<void> = () =>
     this.kc

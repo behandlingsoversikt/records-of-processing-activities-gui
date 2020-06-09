@@ -10,7 +10,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "plugin:jsx-a11y/strict"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -30,7 +31,9 @@
     "html",
     "json",
     "markdown",
-    "prettier"
+    "prettier",
+    "jsx-a11y",
+    "react-hooks"
   ],
   "rules": {
     "prettier/prettier": [
@@ -38,7 +41,9 @@
       {
         "semi": true,
         "singleQuote": true,
-        "jsxSingleQuote": true
+        "jsxSingleQuote": true,
+        "trailingComma": "none",
+        "arrowParens": "avoid"
       }
     ],
     "import/no-extraneous-dependencies": [
@@ -52,6 +57,7 @@
     ],
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-interface": "off",
@@ -70,6 +76,7 @@
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
+    "jsx-a11y/label-has-for": "off",
     "react/jsx-filename-extension": [
       "error",
       {
@@ -85,15 +92,5 @@
       "ts": "never",
       "tsx": "never"
     }]
-  },
-  "overrides": [
-    {
-      "files": [
-        "*.ts",
-        "*.tsx",
-        "*.d.ts"
-      ],
-      "rules": {}
-    }
-  ]
+  }
 }
