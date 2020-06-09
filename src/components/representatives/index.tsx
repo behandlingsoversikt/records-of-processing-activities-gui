@@ -80,8 +80,10 @@ const Representatives = ({
         <RepresentativeForm
           type={RepresentativeType.DATA_PROTECTION_OFFICER}
           title='Personvernombud'
-          subtitle={localization.dataControllerRepresentativeInEUAbstract}
-          description={localization.dataControllerRepresentativeInEUDescription}
+          subtitle={localization.dataProtectionOfficerRepresentativeAbstract}
+          description={
+            localization.dataProtectionOfficerRepresentativeDescription
+          }
           representative={dataProtectionOfficer}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
