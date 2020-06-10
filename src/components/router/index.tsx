@@ -1,9 +1,9 @@
 import React, { lazy, Suspense, memo } from 'react';
 import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import Footer from '@fellesdatakatalog/internal-footer';
 
 import Root from '../root';
 import Header from '../header';
-import Footer from '../footer';
 
 import ProtectedRoute from '../protected-route';
 
@@ -37,8 +37,8 @@ const Router = (): JSX.Element => (
           <Redirect to='/' />
         </Switch>
       </Suspense>
-      <Footer />
     </Root>
+    <Footer />
   </BrowserRouter>
 );
 
