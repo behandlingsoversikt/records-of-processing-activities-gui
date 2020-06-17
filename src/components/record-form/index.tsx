@@ -179,7 +179,7 @@ const RecordForm = ({
         }
       >
         <SC.Fieldset
-          title='Daglig behandlingsanvar'
+          title='Daglig behandlingsansvar'
           subtitle={localization.dataProcessorContactDetailsAbstract}
         >
           <TextField
@@ -287,7 +287,7 @@ const RecordForm = ({
                       <TextField
                         name={`commonDataControllerContact.contactPoints[${index}].name`}
                         value={name}
-                        labelText='Kontaktpunkt'
+                        labelText='Kontaktperson'
                         onChange={handleChange}
                       />
                       <SC.InlineFields>
@@ -367,7 +367,7 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           required
-          title='Formålet med behandlingsaktivitetene'
+          title='Formålene med behandlingen'
           subtitle={localization.purposeAbstract}
           description={localization.purposeDescription}
         >
