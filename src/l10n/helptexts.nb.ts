@@ -8,14 +8,14 @@ export const helptextsNb = {
     'Et personvernombud skal gi råd om hvordan den behandlingsansvarlige best mulig kan ivareta personverninteressene.',
   dataProtectionOfficerRepresentativeDescription:
     'Noen virksomheter har plikt til å ha ombud, mens andre kan ha det dersom de ønsker, se artikkel 37 flg eller les mer på [Datatilsynets nettsider](https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/personvernombud/).',
-  commonDataControllerContactAbstract: `Dersom to eller flere behandlingsansvarlige i fellesskap fastsetter formålene med og midlene for behandlingen, skal de være felles behandlingsansvarlige, jfr. Artikkel 26 nr 1. `,
-  commonDataControllerContactDescription: `Det kan utpekes et kontaktpunkt for den registrerte. Skriv inn hvilke virksomheter som har felles behandlingsansvar og ett eller flere kontaktpunkt for felles behandlingsansvarlige. Dersom du deler behandlingsansvaret med andre må du ha et bevisst forhold til rammene for å utøve dette ansvaret. Du må derfor avtale med de andre behandlingsansvarlige hvordan dere skal fordele ansvaret dere imellom.Husk også på at det mest vesentlige innholdet i avtalen (og ansvarsfordelingen) skal være tilgjengelig for de registrerte enkeltpersonene.`,
-  dataProcessorContactDetailsAbstract: `Behandlingsansvarliges representant kan delegere oppgaver som gjelder behandling av personopplysninger til enkeltpersoner i virksomheten. Dersom dette er tilfelle, skriv inn kontaktopplysninger til den som har det daglige behandlingsansvaret.`,
-  dataProcessingAgreementsAbstract: `Skriv inn navn på databehandlere, dersom relevant. Her kan du også lenke til databehandleravtale. `,
-  dataProcessingAgreementsDescription: `En “databehandler” en fysisk eller juridisk person, offentlig myndighet, institusjon eller ethvert annet organ som behandler personopplysninger på vegne av den behandlingsansvarlige, jfr. Artikkel 4 nr. 8.`,
+  commonDataControllerContactAbstract: `Dersom to eller flere behandlingsansvarlige i fellesskap fastsetter formålene med og midlene for behandlingen, skal de være felles behandlingsansvarlige.  Den enkelte behandlingsansvarlige kan velge å ha et eget kontaktpunkt for den registrerte, eller det kan utpekes et felles kontaktpunkt for den registrerte, jfr. Artikkel 26 nr 1.`,
+  commonDataControllerContactDescription: `Skriv inn hvilke virksomheter som har felles behandlingsansvar og oppgi ett eller flere kontaktpunkt for felles behandlingsansvarlige.`,
+  dataProcessorContactDetailsAbstract: `Behandlingsansvarlig kan delegere oppgaver som gjelder behandling av personopplysninger til enkeltpersoner i virksomheten. Dersom dette er tilfelle, skriv inn kontaktopplysninger til den som har det daglige behandlingsansvaret.`,
+  dataProcessingAgreementsAbstract: `Skriv inn navn på databehandlere, dersom relevant. Her kan du også lenke til databehandleravtale, men husk å vurdere om du av sikkerhetsmessige hensyn kan legge til lenke til databehandleravtale eller ikke. `,
+  dataProcessingAgreementsDescription: `En “databehandler” er en fysisk eller juridisk person, offentlig myndighet, institusjon eller ethvert annet organ som behandler personopplysninger på vegne av den behandlingsansvarlige, jfr. Artikkel 4 nr. 8.`,
   titleAbstract: `Skriv inn hva behandlingen gjelder. Dette vil utgjøre tittelen på behandlingsaktiviteten i listen på protokollens oversiktsside. `,
   titleDescription: `Behandlingen skjer ofte i et system eller i en prosess. Det kan være lurt å skrive hvilket system eller prosess behandlingen skjer i, for eksempel sak/arkivsystem, søknadsportal eller lignende.`,
-  purposeAbstract: `Personopplysninger skal kun behandles for spesifikke, uttrykkelige, angitte og legitime formål. Det betyr at ethvert formål med behandling av personopplysninger skal identifiseres og beskrives presist. `,
+  purposeAbstract: `Personopplysninger skal kun behandles for spesifikke, uttrykkelige, angitte og legitime formål.Det betyr at formålet med behandlingen må identifiseres og beskrives presist.`,
   purposeDescription: `Alle formål skal være forklart på en måte som gjør at alle berørte har samme forståelse av hva personopplysningene skal brukes til. At formålet skal være legitimt innebærer at det i tillegg til å ha et rettslig grunnlag også skal være i samsvar med øvrige etiske og rettslige samfunnsnormer. Personopplysninger kan ikke gjenbrukes til formål som er uforenelig med det opprinnelige formålet.
 
 Les mer om personvernprinsippene på [Datatilsynets nettsider](https://datatilsynet.no)`,
@@ -26,10 +26,8 @@ Det må finnes et behandlingsgrunnlag for behandling av hver enkelt personopplys
   otherArticlesAbstract: `Det må foreligge et særskilt grunnlag i tillegg til behandlingsgrunnlag for å behandle denne typen opplysninger. Skriv inn henvisning også til annen lovgivning, dersom relevant.  `,
   otherArticlesDescription:
     'Les mer på [Datatilsynets nettsider](https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/behandlingsgrunnlag/veileder-om-behandlingsgrunnlag/?id=10832).',
-  dataSubjectCategoriesAbstract: `En “registrert” er en identifiserbar fysisk person er en person som direkte eller indirekte kan identifiseres, særlig ved hjelp av en identifikator, jfr. Artikkel 4 nr. 1. `,
-  dataSubjectCategoriesDescription: `Identifikatorer kan være for eksempelet navn, et identifikasjonsnummer, lokaliseringsopplysninger, en nettidentifikator eller ett eller flere elementer som er spesifikke for nevnte fysiske persons fysiske, fysiologiske, genetiske, psykiske, økonomiske, kulturelle eller sosiale identitet, jfr artikkel 4 nr. 1.
-
-Eksempel på utfylling kan være “arbeidssøkere”, “elever”, “kunder”.  `,
+  dataSubjectCategoriesAbstract: `En “registrert” er en identifiserbar fysisk person som direkte eller indirekte kan identifiseres, jfr. Artikkel 4 nr. 1.`,
+  dataSubjectCategoriesDescription: `Eksempel på utfylling kan være “arbeidssøkere”, “elever”, “kunder”.`,
   businessAreasAbstract: `Skriv inn hvilket overordnet funksjons-eller virksomhetsområde faller behandlingen under.  `,
   businessAreasDescription: `Eksempler på utfylling kan være “intern adminstrasjon og økonomi” eller “salg og kundekontakt”.  `,
   relatedDatasetsAbstract: `Dersom behandlingsaktiviteten kan knyttes til et datasett virksomheten forvalter, koble disse sammen. `,
@@ -37,7 +35,7 @@ Eksempel på utfylling kan være “arbeidssøkere”, “elever”, “kunder�
   personalDataCategoriesAbstract: `«Personopplysninger» er enhver opplysning om en identifisert eller identifiserbar fysisk person («den registrerte»), jfr. Artikkel 4 nr. 1.`,
   personalDataCategoriesDescription: `Eksempel på utfylling kan være “Søknad og CV”, “Skatt og arbeidsgiveravgift”, “Kontaktopplysninger”.`,
   securityMeasuresAbstract: `Som nevnt i artikkel 32. nr 1, dersom mulig`,
-  plannedDeletionAbstract: `For de forskjellige kategorier av personopplysninger, dersom mulig.`,
+  plannedDeletionAbstract: `Dersom mulig, angi frist for sletting for de forskjellige kategorier av personopplysninger`,
   highPrivacyRiskAbstract: `Gjør en vurdering av dette, blant annet med hensyn til eventuell gjennomføring av vurdering av personvernkonsekvenser (DPIA)`,
   dataProtectionImpactAssessmentAbstract: `Hvis du velger Ja, kan du vurdere å lenke til en vurdering av personvernkonsekvenser (DPIA). `,
   personalDataSubjectsAbstract: `Kilder til opplysningene kan for eksempel være den registrerte selv, egen virksomhet, eller andre.`,
