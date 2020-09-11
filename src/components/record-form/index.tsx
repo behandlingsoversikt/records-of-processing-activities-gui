@@ -6,7 +6,7 @@ import React, {
   useState,
   ChangeEvent
 } from 'react';
-import { FormikProps, withFormik, FieldArray } from 'formik';
+import { FormikProps, withFormik, FieldArray, FormikErrors } from 'formik';
 import { compare, Operation } from 'fast-json-patch';
 
 import { localization } from '../../lib/localization';
@@ -33,7 +33,7 @@ import validationSchema from './validation-schema';
 
 import { mapRecordToValues } from './utils';
 
-import { Record, Dataset } from '../../types';
+import { Record, Dataset, Categories } from '../../types';
 import { DatasetStatus, RecordStatus } from '../../types/enums';
 
 type FormValues = Omit<Record, 'updatedAt'>;
@@ -380,40 +380,6 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
-          required
-          title='Kategorier av registrerte'
-          subtitle={localization.dataSubjectCategoriesAbstract}
-          description={localization.dataSubjectCategoriesDescription}
-        >
-          <FieldArray
-            name='dataSubjectCategories'
-            render={arrayHelpers => (
-              <TextTagsField
-                name='dataSubjectCategories'
-                value={values.dataSubjectCategories}
-                error={
-                  isApproved &&
-                  touched.dataSubjectCategories &&
-                  errors.dataSubjectCategories
-                }
-                helperText={
-                  isApproved &&
-                  touched.dataSubjectCategories &&
-                  errors.dataSubjectCategories
-                }
-                onAddTag={(tag: string) => {
-                  arrayHelpers.push(tag);
-                  setFieldTouched('dataSubjectCategories', true, true);
-                }}
-                onRemoveTag={(index: number) => {
-                  arrayHelpers.remove(index);
-                  setFieldTouched('dataSubjectCategories', true, true);
-                }}
-              />
-            )}
-          />
-        </SC.Fieldset>
-        <SC.Fieldset
           title='Behandlingsgrunnlag artikkel 6'
           subtitle={localization.articleSixBasisAbstract}
           description={localization.articleSixBasisDescription}
@@ -625,35 +591,106 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
-          title='Kategorier av personopplysninger'
-          subtitle={localization.personalDataCategoriesAbstract}
-          description={localization.personalDataCategoriesDescription}
+          title='Kategorier av registrerte og kategorier av personopplysninger'
+          subtitle={`${localization.personalDataCategoriesAbstract} ${localization.dataSubjectCategoriesAbstract}`}
+          description={`${localization.personalDataCategoriesDescription} ${localization.dataSubjectCategoriesDescription}`}
         >
           <FieldArray
-            name='personalDataCategories'
-            render={arrayHelpers => (
-              <TextTagsField
-                name='personalDataCategories'
-                value={values.personalDataCategories}
-                error={
-                  isApproved &&
-                  touched.personalDataCategories &&
-                  errors.personalDataCategories
-                }
-                helperText={
-                  isApproved &&
-                  touched.personalDataCategories &&
-                  errors.personalDataCategories
-                }
-                onAddTag={(tag: string) => {
-                  arrayHelpers.push(tag);
-                  setFieldTouched('personalDataCategories', true, true);
-                }}
-                onRemoveTag={(index: number) => {
-                  arrayHelpers.remove(index);
-                  setFieldTouched('personalDataCategories', true, true);
-                }}
-              />
+            name='categories'
+            render={categoriesArray => (
+              <>
+                {values.categories.map(
+                  (
+                    { personalDataCategories, dataSubjectCategories },
+                    index
+                  ) => (
+                    <Fragment key={`categories-${index}`}>
+                      <TextField
+                        name={`categories[${index}].dataSubjectCategories`}
+                        placeholder='Oppgi èn kategori'
+                        labelText='Kategorier av registrerte'
+                        value={dataSubjectCategories}
+                        error={
+                          isApproved &&
+                          touched.categories?.[index].dataSubjectCategories &&
+                          (errors.categories?.[index] as FormikErrors<
+                            Categories
+                          >).dataSubjectCategories
+                        }
+                        helperText={
+                          isApproved &&
+                          touched.categories?.[index].dataSubjectCategories &&
+                          (errors.categories?.[index] as FormikErrors<
+                            Categories
+                          >).dataSubjectCategories
+                        }
+                        onChange={handleChange}
+                      />
+                      <FieldArray
+                        name={`categories[${index}].personalDataCategories`}
+                        render={personalDataCategoriesArray => (
+                          <TextTagsField
+                            placeholder='Oppgi èn eller flere kategorier'
+                            labelText='Kategorier av personopplysninger tilknyttet den registrerte'
+                            name={`categories[${index}].personalDataCategories`}
+                            value={personalDataCategories}
+                            error={
+                              isApproved &&
+                              touched.categories &&
+                              touched.categories[index].personalDataCategories
+                            }
+                            helperText={
+                              isApproved &&
+                              touched.categories &&
+                              touched.categories[index].personalDataCategories
+                              // && errors.categories
+                            }
+                            onAddTag={(tag: string) => {
+                              personalDataCategoriesArray.push(tag);
+                              setFieldTouched(
+                                `categories[${index}].personalDataCategories`,
+                                true,
+                                true
+                              );
+                            }}
+                            onRemoveTag={(i: number) => {
+                              personalDataCategoriesArray.remove(i);
+                              setFieldTouched(
+                                `categories[${index}].personalDataCategories`,
+                                true,
+                                true
+                              );
+                            }}
+                          />
+                        )}
+                      />
+                      {values.categories.length > 1 && (
+                        <SC.RemoveButton
+                          type='button'
+                          onClick={() => categoriesArray.remove(index)}
+                        >
+                          <RemoveIcon />
+                          Slett kategorier
+                        </SC.RemoveButton>
+                      )}
+                    </Fragment>
+                  )
+                )}
+                <SC.AddButton
+                  type='button'
+                  addMargin={values.categories.length === 1}
+                  onClick={() =>
+                    categoriesArray.push({
+                      personalDataCategories: [],
+                      dataSubjectCategories: ''
+                    })
+                  }
+                >
+                  <AddIcon />
+                  Legg til ny kategori av registrerte og kategorier av
+                  personopplysninger
+                </SC.AddButton>
+              </>
             )}
           />
         </SC.Fieldset>

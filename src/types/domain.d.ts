@@ -5,8 +5,7 @@ export interface Record {
   status: RecordStatus;
   organizationId: string;
   purpose: string;
-  dataSubjectCategories: string[];
-  personalDataCategories: string[];
+  categories: Categories[];
   recipientCategories: string[];
   personalDataSubjects: string;
   plannedDeletion: string;
@@ -24,6 +23,11 @@ export interface Record {
   dataProtectionImpactAssessment: Partial<DataProtectionImpactAssessment>;
   dataProcessingAgreements: DataProcessingAgreement[];
   updatedAt: string;
+}
+
+export interface Categories {
+  personalDataCategories?: string[];
+  dataSubjectCategories?: string;
 }
 
 export interface ContactDetailsInterface {

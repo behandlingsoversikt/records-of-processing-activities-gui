@@ -12,8 +12,7 @@ interface Props {
 const RecordItemPure = ({
   record: {
     purpose,
-    dataSubjectCategories,
-    personalDataCategories,
+    categories,
     recipientCategories,
     personalDataSubjects,
     plannedDeletion,
@@ -116,13 +115,6 @@ const RecordItemPure = ({
       </SC.SectionContent>
 
       <SC.SectionContent>
-        <SC.SectionSubTitle>
-          {localization.dataSubjectCategories}
-        </SC.SectionSubTitle>
-        {dataSubjectCategories && dataSubjectCategories.join(', ')}
-      </SC.SectionContent>
-
-      <SC.SectionContent>
         <SC.SectionSubTitle>{localization.articleSixBasis}</SC.SectionSubTitle>
         {articleSixBasis &&
           articleSixBasis.map((item, index) => (
@@ -208,7 +200,14 @@ const RecordItemPure = ({
         <SC.SectionSubTitle>
           {localization.personalDataCategories}
         </SC.SectionSubTitle>
-        {personalDataCategories && personalDataCategories.join(', ')}
+        {categories?.map(
+          ({ personalDataCategories, dataSubjectCategories }, index) => (
+            <Fragment key={`categories-${index}`}>
+              <div>{personalDataCategories?.join(', ')}</div>
+              <div>{dataSubjectCategories}</div>
+            </Fragment>
+          )
+        )}
       </SC.SectionContent>
 
       <SC.SectionContent>

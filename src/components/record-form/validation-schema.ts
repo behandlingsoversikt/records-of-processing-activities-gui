@@ -6,13 +6,19 @@ export default Yup.object().shape({
   status: Yup.string().oneOf([RecordStatus.DRAFT, RecordStatus.APPROVED]),
   title: Yup.string().ensure().required('Feltet må fylles ut'),
   purpose: Yup.string().ensure().required('Feltet må fylles ut'),
-  dataSubjectCategories: Yup.array()
-    .of(Yup.string().ensure())
-    .min(1, 'Feltet må fylles ut')
-    .required('Feltet må fylles ut'),
-  personalDataCategories: Yup.array()
-    .of(Yup.string().ensure())
-    .min(1, 'Feltet må fylles ut')
+  categories: Yup.array()
+    .of(
+      Yup.object().shape({
+        personalDataCategories: Yup.array()
+          .of(Yup.string().ensure())
+          .min(1, 'Feltet må fylles ut')
+          .required('Feltet må fylles ut'),
+        dataSubjectCategories: Yup.string()
+          .ensure()
+          .required('Feltet må fylles ut')
+      })
+    )
+    .min(1, 'Minst 1 kategoripar')
     .required('Feltet må fylles ut'),
   securityMeasures: Yup.string().ensure().required('Feltet må fylles ut'),
   plannedDeletion: Yup.string().ensure().required('Feltet må fylles ut'),

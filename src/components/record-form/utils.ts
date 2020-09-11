@@ -7,6 +7,7 @@ export const mapRecordToValues = (
     status = RecordStatus.DRAFT,
     dataProcessorContactDetails: { name = '', email = '', phone = '' } = {},
     dataProcessingAgreements = [{ dataProcessorName: '', agreementUrl: '' }],
+    categories = [{ personalDataCategories: [], dataSubjectCategories: '' }],
     commonDataControllerContact: {
       companies = '',
       distributionOfResponsibilities = '',
@@ -14,7 +15,6 @@ export const mapRecordToValues = (
     } = {},
     title = '',
     purpose = '',
-    dataSubjectCategories = [],
     articleSixBasis = [{ legality: '', referenceUrl: '' }],
     otherArticles: {
       articleNine: {
@@ -28,7 +28,7 @@ export const mapRecordToValues = (
     } = {},
     businessAreas = [],
     relatedDatasets = [],
-    personalDataCategories = [],
+
     securityMeasures = '',
     plannedDeletion = '',
     highPrivacyRisk = undefined,
@@ -56,6 +56,7 @@ export const mapRecordToValues = (
   },
   organizationId,
   dataProcessingAgreements,
+  categories,
   commonDataControllerContact: {
     companies,
     distributionOfResponsibilities,
@@ -63,7 +64,6 @@ export const mapRecordToValues = (
   },
   title,
   purpose,
-  dataSubjectCategories,
   articleSixBasis,
   otherArticles: {
     articleNine: {
@@ -77,7 +77,6 @@ export const mapRecordToValues = (
   },
   businessAreas,
   relatedDatasets,
-  personalDataCategories,
   securityMeasures,
   plannedDeletion,
   highPrivacyRisk,
