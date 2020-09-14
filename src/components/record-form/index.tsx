@@ -60,6 +60,7 @@ const RecordForm = ({
   touched,
   isValid,
   validateForm,
+  handleBlur,
   handleChange,
   setValues,
   setFieldValue,
@@ -612,17 +613,17 @@ const RecordForm = ({
                         value={dataSubjectCategories}
                         error={
                           isApproved &&
-                          touched.categories?.[index].dataSubjectCategories &&
+                          touched.categories?.[index]?.dataSubjectCategories &&
                           (errors.categories?.[index] as FormikErrors<
                             Categories
-                          >).dataSubjectCategories
+                          >)?.dataSubjectCategories
                         }
                         helperText={
                           isApproved &&
-                          touched.categories?.[index].dataSubjectCategories &&
+                          touched.categories?.[index]?.dataSubjectCategories &&
                           (errors.categories?.[index] as FormikErrors<
                             Categories
-                          >).dataSubjectCategories
+                          >)?.dataSubjectCategories
                         }
                         onChange={handleChange}
                       />
@@ -636,14 +637,19 @@ const RecordForm = ({
                             value={personalDataCategories}
                             error={
                               isApproved &&
-                              touched.categories &&
-                              touched.categories[index].personalDataCategories
+                              touched.categories?.[index]
+                                ?.personalDataCategories &&
+                              (errors.categories?.[index] as FormikErrors<
+                                Categories
+                              >)?.personalDataCategories
                             }
                             helperText={
                               isApproved &&
-                              touched.categories &&
-                              touched.categories[index].personalDataCategories
-                              // && errors.categories
+                              touched.categories?.[index]
+                                ?.personalDataCategories &&
+                              (errors.categories?.[index] as FormikErrors<
+                                Categories
+                              >)?.personalDataCategories
                             }
                             onAddTag={(tag: string) => {
                               personalDataCategoriesArray.push(tag);
@@ -661,6 +667,7 @@ const RecordForm = ({
                                 true
                               );
                             }}
+                            onBlur={handleBlur}
                           />
                         )}
                       />
