@@ -1,4 +1,5 @@
 import React, {
+  FocusEvent,
   memo,
   PropsWithChildren,
   ChangeEvent,
@@ -23,6 +24,7 @@ interface Props {
   name: string;
   onAddTag: (tag: string) => void;
   onRemoveTag: (index: number) => void;
+  onBlur?: (event: FocusEvent<any>) => void;
 }
 
 const TextTagsField = ({
@@ -34,7 +36,8 @@ const TextTagsField = ({
   placeholder,
   labelText,
   onAddTag,
-  onRemoveTag
+  onRemoveTag,
+  onBlur
 }: PropsWithChildren<Props>) => {
   const [inputValue, setInputValue] = useState('');
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -49,7 +52,10 @@ const TextTagsField = ({
       setInputValue('');
     }
   };
-  const handleBlur = () => {
+  const handleBlur = (e: FocusEvent<any>) => {
+    if (onBlur) {
+      onBlur(e);
+    }
     if (inputValue && inputValue.trim()) {
       onAddTag(inputValue.trim());
       setInputValue('');
