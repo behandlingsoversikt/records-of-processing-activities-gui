@@ -5,7 +5,7 @@ export const mapRecordToValues = (
   {
     id,
     status = RecordStatus.DRAFT,
-    dataProcessorContactDetails: { name = '', email = '', phone = '' } = {},
+    dataProcessorContactDetails = [{ name: '', phone: '', email: '' }],
     dataProcessingAgreements = [{ dataProcessorName: '', agreementUrl: '' }],
     categories = [{ personalDataCategories: [], dataSubjectCategories: '' }],
     commonDataControllerContact: {
@@ -49,11 +49,7 @@ export const mapRecordToValues = (
 ): Omit<Record, 'updatedAt'> => ({
   id,
   status,
-  dataProcessorContactDetails: {
-    name,
-    email,
-    phone
-  },
+  dataProcessorContactDetails,
   organizationId,
   dataProcessingAgreements,
   categories,

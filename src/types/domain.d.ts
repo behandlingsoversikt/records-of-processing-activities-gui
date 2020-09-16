@@ -15,13 +15,13 @@ export interface Record {
   businessAreas: string[];
   securityMeasures: string;
   privacyProcessingSystems: string;
-  dataProcessorContactDetails: Omit<ContactDetailsInterface, 'address'>;
+  dataProcessorContactDetails: Omit<ContactDetailsInterface, 'address'>[];
+  dataProcessingAgreements: DataProcessingAgreement[];
   commonDataControllerContact: Partial<CommonDataControllerContact>;
   dataTransfers: Partial<DataTransfers>;
   title: string;
   relatedDatasets: string[];
   dataProtectionImpactAssessment: Partial<DataProtectionImpactAssessment>;
-  dataProcessingAgreements: DataProcessingAgreement[];
   updatedAt: string;
 }
 
@@ -35,6 +35,11 @@ export interface ContactDetailsInterface {
   address?: string;
   phone?: string;
   email?: string;
+}
+
+export interface DataProcessingAgreement {
+  dataProcessorName: string;
+  agreementUrl: string;
 }
 
 export interface RepresentativesInterface {
@@ -73,11 +78,6 @@ export interface DataTransfers {
 export interface DataProtectionImpactAssessment {
   conducted: boolean;
   assessmentReportUrl: string;
-}
-
-export interface DataProcessingAgreement {
-  dataProcessorName: string;
-  agreementUrl: string;
 }
 
 export interface Organization {

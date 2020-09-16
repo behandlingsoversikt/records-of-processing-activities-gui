@@ -183,26 +183,62 @@ const RecordForm = ({
           title='Daglig behandlingsansvar'
           subtitle={localization.dataProcessorContactDetailsAbstract}
         >
-          <TextField
-            name='dataProcessorContactDetails.name'
-            value={values.dataProcessorContactDetails.name}
-            labelText='Navn på behandlingsansvarlig'
-            onChange={handleChange}
+          <FieldArray
+            name='dataProcessorContactDetails'
+            render={arrayHelpers => (
+              <>
+                {values.dataProcessorContactDetails.map(
+                  ({ name, email, phone }, index) => (
+                    <Fragment key={`dataProcessorContactDetails-${index}`}>
+                      <TextField
+                        name={`dataProcessorContactDetails[${index}].name`}
+                        value={name}
+                        labelText='Navn på behandlingsansvarlig'
+                        onChange={handleChange}
+                      />
+                      <SC.InlineFields>
+                        <TextField
+                          name={`dataProcessorContactDetails[${index}].email`}
+                          value={email}
+                          labelText='E-post'
+                          onChange={handleChange}
+                        />
+                        <TextField
+                          name={`dataProcessorContactDetails[${index}].phone`}
+                          value={phone}
+                          labelText='Telefon'
+                          onChange={handleChange}
+                        />
+                      </SC.InlineFields>
+                      {values.dataProcessorContactDetails.length > 1 && (
+                        <SC.RemoveButton
+                          type='button'
+                          onClick={() => arrayHelpers.remove(index)}
+                        >
+                          <RemoveIcon />
+                          Slett behandlingsansvarlig
+                        </SC.RemoveButton>
+                      )}
+                    </Fragment>
+                  )
+                )}
+                <SC.AddButton
+                  type='button'
+                  addMargin={values.dataProcessorContactDetails.length === 1}
+                  onClick={() =>
+                    arrayHelpers.push({
+                      name: '',
+                      phone: '',
+                      email: ''
+                    })
+                  }
+                >
+                  <AddIcon />
+                  Legg til ny behandlingsansvarlig
+                </SC.AddButton>
+              </>
+            )}
           />
-          <SC.InlineFields>
-            <TextField
-              name='dataProcessorContactDetails.email'
-              value={values.dataProcessorContactDetails.email}
-              labelText='E-post'
-              onChange={handleChange}
-            />
-            <TextField
-              name='dataProcessorContactDetails.phone'
-              value={values.dataProcessorContactDetails.phone}
-              labelText='Telefon'
-              onChange={handleChange}
-            />
-          </SC.InlineFields>
         </SC.Fieldset>
         <SC.Fieldset
           title='Databehandlere og databehandleravtaler'
