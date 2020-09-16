@@ -12,20 +12,14 @@ interface Props extends RouteComponentProps {
 }
 
 const RecordRow = ({
-  record: {
-    id,
-    organizationId,
-    title,
-    dataProcessorContactDetails: { name },
-    status
-  },
+  record: { id, organizationId, title, dataProcessorContactDetails, status },
   history: { push }
 }: Props) => {
   const navigateToRecord = () => push(`/${organizationId}/records/${id}`);
   return (
     <SC.RecordRow onClick={navigateToRecord}>
       <td>{title}</td>
-      <td>{name}</td>
+      <td>{dataProcessorContactDetails?.map(({ name }) => name).join(', ')}</td>
       <td>
         <RecordStatusIndicator status={status} />
       </td>

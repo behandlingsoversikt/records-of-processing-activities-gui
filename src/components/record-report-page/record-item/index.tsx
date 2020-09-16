@@ -77,13 +77,10 @@ const RecordItemPure = ({
           <SC.SectionSubTitle>
             {localization.dataProcessorContactDetails}
           </SC.SectionSubTitle>
-          {dataProcessorContactDetails && dataProcessorContactDetails && (
-            <ContactInformation
-              contactDetailsInterface={dataProcessorContactDetails}
-            />
-          )}
+          {dataProcessorContactDetails?.map(dataProcessor => (
+            <ContactInformation contactDetailsInterface={dataProcessor} />
+          ))}
         </SC.SectionContent>
-
         <SC.SectionContent>
           <SC.SectionSubTitle>
             {localization.dataProcessingAgreements}
