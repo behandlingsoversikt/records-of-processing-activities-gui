@@ -195,14 +195,15 @@ const RecordItemPure = ({
 
     <SC.Section>
       <SC.SectionTitle>{localization.personalInformation}</SC.SectionTitle>
-
       <SC.SectionContent>
-        <SC.SectionSubTitle>
-          {localization.personalDataCategories}
-        </SC.SectionSubTitle>
         {categories?.map(
           ({ personalDataCategories, dataSubjectCategories }, index) => (
             <Fragment key={`categories-${index}`}>
+              <SC.SectionSubTitle key={`categories-sub-title-${index}`}>
+                {`${
+                  localization.personalDataCategories
+                } og ${localization.dataSubjectCategories.toLowerCase()}`}
+              </SC.SectionSubTitle>
               <div>{personalDataCategories?.join(', ')}</div>
               <div>{dataSubjectCategories}</div>
             </Fragment>
