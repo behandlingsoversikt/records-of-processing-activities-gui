@@ -66,7 +66,13 @@ const RecordForm = ({
   setFieldValue,
   setFieldTouched
 }: Props): JSX.Element | null => {
-  const [allExpanded, setAllExpanded] = useState([false, false, false, false]);
+  const [allExpanded, setAllExpanded] = useState([
+    true,
+    false,
+    false,
+    false,
+    false
+  ]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
   const [isWaitingForSuggestions, setIsWaitingForSuggestions] = useState(false);
 
@@ -155,7 +161,7 @@ const RecordForm = ({
   useEffect(() => {
     if (onTitleChange) {
       onTitleChange(
-        values?.title?.trim() || 'Protokoll over behandlingsaktiviteter'
+        values?.title?.trim() || 'Registrere ny behandlingsaktivitet'
       );
     }
   }, [values?.title]);
@@ -169,12 +175,38 @@ const RecordForm = ({
         {allFieldsExpanded ? <ExpandAllUpIcon /> : <ExpandAllDownIcon />}
       </SC.ExpandAllButton>
       <SC.RecordFormSection
-        title='Behandlingsansvar og databehandler'
+        title='Behandlingen gjelder'
         isExpanded={allExpanded[0]}
         onClick={() =>
           setAllExpanded(
             allExpanded.map((expanded, index) =>
               index === 0 ? !expanded : expanded
+            )
+          )
+        }
+      >
+        <SC.Fieldset
+          required
+          title='Behandlingen gjelder'
+          subtitle={localization.titleAbstract}
+          description={localization.titleDescription}
+        >
+          <TextField
+            name='title'
+            value={values.title}
+            error={isApproved && touched.title && errors.title}
+            helperText={isApproved && touched.title && errors.title}
+            onChange={handleChange}
+          />
+        </SC.Fieldset>
+      </SC.RecordFormSection>
+      <SC.RecordFormSection
+        title='Behandlingsansvar og databehandler'
+        isExpanded={allExpanded[1]}
+        onClick={() =>
+          setAllExpanded(
+            allExpanded.map((expanded, index) =>
+              index === 1 ? !expanded : expanded
             )
           )
         }
@@ -379,29 +411,15 @@ const RecordForm = ({
       <SC.RecordFormSection
         required
         title='Behandlingsaktiviteter'
-        isExpanded={allExpanded[1]}
+        isExpanded={allExpanded[2]}
         onClick={() =>
           setAllExpanded(
             allExpanded.map((expanded, index) =>
-              index === 1 ? !expanded : expanded
+              index === 2 ? !expanded : expanded
             )
           )
         }
       >
-        <SC.Fieldset
-          required
-          title='Behandlingen gjelder'
-          subtitle={localization.titleAbstract}
-          description={localization.titleDescription}
-        >
-          <TextField
-            name='title'
-            value={values.title}
-            error={isApproved && touched.title && errors.title}
-            helperText={isApproved && touched.title && errors.title}
-            onChange={handleChange}
-          />
-        </SC.Fieldset>
         <SC.Fieldset
           required
           title='Formålene med behandlingen'
@@ -617,11 +635,11 @@ const RecordForm = ({
       <SC.RecordFormSection
         required
         title='Personopplysninger'
-        isExpanded={allExpanded[2]}
+        isExpanded={allExpanded[3]}
         onClick={() =>
           setAllExpanded(
             allExpanded.map((expanded, index) =>
-              index === 2 ? !expanded : expanded
+              index === 3 ? !expanded : expanded
             )
           )
         }
@@ -833,11 +851,11 @@ const RecordForm = ({
       <SC.RecordFormSection
         required
         title='Overføring av personopplysningene'
-        isExpanded={allExpanded[3]}
+        isExpanded={allExpanded[4]}
         onClick={() =>
           setAllExpanded(
             allExpanded.map((expanded, index) =>
-              index === 3 ? !expanded : expanded
+              index === 4 ? !expanded : expanded
             )
           )
         }
