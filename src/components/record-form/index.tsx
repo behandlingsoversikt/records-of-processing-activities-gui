@@ -356,7 +356,7 @@ const RecordForm = ({
                       <TextField
                         name={`commonDataControllerContact.contactPoints[${index}].name`}
                         value={name}
-                        labelText='Kontaktperson'
+                        labelText='Kontaktpunkt'
                         onChange={handleChange}
                       />
                       <SC.InlineFields>
@@ -489,7 +489,7 @@ const RecordForm = ({
                         <TextField
                           name={`articleSixBasis[${index}].referenceUrl`}
                           value={referenceUrl}
-                          labelText='Henvisning til rettslig forpliktelse, berettiget interesse med videre'
+                          labelText='Henvisning til annen lovgivning'
                           onChange={handleChange}
                         />
                       )}
@@ -537,7 +537,7 @@ const RecordForm = ({
             <TextField
               name='otherArticles.articleNine.referenceUrl'
               value={values.otherArticles?.articleNine?.referenceUrl ?? ''}
-              labelText='Henvisning til aktuell lovgivning'
+              labelText='Henvisning til annen lovgivning'
               onChange={handleChange}
             />
           )}
@@ -551,13 +551,13 @@ const RecordForm = ({
             <TextField
               name='otherArticles.articleTen.referenceUrl'
               value={values.otherArticles?.articleTen?.referenceUrl ?? ''}
-              labelText='Henvisning til aktuell lovgivning'
+              labelText='Henvisning til annen lovgivning'
               onChange={handleChange}
             />
           )}
         </SC.Fieldset>
         <SC.Fieldset
-          title='Funksjonsområde behandlingen faller inn under'
+          title='Skriv inn hvilket overordnet funksjons-eller virksomhetsområde behandlingen faller inn under'
           subtitle={localization.businessAreasAbstract}
           description={localization.businessAreasDescription}
         >
@@ -837,7 +837,7 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
-          title='Systemer i din virksomhet som behandler personopplysningene'
+          title='System i virksomheten som behandler personopplysningene'
           subtitle={localization.privacyProcessingSystemsAbstract}
           description={localization.privacyProcessingSystemsDescription}
         >
