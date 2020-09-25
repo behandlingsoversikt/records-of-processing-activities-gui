@@ -9,7 +9,6 @@ export interface Record {
   recipientCategories: string[];
   personalDataSubjects: string;
   plannedDeletion: string;
-  highPrivacyRisk?: boolean;
   articleSixBasis: ArticleSixBasis[];
   otherArticles: Partial<OtherArticles>;
   businessAreas: string[];

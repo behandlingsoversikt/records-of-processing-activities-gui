@@ -21,7 +21,6 @@ export default {
   securityMeasures:
     'Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak',
   plannedDeletion: 'Planlagte tidsfrister for sletting',
-  highPrivacyRisk: 'Kan behandlingen innebære høy personvernrisiko?',
   dataProtectionImpactAssessment: 'Er det gjennomført risikovurdering?',
   assessmentReportUrl: 'se risikovurdering',
   personalDataSubjects: 'Kilder til personvernopplysningene',
