@@ -31,7 +31,6 @@ export const mapRecordToValues = (
 
     securityMeasures = '',
     plannedDeletion = '',
-    highPrivacyRisk = undefined,
     dataProtectionImpactAssessment: {
       conducted = undefined,
       assessmentReportUrl = ''
@@ -75,7 +74,6 @@ export const mapRecordToValues = (
   relatedDatasets,
   securityMeasures,
   plannedDeletion,
-  highPrivacyRisk,
   dataProtectionImpactAssessment: {
     conducted,
     assessmentReportUrl

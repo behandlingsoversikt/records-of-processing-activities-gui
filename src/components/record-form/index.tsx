@@ -71,6 +71,7 @@ const RecordForm = ({
     false,
     false,
     false,
+    false,
     false
   ]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
@@ -757,23 +758,6 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           required
-          title='Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak'
-          subtitle={localization.securityMeasuresAbstract}
-        >
-          <TextAreaField
-            name='securityMeasures'
-            value={values.securityMeasures}
-            error={
-              isApproved && touched.securityMeasures && errors.securityMeasures
-            }
-            helperText={
-              isApproved && touched.securityMeasures && errors.securityMeasures
-            }
-            onChange={handleChange}
-          />
-        </SC.Fieldset>
-        <SC.Fieldset
-          required
           title='Planlagte tidsfrister for sletting'
           subtitle={localization.plannedDeletionAbstract}
         >
@@ -788,42 +772,6 @@ const RecordForm = ({
             }
             onChange={handleChange}
           />
-        </SC.Fieldset>
-        <SC.Fieldset
-          title='Kan behandlingen innebære høy personvernrisiko?'
-          subtitle={localization.highPrivacyRiskAbstract}
-        >
-          <Radio
-            name='highPrivacyRisk'
-            value={values.highPrivacyRisk}
-            options={[
-              { label: 'Nei', value: false },
-              { label: 'Ja', value: true }
-            ]}
-            onChange={handleBooleanRadioChange}
-          />
-        </SC.Fieldset>
-        <SC.Fieldset
-          title='Er det gjennomført risikovurdering?'
-          subtitle={localization.dataProtectionImpactAssessmentAbstract}
-        >
-          <Radio
-            name='dataProtectionImpactAssessment.conducted'
-            value={values.dataProtectionImpactAssessment.conducted}
-            options={[
-              { label: 'Nei', value: false },
-              { label: 'Ja', value: true }
-            ]}
-            onChange={handleBooleanRadioChange}
-          />
-          {values.dataProtectionImpactAssessment.conducted && (
-            <TextField
-              name='dataProtectionImpactAssessment.assessmentReportUrl'
-              value={values.dataProtectionImpactAssessment.assessmentReportUrl}
-              labelText='Lenke til risikovurdering'
-              onChange={handleChange}
-            />
-          )}
         </SC.Fieldset>
         <SC.Fieldset
           title='Kilder til personopplysningene'
@@ -959,6 +907,77 @@ const RecordForm = ({
             />
           </SC.Fieldset>
         )}
+      </SC.RecordFormSection>
+      <SC.RecordFormSection
+        title='Sikkerhetstiltak og DPIA'
+        isExpanded={allExpanded[5]}
+        onClick={() =>
+          setAllExpanded(
+            allExpanded.map((expanded, index) =>
+              index === 5 ? !expanded : expanded
+            )
+          )
+        }
+      >
+        <SC.Fieldset
+          required
+          title='Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak'
+          subtitle={localization.securityMeasuresAbstract}
+        >
+          <TextField
+            name='securityMeasures'
+            value={values.securityMeasures}
+            error={
+              isApproved && touched.securityMeasures && errors.securityMeasures
+            }
+            helperText={
+              isApproved && touched.securityMeasures && errors.securityMeasures
+            }
+            onChange={handleChange}
+          />
+        </SC.Fieldset>
+        <SC.Fieldset
+          title='Er det gjennomført vurdering av personvernkonsekvenser (DPIA)?'
+          subtitle={localization.dataProtectionImpactAssessment}
+        >
+          <Radio
+            name='dataProtectionImpactAssessment.conducted'
+            value={values.dataProtectionImpactAssessment.conducted}
+            options={[
+              { label: 'Nei', value: false },
+              { label: 'Ja', value: true }
+            ]}
+            error={
+              isApproved &&
+              touched.dataProtectionImpactAssessment?.conducted &&
+              errors.dataProtectionImpactAssessment?.conducted
+            }
+            helperText={
+              isApproved &&
+              touched?.dataProtectionImpactAssessment?.conducted &&
+              errors?.dataProtectionImpactAssessment?.conducted
+            }
+            onChange={handleBooleanRadioChange}
+          />
+          {values.dataProtectionImpactAssessment.conducted && (
+            <TextField
+              name='dataProtectionImpactAssessment.assessmentReportUrl'
+              value={values.dataProtectionImpactAssessment.assessmentReportUrl}
+              labelText='Sak-/arkivreferanse eller lenke til vurdering av personvernkonsekvenser (DPIA)'
+              error={
+                isApproved &&
+                touched.dataProtectionImpactAssessment?.assessmentReportUrl &&
+                errors.dataProtectionImpactAssessment?.assessmentReportUrl
+              }
+              helperText={
+                isApproved &&
+                touched?.dataProtectionImpactAssessment?.assessmentReportUrl &&
+                errors?.dataProtectionImpactAssessment?.assessmentReportUrl
+              }
+              onChange={handleChange}
+            />
+          )}
+        </SC.Fieldset>
       </SC.RecordFormSection>
     </SC.RecordForm>
   ) : null;

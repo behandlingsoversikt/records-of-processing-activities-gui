@@ -16,7 +16,6 @@ const RecordItemPure = ({
     recipientCategories,
     personalDataSubjects,
     plannedDeletion,
-    highPrivacyRisk = false,
     articleSixBasis,
     otherArticles,
     businessAreas,
@@ -216,11 +215,6 @@ const RecordItemPure = ({
       <SC.SectionContent>
         <SC.SectionSubTitle>{localization.plannedDeletion}</SC.SectionSubTitle>
         {plannedDeletion}
-      </SC.SectionContent>
-
-      <SC.SectionContent>
-        <SC.SectionSubTitle>{localization.highPrivacyRisk}</SC.SectionSubTitle>
-        {highPrivacyRisk ? localization.yes : localization.no}
       </SC.SectionContent>
 
       <SC.SectionContent>
