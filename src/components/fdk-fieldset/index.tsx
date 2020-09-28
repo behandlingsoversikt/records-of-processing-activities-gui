@@ -8,6 +8,7 @@ import { convertToSanitizedHtml } from '../../lib/markdown-converter';
 
 interface Props {
   required?: boolean;
+  boxed?: boolean;
   title: string;
   subtitle: string;
   description?: string;
@@ -15,6 +16,7 @@ interface Props {
 
 const Fieldset = ({
   required,
+  boxed,
   title,
   subtitle,
   description,
@@ -25,7 +27,7 @@ const Fieldset = ({
   const toggleExpansion = () => setIsExpanded(!isExpanded);
   return (
     <SC.Fieldset {...props}>
-      <SC.Legend>
+      <SC.Legend boxed={boxed}>
         <SC.Inline>
           <SC.Title>{title}</SC.Title>
           {required && <SC.RequiredLabel text='Obligatorisk' />}
