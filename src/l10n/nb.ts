@@ -27,7 +27,7 @@ export default {
   privacyProcessingSystems:
     'Systemer i din virksomhet som behandler personvernopplysningene',
   recipientCategories: 'Kategorier av mottakere',
-  transfered: 'Overføres personvernopplysningene til et tredjeland?',
+  transfered: 'Er mottakerne tredjeland eller internasjonale organisasjoner?',
   guarantees:
     'Garantier ved overføring til tredjeland eller internasjonale organisasjoner',
   dataControllerRepresentative: 'Behandlingsansvarliges representant',

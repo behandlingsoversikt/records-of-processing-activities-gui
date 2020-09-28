@@ -810,7 +810,7 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
-          title='Kategorier av mottakere'
+          title='Mottakere eller kategori av mottagere'
           subtitle={localization.recipientCategoriesAbstract}
           description={localization.recipientCategoriesDescription}
         >
@@ -844,7 +844,7 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           required
-          title='Overføres personopplysningene til tredjeland?'
+          title='Er mottakerne tredjeland eller internasjonale organisasjoner?'
           subtitle={localization.transferredAbstract}
         >
           <Radio
@@ -887,10 +887,11 @@ const RecordForm = ({
         </SC.Fieldset>
         {values.dataTransfers.transferred && (
           <SC.Fieldset
-            title='Nødvendige garantier ved overføring til tredjeland eller internasjonale organisasjoner'
+            boxed={false}
+            title='Nødvendige garantier ved overføring'
             subtitle={localization.guaranteesAbstract}
           >
-            <TextField
+            <TextAreaField
               name='dataTransfers.guarantees'
               value={values.dataTransfers.guarantees}
               error={

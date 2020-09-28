@@ -12,12 +12,19 @@ const Fieldset = styled.fieldset`
   }
 `;
 
-const Legend = styled.legend`
+const Legend = styled.legend<{ boxed?: boolean }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 15px;
-  background: ${({ theme }) => theme.fdk.colors.neutrals.skyblue};
+  padding: 0;
+
+  ${({ boxed = true }) =>
+    boxed &&
+    css`
+      background: ${({ theme }) => theme.fdk.colors.neutrals.skyblue};
+      padding: 15px;
+    `}
+
   border-radius: 5px;
 
   & svg {
