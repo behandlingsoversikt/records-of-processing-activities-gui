@@ -870,7 +870,7 @@ const RecordForm = ({
             <TextField
               name='dataTransfers.thirdCountryRecipients'
               value={values.dataTransfers.thirdCountryRecipients}
-              labelText='Oppgi hvilke(t) tredjeland personopplysningene overføres til'
+              labelText='Tredjeland eller internasjonale organisasjoner'
               error={
                 isApproved &&
                 touched.dataTransfers?.thirdCountryRecipients &&
