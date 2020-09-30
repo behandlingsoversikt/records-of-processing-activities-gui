@@ -1,5 +1,11 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, FC } from 'react';
+import { compose } from 'redux';
 import { RouteComponentProps } from 'react-router-dom';
+
+import Footer from '@fellesdatakatalog/internal-footer';
+
+import Root from '../root';
+import Header from '../header';
 
 import env from '../../env';
 
@@ -53,36 +59,42 @@ const RecordListPage = ({
   const navigateToNewRecordPage = () => push(`/${organizationId}/records`);
 
   return (
-    <SC.RecordListPage>
-      <BreadcrumbsBar
-        breadcrumbs={[
-          {
-            title: 'Alle kataloger',
-            url: FDK_REGISTRATION_BASE_URI
-          },
-          { title: 'Protokoller', current: true }
-        ]}
-      />
-      <Headline
-        title='Protokoll over behandlingsaktiviteter'
-        subTitle={organization?.name ?? ''}
-      />
-      <Representatives organizationId={organizationId} />
-      <SC.RecordListActions>
-        <FDKButton
-          variant='primary'
-          text='Legg til behandlingsaktivitet'
-          onClick={navigateToNewRecordPage}
-        />
-        <FDKButton
-          variant='secondary'
-          text='Generer rapport'
-          onClick={navigateToReportPage}
-        />
-      </SC.RecordListActions>
-      <RecordListTable records={records} />
-    </SC.RecordListPage>
+    <>
+      <Root>
+        <Header />
+        <SC.RecordListPage>
+          <BreadcrumbsBar
+            breadcrumbs={[
+              {
+                title: 'Alle kataloger',
+                url: FDK_REGISTRATION_BASE_URI
+              },
+              { title: 'Protokoller', current: true }
+            ]}
+          />
+          <Headline
+            title='Protokoll over behandlingsaktiviteter'
+            subTitle={organization?.name ?? ''}
+          />
+          <Representatives organizationId={organizationId} />
+          <SC.RecordListActions>
+            <FDKButton
+              variant='primary'
+              text='Legg til behandlingsaktivitet'
+              onClick={navigateToNewRecordPage}
+            />
+            <FDKButton
+              variant='secondary'
+              text='Generer rapport'
+              onClick={navigateToReportPage}
+            />
+          </SC.RecordListActions>
+          <RecordListTable records={records} />
+        </SC.RecordListPage>
+      </Root>
+      <Footer />
+    </>
   );
 };
 
-export default memo(withRecords(withOrganization(RecordListPage)));
+export default compose<FC>(memo, withRecords, withOrganization)(RecordListPage);

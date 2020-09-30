@@ -1,6 +1,11 @@
 import React, { memo, useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
+import Footer from '@fellesdatakatalog/internal-footer';
+
+import Root from '../root';
+import Header from '../header';
+
 import env from '../../env';
 
 import withOrganization, {
@@ -84,43 +89,52 @@ const RecordPage = ({
   };
 
   return (
-    <SC.RecordPage>
-      <BreadcrumbsBar
-        breadcrumbs={[
-          {
-            title: 'Alle kataloger',
-            url: FDK_REGISTRATION_BASE_URI
-          },
-          { title: 'Protokoller', url: `${location.origin}/${organizationId}` },
-          {
-            title: recordTitle ?? 'Protokoll over behandlingsaktiviteter',
-            current: true
-          }
-        ]}
-      />
-      <Headline
-        title={recordTitle}
-        subTitle={organization?.name ?? ''}
-        status={recordStatus}
-      />
-      <RecordForm
-        organizationId={organizationId}
-        recordStatus={recordStatus}
-        onTitleChange={setRecordTitle}
-        onStatusChange={setRecordStatus}
-        onValidityChange={setFormValidity}
-      />
-      <StatusBar
-        recordId={recordId}
-        canBeApproved={formIsValid}
-        updatedAt={record?.updatedAt}
-        status={recordStatus}
-        onSetStatus={handleRecordStatusChange}
-        onRecordRemove={() =>
-          id && deleteRecord(id, organizationId, navigateToRecordListPage)
-        }
-      />
-    </SC.RecordPage>
+    <>
+      <Root>
+        <Header />
+        <SC.RecordPage>
+          <BreadcrumbsBar
+            breadcrumbs={[
+              {
+                title: 'Alle kataloger',
+                url: FDK_REGISTRATION_BASE_URI
+              },
+              {
+                title: 'Protokoller',
+                url: `${location.origin}/${organizationId}`
+              },
+              {
+                title: recordTitle ?? 'Protokoll over behandlingsaktiviteter',
+                current: true
+              }
+            ]}
+          />
+          <Headline
+            title={recordTitle}
+            subTitle={organization?.name ?? ''}
+            status={recordStatus}
+          />
+          <RecordForm
+            organizationId={organizationId}
+            recordStatus={recordStatus}
+            onTitleChange={setRecordTitle}
+            onStatusChange={setRecordStatus}
+            onValidityChange={setFormValidity}
+          />
+          <StatusBar
+            recordId={recordId}
+            canBeApproved={formIsValid}
+            updatedAt={record?.updatedAt}
+            status={recordStatus}
+            onSetStatus={handleRecordStatusChange}
+            onRecordRemove={() =>
+              id && deleteRecord(id, organizationId, navigateToRecordListPage)
+            }
+          />
+        </SC.RecordPage>
+      </Root>
+      <Footer />
+    </>
   );
 };
 

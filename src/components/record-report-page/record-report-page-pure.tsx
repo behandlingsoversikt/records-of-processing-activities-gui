@@ -1,8 +1,6 @@
 import React, { useEffect, memo } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import env from '../../env';
-
 import withOrganization, {
   Props as OrganizationProps
 } from '../with-organization';
@@ -10,8 +8,6 @@ import withOrganization, {
 import withRecords, { Props as RecordsProps } from '../with-records';
 
 import SC from './styled';
-import Headline from '../headline';
-import BreadcrumbsBar from '../breadcrumbs-bar';
 import { RecordItem } from './record-item';
 import { RepresentativesInterface } from '../../types';
 import { localization } from '../../lib/localization';
@@ -29,8 +25,6 @@ interface Props
   representatives: RepresentativesInterface;
   fetchAllRepresentatives: typeof fetchAllRepresentativesRequested;
 }
-
-const { FDK_REGISTRATION_BASE_URI } = env;
 
 const RecordReportPage = ({
   records,
@@ -52,36 +46,24 @@ const RecordReportPage = ({
   }, [organizationId]);
 
   return (
-    <SC.RecordReportPage>
-      <BreadcrumbsBar
-        breadcrumbs={[
-          {
-            title: 'Alle kataloger',
-            url: FDK_REGISTRATION_BASE_URI
-          },
-          {
-            title: 'Protokoller',
-            url: `${location.origin}/${organizationId}`
-          },
-          {
-            title: 'Rapport',
-            current: true
-          }
-        ]}
-      />
-      <Headline
-        title={localization.protocol}
-        subTitle={organization?.name ?? ''}
-      />
+    <SC.Root>
+      <SC.RecordReportPage>
+        <SC.Logo />
 
-      <ReportRepresentatives representatives={representatives} />
+        <SC.RecordReportTitle>
+          {localization.protocol}
+          <div>{`for ${organization?.name ?? ''}`}</div>
+        </SC.RecordReportTitle>
 
-      <SC.RecordReportList>
-        {records.map(record => (
-          <RecordItem key={record.id} record={record} />
-        ))}
-      </SC.RecordReportList>
-    </SC.RecordReportPage>
+        <ReportRepresentatives representatives={representatives} />
+
+        <SC.RecordReportList>
+          {records.map(record => (
+            <RecordItem key={record.id} record={record} />
+          ))}
+        </SC.RecordReportList>
+      </SC.RecordReportPage>
+    </SC.Root>
   );
 };
 
