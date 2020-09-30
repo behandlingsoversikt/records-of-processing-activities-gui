@@ -6,7 +6,7 @@ const BoxRegular = styled.div`
   color: #000;
   display: flex;
   flex-direction: column;
-  padding: 1em 2em;
+  padding: 2em 2.5em;
   margin-bottom: 2em;
 `;
 

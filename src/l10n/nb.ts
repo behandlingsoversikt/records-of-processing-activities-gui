@@ -18,10 +18,11 @@ export default {
   relatedDatasets: 'Tilhørende datasett',
   relatedDatasetsPlaceholder: 'Søk etter datasettbeskrivelser',
   personalDataCategories: 'Kategorier av personopplysninger',
+  securityMeasuresTitle: 'Sikkerhetstiltak og DPIA',
   securityMeasures:
     'Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak',
   plannedDeletion: 'Planlagte tidsfrister for sletting',
-  dataProtectionImpactAssessment: 'Er det gjennomført risikovurdering?',
+  dataProtectionImpactAssessment: 'Vurdering av personvernkonsekvenser (DPIA)',
   assessmentReportUrl: 'se risikovurdering',
   personalDataSubjects: 'Kilder til personvernopplysningene',
   privacyProcessingSystems:

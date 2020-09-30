@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
-import Common from '../common/styled';
-
-const Root = styled(Common.Container)`
+const Root = styled.main`
   display: flex;
   flex-direction: column;
   flex: 1 0 auto;
-  height: calc(100% - 74px);
-  margin: 0 auto;
+  align-items: center;
   margin-top: 74px;
+
+  background: ${({ theme }) => theme.fdk.colors.neutrals.lightest};
 `;
 
 export default { Root };

@@ -12,7 +12,6 @@ export default css`
 
   body {
     color: ${({ theme }) => theme.fdk.colors.text.default};
-    background: ${({ theme }) => theme.fdk.colors.neutrals.lightest};
     font-size: 1.6rem;
     overflow-x: hidden;
     overflow-y: scroll;

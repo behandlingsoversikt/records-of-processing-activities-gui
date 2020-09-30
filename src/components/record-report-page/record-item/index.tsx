@@ -39,7 +39,40 @@ const RecordItemPure = ({
     <SC.Section>
       <SC.SectionTitle>{localization.dataProcessor}</SC.SectionTitle>
 
-      <SC.SectionColumn>
+      <SC.SectionRow>
+        <SC.SectionContent>
+          <SC.SectionSubTitle>
+            {localization.dataProcessorContactDetails}
+          </SC.SectionSubTitle>
+          {dataProcessorContactDetails?.map((dataProcessor, index) => (
+            <ContactInformation
+              key={`contactInformation-${index}`}
+              contactDetailsInterface={dataProcessor}
+            />
+          ))}
+        </SC.SectionContent>
+
+        <SC.SectionContent>
+          <SC.SectionSubTitle>
+            {localization.dataProcessingAgreements}
+          </SC.SectionSubTitle>
+          {dataProcessingAgreements &&
+            dataProcessingAgreements.map((item, index) => (
+              <Fragment key={`dataProcessingAgreements-${index}`}>
+                <div>{item.dataProcessorName}</div>
+                <div>
+                  <a
+                    title={item.agreementUrl}
+                    href={item.agreementUrl}
+                    rel='noopener noreferrer'
+                  >
+                    {item.agreementUrl}
+                  </a>
+                </div>
+              </Fragment>
+            ))}
+        </SC.SectionContent>
+
         <SC.SectionContent>
           <SC.SectionSubTitle>
             {localization.commonDataControllerContact}
@@ -71,36 +104,7 @@ const RecordItemPure = ({
               )
             )}
         </SC.SectionContent>
-
-        <SC.SectionContent>
-          <SC.SectionSubTitle>
-            {localization.dataProcessorContactDetails}
-          </SC.SectionSubTitle>
-          {dataProcessorContactDetails?.map(dataProcessor => (
-            <ContactInformation contactDetailsInterface={dataProcessor} />
-          ))}
-        </SC.SectionContent>
-        <SC.SectionContent>
-          <SC.SectionSubTitle>
-            {localization.dataProcessingAgreements}
-          </SC.SectionSubTitle>
-          {dataProcessingAgreements &&
-            dataProcessingAgreements.map((item, index) => (
-              <Fragment key={`dataProcessingAgreements-${index}`}>
-                <div>{item.dataProcessorName}</div>
-                <div>
-                  <a
-                    title={item.agreementUrl}
-                    href={item.agreementUrl}
-                    rel='noopener noreferrer'
-                  >
-                    {item.agreementUrl}
-                  </a>
-                </div>
-              </Fragment>
-            ))}
-        </SC.SectionContent>
-      </SC.SectionColumn>
+      </SC.SectionRow>
     </SC.Section>
 
     <SC.Section>
@@ -191,62 +195,40 @@ const RecordItemPure = ({
 
     <SC.Section>
       <SC.SectionTitle>{localization.personalInformation}</SC.SectionTitle>
-      <SC.SectionContent>
-        {categories?.map(
-          ({ personalDataCategories, dataSubjectCategories }, index) => (
-            <Fragment key={`categories-${index}`}>
-              <SC.SectionSubTitle key={`categories-sub-title-${index}`}>
-                {`${
-                  localization.personalDataCategories
-                } og ${localization.dataSubjectCategories.toLowerCase()}`}
-              </SC.SectionSubTitle>
-              <div>{personalDataCategories?.join(', ')}</div>
-              <div>{dataSubjectCategories}</div>
-            </Fragment>
-          )
-        )}
-      </SC.SectionContent>
-
-      <SC.SectionContent>
-        <SC.SectionSubTitle>{localization.securityMeasures}</SC.SectionSubTitle>
-        {securityMeasures}
-      </SC.SectionContent>
-
+      {categories?.map(
+        ({ personalDataCategories, dataSubjectCategories }, index) => (
+          <Fragment key={`categories-${index}`}>
+            <SC.SectionRow>
+              <SC.SectionContent>
+                <SC.SectionSubTitle>
+                  Kategorier av registrerte
+                </SC.SectionSubTitle>
+                {dataSubjectCategories}
+              </SC.SectionContent>
+              <SC.SectionContent>
+                <SC.SectionSubTitle>
+                  Kategorier av personopplysninger
+                </SC.SectionSubTitle>
+                <ul>
+                  {personalDataCategories?.map((personalDataCategory, i) => (
+                    <li key={i}>{personalDataCategory}</li>
+                  ))}
+                </ul>
+              </SC.SectionContent>
+            </SC.SectionRow>
+          </Fragment>
+        )
+      )}
       <SC.SectionContent>
         <SC.SectionSubTitle>{localization.plannedDeletion}</SC.SectionSubTitle>
         {plannedDeletion}
       </SC.SectionContent>
-
-      <SC.SectionContent>
-        <SC.SectionSubTitle>
-          {localization.dataProtectionImpactAssessment}
-        </SC.SectionSubTitle>
-        {dataProtectionImpactAssessment &&
-        dataProtectionImpactAssessment.conducted
-          ? localization.yes
-          : localization.no}
-        {dataProtectionImpactAssessment &&
-          !dataProtectionImpactAssessment.conducted && (
-            <span>
-              ,{' '}
-              <a
-                title={localization.assessmentReportUrl}
-                href={localization.assessmentReportUrl}
-                rel='noopener noreferrer'
-              >
-                {localization.assessmentReportUrl}
-              </a>
-            </span>
-          )}
-      </SC.SectionContent>
-
       <SC.SectionContent>
         <SC.SectionSubTitle>
           {localization.personalDataSubjects}
         </SC.SectionSubTitle>
         {personalDataSubjects}
       </SC.SectionContent>
-
       <SC.SectionContent>
         <SC.SectionSubTitle>
           {localization.privacyProcessingSystems}
@@ -278,6 +260,36 @@ const RecordItemPure = ({
       <SC.SectionContent>
         <SC.SectionSubTitle>{localization.guarantees}</SC.SectionSubTitle>
         {dataTransfers && dataTransfers.guarantees}
+      </SC.SectionContent>
+    </SC.Section>
+
+    <SC.Section>
+      <SC.SectionTitle>{localization.securityMeasuresTitle}</SC.SectionTitle>
+      <SC.SectionContent>
+        <SC.SectionSubTitle>{localization.securityMeasures}</SC.SectionSubTitle>
+        {securityMeasures}
+      </SC.SectionContent>
+
+      <SC.SectionContent>
+        <SC.SectionSubTitle>
+          {localization.dataProtectionImpactAssessment}
+        </SC.SectionSubTitle>
+        {dataProtectionImpactAssessment &&
+        dataProtectionImpactAssessment.conducted
+          ? localization.yes
+          : localization.no}
+        {dataProtectionImpactAssessment &&
+          !dataProtectionImpactAssessment.conducted && (
+            <span>
+              <a
+                title={localization.assessmentReportUrl}
+                href={localization.assessmentReportUrl}
+                rel='noopener noreferrer'
+              >
+                {localization.assessmentReportUrl}
+              </a>
+            </span>
+          )}
       </SC.SectionContent>
     </SC.Section>
   </>

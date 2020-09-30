@@ -19,33 +19,40 @@ const Label = styled.span`
 `;
 
 const Title = styled.h2`
-  font-size: 3.2rem;
+  font-size: 3.5rem;
   font-weight: 700;
 `;
 
 const Section = styled.section`
   margin-bottom: 2em;
   padding: 0 1em;
+  font-size: 1.55rem;
+  line-height: 24px;
 `;
 
-const SectionColumn = styled.section`
+const SectionRow = styled.section`
   display: flex;
+
+  & > div {
+    flex: 1;
+  }
 `;
 
 const SectionContent = styled.div`
-  padding: 1em;
+  padding: 2em 1em 0.5em 1em;
 `;
 
 const SectionTitle = styled.h3`
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 700;
   border-bottom: 1px solid #dfe1e2;
   padding-bottom: 0.5em;
 `;
 
 const SectionSubTitle = styled.h4`
-  color: #6c737a;
-  font-size: 1.6rem;
+  color: ${({ theme }) => theme.fdk.colors.text.default};
+  font-weight: 600;
+  font-size: 2rem;
   margin-bottom: 0.5em;
 `;
 export default {
@@ -53,7 +60,7 @@ export default {
   Label,
   Title,
   Section,
-  SectionColumn,
+  SectionRow,
   SectionContent,
   SectionTitle,
   SectionSubTitle
