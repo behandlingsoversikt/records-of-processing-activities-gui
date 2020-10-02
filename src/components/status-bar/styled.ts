@@ -12,6 +12,7 @@ const StatusBar = styled.div`
   height: 64px;
   background: ${({ theme }) => theme.fdk.colors.neutrals.skyblue};
   border-top: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lightblue};
+  z-index: 9001;
 `;
 
 const StatusBarBody = styled(Common.Container)`
