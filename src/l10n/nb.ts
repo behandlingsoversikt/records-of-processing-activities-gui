@@ -30,7 +30,7 @@ export default {
   recipientCategories: 'Kategorier av mottakere',
   transfered: 'Er mottakerne tredjeland eller internasjonale organisasjoner?',
   guarantees:
-    'Garantier ved overføring til tredjeland eller internasjonale organisasjoner',
+    'Ved overføring som nevnt i GDPR artikkel 49 nr. 1, 2. ledd , skal dokumentasjon på nødvendige garantier angis.',
   dataControllerRepresentative: 'Behandlingsansvarliges representant',
   dataControllerRepresentativeInEU:
     'Behandlingsansvarliges representant i EU/EØS',
