@@ -42,5 +42,7 @@ export const helptextsNb = {
   recipientCategoriesAbstract: `En “mottaker” er en fysisk eller juridisk person, offentlig myndighet, institusjon eller ethvert annet organ som personopplysninger utleveres til, enten det dreier seg om en tredjepart eller ikke, jfr. GDPR artikkel 4 nr. 9.`,
   recipientCategoriesDescription: `Offentlige myndigheter som kan motta personopplysninger innenfor rammen av en særskilt undersøkelse i samsvar med unionsretten eller medlemsstatenes nasjonale rett, skal imidlertid ikke anses som mottakere; nevnte offentlige myndigheters behandling av slike opplysninger skal være i samsvar med gjeldende regler om vern av personopplysninger i henhold til formålet med behandlingen jfr. GDPR artikkel 4 nr. 9, 2. setn..`,
   transferredAbstract: `Er mottakerne av personopplysningene tredjeland eller internasjonale organisasjoner, skal disse identifiseres, jfr. GDPR artikkel 30 nr 1. e).`,
+  thirdCountryAbstract:
+    'Oppgi navn på tredjeland og/eller internasjonal(e) organisasjon(er)',
   guaranteesAbstract: `Skriv inn nødvendige garantier ved overføring til tredjeland eller internasjonale organisasjoner, dersom relevant.`
 };

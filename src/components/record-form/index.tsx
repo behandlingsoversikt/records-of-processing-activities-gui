@@ -558,7 +558,7 @@ const RecordForm = ({
           )}
         </SC.Fieldset>
         <SC.Fieldset
-          title='Skriv inn hvilket overordnet funksjons-eller virksomhetsområde behandlingen faller inn under'
+          title='Funksjons-eller virksomhetsområde'
           subtitle={localization.businessAreasAbstract}
           description={localization.businessAreasDescription}
         >
@@ -867,22 +867,27 @@ const RecordForm = ({
             onChange={handleBooleanRadioChange}
           />
           {values.dataTransfers.transferred && (
-            <TextField
-              name='dataTransfers.thirdCountryRecipients'
-              value={values.dataTransfers.thirdCountryRecipients}
-              labelText='Tredjeland eller internasjonale organisasjoner'
-              error={
-                isApproved &&
-                touched.dataTransfers?.thirdCountryRecipients &&
-                errors.dataTransfers?.thirdCountryRecipients
-              }
-              helperText={
-                isApproved &&
-                touched?.dataTransfers?.thirdCountryRecipients &&
-                errors?.dataTransfers?.thirdCountryRecipients
-              }
-              onChange={handleChange}
-            />
+            <SC.Fieldset
+              boxed={false}
+              title='Tredjeland eller internasjonale organisasjoner'
+              subtitle={localization.thirdCountryAbstract}
+            >
+              <TextField
+                name='dataTransfers.thirdCountryRecipients'
+                value={values.dataTransfers.thirdCountryRecipients}
+                error={
+                  isApproved &&
+                  touched.dataTransfers?.thirdCountryRecipients &&
+                  errors.dataTransfers?.thirdCountryRecipients
+                }
+                helperText={
+                  isApproved &&
+                  touched?.dataTransfers?.thirdCountryRecipients &&
+                  errors?.dataTransfers?.thirdCountryRecipients
+                }
+                onChange={handleChange}
+              />
+            </SC.Fieldset>
           )}
         </SC.Fieldset>
         {values.dataTransfers.transferred && (
