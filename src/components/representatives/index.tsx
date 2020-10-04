@@ -15,12 +15,14 @@ import { RepresentativesInterface } from '../../types';
 import { localization } from '../../lib/localization';
 
 interface Props {
+  isReadOnlyUser?: boolean;
   organizationId?: string;
   representatives: RepresentativesInterface;
   actions: typeof actions;
 }
 
 const Representatives = ({
+  isReadOnlyUser,
   organizationId,
   representatives: {
     dataControllerRepresentative,
@@ -43,6 +45,7 @@ const Representatives = ({
         subtitle={dataControllerRepresentative?.name}
       >
         <RepresentativeForm
+          isReadOnlyUser={isReadOnlyUser}
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
           title='Behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeAbstract}
@@ -63,6 +66,7 @@ const Representatives = ({
           for mer informasjon.
         </SC.LegalNoticeEU>
         <RepresentativeForm
+          isReadOnlyUser={isReadOnlyUser}
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU}
           title='Representant for behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeInEUAbstract}
@@ -78,6 +82,7 @@ const Representatives = ({
         subtitle={dataProtectionOfficer?.name}
       >
         <RepresentativeForm
+          isReadOnlyUser={isReadOnlyUser}
           type={RepresentativeType.DATA_PROTECTION_OFFICER}
           title='Personvernombud'
           subtitle={localization.dataProtectionOfficerRepresentativeAbstract}

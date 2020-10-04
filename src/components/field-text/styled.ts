@@ -45,4 +45,15 @@ const Field = styled.div<{ error?: boolean }>`
     `}
 `;
 
-export default { Field, TextField, Label, HelperText };
+const ReadOnlyLabel = styled.span`
+  min-height: 18.4px;
+  text-align: justify;
+`;
+
+export default {
+  Field,
+  TextField,
+  Label,
+  HelperText,
+  ReadOnlyLabel
+};

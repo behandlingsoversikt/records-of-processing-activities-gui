@@ -126,4 +126,12 @@ export class Auth {
       resourceId: 'root',
       role: 'admin'
     });
+
+  isReadOnlyUser = (orgNr: string): boolean =>
+    this.hasOrganizationReadPermission(orgNr) &&
+    !(
+      this.hasOrganizationWritePermission(orgNr) ||
+      this.hasOrganizationAdminPermission(orgNr) ||
+      this.hasSystemAdminPermission()
+    );
 }

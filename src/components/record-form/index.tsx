@@ -39,6 +39,7 @@ import { DatasetStatus, RecordStatus } from '../../types/enums';
 type FormValues = Omit<Record, 'updatedAt'>;
 
 interface Props extends DatasetsProps, RecordProps, FormikProps<FormValues> {
+  isReadOnlyUser: boolean;
   organizationId: string;
   recordStatus: RecordStatus;
   onTitleChange?: (title: string) => void;
@@ -47,6 +48,7 @@ interface Props extends DatasetsProps, RecordProps, FormikProps<FormValues> {
 }
 
 const RecordForm = ({
+  isReadOnlyUser,
   organizationId,
   record,
   recordStatus,
@@ -187,12 +189,14 @@ const RecordForm = ({
         }
       >
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           required
           title='Behandlingen gjelder'
           subtitle={localization.titleAbstract}
           description={localization.titleDescription}
         >
           <TextField
+            isReadOnly={isReadOnlyUser}
             name='title'
             value={values.title}
             error={isApproved && touched.title && errors.title}
@@ -215,6 +219,7 @@ const RecordForm = ({
         <SC.Fieldset
           title='Daglig behandlingsansvar'
           subtitle={localization.dataProcessorContactDetailsAbstract}
+          isReadOnly={isReadOnlyUser}
         >
           <FieldArray
             name='dataProcessorContactDetails'
@@ -224,6 +229,7 @@ const RecordForm = ({
                   ({ name, email, phone }, index) => (
                     <Fragment key={`dataProcessorContactDetails-${index}`}>
                       <TextField
+                        isReadOnly={isReadOnlyUser}
                         name={`dataProcessorContactDetails[${index}].name`}
                         value={name}
                         labelText='Navn på behandlingsansvarlig'
@@ -231,49 +237,55 @@ const RecordForm = ({
                       />
                       <SC.InlineFields>
                         <TextField
+                          isReadOnly={isReadOnlyUser}
                           name={`dataProcessorContactDetails[${index}].email`}
                           value={email}
                           labelText='E-post'
                           onChange={handleChange}
                         />
                         <TextField
+                          isReadOnly={isReadOnlyUser}
                           name={`dataProcessorContactDetails[${index}].phone`}
                           value={phone}
                           labelText='Telefon'
                           onChange={handleChange}
                         />
                       </SC.InlineFields>
-                      {values.dataProcessorContactDetails.length > 1 && (
-                        <SC.RemoveButton
-                          type='button'
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                          <RemoveIcon />
-                          Slett behandlingsansvarlig
-                        </SC.RemoveButton>
-                      )}
+                      {!isReadOnlyUser &&
+                        values.dataProcessorContactDetails.length > 1 && (
+                          <SC.RemoveButton
+                            type='button'
+                            onClick={() => arrayHelpers.remove(index)}
+                          >
+                            <RemoveIcon />
+                            Slett behandlingsansvarlig
+                          </SC.RemoveButton>
+                        )}
                     </Fragment>
                   )
                 )}
-                <SC.AddButton
-                  type='button'
-                  addMargin={values.dataProcessorContactDetails.length === 1}
-                  onClick={() =>
-                    arrayHelpers.push({
-                      name: '',
-                      phone: '',
-                      email: ''
-                    })
-                  }
-                >
-                  <AddIcon />
-                  Legg til ny behandlingsansvarlig
-                </SC.AddButton>
+                {!isReadOnlyUser && (
+                  <SC.AddButton
+                    type='button'
+                    addMargin={values.dataProcessorContactDetails.length === 1}
+                    onClick={() =>
+                      arrayHelpers.push({
+                        name: '',
+                        phone: '',
+                        email: ''
+                      })
+                    }
+                  >
+                    <AddIcon />
+                    Legg til ny behandlingsansvarlig
+                  </SC.AddButton>
+                )}
               </>
             )}
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Databehandlere og databehandleravtaler'
           subtitle={localization.dataProcessingAgreementsAbstract}
           description={localization.dataProcessingAgreementsDescription}
@@ -286,58 +298,66 @@ const RecordForm = ({
                   ({ dataProcessorName, agreementUrl }, index) => (
                     <Fragment key={`dataProcessingAgreements-${index}`}>
                       <TextField
+                        isReadOnly={isReadOnlyUser}
                         name={`dataProcessingAgreements[${index}].dataProcessorName`}
                         value={dataProcessorName}
                         labelText='Navn på databehandler'
                         onChange={handleChange}
                       />
                       <TextField
+                        isReadOnly={isReadOnlyUser}
                         name={`dataProcessingAgreements[${index}].agreementUrl`}
                         value={agreementUrl}
                         labelText='Lenke til databehandleravtale'
                         onChange={handleChange}
                       />
-                      {values.dataProcessingAgreements.length > 1 && (
-                        <SC.RemoveButton
-                          type='button'
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                          <RemoveIcon />
-                          Slett databehandler
-                        </SC.RemoveButton>
-                      )}
+                      {!isReadOnlyUser &&
+                        values.dataProcessingAgreements.length > 1 && (
+                          <SC.RemoveButton
+                            type='button'
+                            onClick={() => arrayHelpers.remove(index)}
+                          >
+                            <RemoveIcon />
+                            Slett databehandler
+                          </SC.RemoveButton>
+                        )}
                     </Fragment>
                   )
                 )}
-                <SC.AddButton
-                  type='button'
-                  addMargin={values.dataProcessingAgreements.length === 1}
-                  onClick={() =>
-                    arrayHelpers.push({
-                      dataProcessorName: '',
-                      agreementUrl: ''
-                    })
-                  }
-                >
-                  <AddIcon />
-                  Legg til ny databehandler
-                </SC.AddButton>
+                {!isReadOnlyUser && (
+                  <SC.AddButton
+                    type='button'
+                    addMargin={values.dataProcessingAgreements.length === 1}
+                    onClick={() =>
+                      arrayHelpers.push({
+                        dataProcessorName: '',
+                        agreementUrl: ''
+                      })
+                    }
+                  >
+                    <AddIcon />
+                    Legg til ny databehandler
+                  </SC.AddButton>
+                )}
               </>
             )}
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Felles behandlingsansvar'
           subtitle={localization.commonDataControllerContactAbstract}
           description={localization.commonDataControllerContactDescription}
         >
           <TextField
+            isReadOnly={isReadOnlyUser}
             name='commonDataControllerContact.companies'
             value={values.commonDataControllerContact.companies}
             labelText='Virksomheter som har felles behandlingsansvar'
             onChange={handleChange}
           />
           <TextField
+            isReadOnly={isReadOnlyUser}
             name='commonDataControllerContact.distributionOfResponsibilities'
             value={
               values.commonDataControllerContact.distributionOfResponsibilities
@@ -355,6 +375,7 @@ const RecordForm = ({
                       key={`commonDataControllerContact.contactPoints-${index}`}
                     >
                       <TextField
+                        isReadOnly={isReadOnlyUser}
                         name={`commonDataControllerContact.contactPoints[${index}].name`}
                         value={name}
                         labelText='Kontaktpunkt'
@@ -362,48 +383,53 @@ const RecordForm = ({
                       />
                       <SC.InlineFields>
                         <TextField
+                          isReadOnly={isReadOnlyUser}
                           name={`commonDataControllerContact.contactPoints[${index}].email`}
                           value={email}
                           labelText='E-post'
                           onChange={handleChange}
                         />
                         <TextField
+                          isReadOnly={isReadOnlyUser}
                           name={`commonDataControllerContact.contactPoints[${index}].phone`}
                           value={phone}
                           labelText='Telefon'
                           onChange={handleChange}
                         />
                       </SC.InlineFields>
-                      {(values.commonDataControllerContact.contactPoints || [])
-                        .length > 1 && (
-                        <SC.RemoveButton
-                          type='button'
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                          <RemoveIcon />
-                          Slett kontaktpunkt
-                        </SC.RemoveButton>
-                      )}
+                      {!isReadOnlyUser &&
+                        (values.commonDataControllerContact.contactPoints || [])
+                          .length > 1 && (
+                          <SC.RemoveButton
+                            type='button'
+                            onClick={() => arrayHelpers.remove(index)}
+                          >
+                            <RemoveIcon />
+                            Slett kontaktpunkt
+                          </SC.RemoveButton>
+                        )}
                     </Fragment>
                   )
                 )}
-                <SC.AddButton
-                  type='button'
-                  addMargin={
-                    (values.commonDataControllerContact.contactPoints || [])
-                      .length === 1
-                  }
-                  onClick={() =>
-                    arrayHelpers.push({
-                      name: '',
-                      email: '',
-                      phone: ''
-                    })
-                  }
-                >
-                  <AddIcon />
-                  Legg til nytt kontaktpunkt
-                </SC.AddButton>
+                {!isReadOnlyUser && (
+                  <SC.AddButton
+                    type='button'
+                    addMargin={
+                      (values.commonDataControllerContact.contactPoints || [])
+                        .length === 1
+                    }
+                    onClick={() =>
+                      arrayHelpers.push({
+                        name: '',
+                        email: '',
+                        phone: ''
+                      })
+                    }
+                  >
+                    <AddIcon />
+                    Legg til nytt kontaktpunkt
+                  </SC.AddButton>
+                )}
               </>
             )}
           />
@@ -423,11 +449,13 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
+          isReadOnly={isReadOnlyUser}
           title='Formålene med behandlingen'
           subtitle={localization.purposeAbstract}
           description={localization.purposeDescription}
         >
           <TextAreaField
+            isReadOnly={isReadOnlyUser}
             name='purpose'
             value={values.purpose}
             error={isApproved && touched.purpose && errors.purpose}
@@ -436,6 +464,7 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Behandlingsgrunnlag artikkel 6'
           subtitle={localization.articleSixBasisAbstract}
           description={localization.articleSixBasisDescription}
@@ -448,6 +477,7 @@ const RecordForm = ({
                   ({ legality, referenceUrl }, index) => (
                     <Fragment key={`articleSixBasis-${index}`}>
                       <Select
+                        isReadOnly={isReadOnlyUser}
                         name={`articleSixBasis[${index}].legality`}
                         value={legality}
                         options={[
@@ -488,47 +518,53 @@ const RecordForm = ({
                       />
                       {['6.1.c', '6.1.e', '6.1.f'].includes(legality) && (
                         <TextField
+                          isReadOnly={isReadOnlyUser}
                           name={`articleSixBasis[${index}].referenceUrl`}
                           value={referenceUrl}
                           labelText='Henvisning til annen lovgivning'
                           onChange={handleChange}
                         />
                       )}
-                      {(values.articleSixBasis || []).length > 1 && (
-                        <SC.RemoveButton
-                          type='button'
-                          onClick={() => arrayHelpers.remove(index)}
-                        >
-                          <RemoveIcon />
-                          Slett behandlingsgrunnlag
-                        </SC.RemoveButton>
-                      )}
+                      {!isReadOnlyUser &&
+                        (values.articleSixBasis || []).length > 1 && (
+                          <SC.RemoveButton
+                            type='button'
+                            onClick={() => arrayHelpers.remove(index)}
+                          >
+                            <RemoveIcon />
+                            Slett behandlingsgrunnlag
+                          </SC.RemoveButton>
+                        )}
                     </Fragment>
                   )
                 )}
-                <SC.AddButton
-                  type='button'
-                  addMargin={(values.articleSixBasis || []).length === 1}
-                  onClick={() =>
-                    arrayHelpers.push({
-                      legality: '',
-                      referenceUrl: ''
-                    })
-                  }
-                >
-                  <AddIcon />
-                  Legg til nytt behandlingsgrunnlag
-                </SC.AddButton>
+                {!isReadOnlyUser && (
+                  <SC.AddButton
+                    type='button'
+                    addMargin={(values.articleSixBasis || []).length === 1}
+                    onClick={() =>
+                      arrayHelpers.push({
+                        legality: '',
+                        referenceUrl: ''
+                      })
+                    }
+                  >
+                    <AddIcon />
+                    Legg til nytt behandlingsgrunnlag
+                  </SC.AddButton>
+                )}
               </>
             )}
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Behandlingsgrunnlag artikkel 9 og 10'
           subtitle={localization.otherArticlesAbstract}
           description={localization.otherArticlesDescription}
         >
           <Checkbox
+            disabled={isReadOnlyUser}
             name='otherArticles.articleNine.checked'
             checked={!!values.otherArticles?.articleNine?.checked}
             labelText='Artikkel 9 - Behandling av særlige kategorier av personopplysninger'
@@ -536,6 +572,7 @@ const RecordForm = ({
           />
           {values.otherArticles?.articleNine?.checked && (
             <TextField
+              isReadOnly={isReadOnlyUser}
               name='otherArticles.articleNine.referenceUrl'
               value={values.otherArticles?.articleNine?.referenceUrl ?? ''}
               labelText='Henvisning til annen lovgivning'
@@ -543,6 +580,7 @@ const RecordForm = ({
             />
           )}
           <Checkbox
+            disabled={isReadOnlyUser}
             name='otherArticles.articleTen.checked'
             checked={!!values.otherArticles?.articleTen?.checked}
             labelText='Artikkel 10 - Behandling av personopplysninger om straffedommer og lovovertredelser'
@@ -550,6 +588,7 @@ const RecordForm = ({
           />
           {values.otherArticles?.articleTen?.checked && (
             <TextField
+              isReadOnly={isReadOnlyUser}
               name='otherArticles.articleTen.referenceUrl'
               value={values.otherArticles?.articleTen?.referenceUrl ?? ''}
               labelText='Henvisning til annen lovgivning'
@@ -558,6 +597,7 @@ const RecordForm = ({
           )}
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Funksjons-eller virksomhetsområde'
           subtitle={localization.businessAreasAbstract}
           description={localization.businessAreasDescription}
@@ -566,6 +606,7 @@ const RecordForm = ({
             name='businessAreas'
             render={arrayHelpers => (
               <TextTagsField
+                isReadOnly={isReadOnlyUser}
                 name='businessAreas'
                 value={values.businessAreas}
                 onAddTag={(tag: string) => arrayHelpers.push(tag)}
@@ -575,6 +616,7 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Tilhørende datasett'
           subtitle={localization.relatedDatasetsAbstract}
           description={localization.relatedDatasetsDescription}
@@ -583,6 +625,7 @@ const RecordForm = ({
             name='relatedDatasets'
             render={arrayHelpers => (
               <TextTagsSearchField
+                isReadOnly={isReadOnlyUser}
                 name='relatedDatasets'
                 value={values.relatedDatasets.map(id => {
                   return {
@@ -647,6 +690,7 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
+          isReadOnly={isReadOnlyUser}
           title='Kategorier av registrerte og kategorier av personopplysninger'
           subtitle={`${localization.personalDataCategoriesAbstract} ${localization.dataSubjectCategoriesAbstract}`}
           description={`${localization.personalDataCategoriesDescription} ${localization.dataSubjectCategoriesDescription}`}
@@ -662,6 +706,7 @@ const RecordForm = ({
                   ) => (
                     <Fragment key={`categories-${index}`}>
                       <TextField
+                        isReadOnly={isReadOnlyUser}
                         name={`categories[${index}].dataSubjectCategories`}
                         placeholder='Oppgi èn kategori'
                         labelText='Kategorier av registrerte'
@@ -686,6 +731,7 @@ const RecordForm = ({
                         name={`categories[${index}].personalDataCategories`}
                         render={personalDataCategoriesArray => (
                           <TextTagsField
+                            isReadOnly={isReadOnlyUser}
                             placeholder='Oppgi èn eller flere kategorier'
                             labelText='Kategorier av personopplysninger tilknyttet den registrerte'
                             name={`categories[${index}].personalDataCategories`}
@@ -726,7 +772,7 @@ const RecordForm = ({
                           />
                         )}
                       />
-                      {values.categories.length > 1 && (
+                      {!isReadOnlyUser && values.categories.length > 1 && (
                         <SC.RemoveButton
                           type='button'
                           onClick={() => categoriesArray.remove(index)}
@@ -738,30 +784,34 @@ const RecordForm = ({
                     </Fragment>
                   )
                 )}
-                <SC.AddButton
-                  type='button'
-                  addMargin={values.categories.length === 1}
-                  onClick={() =>
-                    categoriesArray.push({
-                      personalDataCategories: [],
-                      dataSubjectCategories: ''
-                    })
-                  }
-                >
-                  <AddIcon />
-                  Legg til ny kategori av registrerte og kategorier av
-                  personopplysninger
-                </SC.AddButton>
+                {!isReadOnlyUser && (
+                  <SC.AddButton
+                    type='button'
+                    addMargin={values.categories.length === 1}
+                    onClick={() =>
+                      categoriesArray.push({
+                        personalDataCategories: [],
+                        dataSubjectCategories: ''
+                      })
+                    }
+                  >
+                    <AddIcon />
+                    Legg til ny kategori av registrerte og kategorier av
+                    personopplysninger
+                  </SC.AddButton>
+                )}
               </>
             )}
           />
         </SC.Fieldset>
         <SC.Fieldset
           required
+          isReadOnly={isReadOnlyUser}
           title='Planlagte tidsfrister for sletting'
           subtitle={localization.plannedDeletionAbstract}
         >
           <TextAreaField
+            isReadOnly={isReadOnlyUser}
             name='plannedDeletion'
             value={values.plannedDeletion}
             error={
@@ -774,22 +824,26 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Kilder til personopplysningene'
           subtitle={localization.personalDataSubjectsAbstract}
           description={localization.personalDataSubjectsDescription}
         >
           <TextField
+            isReadOnly={isReadOnlyUser}
             name='personalDataSubjects'
             value={values.personalDataSubjects}
             onChange={handleChange}
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='System i virksomheten som behandler personopplysningene'
           subtitle={localization.privacyProcessingSystemsAbstract}
           description={localization.privacyProcessingSystemsDescription}
         >
           <TextField
+            isReadOnly={isReadOnlyUser}
             name='privacyProcessingSystems'
             value={values.privacyProcessingSystems}
             onChange={handleChange}
@@ -810,6 +864,7 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
+          isReadOnly={isReadOnlyUser}
           title='Mottakere eller kategori av mottagere'
           subtitle={localization.recipientCategoriesAbstract}
           description={localization.recipientCategoriesDescription}
@@ -818,6 +873,7 @@ const RecordForm = ({
             name='recipientCategories'
             render={arrayHelpers => (
               <TextTagsField
+                isReadOnly={isReadOnlyUser}
                 name='recipientCategories'
                 value={values.recipientCategories}
                 error={
@@ -844,10 +900,12 @@ const RecordForm = ({
         </SC.Fieldset>
         <SC.Fieldset
           required
+          isReadOnly={isReadOnlyUser}
           title='Er mottakerne tredjeland eller internasjonale organisasjoner?'
           subtitle={localization.transferredAbstract}
         >
           <Radio
+            isReadOnly={isReadOnlyUser}
             name='dataTransfers.transferred'
             value={values.dataTransfers.transferred}
             options={[
@@ -868,11 +926,13 @@ const RecordForm = ({
           />
           {values.dataTransfers.transferred && (
             <SC.Fieldset
+              isReadOnly={isReadOnlyUser}
               boxed={false}
               title='Tredjeland eller internasjonale organisasjoner'
               subtitle={localization.thirdCountryAbstract}
             >
               <TextField
+                isReadOnly={isReadOnlyUser}
                 name='dataTransfers.thirdCountryRecipients'
                 value={values.dataTransfers.thirdCountryRecipients}
                 error={
@@ -892,11 +952,13 @@ const RecordForm = ({
         </SC.Fieldset>
         {values.dataTransfers.transferred && (
           <SC.Fieldset
+            isReadOnly={isReadOnlyUser}
             boxed={false}
             title='Nødvendige garantier ved overføring'
             subtitle={localization.guaranteesAbstract}
           >
             <TextAreaField
+              isReadOnly={isReadOnlyUser}
               name='dataTransfers.guarantees'
               value={values.dataTransfers.guarantees}
               error={
@@ -927,10 +989,12 @@ const RecordForm = ({
       >
         <SC.Fieldset
           required
+          isReadOnly={isReadOnlyUser}
           title='Generell beskrivelse av tekniske og organisatoriske sikkerhetstiltak'
           subtitle={localization.securityMeasuresAbstract}
         >
           <TextField
+            isReadOnly={isReadOnlyUser}
             name='securityMeasures'
             value={values.securityMeasures}
             error={
@@ -943,10 +1007,12 @@ const RecordForm = ({
           />
         </SC.Fieldset>
         <SC.Fieldset
+          isReadOnly={isReadOnlyUser}
           title='Er det gjennomført vurdering av personvernkonsekvenser (DPIA)?'
           subtitle={localization.dataProtectionImpactAssessment}
         >
           <Radio
+            isReadOnly={isReadOnlyUser}
             name='dataProtectionImpactAssessment.conducted'
             value={values.dataProtectionImpactAssessment.conducted}
             options={[
@@ -967,6 +1033,7 @@ const RecordForm = ({
           />
           {values.dataProtectionImpactAssessment.conducted && (
             <TextField
+              isReadOnly={isReadOnlyUser}
               name='dataProtectionImpactAssessment.assessmentReportUrl'
               value={values.dataProtectionImpactAssessment.assessmentReportUrl}
               labelText='Sak-/arkivreferanse eller lenke til vurdering av personvernkonsekvenser (DPIA)'

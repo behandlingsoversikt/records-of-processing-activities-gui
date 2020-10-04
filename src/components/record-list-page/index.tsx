@@ -8,6 +8,7 @@ import Root from '../root';
 import Header from '../header';
 
 import env from '../../env';
+import { authService } from '../../services/auth-service';
 
 import withOrganization, {
   Props as OrganizationProps
@@ -58,6 +59,8 @@ const RecordListPage = ({
   const navigateToReportPage = () => push(`/${organizationId}/report`);
   const navigateToNewRecordPage = () => push(`/${organizationId}/records`);
 
+  const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
+
   return (
     <>
       <Root>
@@ -76,13 +79,18 @@ const RecordListPage = ({
             title='Protokoll over behandlingsaktiviteter'
             subTitle={organization?.name ?? ''}
           />
-          <Representatives organizationId={organizationId} />
+          <Representatives
+            isReadOnlyUser={isReadOnlyUser}
+            organizationId={organizationId}
+          />
           <SC.RecordListActions>
-            <FDKButton
-              variant='primary'
-              text='Legg til behandlingsaktivitet'
-              onClick={navigateToNewRecordPage}
-            />
+            {!isReadOnlyUser && (
+              <FDKButton
+                variant='primary'
+                text='Legg til behandlingsaktivitet'
+                onClick={navigateToNewRecordPage}
+              />
+            )}
             <FDKButton
               variant='secondary'
               text='Generer rapport'

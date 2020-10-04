@@ -15,6 +15,7 @@ interface Props {
   labelText?: string;
   helperText?: any;
   options: Option[];
+  isReadOnly?: boolean;
   onChange?: (event: ChangeEvent<any>) => void;
 }
 
@@ -25,6 +26,7 @@ const Radio = ({
   labelText,
   helperText,
   options,
+  isReadOnly,
   onChange,
   ...props
 }: Props): JSX.Element => (
@@ -32,15 +34,21 @@ const Radio = ({
     {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
     <SC.Options>
       {options.map(({ label, value: optionValue }) => (
-        <SC.Option key={`${name}-${optionValue}`}>
-          <Field
-            type='radio'
-            name={name}
-            value={optionValue}
-            checked={`${optionValue}` === `${value}`}
-            id={`${name}-${optionValue}`}
-            onChange={onChange}
-          />
+        <SC.Option
+          key={`${name}-${optionValue}`}
+          checked={`${optionValue}` === `${value}`}
+          isReadOnly={isReadOnly}
+        >
+          {!isReadOnly && (
+            <Field
+              type='radio'
+              name={name}
+              value={optionValue}
+              checked={`${optionValue}` === `${value}`}
+              id={`${name}-${optionValue}`}
+              onChange={onChange}
+            />
+          )}
           <label htmlFor={`${name}-${optionValue}`}>{label}</label>
         </SC.Option>
       ))}
