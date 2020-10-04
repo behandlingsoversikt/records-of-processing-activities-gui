@@ -16,6 +16,7 @@ interface Props extends HTMLAttributes<any> {
   subtitle?: string;
   required?: boolean;
   isExpanded?: boolean;
+  isReadOnly?: boolean;
 }
 
 const ExpansionPanel = ({
@@ -23,6 +24,7 @@ const ExpansionPanel = ({
   subtitle = '',
   required = false,
   isExpanded: isExpandedProp = false,
+  isReadOnly,
   onClick,
   children,
   ...props
@@ -38,7 +40,9 @@ const ExpansionPanel = ({
         <SC.TitleWrapper>
           <SC.Description>
             <SC.Title>{title}</SC.Title>
-            {required && <SC.RequiredLabel text='Obligatorisk' />}
+            {required && !isReadOnly && (
+              <SC.RequiredLabel text='Obligatorisk' />
+            )}
           </SC.Description>
           {isExpanded ? (
             <ExpandLess fontSize='large' />

@@ -7,6 +7,7 @@ import SC from './styled';
 import { convertToSanitizedHtml } from '../../lib/markdown-converter';
 
 interface Props {
+  isReadOnly?: boolean;
   required?: boolean;
   boxed?: boolean;
   title: string;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const Fieldset = ({
+  isReadOnly,
   required,
   boxed,
   title,
@@ -30,17 +32,19 @@ const Fieldset = ({
       <SC.Legend boxed={boxed}>
         <SC.Inline>
           <SC.Title>{title}</SC.Title>
-          {required && <SC.RequiredLabel text='Obligatorisk' />}
+          {required && !isReadOnly && <SC.RequiredLabel text='Obligatorisk' />}
         </SC.Inline>
-        <SC.Inline justifyContent='space-between'>
-          <SC.Subtitle>{subtitle}</SC.Subtitle>
-          {description && (
-            <SC.Expand onClick={toggleExpansion}>
-              {isExpanded ? <ExpandLess /> : <ExpandMore />}
-            </SC.Expand>
-          )}
-        </SC.Inline>
-        {isExpanded && description && (
+        {!isReadOnly && (
+          <SC.Inline justifyContent='space-between'>
+            <SC.Subtitle>{subtitle}</SC.Subtitle>
+            {description && (
+              <SC.Expand onClick={toggleExpansion}>
+                {isExpanded ? <ExpandLess /> : <ExpandMore />}
+              </SC.Expand>
+            )}
+          </SC.Inline>
+        )}
+        {isExpanded && description && !isReadOnly && (
           <SC.Description
             dangerouslySetInnerHTML={{
               __html: convertToSanitizedHtml(description)

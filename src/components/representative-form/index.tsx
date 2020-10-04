@@ -18,6 +18,7 @@ interface Props extends FormikProps<ContactDetailsInterface> {
   type: RepresentativeType;
   representative: ContactDetailsInterface;
   organizationId: string;
+  isReadOnlyUser?: boolean;
   onChange?: (
     type: RepresentativeType,
     payload: ContactDetailsInterface,
@@ -31,6 +32,7 @@ const RepresentativeForm = ({
   subtitle,
   description,
   organizationId,
+  isReadOnlyUser,
   onChange,
   values,
   errors,
@@ -75,8 +77,10 @@ const RepresentativeForm = ({
         isControllerRepresentative ||
         isDataProtectionOfficer
       }
+      isReadOnly={isReadOnlyUser}
     >
       <TextField
+        isReadOnly={isReadOnlyUser}
         name='name'
         labelText='Navn'
         placeholder='Fornavn og etternavn'
@@ -86,6 +90,7 @@ const RepresentativeForm = ({
         onChange={handleChange}
       />
       <TextField
+        isReadOnly={isReadOnlyUser}
         name='address'
         labelText='Postadresse'
         value={values.address}
@@ -95,6 +100,7 @@ const RepresentativeForm = ({
       />
       <SC.InlineFields>
         <TextField
+          isReadOnly={isReadOnlyUser}
           name='email'
           labelText='E-post'
           value={values.email}
@@ -103,6 +109,7 @@ const RepresentativeForm = ({
           onChange={handleChange}
         />
         <TextField
+          isReadOnly={isReadOnlyUser}
           name='phone'
           labelText='Telefon'
           value={values.phone}
@@ -118,6 +125,7 @@ const RepresentativeForm = ({
     <SC.RepresentativeForm>
       {isEURepresentative && (
         <SC.Radio
+          isReadOnly={isReadOnlyUser}
           name='hasEURepresentative'
           value={hasEURepresentative}
           labelText='Er behandlingsansvarlig etablert utenfor EU/EØS?'

@@ -5,6 +5,7 @@ import SC from './styled';
 
 interface Props {
   name: string;
+  disabled?: boolean;
   checked: boolean;
   labelText: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -13,6 +14,7 @@ interface Props {
 const Checkbox = ({
   name,
   checked,
+  disabled,
   labelText,
   onChange,
   ...props
@@ -21,6 +23,7 @@ const Checkbox = ({
     <Field
       id={name}
       type='checkbox'
+      disabled={disabled}
       name={name}
       checked={!!checked}
       onChange={onChange}

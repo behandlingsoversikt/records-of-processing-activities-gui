@@ -15,6 +15,11 @@ const TextAreaField = styled(FormikField)<{ error?: boolean }>`
   }
 `;
 
+const ReadOnlyLabel = styled.span`
+  min-height: 18.4px;
+  text-align: justify;
+`;
+
 const Label = styled.label`
   font-weight: bold;
   margin-bottom: 5px;
@@ -47,4 +52,10 @@ const Field = styled.div<{ error?: boolean }>`
     `}
 `;
 
-export default { Field, TextAreaField, Label, HelperText };
+export default {
+  Field,
+  TextAreaField,
+  Label,
+  HelperText,
+  ReadOnlyLabel
+};

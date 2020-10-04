@@ -7,6 +7,7 @@ import Root from '../root';
 import Header from '../header';
 
 import env from '../../env';
+import { authService } from '../../services/auth-service';
 
 import withOrganization, {
   Props as OrganizationProps
@@ -57,6 +58,8 @@ const RecordPage = ({
 
   const navigateToRecordListPage = () => replace(`/${organizationId}`);
   const id = record?.id;
+
+  const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
 
   useEffect(() => {
     if (organizationId) {
@@ -120,17 +123,20 @@ const RecordPage = ({
             onTitleChange={setRecordTitle}
             onStatusChange={setRecordStatus}
             onValidityChange={setFormValidity}
+            isReadOnlyUser={isReadOnlyUser}
           />
-          <StatusBar
-            recordId={recordId}
-            canBeApproved={formIsValid}
-            updatedAt={record?.updatedAt}
-            status={recordStatus}
-            onSetStatus={handleRecordStatusChange}
-            onRecordRemove={() =>
-              id && deleteRecord(id, organizationId, navigateToRecordListPage)
-            }
-          />
+          {!isReadOnlyUser && (
+            <StatusBar
+              recordId={recordId}
+              canBeApproved={formIsValid}
+              updatedAt={record?.updatedAt}
+              status={recordStatus}
+              onSetStatus={handleRecordStatusChange}
+              onRecordRemove={() =>
+                id && deleteRecord(id, organizationId, navigateToRecordListPage)
+              }
+            />
+          )}
         </SC.RecordPage>
       </Root>
       <Footer />

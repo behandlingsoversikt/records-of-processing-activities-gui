@@ -14,6 +14,7 @@ interface Props {
   helperText?: string;
   labelText?: string;
   noOptionLabel?: string;
+  isReadOnly?: boolean;
   onChange?: (event?: ChangeEvent<any>) => void;
 }
 
@@ -23,6 +24,7 @@ const Select = ({
   labelText,
   noOptionLabel,
   value,
+  isReadOnly,
   onChange
 }: Props): JSX.Element => {
   const currentOption = options.find(
@@ -53,51 +55,57 @@ const Select = ({
   return (
     <SC.Select ref={selectElement} onClick={toggleExpandedState}>
       {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-      <SC.SelectButton type='button'>
-        <span>{currentOption ? currentOption.label : selectLabel}</span>
-      </SC.SelectButton>
-      <SC.OverflowControl visible={isExpanded}>
-        <SC.Dropdown>
-          {noOptionLabel && (
-            <SC.NoOptionLabel>{noOptionLabel}</SC.NoOptionLabel>
-          )}
-          {options.map(({ label, value: optionValue }, index) => (
-            <SC.DropdownItem
-              id={name}
-              key={`${label}-${optionValue}`}
-              selected={`${value}` === `${optionValue}`}
-              onClick={() => {
-                setSelectValue(optionValue);
-                setSelectLabel(label);
-                setImmediate(() => {
-                  if (inputElement && inputElement.current) {
-                    inputElement.current.selectedIndex = index;
-                    const event = document.createEvent('Event');
-                    event.initEvent('input', true, true);
-                    inputElement.current.dispatchEvent(event);
-                  }
-                });
-              }}
-            >
-              {label}
-            </SC.DropdownItem>
-          ))}
-        </SC.Dropdown>
-      </SC.OverflowControl>
-      <SC.HiddenSelect
-        ref={inputElement}
-        as='select'
-        name={name}
-        value={selectValue}
-        onInput={onChange}
-        onChange={() => {}}
-      >
-        {options.map(({ label, value: optionValue }) => (
-          <option key={`${name}-${optionValue}`} value={optionValue}>
-            {label}
-          </option>
-        ))}
-      </SC.HiddenSelect>
+      {!isReadOnly ? (
+        <>
+          <SC.SelectButton type='button'>
+            <span>{currentOption ? currentOption.label : selectLabel}</span>
+          </SC.SelectButton>
+          <SC.OverflowControl visible={isExpanded}>
+            <SC.Dropdown>
+              {noOptionLabel && (
+                <SC.NoOptionLabel>{noOptionLabel}</SC.NoOptionLabel>
+              )}
+              {options.map(({ label, value: optionValue }, index) => (
+                <SC.DropdownItem
+                  id={name}
+                  key={`${label}-${optionValue}`}
+                  selected={`${value}` === `${optionValue}`}
+                  onClick={() => {
+                    setSelectValue(optionValue);
+                    setSelectLabel(label);
+                    setImmediate(() => {
+                      if (inputElement && inputElement.current) {
+                        inputElement.current.selectedIndex = index;
+                        const event = document.createEvent('Event');
+                        event.initEvent('input', true, true);
+                        inputElement.current.dispatchEvent(event);
+                      }
+                    });
+                  }}
+                >
+                  {label}
+                </SC.DropdownItem>
+              ))}
+            </SC.Dropdown>
+          </SC.OverflowControl>
+          <SC.HiddenSelect
+            ref={inputElement}
+            as='select'
+            name={name}
+            value={selectValue}
+            onInput={onChange}
+            onChange={() => {}}
+          >
+            {options.map(({ label, value: optionValue }) => (
+              <option key={`${name}-${optionValue}`} value={optionValue}>
+                {label}
+              </option>
+            ))}
+          </SC.HiddenSelect>
+        </>
+      ) : (
+        <span>{currentOption?.label ?? 'Ikke valgt'}</span>
+      )}
     </SC.Select>
   );
 };

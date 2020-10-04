@@ -5,6 +5,7 @@ import SC from './styled';
 interface Props {
   id?: string;
   required?: boolean;
+  isReadOnly?: boolean;
   placeholder?: string;
   labelText?: string;
   value?: string;
@@ -22,19 +23,24 @@ const TextAreaField = ({
   helperText,
   placeholder,
   labelText,
+  isReadOnly,
   onChange
 }: PropsWithChildren<Props>) => (
   <SC.Field error={error}>
     {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-    <SC.TextAreaField
-      component='textarea'
-      rows={3}
-      id={id}
-      placeholder={placeholder || labelText}
-      name={name}
-      value={value}
-      onChange={onChange}
-    />
+    {!isReadOnly ? (
+      <SC.TextAreaField
+        component='textarea'
+        rows={3}
+        id={id}
+        placeholder={placeholder || labelText}
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
+    ) : (
+      <SC.ReadOnlyLabel>{value}</SC.ReadOnlyLabel>
+    )}
     {helperText && <SC.HelperText>{helperText}</SC.HelperText>}
   </SC.Field>
 );
