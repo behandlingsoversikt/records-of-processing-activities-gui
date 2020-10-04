@@ -1,5 +1,5 @@
 export default {
-  protocol: 'Protokoll over behandlingsaktiviteter',
+  protocol: 'Behandlingsoversikt',
   yes: 'Ja',
   no: 'Nei',
   protocolApplyTo: 'Denne behandlingen gjelder',

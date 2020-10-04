@@ -103,11 +103,11 @@ const RecordPage = ({
                 url: FDK_REGISTRATION_BASE_URI
               },
               {
-                title: 'Protokoller',
+                title: 'Behandlingsoversikt',
                 url: `${location.origin}/${organizationId}`
               },
               {
-                title: recordTitle ?? 'Protokoll over behandlingsaktiviteter',
+                title: recordTitle ?? 'Behandlingsoversikt',
                 current: true
               }
             ]}

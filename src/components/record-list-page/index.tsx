@@ -72,11 +72,11 @@ const RecordListPage = ({
                 title: 'Alle kataloger',
                 url: FDK_REGISTRATION_BASE_URI
               },
-              { title: 'Protokoller', current: true }
+              { title: 'Behandlingsoversikt', current: true }
             ]}
           />
           <Headline
-            title='Protokoll over behandlingsaktiviteter'
+            title='Behandlingsoversikt'
             subTitle={organization?.name ?? ''}
           />
           <Representatives
