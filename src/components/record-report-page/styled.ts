@@ -23,6 +23,10 @@ const RecordReportPage = styled(Container)`
   }
 `;
 
+const TitleWrapper = styled.div`
+  margin: 60px 0 100px 0%;
+`;
+
 const Logo = styled(FdkLogo)`
   width: 160px;
 `;
@@ -32,10 +36,26 @@ const RecordReportTitle = styled.h1`
   font-size: 4.7rem;
   line-height: 5.2rem;
   font-weight: 600;
-  margin: 60px 0 100px 0;
 
   & > div {
     color: ${({ theme }) => theme.fdk.colors.text.subtitle};
+  }
+`;
+
+const RecordReportSubTitle = styled.h2`
+  display: inline-flex;
+  align-items: center;
+
+  margin-top: 1em;
+  color: ${({ theme }) => theme.fdk.colors.text.default};
+  font-size: 2.5rem;
+
+  & > svg {
+    width: 2em;
+    margin-right: 0.5em;
+    & > path {
+      fill: ${({ theme }) => theme.fdk.colors.text.subtitle};
+    }
   }
 `;
 
@@ -51,6 +71,8 @@ export default {
   RecordReportPage,
   RecordReportList,
   RecordReportTitle,
+  RecordReportSubTitle,
+  TitleWrapper,
   Logo,
   Root
 };

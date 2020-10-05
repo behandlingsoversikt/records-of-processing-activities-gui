@@ -178,6 +178,7 @@ const RecordForm = ({
         {allFieldsExpanded ? <ExpandAllUpIcon /> : <ExpandAllDownIcon />}
       </SC.ExpandAllButton>
       <SC.RecordFormSection
+        required
         title='Behandlingen gjelder'
         isExpanded={allExpanded[0]}
         onClick={() =>
@@ -189,8 +190,8 @@ const RecordForm = ({
         }
       >
         <SC.Fieldset
-          isReadOnly={isReadOnlyUser}
           required
+          isReadOnly={isReadOnlyUser}
           title='Behandlingen gjelder'
           subtitle={localization.titleAbstract}
           description={localization.titleDescription}
@@ -926,6 +927,7 @@ const RecordForm = ({
           />
           {values.dataTransfers.transferred && (
             <SC.Fieldset
+              required
               isReadOnly={isReadOnlyUser}
               boxed={false}
               title='Tredjeland eller internasjonale organisasjoner'
@@ -952,6 +954,7 @@ const RecordForm = ({
         </SC.Fieldset>
         {values.dataTransfers.transferred && (
           <SC.Fieldset
+            required
             isReadOnly={isReadOnlyUser}
             boxed={false}
             title='Nødvendige garantier ved overføring'
@@ -977,6 +980,7 @@ const RecordForm = ({
         )}
       </SC.RecordFormSection>
       <SC.RecordFormSection
+        required
         title='Sikkerhetstiltak og DPIA'
         isExpanded={allExpanded[5]}
         onClick={() =>
@@ -994,6 +998,7 @@ const RecordForm = ({
           subtitle={localization.securityMeasuresAbstract}
         >
           <TextField
+            required
             isReadOnly={isReadOnlyUser}
             name='securityMeasures'
             value={values.securityMeasures}

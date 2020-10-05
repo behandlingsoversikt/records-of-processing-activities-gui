@@ -1,6 +1,8 @@
 import React, { useEffect, memo } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
+import IconAlertWarning from '../../images/icon-alert-warning-md.svg';
+
 import withOrganization, {
   Props as OrganizationProps
 } from '../with-organization';
@@ -15,6 +17,7 @@ import { fetchAllRepresentativesRequested } from '../representatives/redux/actio
 import { ReportRepresentatives } from './report-representatives';
 
 interface RouteParams {
+  required?: 'required';
   organizationId: string;
 }
 
@@ -31,7 +34,7 @@ const RecordReportPage = ({
   organization,
   representatives,
   match: {
-    params: { organizationId }
+    params: { organizationId, required }
   },
   fetchAllRepresentatives,
   organizationActions: { fetchOrganizationRequested },
@@ -45,21 +48,34 @@ const RecordReportPage = ({
     }
   }, [organizationId]);
 
+  const requiredFieldsOnly = !!required;
+
   return (
     <SC.Root>
       <SC.RecordReportPage>
         <SC.Logo />
-
-        <SC.RecordReportTitle>
-          {localization.protocol}
-          <div>{`for ${organization?.name ?? ''}`}</div>
-        </SC.RecordReportTitle>
+        <SC.TitleWrapper>
+          <SC.RecordReportTitle>
+            {localization.protocol}
+            <div>{`for ${organization?.name ?? ''}`}</div>
+          </SC.RecordReportTitle>
+          {requiredFieldsOnly && (
+            <SC.RecordReportSubTitle>
+              <IconAlertWarning />
+              Inneholder kun obligatoriske felter
+            </SC.RecordReportSubTitle>
+          )}
+        </SC.TitleWrapper>
 
         <ReportRepresentatives representatives={representatives} />
 
         <SC.RecordReportList>
           {records.map(record => (
-            <RecordItem key={record.id} record={record} />
+            <RecordItem
+              key={record.id}
+              record={record}
+              requiredFieldsOnly={requiredFieldsOnly}
+            />
           ))}
         </SC.RecordReportList>
       </SC.RecordReportPage>

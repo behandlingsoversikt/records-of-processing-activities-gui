@@ -44,5 +44,5 @@ export const helptextsNb = {
   transferredAbstract: `Er mottakerne av personopplysningene tredjeland eller internasjonale organisasjoner, skal disse identifiseres, jfr. GDPR artikkel 30 nr 1. e).`,
   thirdCountryAbstract:
     'Oppgi navn på tredjeland og/eller internasjonal(e) organisasjon(er)',
-  guaranteesAbstract: `Skriv inn nødvendige garantier ved overføring til tredjeland eller internasjonale organisasjoner, dersom relevant.`
+  guaranteesAbstract: `Ved overføring som nevnt i GDPR artikkel 49 nr. 1, 2. ledd , skal dokumentasjon på nødvendige garantier angis.`
 };

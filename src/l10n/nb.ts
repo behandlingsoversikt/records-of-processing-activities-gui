@@ -1,4 +1,5 @@
 export default {
+  title: 'Behandlingen gjelder',
   protocol: 'Behandlingsoversikt',
   yes: 'Ja',
   no: 'Nei',

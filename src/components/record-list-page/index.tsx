@@ -18,6 +18,7 @@ import withRecords, { Props as RecordsProps } from '../with-records';
 
 import Headline from '../headline';
 import FDKButton from '../fdk-button';
+import FDKDropdownButton from '../fdk-dropdown-button';
 import BreadcrumbsBar from '../breadcrumbs-bar';
 import Representatives from '../representatives';
 import RecordListTable from '../record-list-table';
@@ -56,7 +57,6 @@ const RecordListPage = ({
     }
   }, [organizationId]);
 
-  const navigateToReportPage = () => push(`/${organizationId}/report`);
   const navigateToNewRecordPage = () => push(`/${organizationId}/records`);
 
   const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
@@ -91,10 +91,21 @@ const RecordListPage = ({
                 onClick={navigateToNewRecordPage}
               />
             )}
-            <FDKButton
+            <FDKDropdownButton
               variant='secondary'
               text='Generer rapport'
-              onClick={navigateToReportPage}
+              subButtons={[
+                {
+                  name: 'Alle behandlingsaktivteter',
+                  href: `/${organizationId}/report`,
+                  external: true
+                },
+                {
+                  name: 'Obligatoriske felt',
+                  href: `/${organizationId}/report/required`,
+                  external: true
+                }
+              ]}
             />
           </SC.RecordListActions>
           <RecordListTable records={records} />
