@@ -25,7 +25,7 @@ const Router = (): JSX.Element => (
         />
         <ProtectedRoute
           exact
-          path='/:organizationId/report'
+          path='/:organizationId/report/:required(required)?'
           component={RecordReportPage}
         />
         <Redirect to='/' />
