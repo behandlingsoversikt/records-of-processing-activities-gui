@@ -15,6 +15,7 @@ import { RepresentativesInterface } from '../../types';
 import { localization } from '../../lib/localization';
 import { fetchAllRepresentativesRequested } from '../representatives/redux/actions';
 import { ReportRepresentatives } from './report-representatives';
+import { RecordStatus } from '../../types/enums';
 
 interface RouteParams {
   required?: 'required';
@@ -70,7 +71,10 @@ const RecordReportPage = ({
         <ReportRepresentatives representatives={representatives} />
 
         <SC.RecordReportList>
-          {records.map(record => (
+          {(requiredFieldsOnly
+            ? records.filter(({ status }) => status === RecordStatus.APPROVED)
+            : records
+          ).map(record => (
             <RecordItem
               key={record.id}
               record={record}
