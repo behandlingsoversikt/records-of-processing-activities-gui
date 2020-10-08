@@ -134,4 +134,10 @@ export class Auth {
       this.hasOrganizationAdminPermission(orgNr) ||
       this.hasSystemAdminPermission()
     );
+
+  hasAccessRights = (orgNr: string): boolean =>
+    this.hasOrganizationReadPermission(orgNr) ||
+    this.hasOrganizationWritePermission(orgNr) ||
+    this.hasOrganizationAdminPermission(orgNr) ||
+    this.hasSystemAdminPermission();
 }

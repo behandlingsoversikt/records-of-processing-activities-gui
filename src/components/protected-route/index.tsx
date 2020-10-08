@@ -16,7 +16,7 @@ const ProtectedRoute = (props: Props): JSX.Element => {
     }
   } = props;
 
-  return authService.hasOrganizationWritePermission(organizationId) ? (
+  return authService.hasAccessRights(organizationId) ? (
     <Route {...props} />
   ) : (
     <Redirect to='/login' />
