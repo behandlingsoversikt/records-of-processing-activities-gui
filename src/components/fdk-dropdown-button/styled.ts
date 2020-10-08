@@ -8,6 +8,7 @@ type ButtonType = {
 };
 
 const FDKDropdownButton = styled.button<ButtonType>`
+  z-index: 9001;
   position: relative;
   display: inline-flex;
   justify-content: space-between;
@@ -71,8 +72,12 @@ const FDKDropdownButton = styled.button<ButtonType>`
     color: ${({ theme }) => theme.fdk.colors.buttons.secondary.text};
 
     & > li {
-      padding: 10px 18px;
       border-top: 1px solid #bfd5e1;
+
+      & > a {
+        display: flex;
+        padding: 10px 18px;
+      }
     }
   }
 `;

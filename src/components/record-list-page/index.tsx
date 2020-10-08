@@ -96,12 +96,12 @@ const RecordListPage = ({
               text='Generer rapport'
               subButtons={[
                 {
-                  name: 'Alle behandlingsaktivteter',
+                  name: 'Behandlingsoversikt',
                   href: `/${organizationId}/report`,
                   external: true
                 },
                 {
-                  name: 'Obligatoriske felt',
+                  name: 'Protokoll',
                   href: `/${organizationId}/report/required`,
                   external: true
                 }
