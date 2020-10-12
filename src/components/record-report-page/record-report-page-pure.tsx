@@ -57,7 +57,7 @@ const RecordReportPage = ({
         <SC.Logo />
         <SC.TitleWrapper>
           <SC.RecordReportTitle>
-            {localization.protocol}
+            {requiredFieldsOnly ? localization.protocol : localization.overview}
             <div>{`for ${organization?.name ?? ''}`}</div>
           </SC.RecordReportTitle>
           {requiredFieldsOnly && (

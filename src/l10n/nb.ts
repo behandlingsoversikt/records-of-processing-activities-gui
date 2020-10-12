@@ -1,6 +1,7 @@
 export default {
   title: 'Behandlingen gjelder',
-  protocol: 'Behandlingsoversikt',
+  overview: 'Behandlingsoversikt',
+  protocol: 'Protokoll',
   yes: 'Ja',
   no: 'Nei',
   protocolApplyTo: 'Denne behandlingen gjelder',
