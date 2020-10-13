@@ -10,19 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
       - name: Apply Helm template
-        uses: stefanprodan/kube-tools@v1
-        with:
-          helm: 2.14.3
-          command: |
-            helm init --client-only
-            helm repo add fdk https://informasjonsforvaltning.github.io/helm-chart/
-            helm fetch --untar --untardir ./helm fdk/records-of-processing-activities-gui
-            helm template --set DOCKER_IMAGE_NAME="eu.gcr.io/digdir-fdk-infra/records-of-processing-activities-gui:${{ github.event.client_payload.sha }}" -f ./helm/records-of-processing-activities-gui/values/demo.yaml ./helm/records-of-processing-activities-gui/ > ./kubectlapply.yaml
-            chmod o+w ./kubectlapply.yaml
-            cat kubectlapply.yaml
+        run: |
+          helm repo add fdk https://informasjonsforvaltning.github.io/helm-chart/
+          helm fetch --untar --untardir ./helm fdk/records-of-processing-activities-gui
+          helm template --set DOCKER_IMAGE_NAME="eu.gcr.io/digdir-fdk-infra/records-of-processing-activities-gui:${{ github.event.client_payload.sha }}" -f ./helm/records-of-processing-activities-gui/values/demo.yaml ./helm/records-of-processing-activities-gui/ > ./kubectlapply.yaml
+          chmod o+w ./kubectlapply.yaml
+          cat kubectlapply.yaml
 
       - name: Get kubeconfig file from GKE
         uses: machine-learning-apps/gke-kubeconfig@master
@@ -39,9 +35,15 @@ jobs:
         with:
           args: "apply -f ./kubectlapply.yaml --force"
 
-      - name: Notify slack of deploy
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: pullreminders/slack-action@master
+      - name: Notify slack
+        uses: 8398a7/action-slack@v3
         with:
-          args: '{\"channel\":\"C7NTH118T\",\"text\":\"Application: records-of-processing-activities-gui deployed to demo\"}'
+          mention: 'channel'
+          if_mention: failure
+          status: ${{ job.status }}
+          author_name: 'Application: records-of-processing-activities-gui | Environment: demo'
+          fields: commit,author,workflow
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
