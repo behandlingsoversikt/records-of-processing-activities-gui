@@ -59,6 +59,10 @@ const Description = styled.div`
 const Body = styled.div`
   border-top: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lighter};
   padding: 30px;
+
+  & > form:nth-of-type(n + 2) {
+    margin-top: 30px;
+  }
 `;
 
 export default {

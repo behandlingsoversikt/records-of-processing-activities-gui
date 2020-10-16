@@ -9,6 +9,12 @@ const Radio = styled(RadioBase)`
   margin-bottom: 30px;
 `;
 
+const LegalNoticeEU = styled.div`
+  line-height: 24px;
+  margin-bottom: 30px;
+  text-align: justify;
+`;
+
 const InlineFields = styled.div`
   display: flex;
 
@@ -24,5 +30,6 @@ const InlineFields = styled.div`
 export default {
   RepresentativeForm,
   Radio,
+  LegalNoticeEU,
   InlineFields
 };

@@ -18,7 +18,9 @@ const Headline = ({ title, subTitle, status }: Props): JSX.Element => (
       <SC.Title>{title}</SC.Title>
       {status && <RecordStatusIndicator status={status} />}
     </SC.TitleWrapper>
-    <SC.SubTitle>{subTitle}</SC.SubTitle>
+    <SC.SubTitle>
+      Behandlingsansvarlig: <strong>{subTitle}</strong>
+    </SC.SubTitle>
   </SC.Headline>
 );
 
