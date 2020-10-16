@@ -33,9 +33,9 @@ export default {
   transfered: 'Er mottakerne tredjeland eller internasjonale organisasjoner?',
   guarantees:
     'Ved overføring som nevnt i GDPR artikkel 49 nr. 1, 2. ledd , skal dokumentasjon på nødvendige garantier angis.',
-  dataControllerRepresentative: 'Behandlingsansvarliges representant',
+  dataControllerRepresentative: 'Virksomhetens kontaktinformasjon',
   dataControllerRepresentativeInEU:
-    'Behandlingsansvarliges representant i EU/EØS',
+    'Behandlingsansvarliges representant utenfor EU/EØS',
   dataProtectionOfficer: 'Personvernombud',
   articleNine: 'Artikkel 9',
   articleTen: 'Artikkel 10'

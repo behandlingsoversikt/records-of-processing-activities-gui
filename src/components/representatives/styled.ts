@@ -17,15 +17,7 @@ const InlineFields = styled.div`
   }
 `;
 
-const LegalNoticeEU = styled.div`
-  line-height: 24px;
-  margin-top: 60px;
-  margin-bottom: 30px;
-  text-align: justify;
-`;
-
 export default {
   Representatives,
-  LegalNoticeEU,
   InlineFields
 };

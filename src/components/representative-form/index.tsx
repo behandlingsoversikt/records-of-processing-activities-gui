@@ -1,6 +1,7 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 import { FormikProps, withFormik } from 'formik';
 
+import Anchor from '../anchor';
 import TextField from '../field-text';
 import Fieldset from '../fdk-fieldset';
 
@@ -25,6 +26,27 @@ interface Props extends FormikProps<ContactDetailsInterface> {
     organizationId: string
   ) => void;
 }
+
+const labels = {
+  [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU]: {
+    name: 'Navn på behandlingsansvarliges representant',
+    address: 'Virksomhetens postadresse',
+    email: 'Virksomhetens e-post',
+    phone: 'Virksomhetens telefon'
+  },
+  [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE]: {
+    name: 'Navn',
+    address: 'Postadresse',
+    email: 'E-post',
+    phone: 'Telefon'
+  },
+  [RepresentativeType.DATA_PROTECTION_OFFICER]: {
+    name: 'Navn',
+    address: 'Postadresse',
+    email: 'E-post',
+    phone: 'Telefon'
+  }
+};
 
 const RepresentativeForm = ({
   type,
@@ -67,60 +89,6 @@ const RepresentativeForm = ({
     }
   }, [values, hasEURepresentative]);
 
-  const renderRepresentativeForm = () => (
-    <Fieldset
-      title={title}
-      subtitle={subtitle}
-      description={description}
-      required={
-        isEURepresentative ||
-        isControllerRepresentative ||
-        isDataProtectionOfficer
-      }
-      isReadOnly={isReadOnlyUser}
-    >
-      <TextField
-        isReadOnly={isReadOnlyUser}
-        name='name'
-        labelText='Navn'
-        placeholder='Fornavn og etternavn'
-        value={values.name}
-        error={errors.name && touched.name}
-        helperText={touched.name && errors.name}
-        onChange={handleChange}
-      />
-      <TextField
-        isReadOnly={isReadOnlyUser}
-        name='address'
-        labelText='Postadresse'
-        value={values.address}
-        error={errors.address && touched.address}
-        helperText={touched.address && errors.address}
-        onChange={handleChange}
-      />
-      <SC.InlineFields>
-        <TextField
-          isReadOnly={isReadOnlyUser}
-          name='email'
-          labelText='E-post'
-          value={values.email}
-          error={errors.email && touched.email}
-          helperText={touched.email && errors.email}
-          onChange={handleChange}
-        />
-        <TextField
-          isReadOnly={isReadOnlyUser}
-          name='phone'
-          labelText='Telefon'
-          value={values.phone}
-          error={errors.phone && touched.phone}
-          helperText={touched.phone && errors.phone}
-          onChange={handleChange}
-        />
-      </SC.InlineFields>
-    </Fieldset>
-  );
-
   return (
     <SC.RepresentativeForm>
       {isEURepresentative && (
@@ -136,9 +104,72 @@ const RepresentativeForm = ({
           onChange={handleHasEURepresentativeChange}
         />
       )}
-      {isEURepresentative
-        ? hasEURepresentative && renderRepresentativeForm()
-        : renderRepresentativeForm()}
+      {isEURepresentative && hasEURepresentative && (
+        <SC.LegalNoticeEU>
+          Virksomheter som er etablert utenfor EU eller EØS, men som har
+          geografisk virkeområde innenfor EU eller EØS må utpeke en representant
+          innenfor EU eller EØS. Se{' '}
+          <Anchor
+            external
+            href='https://lovdata.no/dokument/NL/lov/2018-06-15-38'
+            text='Personopplysingsloven'
+          />{' '}
+          for mer informasjon.
+        </SC.LegalNoticeEU>
+      )}
+      {(!isEURepresentative || hasEURepresentative) && (
+        <Fieldset
+          title={title}
+          subtitle={subtitle}
+          description={description}
+          required={
+            isEURepresentative ||
+            isControllerRepresentative ||
+            isDataProtectionOfficer
+          }
+          isReadOnly={isReadOnlyUser}
+        >
+          <TextField
+            isReadOnly={isReadOnlyUser}
+            name='name'
+            labelText={labels[type].name}
+            placeholder='Fornavn og etternavn'
+            value={values.name}
+            error={errors.name && touched.name}
+            helperText={touched.name && errors.name}
+            onChange={handleChange}
+          />
+          <TextField
+            isReadOnly={isReadOnlyUser}
+            name='address'
+            labelText={labels[type].address}
+            value={values.address}
+            error={errors.address && touched.address}
+            helperText={touched.address && errors.address}
+            onChange={handleChange}
+          />
+          <SC.InlineFields>
+            <TextField
+              isReadOnly={isReadOnlyUser}
+              name='email'
+              labelText={labels[type].email}
+              value={values.email}
+              error={errors.email && touched.email}
+              helperText={touched.email && errors.email}
+              onChange={handleChange}
+            />
+            <TextField
+              isReadOnly={isReadOnlyUser}
+              name='phone'
+              labelText={labels[type].phone}
+              value={values.phone}
+              error={errors.phone && touched.phone}
+              helperText={touched.phone && errors.phone}
+              onChange={handleChange}
+            />
+          </SC.InlineFields>
+        </Fieldset>
+      )}
     </SC.RepresentativeForm>
   );
 };

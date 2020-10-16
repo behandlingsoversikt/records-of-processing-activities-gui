@@ -5,7 +5,6 @@ import { bindActionCreators, Dispatch } from 'redux';
 import SC from './styled';
 
 import ExpansionPanel from '../expansion-panel';
-import Anchor from '../anchor';
 import RepresentativeForm from '../representative-form';
 
 import * as actions from './redux/actions';
@@ -41,7 +40,7 @@ const Representatives = ({
     <SC.Representatives>
       <ExpansionPanel
         required
-        title='Behandlingsansvarlig'
+        title='Kontaktinformasjon'
         subtitle={dataControllerRepresentative?.name}
       >
         <RepresentativeForm
@@ -54,17 +53,6 @@ const Representatives = ({
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
-        <SC.LegalNoticeEU>
-          Virksomheter som er etablert utenfor EU eller EØS, men som har
-          geografisk virkeområde innenfor EU eller EØS må utpeke en representant
-          innenfor EU eller EØS. Se{' '}
-          <Anchor
-            external
-            href='https://lovdata.no/dokument/NL/lov/2018-06-15-38'
-            text='Personopplysingsloven'
-          />{' '}
-          for mer informasjon.
-        </SC.LegalNoticeEU>
         <RepresentativeForm
           isReadOnlyUser={isReadOnlyUser}
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU}
