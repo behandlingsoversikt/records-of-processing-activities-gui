@@ -20,6 +20,12 @@ export enum SortOrder {
   DSC
 }
 
+export enum SortField {
+  TITLE,
+  STATUS,
+  CONTACT
+}
+
 export enum KeyCode {
   TAB = 9,
   ENTER = 13,

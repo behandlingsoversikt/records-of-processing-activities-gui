@@ -5,16 +5,16 @@ import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import withRecords, { Props as RecordsProps } from '../with-records';
 
 import SC from './styled';
-import { SortOrder } from '../../types/enums';
+import { SortOrder, SortField } from '../../types/enums';
 
 interface Props extends RecordsProps {
   title: string;
-  fieldSelector: string[];
+  sortField: SortField;
 }
 
 const TableHead = ({
   title,
-  fieldSelector,
+  sortField,
   recordsActions: { sortRecords }
 }: Props): JSX.Element => (
   <th>
@@ -23,13 +23,13 @@ const TableHead = ({
       <SC.SortButtons>
         <button
           type='button'
-          onClick={() => sortRecords(fieldSelector, SortOrder.ASC)}
+          onClick={() => sortRecords(sortField, SortOrder.ASC)}
         >
           <ArrowDropUp fontSize='large' />
         </button>
         <button
           type='button'
-          onClick={() => sortRecords(fieldSelector, SortOrder.DSC)}
+          onClick={() => sortRecords(sortField, SortOrder.DSC)}
         >
           <ArrowDropDown fontSize='large' />
         </button>
