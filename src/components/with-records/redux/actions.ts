@@ -6,13 +6,13 @@ import {
 } from './action-types';
 
 import { Record } from '../../../types';
-import { SortOrder } from '../../../types/enums';
+import { SortOrder, SortField } from '../../../types/enums';
 
-export function sortRecords(field: string[], order: SortOrder) {
+export function sortRecords(sortField: SortField, order: SortOrder) {
   return {
     type: SORT_RECORDS,
     payload: {
-      field,
+      sortField,
       order
     }
   };

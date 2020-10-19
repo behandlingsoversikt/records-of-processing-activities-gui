@@ -22,7 +22,7 @@ const Header = styled.header`
   background: white;
   border-bottom: 1px solid #e6e6e6;
   box-shadow: 0 0 10px -5px #ccc;
-  z-index: 1000;
+  z-index: 9002;
   @media print {
     border: none;
     box-shadow: none;

@@ -7,6 +7,7 @@ import SC from './styled';
 import RecordRow from '../record-row';
 
 import { Record } from '../../types';
+import { SortField } from '../../types/enums';
 
 interface Props {
   records: Record[];
@@ -16,12 +17,12 @@ const RecordListTable = ({ records }: Props): JSX.Element => (
   <SC.RecordListTable>
     <thead>
       <tr>
-        <TableHead fieldSelector={['title']} title='Navn/tittel' />
+        <TableHead sortField={SortField.TITLE} title='Navn/tittel' />
         <TableHead
-          fieldSelector={['dataProcessorContactDetails', 'name']}
+          sortField={SortField.CONTACT}
           title='Daglig behandlingsansvarlig'
         />
-        <TableHead fieldSelector={['status']} title='Status' />
+        <TableHead sortField={SortField.STATUS} title='Status' />
       </tr>
     </thead>
     <tbody>
