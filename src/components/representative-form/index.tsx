@@ -1,7 +1,6 @@
 import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 import { FormikProps, withFormik } from 'formik';
 
-import Anchor from '../anchor';
 import TextField from '../field-text';
 import Fieldset from '../fdk-fieldset';
 
@@ -28,13 +27,13 @@ interface Props extends FormikProps<ContactDetailsInterface> {
 }
 
 const labels = {
-  [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU]: {
+  [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE]: {
     name: 'Navn på behandlingsansvarliges representant',
     address: 'Virksomhetens postadresse',
     email: 'Virksomhetens e-post',
     phone: 'Virksomhetens telefon'
   },
-  [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE]: {
+  [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU]: {
     name: 'Navn',
     address: 'Postadresse',
     email: 'E-post',
@@ -92,30 +91,27 @@ const RepresentativeForm = ({
   return (
     <SC.RepresentativeForm>
       {isEURepresentative && (
-        <SC.Radio
+        <Fieldset
+          title='Er behandlingsansvarlig etablert utenfor EU/EØS?'
+          subtitle='Virksomheter som er etablert utenfor EU eller EØS,
+          men som har geografisk virkeområde innenfor EU eller EØS må
+          utpeke en representant innenfor EU eller EØS. Se Personopplysningsloven
+          for mer informasjon.'
           isReadOnly={isReadOnlyUser}
-          name='hasEURepresentative'
-          value={hasEURepresentative}
-          labelText='Er behandlingsansvarlig etablert utenfor EU/EØS?'
-          options={[
-            { label: 'Ja', value: true },
-            { label: 'Nei', value: false }
-          ]}
-          onChange={handleHasEURepresentativeChange}
-        />
-      )}
-      {isEURepresentative && hasEURepresentative && (
-        <SC.LegalNoticeEU>
-          Virksomheter som er etablert utenfor EU eller EØS, men som har
-          geografisk virkeområde innenfor EU eller EØS må utpeke en representant
-          innenfor EU eller EØS. Se{' '}
-          <Anchor
-            external
-            href='https://lovdata.no/dokument/NL/lov/2018-06-15-38'
-            text='Personopplysingsloven'
-          />{' '}
-          for mer informasjon.
-        </SC.LegalNoticeEU>
+          required
+        >
+          <SC.Radio
+            isReadOnly={isReadOnlyUser}
+            name='hasEURepresentative'
+            value={hasEURepresentative}
+            labelText=''
+            options={[
+              { label: 'Ja', value: true },
+              { label: 'Nei', value: false }
+            ]}
+            onChange={handleHasEURepresentativeChange}
+          />
+        </Fieldset>
       )}
       {(!isEURepresentative || hasEURepresentative) && (
         <Fieldset
