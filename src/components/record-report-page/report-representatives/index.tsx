@@ -17,39 +17,47 @@ export const ReportRepresentatives = memo(
       dataControllerRepresentativeInEU,
       dataProtectionOfficer
     }
-  }: Props) => (
-    <Grid container spacing={3}>
-      {(dataControllerRepresentative || dataControllerRepresentativeInEU) && (
-        <Grid item md={6}>
-          <SC.BoxRegular>
-            <>
-              {dataControllerRepresentative && (
-                <RepresentativeItem
-                  label={localization.dataControllerRepresentative}
-                  contactDetails={dataControllerRepresentative}
-                />
-              )}
+  }: Props) => {
+    const hasEURepresentative =
+      dataControllerRepresentativeInEU?.name ||
+      dataControllerRepresentativeInEU?.address ||
+      dataControllerRepresentativeInEU?.email ||
+      dataControllerRepresentativeInEU?.phone;
 
-              {dataControllerRepresentativeInEU && (
-                <RepresentativeItem
-                  label={localization.dataControllerRepresentativeInEU}
-                  contactDetails={dataControllerRepresentativeInEU}
-                />
-              )}
-            </>
-          </SC.BoxRegular>
-        </Grid>
-      )}
-      {dataProtectionOfficer && (
-        <Grid item md={6}>
-          <SC.BoxRegular>
-            <RepresentativeItem
-              label={localization.dataProtectionOfficer}
-              contactDetails={dataProtectionOfficer}
-            />
-          </SC.BoxRegular>
-        </Grid>
-      )}
-    </Grid>
-  )
+    return (
+      <Grid container spacing={3}>
+        {(dataControllerRepresentative || dataControllerRepresentativeInEU) && (
+          <Grid item md={6}>
+            <SC.BoxRegular>
+              <>
+                {dataControllerRepresentative && (
+                  <RepresentativeItem
+                    label={localization.dataControllerRepresentative}
+                    contactDetails={dataControllerRepresentative}
+                  />
+                )}
+
+                {dataControllerRepresentativeInEU && hasEURepresentative && (
+                  <RepresentativeItem
+                    label={localization.dataControllerRepresentativeInEU}
+                    contactDetails={dataControllerRepresentativeInEU}
+                  />
+                )}
+              </>
+            </SC.BoxRegular>
+          </Grid>
+        )}
+        {dataProtectionOfficer && (
+          <Grid item md={6}>
+            <SC.BoxRegular>
+              <RepresentativeItem
+                label={localization.dataProtectionOfficer}
+                contactDetails={dataProtectionOfficer}
+              />
+            </SC.BoxRegular>
+          </Grid>
+        )}
+      </Grid>
+    );
+  }
 );

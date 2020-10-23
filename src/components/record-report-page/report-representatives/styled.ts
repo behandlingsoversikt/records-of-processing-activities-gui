@@ -8,6 +8,7 @@ const BoxRegular = styled.div`
   flex-direction: column;
   padding: 2em 2.5em;
   margin-bottom: 2em;
+  min-height: 230px;
 `;
 
 export default { BoxRegular };
