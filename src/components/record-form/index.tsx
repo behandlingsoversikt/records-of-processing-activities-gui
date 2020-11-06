@@ -702,8 +702,8 @@ const RecordForm = ({
             required
             isReadOnly={isReadOnlyUser}
             title='Kategorier av registrerte og kategorier av personopplysninger'
-            subtitle={`${localization.personalDataCategoriesAbstract} ${localization.dataSubjectCategoriesAbstract}`}
-            description={`${localization.personalDataCategoriesDescription} ${localization.dataSubjectCategoriesDescription}`}
+            subtitle={localization.personalDataCategoriesAbstract}
+            description={localization.personalDataCategoriesDescription}
           >
             <FieldArray
               name='categories'
