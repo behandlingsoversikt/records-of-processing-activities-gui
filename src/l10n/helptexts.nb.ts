@@ -31,7 +31,7 @@ export const helptextsNb = {
   relatedDatasetsDescription: ` `,
   personalDataCategoriesAbstract: `En “registrert” er en identifiserbar fysisk person som direkte eller indirekte kan identifiseres. «Personopplysninger» er enhver opplysning om en identifisert eller identifiserbar fysisk person («den registrerte»), jfr. GDPR artikkel 4 nr. 1.`,
   personalDataCategoriesDescription: `Eksempel på utfylling av kategorier av registrerte kan være “ansatte”, “elever” og  “pasienter”. Eksempel på kategorier av personopplysninger kan være “kontaktopplysninger”, “ansatteopplysninger og  “helseopplysninger”.`,
-  securityMeasuresAbstract: `Som nevnt i artikkel 32. nr 1, dersom mulig.`,
+  securityMeasuresAbstract: `Som nevnt i GDPR artikkel 32. nr 1, dersom mulig.`,
   plannedDeletionAbstract: `Angi frist for sletting for de forskjellige kategorier av opplysninger, dersom mulig.`,
   highPrivacyRiskAbstract: `Gjør en vurdering av dette, blant annet med hensyn til eventuell gjennomføring av vurdering av personvernkonsekvenser (DPIA)`,
   dataProtectionImpactAssessmentAbstract: `Hvis du velger “Ja”, kan du velge å legge inn sak-/arkivreferanse til vurderingen/DPIA. `,
@@ -44,5 +44,5 @@ export const helptextsNb = {
   transferredAbstract: `Er mottakerne av personopplysningene tredjeland eller internasjonale organisasjoner, skal disse identifiseres, jfr. GDPR artikkel 30 nr 1. e).`,
   thirdCountryAbstract:
     'Oppgi navn på tredjeland og/eller internasjonal(e) organisasjon(er)',
-  guaranteesAbstract: `Ved overføring som nevnt i GDPR artikkel 49 nr. 1, 2. ledd , skal dokumentasjon på nødvendige garantier angis.`
+  guaranteesAbstract: `Ved overføring som nevnt i GDPR artikkel 46 nr. 1, 2. ledd , skal dokumentasjon på nødvendige garantier angis.`
 };
