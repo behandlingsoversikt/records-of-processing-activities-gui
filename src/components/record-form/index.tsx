@@ -457,7 +457,7 @@ const RecordForm = ({
           <SC.Fieldset
             required
             isReadOnly={isReadOnlyUser}
-            title='Formålene med behandlingen'
+            title='Formål med behandlingen'
             subtitle={localization.purposeAbstract}
             description={localization.purposeDescription}
           >
