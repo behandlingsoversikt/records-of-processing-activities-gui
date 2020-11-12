@@ -488,6 +488,7 @@ const RecordForm = ({
                           name={`articleSixBasis[${index}].legality`}
                           value={legality}
                           options={[
+                            { label: '', value: '' },
                             {
                               label:
                                 'Artikkel 6.1.a - Den registrerte har samtykket til behandling av sine personopplysninger for ett eller flere spesifikke formål',
