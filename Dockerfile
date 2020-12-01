@@ -1,14 +1,7 @@
 FROM node:12 AS build
-ARG GITHUB_TOKEN
-
 RUN mkdir /app
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN echo $'\n\
-        #!/bin/bash\n\
-        @fellesdatakatalog:registry=https://npm.pkg.github.com\n\
-        //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}\n'\
-        > .npmrc
 RUN npm set progress=false && \
   npm config set depth 0 && \
   npm ci
