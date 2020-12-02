@@ -61,7 +61,18 @@ export default {
               jsx: true
             }
           }
-        ]
+        ],
+        exclude: [resolve(__dirname, '../node_modules/@skatteetaten')]
+      },
+      {
+        test: /\.svg$/,
+        use: {
+          loader: 'svg-url-loader',
+          options: {
+            iesafe: true
+          }
+        },
+        include: [resolve(__dirname, '../node_modules/@skatteetaten')]
       },
       {
         test: /\.(png|jpg|gif)$/,
