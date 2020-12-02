@@ -33,3 +33,5 @@ An application for managing records of processing activities.
 - `RECORDS_OF_PROCESSING_ACTIVITIES_URL` - Base URL of Records of Processing Activities backend
 - `FDK_REGISTRATION_BASE_URI` - Base URI for registration clients
 - `ORGANIZATION_API` - Base URL of Organization backend
+- `SEARCH_HOST` - FDK portal main page URL
+- `ADMIN_GUI_HOST` - FDK admin main page URL

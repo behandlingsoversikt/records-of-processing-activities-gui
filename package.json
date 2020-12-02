@@ -44,6 +44,8 @@
   },
   "dependencies": {
     "@fellesdatakatalog/internal-footer": "^0.3.0",
+    "@fellesdatakatalog/internal-header": "^0.4.2",
+    "@fellesdatakatalog/link": "^0.2.2",
     "@fellesdatakatalog/theme": "^0.4.1",
     "@material-ui/core": "^4.10.1",
     "@material-ui/icons": "^4.9.1",
