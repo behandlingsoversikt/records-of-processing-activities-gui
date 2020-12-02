@@ -5,6 +5,8 @@ interface EnvironmentVariables {
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   FDK_REGISTRATION_BASE_URI: string;
   ORGANIZATION_API: string;
+  SEARCH_HOST: string;
+  ADMIN_GUI_HOST: string;
 }
 
 const env = ((window as any).env || {
@@ -15,7 +17,9 @@ const env = ((window as any).env || {
   FDK_REGISTRATION_BASE_URI:
     'https://registrering.staging.fellesdatakatalog.digdir.no',
   ORGANIZATION_API:
-    'https://organization-catalogue.staging.fellesdatakatalog.digdir.no'
+    'https://organization-catalogue.staging.fellesdatakatalog.digdir.no',
+  SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no',
+  ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no'
 }) as EnvironmentVariables;
 
 export default { ...env } as Configuration;
