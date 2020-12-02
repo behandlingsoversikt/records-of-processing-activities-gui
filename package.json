@@ -51,6 +51,7 @@
     "core-js": "^3.6.5",
     "fast-json-patch": "^3.0.0-1",
     "formik": "^2.1.4",
+    "fsevents": "^2.1.2",
     "immutable": "^4.0.0-rc.12",
     "keycloak-js": "^10.0.2",
     "react": "^16.13.1",
