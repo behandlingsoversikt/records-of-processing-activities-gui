@@ -46,6 +46,11 @@ export default merge(baseConfig, {
         use: ['source-map-loader'],
         enforce: 'pre',
         exclude: /node_modules/
+      },
+      {
+        test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file-loader',
+        exclude: [resolve(__dirname, '..', 'src', 'images')]
       }
     ]
   },
