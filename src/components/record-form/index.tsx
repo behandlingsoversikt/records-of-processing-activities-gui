@@ -842,7 +842,7 @@ const RecordForm = ({
             subtitle={localization.personalDataSubjectsAbstract}
             description={localization.personalDataSubjectsDescription}
           >
-            <TextField
+            <TextAreaField
               isReadOnly={isReadOnlyUser}
               name='personalDataSubjects'
               value={values.personalDataSubjects}
@@ -855,7 +855,7 @@ const RecordForm = ({
             subtitle={localization.privacyProcessingSystemsAbstract}
             description={localization.privacyProcessingSystemsDescription}
           >
-            <TextField
+            <TextAreaField
               isReadOnly={isReadOnlyUser}
               name='privacyProcessingSystems'
               value={values.privacyProcessingSystems}
