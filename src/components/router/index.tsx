@@ -1,13 +1,15 @@
 import React, { lazy, Suspense, memo } from 'react';
-import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 
 import ProtectedRoute from '../protected-route';
+import env from '../../env';
 
 const RecordListPage = lazy(() => import('../record-list-page'));
 const RecordPage = lazy(() => import('../record-page'));
 const RecordReportPage = lazy(() =>
   import('../record-report-page/record-report-page')
 );
+const { FDK_REGISTRATION_BASE_URI } = env;
 
 const Router = (): JSX.Element => (
   <BrowserRouter>
@@ -27,6 +29,13 @@ const Router = (): JSX.Element => (
           exact
           path='/:organizationId/report/:required(required)?'
           component={RecordReportPage}
+        />
+        <Route
+          path='/'
+          component={() => {
+            window.location.href = FDK_REGISTRATION_BASE_URI;
+            return null;
+          }}
         />
         <Redirect to='/' />
       </Switch>
