@@ -78,11 +78,6 @@ const FDKDropdownButton = styled.button<ButtonType>`
         display: flex;
         padding: 10px 18px;
       }
-
-      & > span {
-        display: flex;
-        padding: 10px 18px;
-      }
     }
   }
 `;
