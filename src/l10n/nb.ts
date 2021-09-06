@@ -40,30 +40,60 @@ export default {
   articleNine: 'Artikkel 9',
   articleTen: 'Artikkel 10',
   csvHeaders: {
+    organizationName: 'Behandlingsansvarlig',
+    organizationId: 'Organisasjonsnummer',
+    dataControllerRepresentative: 'Behandlingsansvarliges representant',
+    dataControllerRepresentativeAddress: 'Virksomhetens postadresse',
+    dataControllerRepresentativeEmail: 'Virksomhetens e-post',
+    dataControllerRepresentativePhone: 'Virksomhetens telefon',
+    dataControllerRepresentativeInEU: 'Utenfor EU/EØS (ja/nei)',
+    dataControllerRepresentativeInEUName:
+      'Representant behandlingsansvarlig utenfor EU/EØS - navn',
+    dataControllerRepresentativeInEUAddress:
+      'Representant behandlingsansvarlig utenfor EU/EØS - postadresse',
+    dataControllerRepresentativeInEUEmail:
+      'Representant behandlingsansvarlig utenfor EU/EØS - e-post',
+    dataControllerRepresentativeInEUPhone:
+      'Representant behandlingsansvarlig utenfor EU/EØS - telefon',
+    dataProtectionOfficerName: 'Personvernombud - navn',
+    dataProtectionOfficerAddress: 'Personvernombud - postadresse',
+    dataProtectionOfficerEmail: 'Personvernombud - e-post',
+    dataProtectionOfficerPhone: 'Personvernombud - telefon',
     title: 'Behandlingen gjelder',
     dataProcessorName: 'Daglig behandlingsansvar - Navn',
     dataProcessorTlf: 'Daglig behandlingsansvar - Tlf',
     dataProcessorEmail: 'Daglig behandlingsansvar - Epost',
     dataProcessorAgreementNames: 'Databehandlere - Navn',
-    dataProcessorAgreementUrls: 'Databehandlere - URL',
-    commonDataControllerCompanies: 'Felles behandlingsansvar - Selskaper',
+    dataProcessorAgreementUrls: 'Databehandleravtaler - Lenke',
+    commonDataControllerCompanies: 'Felles behandlingsansvar - Virksomheter',
     commonDataControllerResponsibilities:
-      'Felles behandlingsansvar - Fordeling',
-    purpose: 'Formålet med behandlingsaktivitetene',
+      'Felles behandlingsansvar - Ansvarsfordeling',
+    commonDataControllerContact: 'Felles behandlingsansvar - Kontaktpunkt',
+    commonDataControllerEmail: 'Felles behandlingsansvar - E-post',
+    commonDataControllerTlf: 'Felles behandlingsansvar - Telefon',
+    purpose: 'Formål med behandlingen',
     articleSixBasis: 'Behandlingsgrunnlag artikkel 6',
+    articleSixReference: 'Artikkel 6 - Henvisning til annen lovgiving',
     articleNineBasis: 'Behandlingsgrunnlag artikkel 9',
+    articleNineReference: 'Artikkel 9 - henvisning til annen lovgiving',
     articleTenBasis: 'Behandlingsgrunnlag artikkel 10',
-    businessAreas: 'Funksjonsområde',
-    relatedDatasets: 'Tilhørende datasett',
+    articleTenReference: 'Artikkel 10 - henvisning til annen lovgiving',
+    businessAreas: 'Funksjons- eller virksomhetsområde',
+    relatedDatasetsUrl: 'Tilhørende datasett - lenke',
+    relatedDatasetsName: 'Tilhørende datasett - navn',
     categorySubjects: 'Personopplysninger - Kategorier av registrerte',
     categoryPersonalData:
       'Personopplysninger - Kategorier tilknyttet den registrerte',
     plannedDeletion: 'Personopplysninger - Planlagte tidsfrister for sletting',
-    personalDataSubjects: 'Personopplysningskilder',
-    privacyProcessingSystems: 'Personopplysningsbehandlere',
-    recipientCategories: 'Kategorier av mottakere',
-    internationalReceivers: 'Internasjonale mottakere?',
-    guarantees: 'Garantier',
-    securityMeasures: 'Sikkerhetstiltak'
+    personalDataSubjects: 'Kilder til personopplysningene',
+    privacyProcessingSystems:
+      'System i virksomheten som behandler personopplysninger',
+    recipientCategories: 'Mottakere eller kategorier av mottakere',
+    internationalReceivers:
+      'Mottakere - tredjeland eller internasjonale organisasjoner',
+    guarantees: 'Garantier ved overføring',
+    securityMeasures: 'Tekniske og organisatoriske sikkerhetstiltak',
+    dpiaConducted: 'Er det gjennomført DPIA?',
+    dpiaReference: 'Referanse til DPIA'
   }
 };
