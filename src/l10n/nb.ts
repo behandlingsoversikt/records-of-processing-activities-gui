@@ -38,32 +38,5 @@ export default {
     'Behandlingsansvarliges representant utenfor EU/EØS',
   dataProtectionOfficer: 'Personvernombud',
   articleNine: 'Artikkel 9',
-  articleTen: 'Artikkel 10',
-  csvHeaders: {
-    title: 'Behandlingen gjelder',
-    dataProcessorName: 'Daglig behandlingsansvar - Navn',
-    dataProcessorTlf: 'Daglig behandlingsansvar - Tlf',
-    dataProcessorEmail: 'Daglig behandlingsansvar - Epost',
-    dataProcessorAgreementNames: 'Databehandlere - Navn',
-    dataProcessorAgreementUrls: 'Databehandlere - URL',
-    commonDataControllerCompanies: 'Felles behandlingsansvar - Selskaper',
-    commonDataControllerResponsibilities:
-      'Felles behandlingsansvar - Fordeling',
-    purpose: 'Formålet med behandlingsaktivitetene',
-    articleSixBasis: 'Behandlingsgrunnlag artikkel 6',
-    articleNineBasis: 'Behandlingsgrunnlag artikkel 9',
-    articleTenBasis: 'Behandlingsgrunnlag artikkel 10',
-    businessAreas: 'Funksjonsområde',
-    relatedDatasets: 'Tilhørende datasett',
-    categorySubjects: 'Personopplysninger - Kategorier av registrerte',
-    categoryPersonalData:
-      'Personopplysninger - Kategorier tilknyttet den registrerte',
-    plannedDeletion: 'Personopplysninger - Planlagte tidsfrister for sletting',
-    personalDataSubjects: 'Personopplysningskilder',
-    privacyProcessingSystems: 'Personopplysningsbehandlere',
-    recipientCategories: 'Kategorier av mottakere',
-    internationalReceivers: 'Internasjonale mottakere?',
-    guarantees: 'Garantier',
-    securityMeasures: 'Sikkerhetstiltak'
-  }
+  articleTen: 'Artikkel 10'
 };

@@ -12,9 +12,8 @@ import SC from './styled';
 
 type SubButton = {
   name: string;
-  href?: string;
+  href: string;
   external?: boolean;
-  onClick?: any;
 };
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -46,26 +45,11 @@ const FDKDropdownButton = ({
       {isExpanded ? <ArrowDropUp /> : <ArrowDropDown />}
       {isExpanded && (
         <ul>
-          {subButtons?.map(({ name, href, external, onClick }, index) => (
+          {subButtons?.map(({ name, href, external }, index) => (
             <li key={index}>
-              {href ? (
-                <a
-                  rel='noreferrer'
-                  href={href}
-                  target={external ? '_blank' : ''}
-                >
-                  {name}
-                </a>
-              ) : (
-                <span
-                  role='button'
-                  tabIndex={0}
-                  onClick={onClick}
-                  onKeyDown={onClick}
-                >
-                  {name}
-                </span>
-              )}
+              <a rel='noreferrer' href={href} target={external ? '_blank' : ''}>
+                {name}
+              </a>
             </li>
           ))}
         </ul>
