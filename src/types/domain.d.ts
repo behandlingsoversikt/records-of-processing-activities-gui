@@ -92,6 +92,7 @@ interface TranslatableField {
 
 export interface Dataset {
   id: string;
+  uri: string;
   title: TranslatableField;
   registrationStatus: DatasetStatus;
 }
