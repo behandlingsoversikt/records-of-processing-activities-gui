@@ -17,7 +17,7 @@ import {
   DELETE_RECORD_REQUESTED
 } from './action-types';
 
-const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
+const { NEW_RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
 
 function* getRecordRequested({
   payload: { recordId, organizationId, onError }
@@ -28,7 +28,7 @@ function* getRecordRequested({
 
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
+      `${NEW_RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
       {
         headers: {
           authorization,
@@ -56,7 +56,7 @@ function* patchRecordRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.patch,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${
+      `${NEW_RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${
         record.organizationId
       }/records${record.id ? `/${record.id}` : ''}`,
       record,
@@ -85,7 +85,7 @@ function* deleteRecordRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { status, message } = yield call(
       axios.delete,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
+      `${NEW_RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
       {
         headers: {
           authorization,

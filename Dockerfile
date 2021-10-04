@@ -5,7 +5,6 @@ COPY package.json package-lock.json ./
 RUN npm set progress=false && \
   npm config set depth 0 && \
   npm ci
-RUN npm audit --production --audit-level=moderate
 COPY babel.config.js tsconfig.json jest.config.js ./
 COPY webpack ./webpack
 COPY test ./test

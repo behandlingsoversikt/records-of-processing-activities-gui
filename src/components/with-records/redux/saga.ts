@@ -6,7 +6,7 @@ import env from '../../../env';
 import * as actions from './actions';
 import { FETCH_ALL_RECORDS_REQUESTED } from './action-types';
 
-const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
+const { NEW_RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
 
 function* fetchAllRecordsRequested({
   payload: { organizationId }
@@ -16,7 +16,7 @@ function* fetchAllRecordsRequested({
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
     const { data, message } = yield call(
       axios.get,
-      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records`,
+      `${NEW_RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records`,
       {
         params: { limit: 1000 },
         headers: {
