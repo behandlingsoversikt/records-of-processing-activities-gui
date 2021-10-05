@@ -8,6 +8,9 @@ import {
   DELETE_RECORD_FAILED,
   DELETE_RECORD_REQUESTED,
   DELETE_RECORD_SUCCEEDED,
+  CREATE_RECORD_FAILED,
+  CREATE_RECORD_REQUESTED,
+  CREATE_RECORD_SUCCEEDED,
   RESET_RECORD
 } from './action-types';
 
@@ -97,6 +100,33 @@ export function deleteRecordSucceeded() {
 export function deleteRecordFailed(message: string) {
   return {
     type: DELETE_RECORD_FAILED,
+    payload: {
+      message
+    }
+  };
+}
+
+export function createRecordRequested(record: Partial<Record>) {
+  return {
+    type: CREATE_RECORD_REQUESTED,
+    payload: {
+      record
+    }
+  };
+}
+
+export function createRecordSucceeded(recordId: string) {
+  return {
+    type: CREATE_RECORD_SUCCEEDED,
+    payload: {
+      recordId
+    }
+  };
+}
+
+export function createRecordFailed(message: string) {
+  return {
+    type: CREATE_RECORD_FAILED,
     payload: {
       message
     }

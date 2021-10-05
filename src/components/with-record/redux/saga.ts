@@ -14,7 +14,8 @@ import * as actions from './actions';
 import {
   GET_RECORD_REQUESTED,
   PATCH_RECORD_REQUESTED,
-  DELETE_RECORD_REQUESTED
+  DELETE_RECORD_REQUESTED,
+  CREATE_RECORD_REQUESTED
 } from './action-types';
 
 const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
@@ -104,10 +105,40 @@ function* deleteRecordRequested({
   }
 }
 
+function* createRecordRequested({
+  payload: { record }
+}: ReturnType<typeof actions.createRecordRequested>) {
+  try {
+    const auth = yield getContext('auth');
+    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const { headers, message } = yield call(
+      axios.post,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${record.organizationId}/records`,
+      record,
+      {
+        headers: {
+          authorization,
+          accept: 'application/json'
+        }
+      }
+    );
+    if (headers) {
+      yield put(
+        actions.createRecordSucceeded(headers?.location?.split('/').pop())
+      );
+    } else {
+      yield put(actions.createRecordFailed(JSON.stringify(message)));
+    }
+  } catch (e: any) {
+    yield put(actions.createRecordFailed(e.message));
+  }
+}
+
 export default function* saga() {
   yield all([
     takeLatest(GET_RECORD_REQUESTED, getRecordRequested),
     debounce(1000, PATCH_RECORD_REQUESTED, patchRecordRequested),
-    takeLatest(DELETE_RECORD_REQUESTED, deleteRecordRequested)
+    takeLatest(DELETE_RECORD_REQUESTED, deleteRecordRequested),
+    takeLatest(CREATE_RECORD_REQUESTED, createRecordRequested)
   ]);
 }
