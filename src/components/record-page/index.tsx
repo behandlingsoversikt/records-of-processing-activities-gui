@@ -45,6 +45,7 @@ const RecordPage = ({
   recordActions: {
     getRecordRequested: getRecord,
     deleteRecordRequested: deleteRecord,
+    createRecordRequested: createRecord,
     resetRecord
   },
   organizationActions: { fetchOrganizationRequested }
@@ -72,6 +73,8 @@ const RecordPage = ({
     setCanChangeUrl(true);
     if (recordId) {
       getRecord(recordId, organizationId, navigateToRecordListPage);
+    } else {
+      createRecord({ organizationId });
     }
     window.scrollTo(0, 0);
   }, []);

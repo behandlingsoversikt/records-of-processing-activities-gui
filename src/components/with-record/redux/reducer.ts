@@ -5,6 +5,7 @@ import {
   GET_RECORD_SUCCEEDED,
   PATCH_RECORD_SUCCEEDED,
   DELETE_RECORD_SUCCEEDED,
+  CREATE_RECORD_SUCCEEDED,
   RESET_RECORD
 } from './action-types';
 
@@ -25,6 +26,8 @@ export default function reducer(
     case RESET_RECORD:
     case DELETE_RECORD_SUCCEEDED:
       return state.set('record', null);
+    case CREATE_RECORD_SUCCEEDED:
+      return state.set('record', fromJS({ id: action.payload.recordId }));
     default:
       return state;
   }
