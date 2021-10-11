@@ -4,7 +4,10 @@ import {
   FETCH_ALL_REPRESENTATIVES_SUCCEEDED,
   PATCH_REPRESENTATIVE_FAILED,
   PATCH_REPRESENTATIVE_REQUESTED,
-  PATCH_REPRESENTATIVE_SUCCEEDED
+  PATCH_REPRESENTATIVE_SUCCEEDED,
+  CREATE_REPRESENTATIVE_FAILED,
+  CREATE_REPRESENTATIVE_REQUESTED,
+  CREATE_REPRESENTATIVE_SUCCEEDED
 } from './action-types';
 
 import { RepresentativeType } from '../../../types/enums';
@@ -71,6 +74,30 @@ export function patchRepresentativeSucceeded(
 export function patchRepresentativeFailed(message: string) {
   return {
     type: PATCH_REPRESENTATIVE_FAILED,
+    payload: {
+      message
+    }
+  };
+}
+
+export function createRepresentativeRequested(organizationId: string) {
+  return {
+    type: CREATE_REPRESENTATIVE_REQUESTED,
+    payload: {
+      organizationId
+    }
+  };
+}
+
+export function createRepresentativeSucceeded() {
+  return {
+    type: CREATE_REPRESENTATIVE_SUCCEEDED
+  };
+}
+
+export function createRepresentativeFailed(message: string) {
+  return {
+    type: CREATE_REPRESENTATIVE_FAILED,
     payload: {
       message
     }
