@@ -49,7 +49,7 @@ const Representatives = ({
           title='Behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeAbstract}
           description={localization.dataControllerRepresentativeDescription}
-          representative={dataControllerRepresentative}
+          representative={dataControllerRepresentative ?? {}}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
@@ -59,7 +59,7 @@ const Representatives = ({
           title='Representant for behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeInEUAbstract}
           description={localization.dataControllerRepresentativeInEUDescription}
-          representative={dataControllerRepresentativeInEU}
+          representative={dataControllerRepresentativeInEU ?? {}}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
@@ -77,7 +77,7 @@ const Representatives = ({
           description={
             localization.dataProtectionOfficerRepresentativeDescription
           }
-          representative={dataProtectionOfficer}
+          representative={dataProtectionOfficer ?? {}}
           organizationId={organizationId}
           onChange={patchRepresentativeRequested}
         />
@@ -87,7 +87,10 @@ const Representatives = ({
 };
 
 const mapStateToProps = (state: any) => ({
-  representatives: state.RepresentativesReducer.get('representatives').toJS()
+  representatives: state.RepresentativesReducer.get('representatives').toJS(),
+  tryCreateRepresentatives: state.RepresentativesReducer.get(
+    'tryCreateRepresentatives'
+  )
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({

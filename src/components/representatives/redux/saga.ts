@@ -13,7 +13,8 @@ import env from '../../../env';
 import * as actions from './actions';
 import {
   PATCH_REPRESENTATIVE_REQUESTED,
-  FETCH_ALL_REPRESENTATIVES_REQUESTED
+  FETCH_ALL_REPRESENTATIVES_REQUESTED,
+  CREATE_REPRESENTATIVE_REQUESTED
 } from './action-types';
 
 const { RECORDS_OF_PROCESSING_ACTIVITIES_URL } = env;
@@ -45,13 +46,40 @@ function* patchRepresentativeRequested({
   }
 }
 
+function* createRepresentativeRequested({
+  payload: { organizationId }
+}: ReturnType<typeof actions.createRepresentativeRequested>) {
+  try {
+    const auth = yield getContext('auth');
+    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const { data, message } = yield call(
+      axios.post,
+      `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,
+      {},
+      {
+        headers: {
+          authorization,
+          accept: 'application/json'
+        }
+      }
+    );
+    if (data) {
+      yield put(actions.createRepresentativeSucceeded());
+    } else {
+      yield put(actions.createRepresentativeFailed(JSON.stringify(message)));
+    }
+  } catch (e: any) {
+    yield put(actions.createRepresentativeFailed(e.message));
+  }
+}
+
 function* fetchAllRepresentativesRequested({
   payload: { organizationId }
 }: ReturnType<typeof actions.fetchAllRepresentativesRequested>) {
   try {
     const auth = yield getContext('auth');
     const authorization = yield call([auth, auth.getAuthorizationHeader]);
-    const { data, message } = yield call(
+    const { data, message, status } = yield call(
       axios.get,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,
       {
@@ -63,11 +91,23 @@ function* fetchAllRepresentativesRequested({
     );
     if (data) {
       yield put(actions.fetchAllRepresentativesSucceeded(data));
+    } else if (status === 404) {
+      yield createRepresentativeRequested({
+        type: CREATE_REPRESENTATIVE_REQUESTED,
+        payload: { organizationId }
+      });
     } else {
       yield put(actions.fetchAllRepresentativesFailed(JSON.stringify(message)));
     }
   } catch (e: any) {
-    yield put(actions.fetchAllRepresentativesFailed(e.message));
+    if (e.message.includes('status code 404')) {
+      yield createRepresentativeRequested({
+        type: CREATE_REPRESENTATIVE_REQUESTED,
+        payload: { organizationId }
+      });
+    } else {
+      yield put(actions.fetchAllRepresentativesFailed(e.message));
+    }
   }
 }
 
