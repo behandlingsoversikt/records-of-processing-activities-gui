@@ -20,9 +20,11 @@ export default function reducer(
         'records',
         fromJS(
           action.payload.records.map(record => {
-            record.dataProcessorContactDetails.sort(
-              ({ name: a = '' }, { name: b = '' }) => a.localeCompare(b)
-            );
+            if (record.dataProcessorContactDetails) {
+              record.dataProcessorContactDetails.sort(
+                ({ name: a = '' }, { name: b = '' }) => a.localeCompare(b)
+              );
+            }
             return record;
           })
         )
