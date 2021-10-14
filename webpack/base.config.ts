@@ -1,18 +1,27 @@
+import type { Configuration } from 'webpack';
+import { ProvidePlugin } from 'webpack';
 import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-export default {
+const configuration: Configuration = {
   entry: {
     main: './src/entrypoints/main/index.tsx'
   },
   output: {
     path: resolve(__dirname, '../dist'),
-    publicPath: '/'
+    assetModuleFilename: 'images/[hash][ext][query]',
+    publicPath: '/',
+    clean: true
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    fallback: {
+      process: require.resolve('process/browser'),
+      util: false
+    }
   },
   optimization: {
     runtimeChunk: 'single',
@@ -26,7 +35,7 @@ export default {
       cacheGroups: {
         default: false,
         mainVendors: {
-          test: /[\\/]node_modules[\\/]/,
+          test: ({ resource = '' }: any) => resource.includes('node_modules'),
           name: 'main.vendors',
           filename: '[name].bundle.js',
           chunks: ({ name }) => name === 'main'
@@ -71,20 +80,11 @@ export default {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'images',
-              publicPath: 'images'
-            }
-          }
-        ]
+        type: 'asset/resource'
       },
       {
         test: /\.(woff|woff2|ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
+        type: 'asset/inline',
         exclude: [resolve(__dirname, '..', 'src', 'images')]
       }
     ]
@@ -100,6 +100,11 @@ export default {
     }),
     new CopyWebpackPlugin({
       patterns: [{ from: './src/lib/auth/silent-check-sso.html', to: './' }]
+    }),
+    new ProvidePlugin({
+      process: 'process'
     })
   ]
 };
+
+export default configuration;
