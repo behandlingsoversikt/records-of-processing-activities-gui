@@ -1,20 +1,20 @@
-import merge from 'webpack-merge';
+import type { Configuration } from 'webpack';
+import { merge } from 'webpack-merge';
 
 import baseConfig from './base.config';
 
-export default merge(baseConfig, {
+const configuration: Configuration = merge(baseConfig, {
   mode: 'production',
-  devtool: 'none',
+  target: ['web', 'es5'],
   output: {
     filename: '[name].[contenthash].js'
   },
   optimization: {
-    moduleIds: 'hashed',
     splitChunks: {
       maxSize: 40000,
       cacheGroups: {
         mainVendors: {
-          test: /[\\/]node_modules[\\/]/,
+          test: ({ resource = '' }: any) => resource.includes('node_modules'),
           name: module =>
             `main.vendor.${module.context
               .match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
@@ -25,3 +25,5 @@ export default merge(baseConfig, {
     }
   }
 });
+
+export default configuration;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { hot } from 'react-hot-loader/root';
 import { Provider as ReduxProvider } from 'react-redux';
 import ThemeProvider from '@fellesdatakatalog/theme';
 
@@ -12,7 +11,7 @@ import theme from './styles/theme';
 
 import Router from '../router';
 
-export default hot(function App() {
+export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
@@ -23,4 +22,4 @@ export default hot(function App() {
       </AuthProvider>
     </ThemeProvider>
   );
-});
+}
