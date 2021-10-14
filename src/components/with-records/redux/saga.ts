@@ -30,7 +30,7 @@ function* fetchAllRecordsRequested({
     } else {
       yield put(actions.fetchAllRecordsFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.fetchAllRecordsFailed(e.message));
   }
 }

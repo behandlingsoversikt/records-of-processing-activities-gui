@@ -24,9 +24,8 @@ const StatusBar = ({
   canBeApproved,
   onRecordRemove
 }: Props): JSX.Element => {
-  const [showConfirmDeleteMessage, setShowConfirmDeleteMessage] = useState(
-    false
-  );
+  const [showConfirmDeleteMessage, setShowConfirmDeleteMessage] =
+    useState(false);
   const setStatusToDraft = () => onSetStatus(RecordStatus.DRAFT);
   const setStatusToApproved = () => onSetStatus(RecordStatus.APPROVED);
   return (

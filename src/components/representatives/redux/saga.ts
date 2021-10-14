@@ -40,7 +40,7 @@ function* patchRepresentativeRequested({
     } else {
       yield put(actions.patchRepresentativeFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.patchRepresentativeFailed(e.message));
   }
 }
@@ -66,7 +66,7 @@ function* fetchAllRepresentativesRequested({
     } else {
       yield put(actions.fetchAllRepresentativesFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.fetchAllRepresentativesFailed(e.message));
   }
 }

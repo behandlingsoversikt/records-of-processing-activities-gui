@@ -42,7 +42,7 @@ function* getRecordRequested({
       yield put(actions.getRecordFailed(JSON.stringify(message)));
       onError();
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.getRecordFailed(e.message));
     onError();
   }
@@ -72,7 +72,7 @@ function* patchRecordRequested({
     } else {
       yield put(actions.patchRecordFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.patchRecordFailed(e.message));
   }
 }
@@ -99,7 +99,7 @@ function* deleteRecordRequested({
     } else {
       yield put(actions.deleteRecordFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.deleteRecordFailed(e.message));
   }
 }

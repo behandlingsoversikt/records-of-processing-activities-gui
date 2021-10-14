@@ -34,7 +34,7 @@ function* fetchAllDatasetsRequested({
     } else {
       yield put(actions.fetchAllDatasetsFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.fetchAllDatasetsFailed(e.message));
   }
 }

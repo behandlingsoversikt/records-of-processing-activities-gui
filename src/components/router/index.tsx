@@ -4,12 +4,12 @@ import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 import ProtectedRoute from '../protected-route';
 import env from '../../env';
 
-const RecordListPage = lazy(() =>
-  import('../record-list-page/record-list-page')
+const RecordListPage = lazy(
+  () => import('../record-list-page/record-list-page')
 );
 const RecordPage = lazy(() => import('../record-page'));
-const RecordReportPage = lazy(() =>
-  import('../record-report-page/record-report-page')
+const RecordReportPage = lazy(
+  () => import('../record-report-page/record-report-page')
 );
 const { FDK_REGISTRATION_BASE_URI } = env;
 

@@ -35,6 +35,14 @@
     "jsx-a11y",
     "react-hooks"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".ts", ".d.ts", ".tsx"]
+      }
+    }
+  },
   "rules": {
     "prettier/prettier": [
       "error",
@@ -43,7 +51,8 @@
         "singleQuote": true,
         "jsxSingleQuote": true,
         "trailingComma": "none",
-        "arrowParens": "avoid"
+        "arrowParens": "avoid",
+        "endOfLine": "auto"
       }
     ],
     "import/no-extraneous-dependencies": [
@@ -51,12 +60,19 @@
       {
         "devDependencies": [
           "./webpack/*",
-          "./test/*"
+          "test/**/*.{js,jsx,ts,tsx}",
+          "**/*test.{js,jsx,ts,tsx}"
         ]
       }
     ],
-    "no-console": ["error", { "allow": ["warn", "error"] }],
-    "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
+    "@typescript-eslint/no-empty-function": [
+      "error",
+      {
+        "allow": [
+          "arrowFunctions"
+        ]
+      }
+    ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
@@ -64,19 +80,53 @@
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-shadow": ["error"],
     "react/jsx-one-expression-per-line": "off",
-    "react/jsx-wrap-multilines": "off",
     "react/prefer-stateless-function": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/jsx-wrap-multilines": "off",
     "react/no-array-index-key": "off",
     "react/no-unused-state": "off",
-    "react/jsx-curly-newline": "off",
+    "react/no-unused-prop-types": "off",
+    "react/jsx-indent": "off",
     "react/prop-types": "off",
+    "jsx-a11y/label-has-for": "off",
+    "react/require-default-props": "off",
+    "react/jsx-curly-newline": "off",
+    "no-use-before-define": "off",
     "no-restricted-globals": "off",
     "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-shadow": "off",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_embedded"
+        ]
+      }
+    ],
+    "camelcase": "off",
     "class-methods-use-this": "off",
     "import/prefer-default-export": "off",
-    "jsx-a11y/label-has-for": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
     "react/jsx-filename-extension": [
       "error",
       {
@@ -85,12 +135,33 @@
           ".tsx"
         ]
       }
-    ],
-    "import/extensions": ["error", "ignorePackages", {
-      "js": "never",
-      "jsx": "never",
-      "ts": "never",
-      "tsx": "never"
-    }]
-  }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts?(x)"
+      ],
+      "rules": {
+        "no-unused-expressions": "off"
+      }
+    },
+    {
+      "files": [
+        "./webpack/*"
+      ],
+      "rules": {
+        "no-console": [
+          "error",
+          {
+            "allow": [
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-non-null-assertion": "off"
+      }
+    }
+  ]
 }
