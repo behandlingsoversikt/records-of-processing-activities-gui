@@ -26,7 +26,7 @@ function* fetchOrganizationRequested({
     } else {
       yield put(actions.fetchOrganizationFailed(JSON.stringify(message)));
     }
-  } catch (e) {
+  } catch (e: any) {
     yield put(actions.fetchOrganizationFailed(e.message));
   }
 }

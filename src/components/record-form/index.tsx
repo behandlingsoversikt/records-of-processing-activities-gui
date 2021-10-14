@@ -635,15 +635,13 @@ const RecordForm = ({
                 <TextTagsSearchField
                   isReadOnly={isReadOnlyUser}
                   name='relatedDatasets'
-                  value={values.relatedDatasets.map(id => {
-                    return {
-                      label:
-                        datasets.find(
-                          ({ id: datasetId }: Dataset) => datasetId === id
-                        )?.title[localization.getLanguage()] ?? '',
-                      value: id
-                    };
-                  })}
+                  value={values.relatedDatasets.map(id => ({
+                    label:
+                      datasets.find(
+                        ({ id: datasetId }: Dataset) => datasetId === id
+                      )?.title[localization.getLanguage()] ?? '',
+                    value: id
+                  }))}
                   onChange={({
                     target: { value: query }
                   }: ChangeEvent<HTMLInputElement>) => {
@@ -658,9 +656,7 @@ const RecordForm = ({
                                 DatasetStatus.PUBLISH
                               ].includes(registrationStatus) &&
                               !values.relatedDatasets.includes(id) &&
-                              (Object.values(
-                                title
-                              ) as string[]).some(
+                              (Object.values(title) as string[]).some(
                                 (localTitle: string): boolean =>
                                   localTitle
                                     .toLowerCase()
@@ -726,17 +722,21 @@ const RecordForm = ({
                             isApproved &&
                             touched.categories?.[index]
                               ?.dataSubjectCategories &&
-                            (errors.categories?.[index] as FormikErrors<
-                              Categories
-                            >)?.dataSubjectCategories
+                            (
+                              errors.categories?.[
+                                index
+                              ] as FormikErrors<Categories>
+                            )?.dataSubjectCategories
                           }
                           helperText={
                             isApproved &&
                             touched.categories?.[index]
                               ?.dataSubjectCategories &&
-                            (errors.categories?.[index] as FormikErrors<
-                              Categories
-                            >)?.dataSubjectCategories
+                            (
+                              errors.categories?.[
+                                index
+                              ] as FormikErrors<Categories>
+                            )?.dataSubjectCategories
                           }
                           onChange={handleChange}
                         />
@@ -753,17 +753,21 @@ const RecordForm = ({
                                 isApproved &&
                                 touched.categories?.[index]
                                   ?.personalDataCategories &&
-                                (errors.categories?.[index] as FormikErrors<
-                                  Categories
-                                >)?.personalDataCategories
+                                (
+                                  errors.categories?.[
+                                    index
+                                  ] as FormikErrors<Categories>
+                                )?.personalDataCategories
                               }
                               helperText={
                                 isApproved &&
                                 touched.categories?.[index]
                                   ?.personalDataCategories &&
-                                (errors.categories?.[index] as FormikErrors<
-                                  Categories
-                                >)?.personalDataCategories
+                                (
+                                  errors.categories?.[
+                                    index
+                                  ] as FormikErrors<Categories>
+                                )?.personalDataCategories
                               }
                               onAddTag={(tag: string) => {
                                 personalDataCategoriesArray.push(tag);

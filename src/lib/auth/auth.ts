@@ -36,29 +36,29 @@ export class Auth {
     this.kc = Keycloak(kcConfig);
   }
 
-  init: ({
-    loginRequired
-  }: {
-    loginRequired: boolean;
-  }) => Promise<boolean> = async ({ loginRequired }) => {
-    const keycloakInitOptions: KeycloakInitOptions = {
-      onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: this.conf.silentCheckSsoRedirectUri
+  init: ({ loginRequired }: { loginRequired: boolean }) => Promise<boolean> =
+    async ({ loginRequired }) => {
+      const keycloakInitOptions: KeycloakInitOptions = {
+        onLoad: 'check-sso',
+        silentCheckSsoRedirectUri: this.conf.silentCheckSsoRedirectUri
+      };
+      // eslint-disable-next-line no-console
+      await this.kc.init(keycloakInitOptions).catch(console.error);
+      if (loginRequired && !this.isAuthenticated()) {
+        await this.login();
+      }
+      return this.isAuthenticated();
     };
-    await this.kc.init(keycloakInitOptions).catch(console.error);
-    if (loginRequired && !this.isAuthenticated()) {
-      await this.login();
-    }
-    return this.isAuthenticated();
-  };
 
   login: () => Promise<void> = () =>
+    // eslint-disable-next-line no-console
     this.kc.login().then().catch(console.error);
 
   logout: () => Promise<void> = () =>
     this.kc
       .logout({ redirectUri: this.conf.logoutRedirectUri })
       .then()
+      // eslint-disable-next-line no-console
       .catch(console.error);
 
   isAuthenticated: () => boolean = () => this.kc.authenticated || false;

@@ -86,11 +86,9 @@ const Representatives = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return {
-    representatives: state.RepresentativesReducer.get('representatives').toJS()
-  };
-};
+const mapStateToProps = (state: any) => ({
+  representatives: state.RepresentativesReducer.get('representatives').toJS()
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(actions, dispatch)
