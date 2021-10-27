@@ -188,21 +188,24 @@ const RecordListPage = ({
                 representatives?.dataProtectionOfficer?.email ?? '',
               dataProtectionOfficerPhone:
                 representatives?.dataProtectionOfficer?.phone ?? '',
-              title: record.title,
-              purpose: record.purpose,
-              categorySubjects: record.categories
-                .map(item => item.dataSubjectCategories)
-                .join(' | '),
-              categoryPersonalData: record.categories
-                .map(item => item.personalDataCategories?.join(' | '))
-                .join(' :: '),
-              plannedDeletion: record.plannedDeletion,
-              recipientCategories: record.recipientCategories.join(' | '),
-              internationalReceivers: record.dataTransfers.transferred
-                ? `${localization.yes}, ${record.dataTransfers.thirdCountryRecipients}`
+              title: record.title ?? '',
+              purpose: record.purpose ?? '',
+              categorySubjects:
+                record.categories
+                  ?.map(item => item.dataSubjectCategories)
+                  ?.join(' | ') ?? '',
+              categoryPersonalData:
+                record.categories
+                  ?.map(item => item.personalDataCategories?.join(' | '))
+                  ?.join(' :: ') ?? '',
+              plannedDeletion: record.plannedDeletion ?? '',
+              recipientCategories:
+                record.recipientCategories?.join(' | ') ?? '',
+              internationalReceivers: record.dataTransfers?.transferred
+                ? `${localization.yes}, ${record.dataTransfers?.thirdCountryRecipients}`
                 : localization.no,
-              guarantees: record.dataTransfers.guarantees,
-              securityMeasures: record.securityMeasures
+              guarantees: record.dataTransfers?.guarantees ?? '',
+              securityMeasures: record.securityMeasures ?? ''
             }
           : {
               organizationName: organization?.name ?? '',
@@ -235,95 +238,107 @@ const RecordListPage = ({
                 representatives?.dataProtectionOfficer?.email ?? '',
               dataProtectionOfficerPhone:
                 representatives?.dataProtectionOfficer?.phone ?? '',
-              title: record.title,
-              dataProcessorName: record.dataProcessorContactDetails
-                .map(item => item.name)
-                .join(' | '),
-              dataProcessorTlf: record.dataProcessorContactDetails
-                .map(item => item.phone)
-                .join(' | '),
-              dataProcessorEmail: record.dataProcessorContactDetails
-                .map(item => item.email)
-                .join(' | '),
-              dataProcessorAgreementNames: record.dataProcessingAgreements
-                .map(item => item.dataProcessorName)
-                .join(' | '),
-              dataProcessorAgreementUrls: record.dataProcessingAgreements
-                .map(item => item.agreementUrl)
-                .join(' | '),
+              title: record.title ?? '',
+              dataProcessorName:
+                record.dataProcessorContactDetails
+                  ?.map(item => item.name)
+                  ?.join(' | ') ?? '',
+              dataProcessorTlf:
+                record.dataProcessorContactDetails
+                  ?.map(item => item.phone)
+                  ?.join(' | ') ?? '',
+              dataProcessorEmail:
+                record.dataProcessorContactDetails
+                  ?.map(item => item.email)
+                  ?.join(' | ') ?? '',
+              dataProcessorAgreementNames:
+                record.dataProcessingAgreements
+                  ?.map(item => item.dataProcessorName)
+                  ?.join(' | ') ?? '',
+              dataProcessorAgreementUrls:
+                record.dataProcessingAgreements
+                  ?.map(item => item.agreementUrl)
+                  ?.join(' | ') ?? '',
               commonDataControllerCompanies:
-                record.commonDataControllerContact.companies,
+                record.commonDataControllerContact?.companies ?? '',
               commonDataControllerResponsibilities:
                 record.commonDataControllerContact
-                  .distributionOfResponsibilities,
+                  ?.distributionOfResponsibilities ?? '',
               commonDataControllerContact:
-                record.commonDataControllerContact.contactPoints
+                record.commonDataControllerContact?.contactPoints
                   ?.map(item => item.name)
                   ?.join(' | ') ?? '',
               commonDataControllerEmail:
-                record.commonDataControllerContact.contactPoints
+                record.commonDataControllerContact?.contactPoints
                   ?.map(item => item.email)
                   ?.join(' | ') ?? '',
               commonDataControllerTlf:
-                record.commonDataControllerContact.contactPoints
+                record.commonDataControllerContact?.contactPoints
                   ?.map(item => item.phone)
                   ?.join(' | ') ?? '',
-              purpose: record.purpose,
-              articleSixBasis: record.articleSixBasis
-                .map(item => item.legality)
-                .join(' | '),
-              articleSixReference: record.articleSixBasis
-                .map(item => item.referenceUrl ?? ' ')
-                .join(' | '),
+              purpose: record.purpose ?? '',
+              articleSixBasis:
+                record.articleSixBasis
+                  ?.map(item => item.legality)
+                  ?.join(' | ') ?? '',
+              articleSixReference:
+                record.articleSixBasis
+                  ?.map(item => item.referenceUrl ?? ' ')
+                  ?.join(' | ') ?? '',
               articleNineBasis: yesNoOrEmpty(
-                record.otherArticles.articleNine?.checked
+                record.otherArticles?.articleNine?.checked
               ),
-              articleNineReference: record.otherArticles.articleNine?.checked
-                ? record.otherArticles.articleNine?.referenceUrl
+              articleNineReference: record.otherArticles?.articleNine?.checked
+                ? record.otherArticles?.articleNine?.referenceUrl
                 : '',
               articleTenBasis: yesNoOrEmpty(
-                record.otherArticles.articleTen?.checked
+                record.otherArticles?.articleTen?.checked
               ),
-              articleTenReference: record.otherArticles.articleTen?.checked
-                ? record.otherArticles.articleTen?.referenceUrl
+              articleTenReference: record.otherArticles?.articleTen?.checked
+                ? record.otherArticles?.articleTen?.referenceUrl
                 : '',
-              businessAreas: record.businessAreas.join(' | '),
-              relatedDatasets: record.relatedDatasets
-                .map(
-                  id =>
-                    datasets.find(
-                      ({ id: datasetId }: Dataset) => datasetId === id
-                    )?.uri ?? ''
-                )
-                .join(' | '),
-              relatedDatasetNames: record.relatedDatasets
-                .map(
-                  id =>
-                    datasets.find(
-                      ({ id: datasetId }: Dataset) => datasetId === id
-                    )?.title[localization.getLanguage()] ?? ''
-                )
-                .join(' | '),
-              categorySubjects: record.categories
-                .map(item => item.dataSubjectCategories)
-                .join(' | '),
-              categoryPersonalData: record.categories
-                .map(item => item.personalDataCategories?.join(' | '))
-                .join(' :: '),
-              plannedDeletion: record.plannedDeletion,
-              personalDataSubjects: record.personalDataSubjects,
-              privacyProcessingSystems: record.privacyProcessingSystems,
-              recipientCategories: record.recipientCategories.join(' | '),
-              internationalReceivers: record.dataTransfers.transferred
-                ? `${localization.yes}, ${record.dataTransfers.thirdCountryRecipients}`
+              businessAreas: record.businessAreas?.join(' | ') ?? '',
+              relatedDatasets:
+                record.relatedDatasets
+                  ?.map(
+                    id =>
+                      datasets.find(
+                        ({ id: datasetId }: Dataset) => datasetId === id
+                      )?.uri ?? ''
+                  )
+                  ?.join(' | ') ?? '',
+              relatedDatasetNames:
+                record.relatedDatasets
+                  ?.map(
+                    id =>
+                      datasets.find(
+                        ({ id: datasetId }: Dataset) => datasetId === id
+                      )?.title[localization.getLanguage()] ?? ''
+                  )
+                  ?.join(' | ') ?? '',
+              categorySubjects:
+                record.categories
+                  ?.map(item => item.dataSubjectCategories)
+                  ?.join(' | ') ?? '',
+              categoryPersonalData:
+                record.categories
+                  ?.map(item => item.personalDataCategories?.join(' | '))
+                  ?.join(' :: ') ?? '',
+              plannedDeletion: record.plannedDeletion ?? '',
+              personalDataSubjects: record.personalDataSubjects ?? '',
+              privacyProcessingSystems: record.privacyProcessingSystems ?? '',
+              recipientCategories:
+                record.recipientCategories?.join(' | ') ?? '',
+              internationalReceivers: record.dataTransfers?.transferred
+                ? `${localization.yes}, ${record.dataTransfers?.thirdCountryRecipients}`
                 : localization.no,
-              guarantees: record.dataTransfers.guarantees,
-              securityMeasures: record.securityMeasures,
+              guarantees: record.dataTransfers?.guarantees ?? '',
+              securityMeasures: record.securityMeasures ?? '',
               dpiaConducted: yesNoOrEmpty(
-                record.dataProtectionImpactAssessment.conducted
+                record.dataProtectionImpactAssessment?.conducted
               ),
-              dpiaReference: record.dataProtectionImpactAssessment.conducted
-                ? record.dataProtectionImpactAssessment.assessmentReportUrl
+              dpiaReference: record.dataProtectionImpactAssessment?.conducted
+                ? record.dataProtectionImpactAssessment?.assessmentReportUrl
                 : ''
             }
       );
