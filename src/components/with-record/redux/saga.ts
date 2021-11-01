@@ -1,12 +1,7 @@
-import {
-  all,
-  call,
-  debounce,
-  takeLatest,
-  getContext,
-  put
-} from 'redux-saga/effects';
+import { all, call, debounce, takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
+
+import AuthService from '../../../services/auth';
 
 import env from '../../../env';
 
@@ -24,8 +19,10 @@ function* getRecordRequested({
   payload: { recordId, organizationId, onError }
 }: ReturnType<typeof actions.getRecordRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
 
     const { data, message } = yield call(
       axios.get,
@@ -53,8 +50,10 @@ function* patchRecordRequested({
   payload: { record }
 }: ReturnType<typeof actions.patchRecordRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { data, message } = yield call(
       axios.patch,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${
@@ -82,8 +81,10 @@ function* deleteRecordRequested({
   payload: { recordId, organizationId, onSuccess }
 }: ReturnType<typeof actions.deleteRecordRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { status, message } = yield call(
       axios.delete,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records/${recordId}`,
@@ -109,8 +110,10 @@ function* createRecordRequested({
   payload: { record }
 }: ReturnType<typeof actions.createRecordRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { headers, message } = yield call(
       axios.post,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${record.organizationId}/records`,

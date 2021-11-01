@@ -28,7 +28,10 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
     onBeforeSetupMiddleware: devServer =>
       devServer.app.get('/config.js', (_, res) => res.status(204).send()),
     historyApiFallback: {
-      rewrites: [{ from: /./, to: '/index.html' }]
+      rewrites: [
+        { from: /^\/auth/, to: '/auth.html' },
+        { from: /./, to: '/index.html' }
+      ]
     }
   },
   module: {

@@ -4,11 +4,10 @@ import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-
 const configuration: Configuration = {
   entry: {
-    main: './src/entrypoints/main/index.tsx'
+    main: './src/entrypoints/main/index.tsx',
+    auth: './src/entrypoints/auth/index.ts'
   },
   output: {
     path: resolve(__dirname, '../dist'),
@@ -98,8 +97,12 @@ const configuration: Configuration = {
       base: '/',
       chunks: ['main']
     }),
-    new CopyWebpackPlugin({
-      patterns: [{ from: './src/lib/auth/silent-check-sso.html', to: './' }]
+    new HtmlWebpackPlugin({
+      template: './src/entrypoints/auth/index.html',
+      filename: 'auth.html',
+      favicon: './src/images/favicon.ico',
+      base: '/',
+      chunks: ['auth']
     }),
     new ProvidePlugin({
       process: 'process'
