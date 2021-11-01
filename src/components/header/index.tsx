@@ -1,22 +1,19 @@
-import React, { memo } from 'react';
+import React, { memo, FC } from 'react';
+import { compose } from 'redux';
 import InternalHeader from '@fellesdatakatalog/internal-header';
 import Link from '@fellesdatakatalog/link';
 
 import env from '../../env';
 
-import { withAuth } from '../../providers/auth';
+import { withAuth, Props as AuthorizationProps } from '../../providers/auth';
 
-import { Auth } from '../../lib/auth/auth';
-
-interface Props {
-  authService: Auth;
-}
+interface Props extends AuthorizationProps {}
 
 const { ADMIN_GUI_HOST, FDK_REGISTRATION_BASE_URI, SEARCH_HOST } = env;
 
-const Header = ({ authService }: Props): JSX.Element => {
-  const userName = authService.getUser()?.name;
-  const logOutAndRedirect = () => authService.logout();
+const Header: FC<Props> = ({ authService }) => {
+  const userName = authService.getUserProfile()?.name;
+  const logOutAndRedirect = () => authService.signOut();
 
   return (
     <InternalHeader
@@ -33,4 +30,4 @@ const Header = ({ authService }: Props): JSX.Element => {
   );
 };
 
-export default memo(withAuth(Header));
+export default compose<FC>(memo, withAuth)(Header);

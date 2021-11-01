@@ -7,7 +7,7 @@ import Root from '../root';
 import Header from '../header';
 
 import env from '../../env';
-import { authService } from '../../services/auth-service';
+import AuthService from '../../services/auth';
 
 import withOrganization, {
   Props as OrganizationProps
@@ -60,7 +60,7 @@ const RecordPage = ({
   const navigateToRecordListPage = () => replace(`/${organizationId}`);
   const id = record?.id;
 
-  const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
+  const isReadOnlyUser = AuthService.isReadOnlyUser(organizationId);
 
   useEffect(() => {
     if (organizationId) {
