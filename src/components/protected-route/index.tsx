@@ -4,9 +4,11 @@ import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
 
-interface Props extends RouteProps, AuthServiceProps {
+interface ExternalProps extends RouteProps {}
+interface Props extends ExternalProps, AuthServiceProps {
   computedMatch: any;
 }
+
 const ProtectedRoute: FC<Props> = ({
   authService,
   computedMatch: {
@@ -20,4 +22,4 @@ const ProtectedRoute: FC<Props> = ({
     <Redirect to='/login' />
   );
 
-export default compose<FC>(memo, withAuth)(ProtectedRoute);
+export default compose<FC<ExternalProps>>(memo, withAuth)(ProtectedRoute);
