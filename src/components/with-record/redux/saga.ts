@@ -110,8 +110,10 @@ function* createRecordRequested({
   payload: { record }
 }: ReturnType<typeof actions.createRecordRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { headers, message } = yield call(
       axios.post,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${record.organizationId}/records`,
