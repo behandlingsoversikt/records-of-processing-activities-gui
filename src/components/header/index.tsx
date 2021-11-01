@@ -4,19 +4,15 @@ import Link from '@fellesdatakatalog/link';
 
 import env from '../../env';
 
-import { withAuth } from '../../providers/auth';
+import { withAuth, Props as AuthorizationProps } from '../../providers/auth';
 
-import { Auth } from '../../lib/auth/auth';
-
-interface Props {
-  authService: Auth;
-}
+interface Props extends AuthorizationProps {}
 
 const { ADMIN_GUI_HOST, FDK_REGISTRATION_BASE_URI, SEARCH_HOST } = env;
 
 const Header = ({ authService }: Props): JSX.Element => {
-  const userName = authService.getUser()?.name;
-  const logOutAndRedirect = () => authService.logout();
+  const userName = authService.getUserProfile()?.name;
+  const logOutAndRedirect = () => authService.signOut();
 
   return (
     <InternalHeader

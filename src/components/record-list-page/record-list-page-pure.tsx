@@ -9,7 +9,6 @@ import Header from '../header';
 
 import env from '../../env';
 import { localization } from '../../lib/localization';
-import { authService } from '../../services/auth-service';
 
 import withDatasets, { Props as DatasetsProps } from '../with-datasets';
 import withOrganization, {
@@ -30,6 +29,8 @@ import SC from './styled';
 import { Dataset, Record, RepresentativesInterface } from '../../types';
 import { fetchAllRepresentativesRequested } from '../representatives/redux/actions';
 
+import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
+
 const { FDK_REGISTRATION_BASE_URI } = env;
 
 interface RouteParams {
@@ -40,6 +41,7 @@ interface Props
   extends DatasetsProps,
     RecordsProps,
     OrganizationProps,
+    AuthServiceProps,
     RouteComponentProps<RouteParams> {
   representatives: RepresentativesInterface;
   fetchAllRepresentatives: typeof fetchAllRepresentativesRequested;
@@ -58,7 +60,8 @@ const RecordListPage = ({
   fetchAllRepresentatives,
   datasetsActions: { fetchAllDatasetsRequested },
   recordsActions: { fetchAllRecordsRequested },
-  organizationActions: { fetchOrganizationRequested }
+  organizationActions: { fetchOrganizationRequested },
+  authService
 }: Props): JSX.Element => {
   useEffect(() => {
     if (organizationId) {
@@ -420,5 +423,5 @@ const RecordListPage = ({
 };
 
 export default memo(
-  withDatasets(withRecords(withOrganization(RecordListPage)))
+  withAuth(withDatasets(withRecords(withOrganization(RecordListPage))))
 );

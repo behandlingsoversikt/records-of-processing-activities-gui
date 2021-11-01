@@ -4,8 +4,6 @@ import { resolve } from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-import CopyWebpackPlugin from 'copy-webpack-plugin';
-
 const configuration: Configuration = {
   entry: {
     main: './src/entrypoints/main/index.tsx'
@@ -97,9 +95,6 @@ const configuration: Configuration = {
       favicon: './src/images/favicon.ico',
       base: '/',
       chunks: ['main']
-    }),
-    new CopyWebpackPlugin({
-      patterns: [{ from: './src/lib/auth/silent-check-sso.html', to: './' }]
     }),
     new ProvidePlugin({
       process: 'process'

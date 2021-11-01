@@ -1,26 +1,23 @@
-import React, { memo } from 'react';
+import React, { memo, FC } from 'react';
+import { compose } from 'redux';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
-import { withAuth } from '../../providers/auth';
-import { Auth } from '../../lib/auth/auth';
+import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
 
-interface Props extends RouteProps {
-  authService: Auth;
+interface Props extends RouteProps, AuthServiceProps {
   computedMatch: any;
 }
-const ProtectedRoute = (props: Props): JSX.Element => {
-  const {
-    authService,
-    computedMatch: {
-      params: { organizationId }
-    }
-  } = props;
-
-  return authService.hasAccessRights(organizationId) ? (
+const ProtectedRoute: FC<Props> = ({
+  authService,
+  computedMatch: {
+    params: { organizationId }
+  },
+  ...props
+}) =>
+  authService.hasAccessRights(organizationId) ? (
     <Route {...props} />
   ) : (
     <Redirect to='/login' />
   );
-};
 
-export default memo(withAuth(ProtectedRoute));
+export default compose<FC>(memo, withAuth)(ProtectedRoute);

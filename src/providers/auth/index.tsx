@@ -1,56 +1,36 @@
-import React, { ComponentType, createContext, PureComponent } from 'react';
+import React, { FC, PropsWithChildren, memo, useState, useEffect } from 'react';
+import { compose } from 'redux';
 
-import { authService } from '../../services/auth-service';
-import { Auth } from '../../lib/auth/auth';
+import service from '../../services/auth';
 
-const AuthContext = createContext<any>(null);
+import Context from './context';
 
-interface Props {}
+const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
+  const [isInitialised, setIsInitialised] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-interface State {
-  service: Auth;
-  instantiated: boolean;
-}
+  const init = async () => {
+    try {
+      const authenticated = await service.init();
 
-class AuthProvider extends PureComponent<Props, State> {
-  constructor(props: Props) {
-    super(props);
+      setIsInitialised(true);
+      setIsAuthenticated(authenticated);
+    } catch (e: any) {
+      // TODO: handle service errors and log them to Sentry
+    }
+  };
 
-    this.state = {
-      service: authService,
-      instantiated: false
-    };
-  }
+  useEffect(() => {
+    init();
+  }, []);
 
-  public async componentDidMount(): Promise<void> {
-    const { service } = this.state;
-    await service.init({ loginRequired: true });
-    this.setState({ instantiated: true });
-  }
-
-  public render(): JSX.Element {
-    const { children } = this.props;
-    const { instantiated } = this.state;
-    return instantiated ? (
-      <AuthContext.Provider value={this.state}>{children}</AuthContext.Provider>
-    ) : (
-      <></>
-    );
-  }
-}
-
-export function withAuth(Child: ComponentType<any>): ComponentType<any> {
-  return (props: any) => (
-    <AuthContext.Consumer>
-      {({ service }) =>
-        service ? (
-          <Child {...props} authService={service} />
-        ) : (
-          <Child {...props} />
-        )
-      }
-    </AuthContext.Consumer>
+  return isInitialised && isAuthenticated ? (
+    <Context.Provider value={{ service }}>{children}</Context.Provider>
+  ) : (
+    <></>
   );
-}
+};
 
-export default AuthProvider;
+export default compose<FC>(memo)(AuthProvider);
+export { withAuth } from './hoc';
+export type { ServiceProps as Props } from './hoc';

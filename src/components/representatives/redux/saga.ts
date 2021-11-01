@@ -1,12 +1,7 @@
-import {
-  all,
-  call,
-  debounce,
-  takeLatest,
-  getContext,
-  put
-} from 'redux-saga/effects';
+import { all, call, debounce, takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
+
+import AuthService from '../../../services/auth';
 
 import env from '../../../env';
 
@@ -23,8 +18,10 @@ function* patchRepresentativeRequested({
   payload: { type: field, payload, organizationId }
 }: ReturnType<typeof actions.patchRepresentativeRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { data, message } = yield call(
       axios.patch,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,
@@ -50,8 +47,10 @@ function* createRepresentativeRequested({
   payload: { organizationId }
 }: ReturnType<typeof actions.createRepresentativeRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { data, message } = yield call(
       axios.post,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,
@@ -77,8 +76,10 @@ function* fetchAllRepresentativesRequested({
   payload: { organizationId }
 }: ReturnType<typeof actions.fetchAllRepresentativesRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { data, message, status } = yield call(
       axios.get,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/representatives`,

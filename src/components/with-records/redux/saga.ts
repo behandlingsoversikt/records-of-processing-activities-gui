@@ -1,5 +1,7 @@
-import { all, call, getContext, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+
+import AuthService from '../../../services/auth';
 
 import env from '../../../env';
 
@@ -12,8 +14,10 @@ function* fetchAllRecordsRequested({
   payload: { organizationId }
 }: ReturnType<typeof actions.fetchAllRecordsRequested>) {
   try {
-    const auth = yield getContext('auth');
-    const authorization = yield call([auth, auth.getAuthorizationHeader]);
+    const authorization: string = yield call([
+      AuthService,
+      AuthService.getAuthorizationHeader
+    ]);
     const { data, message } = yield call(
       axios.get,
       `${RECORDS_OF_PROCESSING_ACTIVITIES_URL}/api/organizations/${organizationId}/records`,
