@@ -6,7 +6,8 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 const configuration: Configuration = {
   entry: {
-    main: './src/entrypoints/main/index.tsx'
+    main: './src/entrypoints/main/index.tsx',
+    auth: './src/entrypoints/auth/index.ts'
   },
   output: {
     path: resolve(__dirname, '../dist'),
@@ -95,6 +96,13 @@ const configuration: Configuration = {
       favicon: './src/images/favicon.ico',
       base: '/',
       chunks: ['main']
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/entrypoints/auth/index.html',
+      filename: 'auth.html',
+      favicon: './src/images/favicon.ico',
+      base: '/',
+      chunks: ['auth']
     }),
     new ProvidePlugin({
       process: 'process'

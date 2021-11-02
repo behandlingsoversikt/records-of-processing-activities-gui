@@ -1,8 +1,9 @@
 import {
-  InMemoryWebStorage,
+  // InMemoryWebStorage,
   User,
-  UserManager,
-  WebStorageStateStore
+  UserManager
+  // WebStorageStateStore
+  // Log
 } from 'oidc-client';
 
 import config from './config';
@@ -17,39 +18,75 @@ class AuthService {
 
   constructor() {
     this.manager = new UserManager({
-      ...config,
-      userStore: new WebStorageStateStore({ store: new InMemoryWebStorage() })
+      ...config
+      // userStore: new WebStorageStateStore({ store: new InMemoryWebStorage() })
     });
-
     this.manager.events?.addUserLoaded(this.setUser.bind(this));
   }
 
-  private hasCodeInUrl(location: Location): boolean {
-    const searchParams = new URLSearchParams(location.search);
-    const hashParams = new URLSearchParams(location.hash.replace('#', '?'));
+  // private hasCodeInUrl(location: Location): boolean {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   const hashParams = new URLSearchParams(location.hash.replace('#', '?'));
 
-    return Boolean(
-      searchParams.get('code') ||
-        searchParams.get('id_token') ||
-        searchParams.get('session_state') ||
-        hashParams.get('code') ||
-        hashParams.get('id_token') ||
-        hashParams.get('session_state')
-    );
-  }
+  //   return Boolean(
+  //     searchParams.get('code') ||
+  //       searchParams.get('id_token') ||
+  //       searchParams.get('session_state') ||
+  //       hashParams.get('code') ||
+  //       hashParams.get('id_token') ||
+  //       hashParams.get('session_state')
+  //   );
+  // }
+
+  // public async init(): Promise<boolean> {
+  //   try {
+  //     if (this.hasCodeInUrl(location)) {
+  //       try {
+  //         this.user = await this.manager.signinRedirectCallback();
+  //       } catch (e: any) {
+  //         // eslint-disable-next-line no-console
+  //         console.log(e);
+  //       }
+  //       if (this.user?.state?.path) {
+  //         // location.replace(this.user.state.path.replace(location.origin, ''));
+  //         window.history.replaceState(
+  //           null,
+  //           '',
+  //           this.user.state.path.replace(location.origin, '')
+  //         );
+  //         return true;
+  //       }
+  //     }
+
+  //     this.user = await this.manager.getUser();
+  //     if (this.isAuthenticated() && !this.isTokenExpired()) {
+  //       // eslint-disable-next-line no-console
+  //       console.log('logged in');
+  //       return true;
+  //     }
+
+  //     // eslint-disable-next-line no-console
+  //     console.log('signin');
+
+  //     await this.cleanUp();
+  //     await this.signIn();
+  //   } catch (e: any) {
+  //     // TODO: handle service errors and log them to Sentry
+  //   }
+
+  //   return this.isAuthenticated() && !this.isTokenExpired();
+  // }
 
   public async init(): Promise<boolean> {
     try {
-      if (this.hasCodeInUrl(location)) {
-        this.user = await this.manager.signinRedirectCallback();
-      }
-
+      this.user = await this.manager.getUser();
       if (this.isAuthenticated() && !this.isTokenExpired()) {
         return true;
       }
 
       await this.cleanUp();
-      await this.signIn();
+
+      this.user = await this.manager.signinSilent();
     } catch (e: any) {
       if (e.error === OidcError.LOGIN_REQUIRED) {
         await this.signIn();
