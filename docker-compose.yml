@@ -7,9 +7,79 @@ services:
     ports:
       - 8140:8080
     environment:
-      - OIDC_ISSUER
-      - RECORDS_OF_PROCESSING_ACTIVITIES_URL
-      - FDK_REGISTRATION_BASE_URI
-      - ORGANIZATION_API
-      - SEARCH_HOST
-      - ADMIN_GUI_HOST
+      OIDC_ISSUER: 'http://localhost:4011'
+      CLIENT_SECRET: 'records-of-processing-activities-gui-secret'
+      RECORDS_OF_PROCESSING_ACTIVITIES_URL: 'https://registrering-protokoll.staging.fellesdatakatalog.digdir.no'
+      FDK_REGISTRATION_BASE_URI: 'https://registrering.staging.fellesdatakatalog.digdir.no'
+      ORGANIZATION_API: 'https://organization-catalogue.staging.fellesdatakatalog.digdir.no'
+      SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no'
+      ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no'
+  oidc-server-mock:
+    container_name: oidc-server-mock
+    image: ghcr.io/soluto/oidc-server-mock:latest
+    ports:
+      - "4011:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      SERVER_CORS_ALLOWED_ORIGINS_INLINE: |
+        [
+          "http://localhost:8140"
+        ]
+      SERVER_OPTIONS_INLINE: |
+        {
+          "AccessTokenJwtType": "JWT",
+          "Discovery": {
+            "ShowKeySet": true
+          },
+          "Authentication": {
+            "CookieSameSiteMode": "Lax",
+            "CheckSessionCookieSameSiteMode": "Lax"
+          }
+        }
+      ACCOUNT_OPTIONS_INLINE: |
+        {
+          "AutomaticRedirectAfterSignOut": true
+        }
+      USERS_CONFIGURATION_INLINE: |
+        [
+          {
+            "SubjectId":"1",
+            "Username":"stig",
+            "Password":"stig",
+            "Claims": [
+              {
+                "Type": "name",
+                "Value": "The Stig"
+              },
+              {
+                "Type": "email",
+                "Value": "the-stig@gmail.com"
+              },
+              {
+                "Type": "authorities",
+                "Value": "organization:910244132:admin"
+              }
+            ]
+          }
+        ]
+      IDENTITY_RESOURCES_INLINE: |
+        [
+          {
+            "Name": "authorities",
+            "ClaimTypes": ["authorities"]
+          }
+        ]
+      CLIENTS_CONFIGURATION_INLINE: |
+        [
+          {
+            "ClientId": "records-of-processing-activities-gui",
+            "ClientSecrets": ["records-of-processing-activities-gui-secret"],
+            "Description": "",
+            "AllowedGrantTypes": ["authorization_code"],
+            "RedirectUris": ["http://localhost:8140/auth"],
+            "AllowedScopes": ["openid", "authorities", "profile", "email"],
+            "ClientClaimsPrefix": "",
+            "Claims": []
+          }
+        ]   
+        

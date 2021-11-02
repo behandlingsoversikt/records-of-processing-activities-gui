@@ -2,6 +2,7 @@ import { Configuration } from './types';
 
 interface EnvironmentVariables {
   OIDC_ISSUER: string;
+  CLIENT_SECRET: string;
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   FDK_REGISTRATION_BASE_URI: string;
   ORGANIZATION_API: string;
@@ -12,6 +13,7 @@ interface EnvironmentVariables {
 const env = ((window as any).env || {
   OIDC_ISSUER:
     'https://sso.staging.fellesdatakatalog.digdir.no/auth/realms/fdk',
+  CLIENT_SECRET: '',
   RECORDS_OF_PROCESSING_ACTIVITIES_URL:
     'https://registrering-protokoll.staging.fellesdatakatalog.digdir.no',
   FDK_REGISTRATION_BASE_URI:
