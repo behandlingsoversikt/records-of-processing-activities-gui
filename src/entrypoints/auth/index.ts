@@ -1,7 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import { UserManager } from 'oidc-client';
+import { UserManager, Log } from 'oidc-client';
 
 import config from '../../services/auth/config';
 
@@ -24,7 +24,7 @@ async function run(): Promise<void> {
       path = user.state.path.replace(location.origin, '');
     }
   } catch (e: any) {
-    // TODO: handle errors and log them to Sentry
+    Log.error('OIDC signin callback failed');
   } finally {
     if (!isInIframe) {
       location.replace(path);
