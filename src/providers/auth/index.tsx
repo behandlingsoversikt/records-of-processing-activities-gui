@@ -10,14 +10,10 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const init = async () => {
-    try {
-      setIsInitialised(true);
+    setIsInitialised(true);
 
-      const authenticated = await service.init();
-      setIsAuthenticated(authenticated);
-    } catch (e: any) {
-      // TODO: handle service errors and log them to Sentry
-    }
+    const authenticated = await service.init();
+    setIsAuthenticated(authenticated);
   };
 
   useEffect(() => {
@@ -28,9 +24,7 @@ const AuthProvider: FC<PropsWithChildren<any>> = ({ children }) => {
 
   return isInitialised && isAuthenticated ? (
     <Context.Provider value={{ service }}>{children}</Context.Provider>
-  ) : (
-    <></>
-  );
+  ) : null;
 };
 
 export default compose<FC>(memo)(AuthProvider);
