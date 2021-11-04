@@ -31,6 +31,7 @@ An application for managing records of processing activities.
 
 - `OIDC_ISSUER` - OIDC issuer URI
 - `OIDC_CLIENT_SECRET` - OIDC client secret
+- `DATASET_CATALOG_API` - Dataset catalog API
 - `RECORDS_OF_PROCESSING_ACTIVITIES_URL` - Base URL of Records of Processing Activities backend
 - `FDK_REGISTRATION_BASE_URI` - Base URI for registration clients
 - `ORGANIZATION_API` - Base URL of Organization backend
