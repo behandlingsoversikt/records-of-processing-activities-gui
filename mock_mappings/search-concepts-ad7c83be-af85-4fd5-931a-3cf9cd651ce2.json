@@ -1,0 +1,33 @@
+{
+  "id": "ad7c83be-af85-4fd5-931a-3cf9cd651ce2",
+  "name": "collections",
+  "request": {
+    "url": "/concepts",
+    "method": "POST"
+  },
+  "response": {
+    "status": 200,
+    "body": "{\"hits\": [{\"id\": \"40938d13-eda7-406d-b6bc-fbe26506f6ac\", \"uri\": \"https://concepts.fellesdatakatalog.digdir.no/concepts/40938d13-eda7-406d-b6bc-fbe26506f6ac\", \"identifier\": \"http://begrepskatalogen/begrep/1a9af0d9-098d-11e7-94d1-005056825ca0\", \"harvest\": {\"firstHarvested\": \"2019-04-29T12:17:51Z\", \"changed\": [\"2021-05-11T06:02:45Z\"]}, \"collection\": {\"id\": \"6b90b4ab-12d1-3169-85b9-b0849e77a195\", \"uri\": \"https://data.skatteetaten.no/begrep/#GeneratedCollection\", \"label\": {\"nn\": \"SKATTEETATEN - Begrepssamling\", \"nb\": \"SKATTEETATEN - Begrepssamling\", \"en\": \"SKATTEETATEN - Concept collection\"}, \"description\": null, \"publisher\": {\"uri\": \"https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/974761076\", \"id\": \"974761076\", \"name\": \"SKATTEETATEN\", \"orgPath\": \"/STAT/972417807/974761076\", \"prefLabel\": {\"nb\": \"SKATTEETATEN\"}, \"organisasjonsform\": \"https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#ORGL\"}}, \"publisher\": {\"uri\": \"https://organization-catalogue.fellesdatakatalog.digdir.no/organizations/974761076\", \"id\": \"974761076\", \"name\": \"SKATTEETATEN\", \"orgPath\": \"/STAT/972417807/974761076\", \"prefLabel\": {\"nb\": \"SKATTEETATEN\"}, \"organisasjonsform\": \"https://raw.githubusercontent.com/Informasjonsforvaltning/organization-catalogue/master/src/main/resources/ontology/org-type.ttl#ORGL\"}, \"subject\": {\"nb\": \"Folkeregister\"}, \"application\": null, \"example\": null, \"prefLabel\": {\"nb\": \"n\u00f8dpass\"}, \"hiddenLabel\": null, \"altLabel\": [{\"nb\": \"provisorisk pass\"}], \"contactPoint\": {\"uri\": null, \"fullname\": null, \"email\": \"begrepskatalogen@skatteetaten.no\", \"organizationName\": null, \"organizationUnit\": null, \"hasURL\": null, \"hasTelephone\": null}, \"definition\": {\"text\": {\"nb\": \"reisedokument som er en erstatning for ordin\u00e6rt pass\"}, \"remark\": null, \"targetGroup\": null, \"sourceRelationship\": null, \"range\": null, \"sources\": null, \"lastUpdated\": null}, \"seeAlso\": null, \"validFromIncluding\": \"2017-03-03\", \"validToIncluding\": null, \"type\": \"concept\"}], \"page\": {\"size\": 1, \"totalElements\": 1, \"totalPages\": 1, \"currentPage\": 0}, \"aggregations\": {\"los\": {\"doc_count_error_upper_bound\": 0, \"sum_other_doc_count\": 0, \"buckets\": []}, \"provenance\": {\"doc_count_error_upper_bound\": 0, \"sum_other_doc_count\": 0, \"buckets\": []}, \"orgPath\": {\"doc_count_error_upper_bound\": 0, \"sum_other_doc_count\": 0, \"buckets\": [{\"key\": \"/STAT\", \"doc_count\": 1}, {\"key\": \"/STAT/972417807\", \"doc_count\": 1}, {\"key\": \"/STAT/972417807/974761076\", \"doc_count\": 1}]}, \"opendata\": {\"meta\": {}, \"doc_count\": 0}, \"theme\": {\"doc_count_error_upper_bound\": 0, \"sum_other_doc_count\": 0, \"buckets\": []}, \"accessRights\": {\"doc_count_error_upper_bound\": 0, \"sum_other_doc_count\": 0, \"buckets\": [{\"key\": \"Ukjent\", \"doc_count\": 1}]}, \"spatial\": {\"doc_count_error_upper_bound\": 0, \"sum_other_doc_count\": 0, \"buckets\": []}}}",
+    "headers": {
+      "Vary": [
+        "Origin",
+        "Access-Control-Request-Method",
+        "Access-Control-Request-Headers"
+      ],
+      "X-Content-Type-Options": "nosniff",
+      "X-XSS-Protection": "1; mode=block",
+      "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": "0",
+      "Strict-Transport-Security": "max-age=31536000 ; includeSubDomains",
+      "X-Frame-Options": "DENY",
+      "Content-Type": "application/json;charset=UTF-8",
+      "Date": "Fri, 26 Feb 2021 08:31:15 GMT",
+      "Via": "1.1 google",
+      "Alt-Svc": "clear"
+    }
+  },
+  "uuid": "ad7c83be-af85-4fd5-931a-3cf9cd651ce2",
+  "persistent": true,
+  "insertionIndex": 18
+}

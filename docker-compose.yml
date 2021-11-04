@@ -1,15 +1,201 @@
 version: "3"
 
+networks:
+  rop-net:
+    driver: bridge
+
 services:
   records-of-processing-activities-gui:
+    container_name: records-of-processing-activities-gui
     build: ../records-of-processing-activities-gui
     image: dcatno/records-of-processing-activities-gui:latest
     ports:
       - 8140:8080
+    environment:      
+      OIDC_ISSUER: 'http://localhost:4011'
+      OIDC_CLIENT_SECRET: 'records-of-processing-activities-gui-secret'
+      RECORDS_OF_PROCESSING_ACTIVITIES_URL: 'http://localhost:8081'
+      FDK_REGISTRATION_BASE_URI: 'https://registrering.staging.fellesdatakatalog.digdir.no'
+      DATASET_CATALOG_API: 'http://localhost:8084'
+      ORGANIZATION_API: 'http://localhost:8082'
+      SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no'
+      ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no'
+    networks:
+      - rop-net
+      
+  records-of-processing-activities:
+    container_name: records-of-processing-activities
+    image: eu.gcr.io/digdir-fdk-infra/records-of-processing-activities:latest
+    ports:
+      - "8081:8080"
     environment:
-      - OIDC_ISSUER
-      - RECORDS_OF_PROCESSING_ACTIVITIES_URL
-      - FDK_REGISTRATION_BASE_URI
-      - ORGANIZATION_API
-      - SEARCH_HOST
-      - ADMIN_GUI_HOST
+      OIDC_ISSUER: 'http://oidc-server-mock'
+      OIDC_JWKS: 'http://oidc-server-mock/.well-known/openid-configuration/jwks'
+      MONGO_HOST: 'mongodb'
+      MONGO_USERNAME: 'admin'
+      MONGO_PASSWORD: 'admin'
+    networks:
+      - rop-net
+
+  organization-catalogue:
+    container_name: organization-catalogue
+    image: eu.gcr.io/digdir-fdk-infra/organization-catalogue:latest
+    ports:
+      - "8082:8080"
+    environment:
+      ENHETSREGISTERET_PROXY_BASE_URL: 'http://fdk-nginx-enhetsregisteret-proxy-mock:8080'
+      MONGO_HOST: 'mongodb'
+      MONGO_USERNAME: 'admin'
+      MONGO_PASSWORD: 'admin'
+    networks:
+      - rop-net
+
+  dataset-catalog:
+    container_name: dataset-catalog
+    image: eu.gcr.io/digdir-fdk-infra/dataset-catalog:latest
+    ports:
+      - "8084:8080"
+    environment:
+      OIDC_ISSUER: 'http://oidc-server-mock'
+      OIDC_JWKS: 'http://oidc-server-mock/.well-known/openid-configuration/jwks'
+      ORGANIZATION_CATALOGUE_HOST: 'http://organization-catalogue:8080'
+      SEARCH_FULLTEXT_HOST: 'http://services-mock:8080'
+      MONGO_HOST: 'mongodb'
+      MONGO_USERNAME: 'admin'
+      MONGO_PASSWORD: 'admin'
+      RABBIT_HOST: 'rabbitmq'
+      RABBIT_USERNAME: 'admin'
+      RABBIT_PASSWORD: 'admin'
+    networks:
+      - rop-net
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - 27017:27017
+    networks:
+      - rop-net
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - rop-net
+
+  fdk-nginx-enhetsregisteret-proxy-mock:
+    container_name: fdk-nginx-enhetsregisteret-proxy-mock
+    image: eu.gcr.io/digdir-fdk-infra/fdk-nginx-enhetsregisteret-proxy-mock:latest
+    ports:
+      - 8083:8080
+    networks:
+      - rop-net
+
+  services-mock:
+    container_name: services-mock
+    image: rodolpheche/wiremock
+    ports:
+      - "8085:8080"
+    volumes:
+      - ./mock_mappings/mappings:/home/wiremock/mappings
+    networks:
+      - rop-net
+
+  oidc-server-mock:
+    container_name: oidc-server-mock
+    image: ghcr.io/soluto/oidc-server-mock:latest
+    ports:
+      - "4011:80"
+    networks:
+      - rop-net
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      SERVER_CORS_ALLOWED_ORIGINS_INLINE: |
+        [
+          "http://localhost:8140"
+        ]
+      SERVER_OPTIONS_INLINE: |
+        {
+          "IssuerUri": "http://oidc-server-mock",
+          "AccessTokenJwtType": "JWT",
+          "EmitStaticAudienceClaim": false,
+          "Discovery": {
+            "ShowKeySet": true
+          },
+          "Authentication": {
+            "CookieSameSiteMode": "Lax",
+            "CheckSessionCookieSameSiteMode": "Lax"
+          }          
+        }
+      ACCOUNT_OPTIONS_INLINE: |
+        {
+          "AutomaticRedirectAfterSignOut": true          
+        }
+      API_SCOPES_INLINE: |
+        [
+          {
+            "Name": "authorities"
+          }
+        ]
+      API_RESOURCES_INLINE: |
+        [
+          {
+            "Name": "records-of-processing-activities",
+            "Scopes": ["authorities"],
+            "UserClaims": ["authorities"]
+          },
+          {
+            "Name": "fdk-registration-api",
+            "Scopes": ["authorities"],
+            "UserClaims": ["authorities"]
+          }
+        ]
+      USERS_CONFIGURATION_INLINE: |
+        [
+          {
+            "SubjectId":"1",
+            "Username":"stig",
+            "Password":"stig",
+            "Claims": [
+              {
+                "Type": "name",
+                "Value": "The Stig"
+              },
+              {
+                "Type": "email",
+                "Value": "the-stig@gmail.com"
+              },
+              {
+                "Type": "authorities",
+                "Value": "organization:910244132:admin"
+              }
+            ]
+          }
+        ]
+    
+      CLIENTS_CONFIGURATION_INLINE: |
+        [
+          {
+            "ClientId": "records-of-processing-activities-gui",
+            "ClientSecrets": ["records-of-processing-activities-gui-secret"],
+            "Description": "",
+            "AllowedGrantTypes": ["authorization_code"],
+            "AllowAccessTokensViaBrowser": true,
+            "AlwaysSendClientClaims": true,
+            "AlwaysIncludeUserClaimsInIdToken": true,
+            "RedirectUris": ["http://localhost:8140/auth"],
+            "AllowedScopes": ["openid", "authorities", "profile", "email"],
+            "ClientClaimsPrefix": "",
+            "Claims": []
+          }
+        ]   
+        
