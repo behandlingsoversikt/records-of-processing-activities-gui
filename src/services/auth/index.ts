@@ -1,10 +1,5 @@
-import {
-  // InMemoryWebStorage,
-  User,
-  UserManager
-  // WebStorageStateStore
-  // Log
-} from 'oidc-client';
+import { User, UserManager, Log } from 'oidc-client';
+import jwt_decode from 'jwt-decode';
 
 import config from './config';
 
@@ -37,7 +32,7 @@ class AuthService {
       if (e.error === OidcError.LOGIN_REQUIRED) {
         await this.signIn();
       }
-      // TODO: handle service errors and log them to Sentry
+      Log.error('OIDC init failed');
     }
 
     return this.isAuthenticated() && !this.isTokenExpired();
@@ -47,7 +42,7 @@ class AuthService {
     try {
       await this.manager.signinRedirect({ data: { path: location.href } });
     } catch (e: any) {
-      // TODO: handle service errors and log them to Sentry
+      Log.error('OIDC signin failed');
     }
   }
 
@@ -55,7 +50,7 @@ class AuthService {
     try {
       await this.manager.signoutRedirect();
     } catch (e: any) {
-      // TODO: handle service errors and log them to Sentry
+      Log.error('OIDC signout failed');
     }
   }
 
@@ -78,7 +73,7 @@ class AuthService {
         return `${token_type} ${access_token}`;
       }
     } catch (e: any) {
-      // TODO: handle service errors and log them to Sentry
+      Log.error('OIDC fetching authorization header failed');
     }
 
     return '';
@@ -96,21 +91,35 @@ class AuthService {
         given_name: firstName,
         family_name: lastName,
         name,
-        authorities = '',
         fdk_terms: fdkTerms = '',
         org_terms = ''
       } = this.user.profile;
 
-      return {
-        id,
-        username,
-        firstName,
-        lastName,
-        name,
-        authorities: authorities.split(','),
-        fdkTerms,
-        orgTerms: org_terms.split(',')
-      };
+      try {
+        const { authorities = '' }: any = jwt_decode(this.user.access_token);
+
+        return {
+          id,
+          username,
+          firstName,
+          lastName,
+          name,
+          authorities: authorities.split(','),
+          fdkTerms,
+          orgTerms: org_terms.split(',')
+        };
+      } catch (e: any) {
+        return {
+          id,
+          username,
+          firstName,
+          lastName,
+          name,
+          authorities: [],
+          fdkTerms,
+          orgTerms: org_terms.split(',')
+        };
+      }
     }
 
     return {};

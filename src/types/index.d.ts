@@ -1,11 +1,12 @@
 export interface Configuration {
-  OIDC_ISSUER: string;
-  CLIENT_SECRET: string;
-  RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
-  FDK_REGISTRATION_BASE_URI: string;
-  ORGANIZATION_API: string;
-  SEARCH_HOST: string;
   ADMIN_GUI_HOST: string;
+  DATASET_CATALOG_API: string;
+  FDK_REGISTRATION_BASE_URI: string;
+  OIDC_ISSUER: string;
+  OIDC_CLIENT_SECRET: string;
+  ORGANIZATION_API: string;
+  RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
+  SEARCH_HOST: string;
 }
 
 export * from './domain';

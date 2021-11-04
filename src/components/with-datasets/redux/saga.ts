@@ -8,7 +8,7 @@ import env from '../../../env';
 import * as actions from './actions';
 import { FETCH_ALL_DATASETS_REQUESTED } from './action-types';
 
-const { FDK_REGISTRATION_BASE_URI } = env;
+const { DATASET_CATALOG_API } = env;
 
 function* fetchAllDatasetsRequested({
   payload: { organizationId }
@@ -21,7 +21,7 @@ function* fetchAllDatasetsRequested({
 
     const { data, message } = yield call(
       axios.get,
-      `${FDK_REGISTRATION_BASE_URI}/catalogs/${organizationId}/datasets`,
+      `${DATASET_CATALOG_API}/catalogs/${organizationId}/datasets`,
       {
         params: {
           size: 1000
