@@ -74,9 +74,12 @@ const RecordListPage = ({
 
   const navigateToNewRecordPage = () => push(`/${organizationId}/records`);
 
-  const yesNoOrEmpty = (bool: boolean | undefined) => {
+  const yesNoOrEmpty = (
+    bool: boolean | undefined,
+    yesText: string = localization.yes
+  ) => {
     if (typeof bool === 'boolean') {
-      return bool ? localization.yes : localization.no;
+      return bool ? yesText : localization.no;
     }
     return '';
   };
@@ -204,9 +207,10 @@ const RecordListPage = ({
               plannedDeletion: record.plannedDeletion ?? '',
               recipientCategories:
                 record.recipientCategories?.join(' | ') ?? '',
-              internationalReceivers: record.dataTransfers?.transferred
-                ? `${localization.yes}, ${record.dataTransfers?.thirdCountryRecipients}`
-                : localization.no,
+              internationalReceivers: yesNoOrEmpty(
+                record.dataTransfers?.transferred,
+                `${localization.yes}, ${record.dataTransfers?.thirdCountryRecipients}`
+              ),
               guarantees: record.dataTransfers?.guarantees ?? '',
               securityMeasures: record.securityMeasures ?? ''
             }
@@ -332,9 +336,10 @@ const RecordListPage = ({
               privacyProcessingSystems: record.privacyProcessingSystems ?? '',
               recipientCategories:
                 record.recipientCategories?.join(' | ') ?? '',
-              internationalReceivers: record.dataTransfers?.transferred
-                ? `${localization.yes}, ${record.dataTransfers?.thirdCountryRecipients}`
-                : localization.no,
+              internationalReceivers: yesNoOrEmpty(
+                record.dataTransfers?.transferred,
+                `${localization.yes}, ${record.dataTransfers?.thirdCountryRecipients}`
+              ),
               guarantees: record.dataTransfers?.guarantees ?? '',
               securityMeasures: record.securityMeasures ?? '',
               dpiaConducted: yesNoOrEmpty(
