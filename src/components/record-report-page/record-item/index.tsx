@@ -351,18 +351,22 @@ const RecordItemPure = ({
               {localization.dataProtectionImpactAssessment}
             </SC.SectionSubTitle>
             {dataProtectionImpactAssessment &&
-            dataProtectionImpactAssessment.conducted
-              ? localization.yes
-              : localization.no}
+              typeof dataProtectionImpactAssessment.conducted === 'boolean' &&
+              `${
+                dataProtectionImpactAssessment.conducted
+                  ? localization.yes
+                  : localization.no
+              }`}
             {dataProtectionImpactAssessment &&
-              !dataProtectionImpactAssessment.conducted && (
+              dataProtectionImpactAssessment.conducted &&
+              dataProtectionImpactAssessment.assessmentReportUrl && (
                 <span>
                   <a
                     title={localization.assessmentReportUrl}
-                    href={localization.assessmentReportUrl}
+                    href={dataProtectionImpactAssessment.assessmentReportUrl}
                     rel='noopener noreferrer'
                   >
-                    {localization.assessmentReportUrl}
+                    {`, ${localization.assessmentReportUrl}`}
                   </a>
                 </span>
               )}
