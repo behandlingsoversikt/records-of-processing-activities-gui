@@ -319,9 +319,9 @@ const RecordItemPure = ({
             {localization.transfered}
             <SC.RequiredLabel text='Obligatorisk' />
           </SC.SectionSubTitle>
-          {dataTransfers && dataTransfers.transferred
-            ? localization.yes
-            : localization.no}
+          {dataTransfers &&
+            typeof dataTransfers.transferred === 'boolean' &&
+            `${dataTransfers.transferred ? localization.yes : localization.no}`}
           {dataTransfers && dataTransfers.thirdCountryRecipients && (
             <span>, {dataTransfers.thirdCountryRecipients}</span>
           )}
