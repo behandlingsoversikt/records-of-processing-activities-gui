@@ -9,6 +9,7 @@ interface EnvironmentVariables {
   ORGANIZATION_API: string;
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   SEARCH_HOST: string;
+  USE_DEMO_LOGO: boolean;
 }
 
 const env = ((window as any).env || {
@@ -25,7 +26,8 @@ const env = ((window as any).env || {
   RECORDS_OF_PROCESSING_ACTIVITIES_URL:
     'https://registrering-protokoll.staging.fellesdatakatalog.digdir.no',
 
-  SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no'
+  SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no',
+  USE_DEMO_LOGO: false
 }) as EnvironmentVariables;
 
 export default { ...env } as Configuration;

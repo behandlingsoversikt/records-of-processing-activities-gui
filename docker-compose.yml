@@ -11,7 +11,7 @@ services:
     image: dcatno/records-of-processing-activities-gui:latest
     ports:
       - 8140:8080
-    environment:      
+    environment:
       OIDC_ISSUER: 'http://localhost:4011'
       OIDC_CLIENT_SECRET: 'records-of-processing-activities-gui-secret'
       RECORDS_OF_PROCESSING_ACTIVITIES_URL: 'http://localhost:8081'
@@ -20,9 +20,10 @@ services:
       ORGANIZATION_API: 'http://localhost:8082'
       SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no'
       ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no'
+      USE_DEMO_LOGO: false
     networks:
       - rop-net
-      
+
   records-of-processing-activities:
     container_name: records-of-processing-activities
     image: eu.gcr.io/digdir-fdk-infra/new-records-of-processing-activities:latest
@@ -134,11 +135,11 @@ services:
           "Authentication": {
             "CookieSameSiteMode": "Lax",
             "CheckSessionCookieSameSiteMode": "Lax"
-          }          
+          }
         }
       ACCOUNT_OPTIONS_INLINE: |
         {
-          "AutomaticRedirectAfterSignOut": true          
+          "AutomaticRedirectAfterSignOut": true
         }
       API_SCOPES_INLINE: |
         [
@@ -181,7 +182,7 @@ services:
             ]
           }
         ]
-    
+
       CLIENTS_CONFIGURATION_INLINE: |
         [
           {
@@ -197,5 +198,5 @@ services:
             "ClientClaimsPrefix": "",
             "Claims": []
           }
-        ]   
-        
+        ]
+

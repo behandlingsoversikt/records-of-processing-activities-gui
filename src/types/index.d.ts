@@ -7,6 +7,7 @@ export interface Configuration {
   ORGANIZATION_API: string;
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   SEARCH_HOST: string;
+  USE_DEMO_LOGO: boolean;
 }
 
 export * from './domain';
