@@ -361,13 +361,7 @@ const RecordItemPure = ({
               dataProtectionImpactAssessment.conducted &&
               dataProtectionImpactAssessment.assessmentReportUrl && (
                 <span>
-                  <a
-                    title={localization.assessmentReportUrl}
-                    href={dataProtectionImpactAssessment.assessmentReportUrl}
-                    rel='noopener noreferrer'
-                  >
-                    {`, ${localization.assessmentReportUrl}`}
-                  </a>
+                  {`, ${dataProtectionImpactAssessment.assessmentReportUrl}`}
                 </span>
               )}
           </SC.SectionContent>
