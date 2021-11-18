@@ -4,6 +4,66 @@
       "decision": "ignore",
       "madeAt": 1633673392906,
       "expiresAt": 1639508695000
+    },
+    "1002401|showdown>yargs>cliui>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|showdown>yargs>cliui>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|showdown>yargs>cliui>wrap-ansi>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|showdown>yargs>cliui>wrap-ansi>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|showdown>yargs>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|commitizen>inquirer>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|cz-conventional-changelog>commitizen>inquirer>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|commitizen>inquirer>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002401|cz-conventional-changelog>commitizen>inquirer>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1637248681167,
+      "expiresAt": 1639840673721
+    },
+    "1002423|@svgr/webpack>@svgr/plugin-svgo>svgo>css-select>nth-check": {
+      "decision": "ignore",
+      "madeAt": 1637248682672,
+      "expiresAt": 1639840673721
+    },
+    "1002423|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
+      "decision": "ignore",
+      "madeAt": 1637248682672,
+      "expiresAt": 1639840673721
+    },
+    "1002477|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>axios": {
+      "decision": "ignore",
+      "madeAt": 1637248685860,
+      "expiresAt": 1639840673721
     }
   },
   "rules": {},

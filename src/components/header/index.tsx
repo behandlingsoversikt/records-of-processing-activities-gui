@@ -9,7 +9,12 @@ import { withAuth, Props as AuthorizationProps } from '../../providers/auth';
 
 interface Props extends AuthorizationProps {}
 
-const { ADMIN_GUI_HOST, FDK_REGISTRATION_BASE_URI, SEARCH_HOST } = env;
+const {
+  ADMIN_GUI_HOST,
+  FDK_REGISTRATION_BASE_URI,
+  SEARCH_HOST,
+  USE_DEMO_LOGO
+} = env;
 
 const Header: FC<Props> = ({ authService }) => {
   const userName = authService.getUserProfile()?.name;
@@ -20,6 +25,7 @@ const Header: FC<Props> = ({ authService }) => {
       homeUrl={FDK_REGISTRATION_BASE_URI}
       username={userName}
       onLogout={logOutAndRedirect}
+      useDemoLogo={USE_DEMO_LOGO}
     >
       <Link href={`${SEARCH_HOST}/guidance`}>Registrere data</Link>
       <Link href={ADMIN_GUI_HOST}>Høste data</Link>

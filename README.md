@@ -73,3 +73,4 @@ USERS_CONFIGURATION_INLINE: |
 - `ORGANIZATION_API` - Base URL of Organization backend
 - `SEARCH_HOST` - FDK portal main page URL
 - `ADMIN_GUI_HOST` - FDK admin main page URL
+- `USE_DEMO_LOGO` - Boolean variable determining demo logo
