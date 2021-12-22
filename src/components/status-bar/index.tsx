@@ -60,9 +60,13 @@ const StatusBar = ({
                 onClick={setStatusToApproved}
               />
               <SC.RemoveButton
+                tabIndex={0}
                 as='a'
                 disabled={!recordId || status === RecordStatus.APPROVED}
                 onClick={() => {
+                  setShowConfirmDeleteMessage(true);
+                }}
+                onKeyPress={() => {
                   setShowConfirmDeleteMessage(true);
                 }}
               >
@@ -81,8 +85,12 @@ const StatusBar = ({
                 }}
               />
               <SC.CancelButton
+                tabIndex={0}
                 as='a'
                 onClick={() => {
+                  setShowConfirmDeleteMessage(false);
+                }}
+                onKeyPress={() => {
                   setShowConfirmDeleteMessage(false);
                 }}
               >
