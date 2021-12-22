@@ -7,6 +7,7 @@ const BreadcrumbsBar = styled.div`
 
   & * {
     font-size: 1.4rem;
+    color: ${({ theme }) => theme.fdk.colors.neutrals.darker};
   }
 
   & nav a {
