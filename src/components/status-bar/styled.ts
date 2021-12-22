@@ -1,24 +1,34 @@
 import styled, { css } from 'styled-components';
+
+import { theme } from '@fellesdatakatalog/theme';
+
 import Common from '../common/styled';
 import FDKButton from '../fdk-button';
 
+const onMobileView = '@media (max-width: 900px)';
+
 const StatusBar = styled.div`
   display: flex;
-  justify-content: center;
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   height: 64px;
-  background: ${({ theme }) => theme.fdk.colors.neutrals.skyblue};
-  border-top: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lightblue};
+  background: ${({ theme: customTheme }) =>
+    customTheme.fdk.colors.neutrals.skyblue};
+  border-top: 1px solid
+    ${({ theme: customTheme }) => customTheme.fdk.colors.neutrals.lightblue};
   z-index: 9001;
 `;
 
 const StatusBarBody = styled(Common.Container)`
-  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  ${onMobileView} {
+    font-size: ${theme.fontSize('FS12')};
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -55,7 +65,7 @@ const StatusButton = styled(FDKButton)<{ selected?: boolean }>`
 
 const RemoveButton = styled.button<{ disabled?: boolean }>`
   margin-left: 8px;
-  color: ${({ theme }) => theme.fdk.colors.text.link};
+  color: ${({ theme: customTheme }) => customTheme.fdk.colors.text.link};
 
   &:hover {
     text-decoration: underline;
