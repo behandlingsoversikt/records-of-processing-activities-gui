@@ -1,10 +1,7 @@
 import React, { memo, useState, useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import Footer from '@fellesdatakatalog/internal-footer';
-
 import Root from '../root';
-import Header from '../header';
 
 import env from '../../env';
 import AuthService from '../../services/auth';
@@ -95,55 +92,51 @@ const RecordPage = ({
   };
 
   return (
-    <>
-      <Root>
-        <Header />
-        <SC.RecordPage>
-          <BreadcrumbsBar
-            breadcrumbs={[
-              {
-                title: 'Alle kataloger',
-                url: FDK_REGISTRATION_BASE_URI
-              },
-              {
-                title: 'Behandlingsoversikt',
-                url: `${location.origin}/${organizationId}`
-              },
-              {
-                title: recordTitle ?? 'Behandlingsoversikt',
-                current: true
-              }
-            ]}
-          />
-          <Headline
-            title={recordTitle}
-            subTitle={organization?.name ?? ''}
+    <Root>
+      <SC.RecordPage>
+        <BreadcrumbsBar
+          breadcrumbs={[
+            {
+              title: 'Alle kataloger',
+              url: FDK_REGISTRATION_BASE_URI
+            },
+            {
+              title: 'Behandlingsoversikt',
+              url: `${location.origin}/${organizationId}`
+            },
+            {
+              title: recordTitle ?? 'Behandlingsoversikt',
+              current: true
+            }
+          ]}
+        />
+        <Headline
+          title={recordTitle}
+          subTitle={organization?.name ?? ''}
+          status={recordStatus}
+        />
+        <RecordForm
+          organizationId={organizationId}
+          recordStatus={recordStatus}
+          onTitleChange={setRecordTitle}
+          onStatusChange={setRecordStatus}
+          onValidityChange={setFormValidity}
+          isReadOnlyUser={isReadOnlyUser}
+        />
+        {!isReadOnlyUser && (
+          <StatusBar
+            recordId={recordId}
+            canBeApproved={formIsValid}
+            updatedAt={record?.updatedAt}
             status={recordStatus}
+            onSetStatus={handleRecordStatusChange}
+            onRecordRemove={() =>
+              id && deleteRecord(id, organizationId, navigateToRecordListPage)
+            }
           />
-          <RecordForm
-            organizationId={organizationId}
-            recordStatus={recordStatus}
-            onTitleChange={setRecordTitle}
-            onStatusChange={setRecordStatus}
-            onValidityChange={setFormValidity}
-            isReadOnlyUser={isReadOnlyUser}
-          />
-          {!isReadOnlyUser && (
-            <StatusBar
-              recordId={recordId}
-              canBeApproved={formIsValid}
-              updatedAt={record?.updatedAt}
-              status={recordStatus}
-              onSetStatus={handleRecordStatusChange}
-              onRecordRemove={() =>
-                id && deleteRecord(id, organizationId, navigateToRecordListPage)
-              }
-            />
-          )}
-        </SC.RecordPage>
-      </Root>
-      <Footer />
-    </>
+        )}
+      </SC.RecordPage>
+    </Root>
   );
 };
 
