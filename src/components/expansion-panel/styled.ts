@@ -1,25 +1,33 @@
 import styled, { css } from 'styled-components';
 
+import { theme } from '@fellesdatakatalog/theme';
+
 import Tag from '../tag';
 
-const ExpansionPanel = styled.div<{ isExpanded: boolean }>`
-  flex: 0 0 calc(50% - 15px);
+const onMobileView = '@media (max-width: 900px)';
 
+const ExpansionPanel = styled.div<{ isExpanded: boolean }>`
   background-color: white;
   border-radius: 5px;
+  flex: 0 1 49%;
+  margin-bottom: ${theme.spacing('S24')};
 
   ${({ isExpanded }) =>
     isExpanded &&
     css`
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
     `}
+
+  ${onMobileView} {
+    flex: 1;
+  }
 `;
 
 const Title = styled.h2`
   display: inline-flex;
   font-size: 22px;
   font-weight: bold;
-  color: ${({ theme }) => theme.fdk.colors.text.link};
+  color: ${({ theme: customTheme }) => customTheme.fdk.colors.text.link};
 `;
 
 const Subtitle = styled.h3`
@@ -41,7 +49,7 @@ const Head = styled.div`
   cursor: pointer;
 
   & svg {
-    fill: ${({ theme }) => theme.fdk.colors.text.link};
+    fill: ${({ theme: customTheme }) => customTheme.fdk.colors.text.link};
   }
 `;
 
@@ -57,7 +65,8 @@ const Description = styled.div`
 `;
 
 const Body = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lighter};
+  border-top: 1px solid
+    ${({ theme: customTheme }) => customTheme.fdk.colors.neutrals.lighter};
   padding: 30px;
 
   & > form:nth-of-type(n + 2) {

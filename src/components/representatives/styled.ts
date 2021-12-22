@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const Representatives = styled.div`
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: space-between;
 `;
 

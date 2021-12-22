@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+const onMobileView = '@media (max-width: 900px)';
+
 const RecordListTable = styled.table`
   width: 100%;
   border-spacing: 0 5px;
@@ -30,6 +32,10 @@ const RecordListTable = styled.table`
       width: 15%;
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
+
+      ${onMobileView} {
+        width: 50%;
+      }
     }
   }
 
