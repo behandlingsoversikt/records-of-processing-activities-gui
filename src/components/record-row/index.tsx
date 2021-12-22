@@ -15,9 +15,21 @@ const RecordRow = ({
   record: { id, organizationId, title, dataProcessorContactDetails, status },
   history: { push }
 }: Props) => {
-  const navigateToRecord = () => push(`/${organizationId}/records/${id}`);
+  const navigateToRecord = event => {
+    if (
+      event.type === 'click' ||
+      (event.type === 'keypress' &&
+        (event.key === ' ' || event.key === 'Enter'))
+    ) {
+      push(`/${organizationId}/records/${id}`);
+    }
+  };
   return (
-    <SC.RecordRow onClick={navigateToRecord}>
+    <SC.RecordRow
+      onClick={navigateToRecord}
+      onKeyPress={navigateToRecord}
+      tabIndex={0}
+    >
       <td>{title}</td>
       <td>{dataProcessorContactDetails?.map(({ name }) => name).join(', ')}</td>
       <td>

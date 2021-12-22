@@ -15,6 +15,7 @@ const ExpandAllButton = styled.button`
   align-items: center;
   align-self: flex-end;
   margin-bottom: 12px;
+  padding: 10px;
 
   color: ${({ theme }) => theme.fdk.colors.text.link};
 
