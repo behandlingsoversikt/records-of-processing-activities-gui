@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { Field as FormikField } from 'formik';
 
 const TextAreaField = styled(FormikField)<{ error?: boolean }>`
+  font-weight: 400;
   width: 100%;
   min-height: 72px;
   padding: 8px;
@@ -21,7 +22,7 @@ const ReadOnlyLabel = styled.span`
 `;
 
 const Label = styled.label`
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 5px;
 `;
 

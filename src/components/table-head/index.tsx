@@ -22,12 +22,14 @@ const TableHead = ({
       <span>{title}</span>
       <SC.SortButtons>
         <button
+          title='Sorter stigende'
           type='button'
           onClick={() => sortRecords(sortField, SortOrder.ASC)}
         >
           <ArrowDropUp fontSize='large' />
         </button>
         <button
+          title='Sorter synkende'
           type='button'
           onClick={() => sortRecords(sortField, SortOrder.DSC)}
         >

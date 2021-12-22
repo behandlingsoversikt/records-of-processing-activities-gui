@@ -27,18 +27,20 @@ const TextField = ({
   onChange
 }: PropsWithChildren<Props>) => (
   <SC.Field error={error}>
-    {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-    {!isReadOnly ? (
-      <SC.TextField
-        id={id}
-        placeholder={placeholder || labelText}
-        name={name}
-        value={value}
-        onChange={onChange}
-      />
-    ) : (
-      <SC.ReadOnlyLabel>{value}</SC.ReadOnlyLabel>
-    )}
+    <SC.Label htmlFor={name}>
+      {labelText ?? null}
+      {!isReadOnly ? (
+        <SC.TextField
+          id={id}
+          placeholder={placeholder || labelText}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+      ) : (
+        <SC.ReadOnlyLabel>{value}</SC.ReadOnlyLabel>
+      )}
+    </SC.Label>
     {helperText && <SC.HelperText>{helperText}</SC.HelperText>}
   </SC.Field>
 );

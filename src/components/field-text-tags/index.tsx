@@ -65,18 +65,20 @@ const TextTagsField = ({
   };
   return (
     <SC.Field error={error}>
-      {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-      {!isReadOnly && (
-        <SC.TextTagsField
-          id={id}
-          placeholder={placeholder || labelText}
-          name={name}
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyPress}
-          onBlur={handleBlur}
-        />
-      )}
+      <SC.Label htmlFor={name}>
+        {labelText ?? <SC.VisuallyHidden>Skriv inn tag</SC.VisuallyHidden>}
+        {!isReadOnly && (
+          <SC.TextTagsField
+            id={id}
+            placeholder={placeholder || labelText}
+            name={name}
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyPress}
+            onBlur={handleBlur}
+          />
+        )}
+      </SC.Label>
       {helperText && <SC.HelperText error={error}>{helperText}</SC.HelperText>}
       {value && value.length > 0 && (
         <SC.Tags>

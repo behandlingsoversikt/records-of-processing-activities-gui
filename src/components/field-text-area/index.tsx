@@ -27,20 +27,22 @@ const TextAreaField = ({
   onChange
 }: PropsWithChildren<Props>) => (
   <SC.Field error={error}>
-    {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
-    {!isReadOnly ? (
-      <SC.TextAreaField
-        component='textarea'
-        rows={3}
-        id={id}
-        placeholder={placeholder || labelText}
-        name={name}
-        value={value}
-        onChange={onChange}
-      />
-    ) : (
-      <SC.ReadOnlyLabel>{value}</SC.ReadOnlyLabel>
-    )}
+    <SC.Label htmlFor={name}>
+      {labelText ?? null}
+      {!isReadOnly ? (
+        <SC.TextAreaField
+          component='textarea'
+          rows={3}
+          id={id}
+          placeholder={placeholder || labelText}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+      ) : (
+        <SC.ReadOnlyLabel>{value}</SC.ReadOnlyLabel>
+      )}
+    </SC.Label>
     {helperText && <SC.HelperText>{helperText}</SC.HelperText>}
   </SC.Field>
 );

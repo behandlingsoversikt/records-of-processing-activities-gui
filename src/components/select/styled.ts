@@ -79,7 +79,7 @@ const Dropdown = styled.ul`
   outline: none;
 `;
 
-const NoOptionLabel = styled.p`
+const NoOptionLabel = styled.li`
   padding: 8px;
   font-size: 1.4rem;
   color: ${({ theme }) => theme.fdk.colors.neutrals.default};
