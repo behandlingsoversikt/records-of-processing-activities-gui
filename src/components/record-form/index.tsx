@@ -93,8 +93,15 @@ const RecordForm = ({
   const allFieldsExpanded = allExpanded.every(Boolean);
   const isApproved = record?.status === RecordStatus.APPROVED;
 
-  const toggleAllExpanded = () =>
-    setAllExpanded(allExpanded.map(() => !allFieldsExpanded));
+  const toggleAllExpanded = event => {
+    if (
+      event.type === 'click' ||
+      (event.type === 'keypress' &&
+        (event.key === ' ' || event.key === 'Enter'))
+    ) {
+      setAllExpanded(allExpanded.map(() => !allFieldsExpanded));
+    }
+  };
 
   const handleBooleanRadioChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (['true', 'false'].includes(e.target.value)) {
@@ -172,7 +179,12 @@ const RecordForm = ({
   return (
     datasets && (
       <SC.RecordForm>
-        <SC.ExpandAllButton as='a' onClick={toggleAllExpanded}>
+        <SC.ExpandAllButton
+          as='a'
+          onClick={toggleAllExpanded}
+          onKeyPress={toggleAllExpanded}
+          tabIndex={0}
+        >
           <span>
             {allFieldsExpanded ? 'Lukk alle felter' : 'Åpne alle felter'}
           </span>
