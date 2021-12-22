@@ -27,4 +27,13 @@ export default css`
   body.no-scroll {
     overflow: hidden;
   }
+
+  a:focus,
+  button:focus,
+  input:focus,
+  textarea:focus,
+  summary:focus-visible,
+  tr:focus-visible {
+    outline: 2px auto blue;
+  }
 `;

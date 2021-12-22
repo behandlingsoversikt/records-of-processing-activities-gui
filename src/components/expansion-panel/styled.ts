@@ -39,7 +39,7 @@ const RequiredLabel = styled(Tag)`
   margin-left: 5px;
 `;
 
-const Head = styled.div`
+const Head = styled.details`
   display: flex;
   flex-direction: column;
 
@@ -53,10 +53,11 @@ const Head = styled.div`
   }
 `;
 
-const TitleWrapper = styled.div`
+const TitleWrapper = styled.summary`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: ${theme.spacing('S4')};
 `;
 
 const Description = styled.div`
