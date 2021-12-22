@@ -14,7 +14,6 @@ const FDKDropdownButton = styled.button<ButtonType>`
   justify-content: space-between;
   align-items: center;
   padding: 10px 18px;
-  outline: none;
   border: none;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;

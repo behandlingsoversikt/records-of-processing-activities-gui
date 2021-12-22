@@ -6,7 +6,6 @@ const FDKButton = styled.button<{ variant?: Variant }>`
   display: inline-flex;
   align-items: center;
   padding: 10px 18px;
-  outline: none;
   border: none;
   border-radius: 3px;
   line-height: 21px;
