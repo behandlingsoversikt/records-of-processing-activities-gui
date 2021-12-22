@@ -19,12 +19,26 @@ const Field = styled.div<{ error?: boolean }>`
 `;
 
 const Label = styled.label`
-  font-weight: bold;
+  font-weight: 500;
+  display: flex;
   margin-bottom: 5px;
 `;
 
+const VisuallyHidden = styled.span`
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+`;
+
 const TextTagsField = styled(FormikField)`
+  font-weight: 400;
   display: block;
+  flex: 1;
   padding: 8px;
   border: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lightblue};
   border-radius: 5px;
@@ -97,6 +111,7 @@ const Tag = styled.span<{ isReadOnly?: boolean }>`
 export default {
   Field,
   Label,
+  VisuallyHidden,
   TextTagsField,
   HelperText,
   Tags,

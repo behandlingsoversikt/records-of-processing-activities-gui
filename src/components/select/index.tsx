@@ -57,7 +57,7 @@ const Select = ({
       {labelText && <SC.Label htmlFor={name}>{labelText}</SC.Label>}
       {!isReadOnly ? (
         <>
-          <SC.SelectButton type='button'>
+          <SC.SelectButton title='Velg fra dropdown' type='button'>
             <span>{currentOption ? currentOption.label : selectLabel}</span>
           </SC.SelectButton>
           <SC.OverflowControl visible={isExpanded}>
@@ -67,7 +67,7 @@ const Select = ({
               )}
               {options.map(({ label, value: optionValue }, index) => (
                 <SC.DropdownItem
-                  id={name}
+                  id={`${name}-${index}`}
                   key={`${label}-${optionValue}`}
                   selected={`${value}` === `${optionValue}`}
                   onClick={() => {

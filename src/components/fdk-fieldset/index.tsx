@@ -38,7 +38,7 @@ const Fieldset = ({
           <SC.Inline justifyContent='space-between'>
             <SC.Subtitle>{subtitle}</SC.Subtitle>
             {description && (
-              <SC.Expand onClick={toggleExpansion}>
+              <SC.Expand title='Toggle beskrivelse' onClick={toggleExpansion}>
                 {isExpanded ? <ExpandLess /> : <ExpandMore />}
               </SC.Expand>
             )}
