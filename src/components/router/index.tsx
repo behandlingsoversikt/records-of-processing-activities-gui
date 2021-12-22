@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, memo } from 'react';
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 
+import Footer from '@fellesdatakatalog/internal-footer';
+import Header from '../header';
 import ProtectedRoute from '../protected-route';
 import env from '../../env';
 
@@ -15,6 +17,7 @@ const { FDK_REGISTRATION_BASE_URI } = env;
 
 const Router = (): JSX.Element => (
   <BrowserRouter>
+    <Header />
     <Suspense fallback={<></>}>
       <Switch>
         <ProtectedRoute
@@ -42,6 +45,7 @@ const Router = (): JSX.Element => (
         <Redirect to='/' />
       </Switch>
     </Suspense>
+    <Footer />
   </BrowserRouter>
 );
 

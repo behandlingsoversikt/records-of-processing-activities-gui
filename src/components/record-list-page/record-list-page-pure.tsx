@@ -1,11 +1,9 @@
 import React, { useEffect, memo } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import Footer from '@fellesdatakatalog/internal-footer';
 import { ExportToCsv } from 'export-to-csv';
 
 import Root from '../root';
-import Header from '../header';
 
 import env from '../../env';
 import { localization } from '../../lib/localization';
@@ -365,65 +363,61 @@ const RecordListPage = ({
   const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
 
   return (
-    <>
-      <Root>
-        <Header />
-        <SC.RecordListPage>
-          <BreadcrumbsBar
-            breadcrumbs={[
+    <Root>
+      <SC.RecordListPage>
+        <BreadcrumbsBar
+          breadcrumbs={[
+            {
+              title: 'Alle kataloger',
+              url: FDK_REGISTRATION_BASE_URI
+            },
+            { title: 'Behandlingsoversikt', current: true }
+          ]}
+        />
+        <Headline
+          title='Behandlingsoversikt'
+          subTitle={organization?.name ?? ''}
+        />
+        <Representatives
+          isReadOnlyUser={isReadOnlyUser}
+          organizationId={organizationId}
+        />
+        <SC.RecordListActions>
+          {!isReadOnlyUser && (
+            <FDKButton
+              variant='primary'
+              text='Legg til behandlingsaktivitet'
+              onClick={navigateToNewRecordPage}
+            />
+          )}
+          <FDKDropdownButton
+            variant='secondary'
+            text='Generer rapport'
+            subButtons={[
               {
-                title: 'Alle kataloger',
-                url: FDK_REGISTRATION_BASE_URI
+                name: 'Behandlingsoversikt',
+                href: `/${organizationId}/report`,
+                external: true
               },
-              { title: 'Behandlingsoversikt', current: true }
+              {
+                name: 'Behandlingsoversikt CSV',
+                onClick: () => downloadCSV(false)
+              },
+              {
+                name: 'Protokoll',
+                href: `/${organizationId}/report/required`,
+                external: true
+              },
+              {
+                name: 'Protokoll CSV',
+                onClick: () => downloadCSV(true)
+              }
             ]}
           />
-          <Headline
-            title='Behandlingsoversikt'
-            subTitle={organization?.name ?? ''}
-          />
-          <Representatives
-            isReadOnlyUser={isReadOnlyUser}
-            organizationId={organizationId}
-          />
-          <SC.RecordListActions>
-            {!isReadOnlyUser && (
-              <FDKButton
-                variant='primary'
-                text='Legg til behandlingsaktivitet'
-                onClick={navigateToNewRecordPage}
-              />
-            )}
-            <FDKDropdownButton
-              variant='secondary'
-              text='Generer rapport'
-              subButtons={[
-                {
-                  name: 'Behandlingsoversikt',
-                  href: `/${organizationId}/report`,
-                  external: true
-                },
-                {
-                  name: 'Behandlingsoversikt CSV',
-                  onClick: () => downloadCSV(false)
-                },
-                {
-                  name: 'Protokoll',
-                  href: `/${organizationId}/report/required`,
-                  external: true
-                },
-                {
-                  name: 'Protokoll CSV',
-                  onClick: () => downloadCSV(true)
-                }
-              ]}
-            />
-          </SC.RecordListActions>
-          <RecordListTable records={records} />
-        </SC.RecordListPage>
-      </Root>
-      <Footer />
-    </>
+        </SC.RecordListActions>
+        <RecordListTable records={records} />
+      </SC.RecordListPage>
+    </Root>
   );
 };
 
