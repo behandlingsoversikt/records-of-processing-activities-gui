@@ -363,7 +363,7 @@ const RecordListPage = ({
   const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
 
   return (
-    <Root>
+    <Root id='content'>
       <SC.RecordListPage>
         <BreadcrumbsBar
           breadcrumbs={[

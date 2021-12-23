@@ -52,7 +52,7 @@ const RecordReportPage = ({
   const requiredFieldsOnly = !!required;
 
   return (
-    <SC.Root>
+    <SC.Root id='content'>
       <SC.RecordReportPage>
         <SC.Logo />
         <SC.TitleWrapper>
