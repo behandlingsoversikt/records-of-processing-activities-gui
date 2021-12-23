@@ -7,6 +7,8 @@ import env from '../../env';
 
 import { withAuth, Props as AuthorizationProps } from '../../providers/auth';
 
+import SC from './styled';
+
 interface Props extends AuthorizationProps {}
 
 const {
@@ -21,18 +23,25 @@ const Header: FC<Props> = ({ authService }) => {
   const logOutAndRedirect = () => authService.signOut();
 
   return (
-    <InternalHeader
-      homeUrl={FDK_REGISTRATION_BASE_URI}
-      username={userName}
-      onLogout={logOutAndRedirect}
-      useDemoLogo={USE_DEMO_LOGO}
-    >
-      <Link href={`${SEARCH_HOST}/guidance`}>Registrere data</Link>
-      <Link href={ADMIN_GUI_HOST}>Høste data</Link>
-      <Link href={SEARCH_HOST} external>
-        Søk i Felles datakatalog
-      </Link>
-    </InternalHeader>
+    <>
+      <SC.SkipLinkWrap>
+        <SC.SkipLink href={`${location.pathname}#content`} tabIndex={0}>
+          Hopp til hovedinnhold
+        </SC.SkipLink>
+      </SC.SkipLinkWrap>
+      <InternalHeader
+        homeUrl={FDK_REGISTRATION_BASE_URI}
+        username={userName}
+        onLogout={logOutAndRedirect}
+        useDemoLogo={USE_DEMO_LOGO}
+      >
+        <Link href={`${SEARCH_HOST}/guidance`}>Registrere data</Link>
+        <Link href={ADMIN_GUI_HOST}>Høste data</Link>
+        <Link href={SEARCH_HOST} external>
+          Søk i Felles datakatalog
+        </Link>
+      </InternalHeader>
+    </>
   );
 };
 

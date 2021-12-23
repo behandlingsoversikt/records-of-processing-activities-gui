@@ -73,6 +73,40 @@ const LogoutButton = styled(Button)`
   }
 `;
 
+const SkipLinkWrap = styled.div`
+  display: flex;
+  flex: 1;
+`;
+
+const SkipLink = styled.a`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+
+  &:active,
+  &:focus {
+    background-color: blue;
+    color: #ffffff;
+    font-size: 2rem;
+    position: static;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    flex: 1;
+    text-decoration: underline;
+    padding: 0.5em;
+  }
+`;
+
 export default {
   Header,
   Container,
@@ -80,5 +114,7 @@ export default {
   Logo,
   UserAvatar,
   UserName,
-  LogoutButton
+  LogoutButton,
+  SkipLinkWrap,
+  SkipLink
 };

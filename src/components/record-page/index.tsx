@@ -92,7 +92,7 @@ const RecordPage = ({
   };
 
   return (
-    <Root>
+    <Root id='content'>
       <SC.RecordPage>
         <BreadcrumbsBar
           breadcrumbs={[
