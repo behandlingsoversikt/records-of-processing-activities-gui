@@ -21,6 +21,7 @@ const Field = styled.div<{ error?: boolean }>`
 const Label = styled.label`
   font-weight: 500;
   display: flex;
+  flex-direction: column;
   margin-bottom: 5px;
 `;
 
