@@ -17,6 +17,11 @@ const RecordListActions = styled.div`
   margin-top: 50px;
   margin-bottom: 15px;
 
+  ${onMobileView} {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   & > button:nth-of-type(n + 2) {
     margin-left: 10px;
 
