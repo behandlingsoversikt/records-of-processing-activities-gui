@@ -75,7 +75,6 @@ const LogoutButton = styled(Button)`
 
 const SkipLinkWrap = styled.div`
   display: flex;
-  flex: 1;
 `;
 
 const SkipLink = styled.a`
