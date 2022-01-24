@@ -33,7 +33,12 @@ import validationSchema from './validation-schema';
 
 import { mapRecordToValues } from './utils';
 
-import { Record, Dataset, Categories } from '../../types';
+import {
+  Record,
+  Dataset,
+  Categories,
+  CommonDataControllerContact
+} from '../../types';
 import { DatasetStatus, RecordStatus } from '../../types/enums';
 
 type FormValues = Omit<Record, 'updatedAt'>;
@@ -46,6 +51,24 @@ interface Props extends DatasetsProps, RecordProps, FormikProps<FormValues> {
   onStatusChange?: (status: RecordStatus) => void;
   onValidityChange?: (isValid: boolean) => void;
 }
+
+const checkIfCommonDataControllerCheckedOrFieldValuesFilledFromBefore = ({
+  commonDataControllerChecked,
+  companies,
+  distributionOfResponsibilities,
+  contactPoints
+}: Partial<CommonDataControllerContact>): boolean => {
+  const contactPointHasValue = element => Object.values(element).length > 0;
+  if (commonDataControllerChecked) {
+    return true;
+  }
+  return !!(
+    commonDataControllerChecked === null &&
+    companies !== '' &&
+    distributionOfResponsibilities !== '' &&
+    contactPoints?.some(contactPointHasValue)
+  );
+};
 
 const RecordForm = ({
   isReadOnlyUser,
@@ -107,6 +130,19 @@ const RecordForm = ({
     if (['true', 'false'].includes(e.target.value)) {
       e.persist();
       setFieldValue(e.target.name, e.target.value === 'true', true);
+    }
+  };
+
+  const handleCommonDataControllerRadioChange = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    if (['true', 'false'].includes(e.target.value)) {
+      e.persist();
+      setFieldValue(
+        'commonDataControllerContact.commonDataControllerChecked',
+        e.target.value === 'true',
+        true
+      );
     }
   };
 
@@ -220,6 +256,7 @@ const RecordForm = ({
           </SC.Fieldset>
         </SC.RecordFormSection>
         <SC.RecordFormSection
+          required
           title='Behandlingsansvar og databehandler'
           isExpanded={allExpanded[1]}
           onClick={() =>
@@ -360,98 +397,120 @@ const RecordForm = ({
             />
           </SC.Fieldset>
           <SC.Fieldset
+            required
             isReadOnly={isReadOnlyUser}
             title='Felles behandlingsansvar'
             subtitle={localization.commonDataControllerContactAbstract}
             description={localization.commonDataControllerContactDescription}
           >
-            <TextField
+            <Radio
+              labelText='Foreligger det felles behandlingsansvar?'
               isReadOnly={isReadOnlyUser}
-              name='commonDataControllerContact.companies'
-              value={values.commonDataControllerContact.companies}
-              labelText='Virksomheter som har felles behandlingsansvar'
-              onChange={handleChange}
-            />
-            <TextField
-              isReadOnly={isReadOnlyUser}
-              name='commonDataControllerContact.distributionOfResponsibilities'
+              name='commonDataControllerContact.commonDataControllerChecked'
               value={
-                values.commonDataControllerContact
-                  .distributionOfResponsibilities
+                values.commonDataControllerContact.commonDataControllerChecked
               }
-              labelText='Ansvarsfordeling'
-              onChange={handleChange}
+              options={[
+                { label: 'Nei', value: false },
+                { label: 'Ja', value: true }
+              ]}
+              onChange={e => handleCommonDataControllerRadioChange(e)}
             />
-            <FieldArray
-              name='commonDataControllerContact.contactPoints'
-              render={arrayHelpers => (
-                <>
-                  {(values.commonDataControllerContact.contactPoints || []).map(
-                    ({ name, email, phone }, index) => (
-                      <Fragment
-                        key={`commonDataControllerContact.contactPoints-${index}`}
-                      >
-                        <TextField
-                          isReadOnly={isReadOnlyUser}
-                          name={`commonDataControllerContact.contactPoints[${index}].name`}
-                          value={name}
-                          labelText='Kontaktpunkt'
-                          onChange={handleChange}
-                        />
-                        <SC.InlineFields>
+            {checkIfCommonDataControllerCheckedOrFieldValuesFilledFromBefore(
+              values.commonDataControllerContact
+            ) && (
+              <>
+                <TextField
+                  isReadOnly={isReadOnlyUser}
+                  name='commonDataControllerContact.companies'
+                  value={values.commonDataControllerContact.companies}
+                  labelText='Virksomheter som har felles behandlingsansvar'
+                  onChange={handleChange}
+                />
+                <TextField
+                  isReadOnly={isReadOnlyUser}
+                  name='commonDataControllerContact.distributionOfResponsibilities'
+                  value={
+                    values.commonDataControllerContact
+                      .distributionOfResponsibilities
+                  }
+                  labelText='Ansvarsfordeling'
+                  onChange={handleChange}
+                />
+                <FieldArray
+                  name='commonDataControllerContact.contactPoints'
+                  render={arrayHelpers => (
+                    <>
+                      {(
+                        values.commonDataControllerContact.contactPoints || []
+                      ).map(({ name, email, phone }, index) => (
+                        <Fragment
+                          key={`commonDataControllerContact.contactPoints-${index}`}
+                        >
                           <TextField
                             isReadOnly={isReadOnlyUser}
-                            name={`commonDataControllerContact.contactPoints[${index}].email`}
-                            value={email}
-                            labelText='E-post'
+                            name={`commonDataControllerContact.contactPoints[${index}].name`}
+                            value={name}
+                            labelText='Kontaktpunkt'
                             onChange={handleChange}
                           />
-                          <TextField
-                            isReadOnly={isReadOnlyUser}
-                            name={`commonDataControllerContact.contactPoints[${index}].phone`}
-                            value={phone}
-                            labelText='Telefon'
-                            onChange={handleChange}
-                          />
-                        </SC.InlineFields>
-                        {!isReadOnlyUser &&
-                          (
-                            values.commonDataControllerContact.contactPoints ||
-                            []
-                          ).length > 1 && (
-                            <SC.RemoveButton
-                              type='button'
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              <RemoveIcon />
-                              Slett kontaktpunkt
-                            </SC.RemoveButton>
-                          )}
-                      </Fragment>
-                    )
+                          <SC.InlineFields>
+                            <TextField
+                              isReadOnly={isReadOnlyUser}
+                              name={`commonDataControllerContact.contactPoints[${index}].email`}
+                              value={email}
+                              labelText='E-post'
+                              onChange={handleChange}
+                            />
+                            <TextField
+                              isReadOnly={isReadOnlyUser}
+                              name={`commonDataControllerContact.contactPoints[${index}].phone`}
+                              value={phone}
+                              labelText='Telefon'
+                              onChange={handleChange}
+                            />
+                          </SC.InlineFields>
+                          {!isReadOnlyUser &&
+                            (
+                              values.commonDataControllerContact
+                                .contactPoints || []
+                            ).length > 1 && (
+                              <SC.RemoveButton
+                                type='button'
+                                onClick={() => arrayHelpers.remove(index)}
+                              >
+                                <RemoveIcon />
+                                Slett kontaktpunkt
+                              </SC.RemoveButton>
+                            )}
+                        </Fragment>
+                      ))}
+                      {!isReadOnlyUser && (
+                        <SC.AddButton
+                          type='button'
+                          addMargin={
+                            (
+                              values.commonDataControllerContact
+                                .contactPoints || []
+                            ).length === 1
+                          }
+                          onClick={() =>
+                            arrayHelpers.push({
+                              name: '',
+                              email: '',
+                              phone: ''
+                            })
+                          }
+                        >
+                          <AddIcon />
+                          Legg til nytt kontaktpunkt
+                        </SC.AddButton>
+                      )}
+                    </>
                   )}
-                  {!isReadOnlyUser && (
-                    <SC.AddButton
-                      type='button'
-                      addMargin={
-                        (values.commonDataControllerContact.contactPoints || [])
-                          .length === 1
-                      }
-                      onClick={() =>
-                        arrayHelpers.push({
-                          name: '',
-                          email: '',
-                          phone: ''
-                        })
-                      }
-                    >
-                      <AddIcon />
-                      Legg til nytt kontaktpunkt
-                    </SC.AddButton>
-                  )}
-                </>
-              )}
-            />
+                />
+              </>
+            )}
           </SC.Fieldset>
         </SC.RecordFormSection>
         <SC.RecordFormSection

@@ -65,6 +65,7 @@ export default {
     dataProcessorEmail: 'Daglig behandlingsansvar - Epost',
     dataProcessorAgreementNames: 'Databehandlere - Navn',
     dataProcessorAgreementUrls: 'Databehandleravtaler - Lenke',
+    commonDataControllerChecked: 'Felles behandlingsansvar',
     commonDataControllerCompanies: 'Felles behandlingsansvar - Virksomheter',
     commonDataControllerResponsibilities:
       'Felles behandlingsansvar - Ansvarsfordeling',
