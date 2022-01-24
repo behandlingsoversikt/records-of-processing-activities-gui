@@ -63,6 +63,7 @@ export interface OtherArticles {
 }
 
 export interface CommonDataControllerContact {
+  commonDataControllerChecked: boolean;
   companies: string;
   distributionOfResponsibilities: string;
   contactPoints: Omit<ContactDetailsInterface, 'address'>[];

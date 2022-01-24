@@ -9,6 +9,7 @@ export const mapRecordToValues = (
     dataProcessingAgreements = [{ dataProcessorName: '', agreementUrl: '' }],
     categories = [{ personalDataCategories: [], dataSubjectCategories: '' }],
     commonDataControllerContact: {
+      commonDataControllerChecked = undefined,
       companies = '',
       distributionOfResponsibilities = '',
       contactPoints = [{ name: '', email: '', phone: '' }]
@@ -53,6 +54,7 @@ export const mapRecordToValues = (
   dataProcessingAgreements,
   categories,
   commonDataControllerContact: {
+    commonDataControllerChecked,
     companies,
     distributionOfResponsibilities,
     contactPoints

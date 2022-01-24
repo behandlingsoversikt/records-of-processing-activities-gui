@@ -40,5 +40,8 @@ export default Yup.object().shape({
         is: true,
         then: Yup.string().ensure().required('Feltet må fylles ut')
       })
+  }),
+  commonDataControllerContact: Yup.object().shape({
+    commonDataControllerChecked: Yup.boolean().required('Feltet må fylles ut')
   })
 });

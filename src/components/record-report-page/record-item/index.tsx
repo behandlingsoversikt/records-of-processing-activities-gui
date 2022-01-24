@@ -112,15 +112,26 @@ const RecordItemPure = ({
             <SC.SectionContent>
               <SC.SectionSubTitle>
                 {localization.commonDataControllerContact}
+                <SC.RequiredLabel text='Obligatorisk' />
               </SC.SectionSubTitle>
+              {commonDataControllerContact &&
+                typeof commonDataControllerContact.commonDataControllerChecked ===
+                  'boolean' &&
+                `${
+                  commonDataControllerContact.commonDataControllerChecked
+                    ? localization.yes
+                    : localization.no
+                }`}
 
               {commonDataControllerContact &&
+                commonDataControllerContact.commonDataControllerChecked &&
                 commonDataControllerContact.companies && (
                   <div>
                     <span>{commonDataControllerContact.companies}</span>
                   </div>
                 )}
               {commonDataControllerContact &&
+                commonDataControllerContact.commonDataControllerChecked &&
                 commonDataControllerContact.distributionOfResponsibilities && (
                   <div>
                     <span>
@@ -132,6 +143,7 @@ const RecordItemPure = ({
                 )}
 
               {commonDataControllerContact &&
+                commonDataControllerContact.commonDataControllerChecked &&
                 commonDataControllerContact.contactPoints &&
                 commonDataControllerContact.contactPoints.map(
                   (contactPoint, index) => (

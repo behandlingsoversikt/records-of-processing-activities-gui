@@ -264,6 +264,10 @@ const RecordListPage = ({
                 record.dataProcessingAgreements
                   ?.map(item => item.agreementUrl)
                   ?.join(' | ') ?? '',
+              commonDataControllerChecked: yesNoOrEmpty(
+                record.commonDataControllerContact?.commonDataControllerChecked,
+                `${localization.yes}`
+              ),
               commonDataControllerCompanies:
                 record.commonDataControllerContact?.companies ?? '',
               commonDataControllerResponsibilities:
