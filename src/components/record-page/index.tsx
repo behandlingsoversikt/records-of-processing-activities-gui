@@ -66,7 +66,6 @@ const RecordPage = ({
   }, [organizationId]);
 
   useEffect(() => {
-    resetRecord();
     setCanChangeUrl(true);
     if (recordId) {
       getRecord(recordId, organizationId, navigateToRecordListPage);
@@ -74,6 +73,9 @@ const RecordPage = ({
       createRecord({ organizationId });
     }
     window.scrollTo(0, 0);
+    return () => {
+      resetRecord();
+    };
   }, []);
 
   useEffect(() => {
