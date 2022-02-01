@@ -19,11 +19,11 @@ export const mapRecordToValues = (
     articleSixBasis = [{ legality: '', referenceUrl: '' }],
     otherArticles: {
       articleNine: {
-        checked: articleNineChecked = false,
+        checked: articleNineChecked = undefined,
         referenceUrl: articleNineReferenceUrl = ''
       } = {},
       articleTen: {
-        checked: articleTenChecked = false,
+        checked: articleTenChecked = undefined,
         referenceUrl: articleTenReferenceUrl = ''
       } = {}
     } = {},

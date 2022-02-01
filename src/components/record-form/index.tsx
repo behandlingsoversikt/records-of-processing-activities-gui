@@ -19,7 +19,6 @@ import TextAreaField from '../field-text-area';
 import TextTagsField from '../field-text-tags';
 import TextTagsSearchField from '../field-text-tags-search';
 import Radio from '../radio';
-import Checkbox from '../checkbox';
 import Select from '../select';
 
 import SC from './styled';
@@ -140,6 +139,19 @@ const RecordForm = ({
       e.persist();
       setFieldValue(
         'commonDataControllerContact.commonDataControllerChecked',
+        e.target.value === 'true',
+        true
+      );
+    }
+  };
+
+  const handleOtherArticlesArticleNineRadioChange = (
+    e: ChangeEvent<HTMLInputElement>
+  ) => {
+    if (['true', 'false'].includes(e.target.value)) {
+      e.persist();
+      setFieldValue(
+        'otherArticles.articleNine.checked',
         e.target.value === 'true',
         true
       );
@@ -642,12 +654,16 @@ const RecordForm = ({
             subtitle={localization.otherArticlesAbstract}
             description={localization.otherArticlesDescription}
           >
-            <Checkbox
-              disabled={isReadOnlyUser}
-              name='otherArticles.articleNine.checked'
-              checked={!!values.otherArticles?.articleNine?.checked}
+            <Radio
               labelText='Artikkel 9 - Behandling av særlige kategorier av personopplysninger'
-              onChange={handleChange}
+              isReadOnly={isReadOnlyUser}
+              name='otherArticles.articleNine.checked'
+              value={values.otherArticles?.articleNine?.checked}
+              options={[
+                { label: 'Nei', value: false },
+                { label: 'Ja', value: true }
+              ]}
+              onChange={e => handleOtherArticlesArticleNineRadioChange(e)}
             />
             {values.otherArticles?.articleNine?.checked && (
               <TextField
@@ -658,12 +674,16 @@ const RecordForm = ({
                 onChange={handleChange}
               />
             )}
-            <Checkbox
-              disabled={isReadOnlyUser}
-              name='otherArticles.articleTen.checked'
-              checked={!!values.otherArticles?.articleTen?.checked}
+            <Radio
               labelText='Artikkel 10 - Behandling av personopplysninger om straffedommer og lovovertredelser'
-              onChange={handleChange}
+              isReadOnly={isReadOnlyUser}
+              name='otherArticles.articleTen.checked'
+              value={values.otherArticles?.articleTen?.checked}
+              options={[
+                { label: 'Nei', value: false },
+                { label: 'Ja', value: true }
+              ]}
+              onChange={e => handleBooleanRadioChange(e)}
             />
             {values.otherArticles?.articleTen?.checked && (
               <TextField

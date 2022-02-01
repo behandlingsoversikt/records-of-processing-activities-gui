@@ -201,13 +201,19 @@ const RecordItemPure = ({
                 otherArticles.articleNine.checked && (
                   <div>
                     <span>{localization.articleNine}: </span>
-                    <a
-                      title={otherArticles.articleNine.referenceUrl}
-                      href={otherArticles.articleNine.referenceUrl}
-                      rel='noopener noreferrer'
-                    >
-                      {otherArticles.articleNine.referenceUrl}
-                    </a>
+                    {otherArticles.articleNine.checked
+                      ? localization.yes
+                      : localization.no}
+                    <div>
+                      <span>Henvisning til annen lovgivning: </span>
+                      <a
+                        title={otherArticles.articleNine.referenceUrl}
+                        href={otherArticles.articleNine.referenceUrl}
+                        rel='noopener noreferrer'
+                      >
+                        {otherArticles.articleNine.referenceUrl}
+                      </a>
+                    </div>
                   </div>
                 )}
 
@@ -216,13 +222,19 @@ const RecordItemPure = ({
                 otherArticles.articleTen.checked && (
                   <div>
                     <span>{localization.articleTen}: </span>
-                    <a
-                      title={otherArticles.articleTen.referenceUrl}
-                      href={otherArticles.articleTen.referenceUrl}
-                      rel='noopener noreferrer'
-                    >
-                      {otherArticles.articleTen.referenceUrl}
-                    </a>
+                    {otherArticles.articleTen.checked
+                      ? localization.yes
+                      : localization.no}
+                    <div>
+                      <span>Henvisning til annen lovgivning: </span>
+                      <a
+                        title={otherArticles.articleTen.referenceUrl}
+                        href={otherArticles.articleTen.referenceUrl}
+                        rel='noopener noreferrer'
+                      >
+                        {otherArticles.articleTen.referenceUrl}
+                      </a>
+                    </div>
                   </div>
                 )}
             </SC.SectionContent>
