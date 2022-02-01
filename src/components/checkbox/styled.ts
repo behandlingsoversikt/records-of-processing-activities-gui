@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from '@fellesdatakatalog/theme';
 
 const Checkbox = styled.div`
   display: flex;
@@ -10,8 +11,13 @@ const Checkbox = styled.div`
     cursor: pointer;
   }
 
+  & > input {
+    height: ${theme.spacing('S16')};
+    width: ${theme.spacing('S16')};
+  }
+
   & > label {
-    margin-left: 5px;
+    margin-left: ${theme.spacing('S8')};
   }
 `;
 
