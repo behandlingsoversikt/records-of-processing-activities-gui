@@ -100,6 +100,7 @@ const RecordListPage = ({
           localization.csvHeaders.dataProcessorEmail,
           localization.csvHeaders.dataProcessorAgreementNames,
           localization.csvHeaders.dataProcessorAgreementUrls,
+          localization.csvHeaders.commonDataControllerChecked,
           localization.csvHeaders.commonDataControllerCompanies,
           localization.csvHeaders.commonDataControllerResponsibilities,
           localization.csvHeaders.commonDataControllerContact,
