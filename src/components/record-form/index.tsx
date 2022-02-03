@@ -817,7 +817,7 @@ const RecordForm = ({
           <SC.Fieldset
             required
             isReadOnly={isReadOnlyUser}
-            title='Kategorier av registrerte og kategorier av personopplysninger'
+            title='Kategori av registrerte og kategorier av personopplysninger'
             subtitle={localization.personalDataCategoriesAbstract}
             description={localization.personalDataCategoriesDescription}
           >
@@ -835,7 +835,7 @@ const RecordForm = ({
                           isReadOnly={isReadOnlyUser}
                           name={`categories[${index}].dataSubjectCategories`}
                           placeholder='Oppgi èn kategori'
-                          labelText='Kategorier av registrerte'
+                          labelText='Kategori av registrerte'
                           value={dataSubjectCategories}
                           error={
                             isApproved &&
