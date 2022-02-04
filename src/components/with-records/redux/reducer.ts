@@ -37,22 +37,25 @@ export default function reducer(
 
           switch (action.payload.sortField) {
             case SortField.TITLE:
-              mapper = (obj: any) => obj.getIn(['title']);
+              mapper = (obj: any) => obj.getIn(['title'], '');
               break;
             case SortField.STATUS:
               mapper = (obj: any) => obj.getIn(['status']);
               break;
             case SortField.CONTACT:
               mapper = (obj: any) =>
-                obj
-                  .getIn(['dataProcessorContactDetails'])
-                  .map((contact: any) => contact.get('name'))
-                  .join();
+                obj.getIn(['dataProcessorContactDetails'])
+                  ? obj
+                      .getIn(['dataProcessorContactDetails'])
+                      .map((contact): any => contact.get('name'))
+                      .join()
+                  : '';
               break;
             default:
               return 0;
           }
-
+          if (mapper(a) === '' || mapper(a) === null) return 1;
+          if (mapper(b) === '' || mapper(b) === null) return -1;
           return (
             mapper(a).localeCompare(mapper(b)) *
             (action.payload.order === SortOrder.DSC ? 1 : -1)
