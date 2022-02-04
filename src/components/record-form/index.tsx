@@ -133,32 +133,6 @@ const RecordForm = ({
     }
   };
 
-  const handleCommonDataControllerRadioChange = (
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    if (['true', 'false'].includes(e.target.value)) {
-      e.persist();
-      setFieldValue(
-        'commonDataControllerContact.commonDataControllerChecked',
-        e.target.value === 'true',
-        true
-      );
-    }
-  };
-
-  const handleOtherArticlesArticleNineRadioChange = (
-    e: ChangeEvent<HTMLInputElement>
-  ) => {
-    if (['true', 'false'].includes(e.target.value)) {
-      e.persist();
-      setFieldValue(
-        'otherArticles.articleNine.checked',
-        e.target.value === 'true',
-        true
-      );
-    }
-  };
-
   useEffect(() => {
     if (record) {
       const recordValues = mapRecordToValues(record, organizationId);
@@ -427,7 +401,7 @@ const RecordForm = ({
                 { label: 'Nei', value: false },
                 { label: 'Ja', value: true }
               ]}
-              onChange={e => handleCommonDataControllerRadioChange(e)}
+              onChange={e => handleBooleanRadioChange(e)}
             />
             {checkIfCommonDataControllerCheckedOrFieldValuesFilledFromBefore(
               values.commonDataControllerContact
@@ -666,7 +640,7 @@ const RecordForm = ({
                 { label: 'Nei', value: false },
                 { label: 'Ja', value: true }
               ]}
-              onChange={e => handleOtherArticlesArticleNineRadioChange(e)}
+              onChange={e => handleBooleanRadioChange(e)}
             />
             {values.otherArticles?.articleNine?.checked && (
               <>
