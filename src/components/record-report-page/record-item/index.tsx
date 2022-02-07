@@ -1,4 +1,5 @@
-import React, { memo, Fragment } from 'react';
+import React, { FC, memo, Fragment } from 'react';
+import { compose } from 'redux';
 
 import CreateIconOutlined from '@material-ui/icons/CreateOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
@@ -10,10 +11,12 @@ import { RecordStatus } from '../../../types/enums';
 import { ContactInformation } from '../contact-information';
 import { articleNineLabels } from '../../article-nine';
 
-interface Props {
+interface ExternalProps {
   record: Record;
   requiredFieldsOnly?: boolean;
 }
+
+interface Props extends ExternalProps {}
 
 const statuses = {
   [RecordStatus.DRAFT]: {
@@ -26,7 +29,7 @@ const statuses = {
   }
 };
 
-const RecordItemPure = ({
+const RecordItemPure: FC<Props> = ({
   record: {
     status,
     purpose,
@@ -48,7 +51,7 @@ const RecordItemPure = ({
     dataProcessingAgreements
   },
   requiredFieldsOnly
-}: Props) => {
+}) => {
   const { text: statusText, icon: StatusIcon } = statuses[status];
 
   return (
@@ -429,4 +432,4 @@ const RecordItemPure = ({
   );
 };
 
-export const RecordItem = memo(RecordItemPure);
+export const RecordItem = compose<FC<ExternalProps>>(memo)(RecordItemPure);
