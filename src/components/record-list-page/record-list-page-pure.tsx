@@ -24,10 +24,16 @@ import RecordListTable from '../record-list-table';
 
 import SC from './styled';
 
-import { Dataset, Record, RepresentativesInterface } from '../../types';
+import {
+  Dataset,
+  Legality,
+  Record,
+  RepresentativesInterface
+} from '../../types';
 import { fetchAllRepresentativesRequested } from '../representatives/redux/actions';
 
 import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
+import { ArticleNineCode } from '../../types/enums';
 
 const { FDK_REGISTRATION_BASE_URI } = env;
 
@@ -82,6 +88,16 @@ const RecordListPage = ({
     return '';
   };
 
+  const yesOrEmpty = (
+    bool: boolean | undefined,
+    yesText: string = localization.yes
+  ) => {
+    if (typeof bool === 'boolean' && bool) {
+      return yesText;
+    }
+    return '';
+  };
+
   const downloadCSV = (requiredFieldsOnly: boolean) => {
     const variableHeaders = requiredFieldsOnly
       ? [
@@ -111,6 +127,25 @@ const RecordListPage = ({
           localization.csvHeaders.articleSixReference,
           localization.csvHeaders.articleNineBasis,
           localization.csvHeaders.articleNineReference,
+          localization.articleNineCodes.labels.a,
+          localization.articleNineCodes.labels.b,
+          localization.articleNineCodes.reference.b,
+          localization.articleNineCodes.labels.c,
+          localization.articleNineCodes.reference.c,
+          localization.articleNineCodes.labels.d,
+          localization.articleNineCodes.reference.d,
+          localization.articleNineCodes.labels.e,
+          localization.articleNineCodes.reference.e,
+          localization.articleNineCodes.labels.f,
+          localization.articleNineCodes.reference.f,
+          localization.articleNineCodes.labels.g,
+          localization.articleNineCodes.reference.g,
+          localization.articleNineCodes.labels.h,
+          localization.articleNineCodes.reference.h,
+          localization.articleNineCodes.labels.i,
+          localization.articleNineCodes.reference.i,
+          localization.articleNineCodes.labels.j,
+          localization.articleNineCodes.reference.j,
           localization.csvHeaders.articleTenBasis,
           localization.csvHeaders.articleTenReference,
           localization.csvHeaders.businessAreas,
@@ -298,9 +333,97 @@ const RecordListPage = ({
               articleNineBasis: yesNoOrEmpty(
                 record.otherArticles?.articleNine?.checked
               ),
-              articleNineReference: record.otherArticles?.articleNine?.checked
-                ? record.otherArticles?.articleNine?.referenceUrl
-                : '',
+              articleNineReference:
+                record.otherArticles?.articleNine?.checked &&
+                record.otherArticles?.articleNine?.referenceUrl !== null
+                  ? record.otherArticles?.articleNine?.referenceUrl
+                  : '',
+              articleNineLegalityA: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.A
+                )?.checked
+              ),
+              articleNineLegalityB: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.B
+                )?.checked
+              ),
+              articleNineLegalityBReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.B
+                )?.referenceUrl ?? '',
+              articleNineLegalityC: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.C
+                )?.checked
+              ),
+              articleNineLegalityCReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.C
+                )?.referenceUrl ?? '',
+              articleNineLegalityD: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.D
+                )?.checked
+              ),
+              articleNineLegalityDReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.D
+                )?.referenceUrl ?? '',
+              articleNineLegalityE: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.E
+                )?.checked
+              ),
+              articleNineLegalityEReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.E
+                )?.referenceUrl ?? '',
+              articleNineLegalityF: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.F
+                )?.checked
+              ),
+              articleNineLegalityFReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.F
+                )?.referenceUrl ?? '',
+              articleNineLegalityG: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.G
+                )?.checked
+              ),
+              articleNineLegalityGReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.G
+                )?.referenceUrl ?? '',
+              articleNineLegalityH: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.H
+                )?.checked
+              ),
+              articleNineLegalityHReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.H
+                )?.referenceUrl ?? '',
+              articleNineLegalityI: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.I
+                )?.checked
+              ),
+              articleNineLegalityIReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.I
+                )?.referenceUrl ?? '',
+              articleNineLegalityJ: yesOrEmpty(
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.J
+                )?.checked
+              ),
+              articleNineLegalityJReference:
+                record.otherArticles?.articleNine?.legalities?.find(
+                  ({ legality }: Legality) => legality === ArticleNineCode.J
+                )?.referenceUrl ?? '',
               articleTenBasis: yesNoOrEmpty(
                 record.otherArticles?.articleTen?.checked
               ),
