@@ -97,5 +97,45 @@ export default {
     securityMeasures: 'Tekniske og organisatoriske sikkerhetstiltak',
     dpiaConducted: 'Er det gjennomført DPIA?',
     dpiaReference: 'Referanse til DPIA'
-  }
+  },
+  articleNineCodes: {
+    labels: {
+      a: 'Artikkel 9(2)(a) - Samtykke',
+      b: 'Artikkel 9(2)(b) - Trygde-, arbeids- og sosialrettslige forhold',
+      c: 'Artikkel 9(2)(c) - Vern av noen vitale interesser',
+      d: 'Artikkel 9(2)(d) - Medlemsopplysninger',
+      e: 'Artikkel 9(2)(e) - Offentliggjorte opplysninger',
+      f: 'Artikkel 9(2)(f) - Rettskrav/domstolsbehandling',
+      g: 'Artikkel 9(2)(g) - Viktige allmenne interesser',
+      h: 'Artikkel 9(2)(h) - Medisinske opplysninger',
+      i: 'Artikkel 9(2)(i) - Allmenne folkehelseopplysninger',
+      j: 'Artikkel 9(2)(j) - Arkiv- og forskningsformål'
+    },
+    description: {
+      a: 'Den registrerte har gitt uttrykkelig samtykke til behandling av slike personopplysninger for ett eller flere spesifikke formål, unntatt dersom det i unionsretten eller medlemsstatenes nasjonale rett er fastsatt at den registrerte ikke kan oppheve forbudet nevnt i nr. 1.',
+      b: 'Behandlingen er nødvendig for at den behandlingsansvarlige eller den registrerte skal kunne oppfylle sine forpliktelser og utøve sine særlige rettigheter på området arbeidsrett, trygderett og sosialrett i den grad dette er tillatt i henhold til unionsretten eller medlemsstatenes nasjonale rett, eller en tariffavtale i henhold til medlemsstatenes nasjonale rett som gir nødvendige garantier for den registrertes grunnleggende rettigheter og interesser.',
+      c: 'Behandlingen er nødvendig for å verne den registrertes eller en annen fysisk persons vitale interesser dersom den registrerte fysisk eller juridisk ikke er i stand til å gi samtykke.',
+      d: 'Behandlingen utføres av en stiftelse, sammenslutning eller et annet ideelt organ hvis mål er av politisk, religiøs eller fagforeningsmessig art, som ledd i organets berettigede aktiviteter og med nødvendige garantier, forutsatt at behandlingen bare gjelder organets medlemmer eller tidligere medlemmer eller personer som på grunn av organets mål har regelmessig kontakt med det, og at personopplysningene ikke utleveres til andre enn nevnte organ uten de registrertes samtykke.',
+      e: 'Behandlingen gjelder personopplysninger som det er åpenbart at den registrerte har offentliggjort.',
+      f: 'Behandlingen er nødvendig for å fastsette, gjøre gjeldende eller forsvare rettskrav eller når domstolene handler innenfor rammen av sin domsmyndighet.',
+      g: 'Behandlingen er nødvendig av hensyn til viktige allmenne interesser, på grunnlag av unionsretten eller medlemsstatenes nasjonale rett som skal stå i et rimelig forhold til det mål som søkes oppnådd, være forenlig med det grunnleggende innholdet i retten til vern av personopplysninger og sikre egnede og særlige tiltak for å verne den registrertes grunnleggende rettigheter og interesser.',
+      h: 'Behandlingen er nødvendig i forbindelse med forebyggende medisin eller arbeidsmedisin for å vurdere en arbeidstakers arbeidskapasitet, i forbindelse med medisinsk diagnostikk, yting av helse- eller sosialtjenester, behandling eller forvaltning av helse- eller sosialtjenester og -systemer på grunnlag av unionsretten eller medlemsstatenes nasjonale rett eller i henhold til en avtale med helsepersonell og med forbehold for vilkårene og garantiene nevnt i nr. 3.',
+      i: 'Behandlingen er nødvendig av allmenne folkehelsehensyn, f.eks. vern mot alvorlige grenseoverskridende helsetrusler eller for å sikre høye kvalitets- og sikkerhetsstandarder for helsetjenester og legemidler eller medisinsk utstyr, på grunnlag av unionsretten eller medlemsstatenes nasjonale rett der det fastsettes egnede og særlige tiltak for å verne den registrertes rettigheter og friheter, særlig taushetsplikt.',
+      j: 'Behandlingen er nødvendig for arkivformål i allmennhetens interesse, for formål knyttet til vitenskapelig eller historisk forskning eller for statistiske formål i samsvar med artikkel 89 nr. 1 på grunnlag av unionsretten eller medlemsstatenes nasjonale rett som skal stå i et rimelig forhold til det mål som søkes oppnådd, være forenlig med det grunnleggende innholdet i retten til vern av personopplysninger og sikre egnede og særlige tiltak for å verne den registrertes grunnleggende rettigheter og interesser.'
+    },
+    reference: {
+      b: 'Artikkel 9(2)(b) - Henvisning til annet hjemmelsgrunnlag',
+      c: 'Artikkel 9(2)(c) - Henvisning til annet hjemmelsgrunnlag',
+      d: 'Artikkel 9(2)(d) - Henvisning til annet hjemmelsgrunnlag',
+      e: 'Artikkel 9(2)(e) - Henvisning til annet hjemmelsgrunnlag',
+      f: 'Artikkel 9(2)(f) - Henvisning til annet hjemmelsgrunnlag',
+      g: 'Artikkel 9(2)(g) - Henvisning til annet hjemmelsgrunnlag',
+      h: 'Artikkel 9(2)(h) - Henvisning til annet hjemmelsgrunnlag',
+      i: 'Artikkel 9(2)(i) - Henvisning til annet hjemmelsgrunnlag',
+      j: 'Artikkel 9(2)(j) - Henvisning til annet hjemmelsgrunnlag'
+    }
+  },
+  showDetails: 'Vis detaljer',
+  hideDetails: 'Skjul detaljer',
+  referenceToOtherLegalBasis: 'Henvisning til annet hjemmelsgrunnlag'
 };

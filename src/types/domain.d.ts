@@ -57,8 +57,20 @@ export interface Article {
   referenceUrl: string;
 }
 
+export interface Legality {
+  legality: string;
+  checked: boolean;
+  referenceUrl?: string;
+}
+
+export interface ArticleWithLegalities {
+  checked: boolean;
+  referenceUrl?: string;
+  legalities: Legality[];
+}
+
 export interface OtherArticles {
-  articleNine: Partial<Article>;
+  articleNine: Partial<ArticleWithLegalities>;
   articleTen: Partial<Article>;
 }
 

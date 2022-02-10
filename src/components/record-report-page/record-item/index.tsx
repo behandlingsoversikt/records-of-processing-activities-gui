@@ -8,6 +8,7 @@ import { localization } from '../../../lib/localization';
 import { Record } from '../../../types';
 import { RecordStatus } from '../../../types/enums';
 import { ContactInformation } from '../contact-information';
+import { articleNineLabels } from '../../article-nine';
 
 interface Props {
   record: Record;
@@ -196,14 +197,17 @@ const RecordItemPure = ({
               <SC.SectionSubTitle>
                 {localization.otherArticles}
               </SC.SectionSubTitle>
-              {otherArticles &&
-                otherArticles.articleNine &&
-                otherArticles.articleNine.checked && (
-                  <div>
-                    <span>{localization.articleNine}: </span>
-                    {otherArticles.articleNine.checked
-                      ? localization.yes
-                      : localization.no}
+              {otherArticles && otherArticles.articleNine && (
+                <div style={{ marginBottom: '1em' }}>
+                  <span>{localization.articleNine}:</span>
+                  {typeof otherArticles.articleNine.checked === 'boolean' && (
+                    <span>
+                      {otherArticles.articleNine.checked
+                        ? localization.yes
+                        : localization.no}
+                    </span>
+                  )}
+                  {otherArticles.articleNine.referenceUrl && (
                     <div>
                       <span>Henvisning til annen lovgivning: </span>
                       <a
@@ -214,29 +218,60 @@ const RecordItemPure = ({
                         {otherArticles.articleNine.referenceUrl}
                       </a>
                     </div>
-                  </div>
-                )}
+                  )}
+                  {otherArticles.articleNine.checked &&
+                    otherArticles.articleNine?.legalities?.map(
+                      ({ legality, checked, referenceUrl }) => (
+                        <>
+                          {checked && (
+                            <div style={{ marginTop: '1em' }}>
+                              <span>
+                                {articleNineLabels[legality].label ?? legality}
+                                :&nbsp;
+                              </span>
+                              {checked ? localization.yes : localization.no}
+                              {referenceUrl && (
+                                <div>
+                                  <span>
+                                    {localization.referenceToOtherLegalBasis}
+                                    :&nbsp;
+                                  </span>
+                                  {referenceUrl}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </>
+                      )
+                    )}
+                </div>
+              )}
 
-              {otherArticles &&
-                otherArticles.articleTen &&
-                otherArticles.articleTen.checked && (
-                  <div>
-                    <span>{localization.articleTen}: </span>
-                    {otherArticles.articleTen.checked
-                      ? localization.yes
-                      : localization.no}
-                    <div>
-                      <span>Henvisning til annen lovgivning: </span>
-                      <a
-                        title={otherArticles.articleTen.referenceUrl}
-                        href={otherArticles.articleTen.referenceUrl}
-                        rel='noopener noreferrer'
-                      >
-                        {otherArticles.articleTen.referenceUrl}
-                      </a>
-                    </div>
-                  </div>
-                )}
+              {otherArticles && otherArticles.articleTen && (
+                <div>
+                  <span>{localization.articleTen}: </span>
+                  {typeof otherArticles.articleTen.checked === 'boolean' && (
+                    <span>
+                      {otherArticles.articleTen.checked
+                        ? localization.yes
+                        : localization.no}
+                    </span>
+                  )}
+                  {otherArticles.articleTen.checked &&
+                    otherArticles.articleTen.referenceUrl && (
+                      <div>
+                        <span>Henvisning til annen lovgivning: </span>
+                        <a
+                          title={otherArticles.articleTen.referenceUrl}
+                          href={otherArticles.articleTen.referenceUrl}
+                          rel='noopener noreferrer'
+                        >
+                          {otherArticles.articleTen.referenceUrl}
+                        </a>
+                      </div>
+                    )}
+                </div>
+              )}
             </SC.SectionContent>
 
             <SC.SectionContent>

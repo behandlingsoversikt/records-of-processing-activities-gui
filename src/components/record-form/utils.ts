@@ -1,5 +1,5 @@
 import { Record } from '../../types';
-import { RecordStatus } from '../../types/enums';
+import { ArticleNineCode, RecordStatus } from '../../types/enums';
 
 export const mapRecordToValues = (
   {
@@ -20,7 +20,23 @@ export const mapRecordToValues = (
     otherArticles: {
       articleNine: {
         checked: articleNineChecked = undefined,
-        referenceUrl: articleNineReferenceUrl = ''
+        referenceUrl: articleNineReferenceUrl = undefined,
+        legalities = [
+          {
+            legality: ArticleNineCode.A,
+            checked: false,
+            referenceUrl: undefined
+          },
+          { legality: ArticleNineCode.B, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.C, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.D, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.E, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.F, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.G, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.H, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.I, checked: false, referenceUrl: '' },
+          { legality: ArticleNineCode.J, checked: false, referenceUrl: '' }
+        ]
       } = {},
       articleTen: {
         checked: articleTenChecked = undefined,
@@ -65,7 +81,8 @@ export const mapRecordToValues = (
   otherArticles: {
     articleNine: {
       checked: articleNineChecked,
-      referenceUrl: articleNineReferenceUrl
+      referenceUrl: articleNineReferenceUrl,
+      legalities
     },
     articleTen: {
       checked: articleTenChecked,

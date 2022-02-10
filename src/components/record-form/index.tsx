@@ -39,6 +39,7 @@ import {
   CommonDataControllerContact
 } from '../../types';
 import { DatasetStatus, RecordStatus } from '../../types/enums';
+import ArticleNine from '../article-nine';
 
 type FormValues = Omit<Record, 'updatedAt'>;
 
@@ -666,13 +667,38 @@ const RecordForm = ({
               onChange={e => handleOtherArticlesArticleNineRadioChange(e)}
             />
             {values.otherArticles?.articleNine?.checked && (
-              <TextField
-                isReadOnly={isReadOnlyUser}
-                name='otherArticles.articleNine.referenceUrl'
-                value={values.otherArticles?.articleNine?.referenceUrl ?? ''}
-                labelText='Henvisning til annen lovgivning'
-                onChange={handleChange}
-              />
+              <>
+                {values.otherArticles?.articleNine?.referenceUrl && (
+                  <TextField
+                    isReadOnly={isReadOnlyUser}
+                    name='otherArticles.articleNine.referenceUrl'
+                    value={
+                      values.otherArticles?.articleNine?.referenceUrl ?? ''
+                    }
+                    labelText='Henvisning til annen lovgivning (utdatert felt)'
+                    onChange={handleChange}
+                  />
+                )}
+                <FieldArray
+                  name='otherArticles.articleNine.legalities'
+                  render={() => (
+                    <div>
+                      {(values.otherArticles.articleNine?.legalities || []).map(
+                        (legality, index) => (
+                          <ArticleNine
+                            key={`otherArticles.articleNine.legalities-${index}`}
+                            index={index}
+                            isReadOnlyUser={isReadOnlyUser}
+                            fieldValues={legality}
+                            checkBoxName={`otherArticles.articleNine.legalities[${index}].checked`}
+                            handleChange={handleChange}
+                          />
+                        )
+                      )}
+                    </div>
+                  )}
+                />
+              </>
             )}
             <Radio
               labelText='Artikkel 10 - Behandling av personopplysninger om straffedommer og lovovertredelser'
