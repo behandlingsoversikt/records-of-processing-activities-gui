@@ -562,32 +562,32 @@ const RecordForm = ({
                             { label: '', value: '' },
                             {
                               label:
-                                'Artikkel 6.1.a - Den registrerte har samtykket til behandling av sine personopplysninger for ett eller flere spesifikke formål',
+                                'Artikkel 6(1)(a) - Den registrerte har samtykket til behandling av sine personopplysninger for ett eller flere spesifikke formål',
                               value: '6.1.a'
                             },
                             {
                               label:
-                                'Artikkel 6.1.b - Behandlingen er nødvendig for å oppfylle en avtale som den registrerte er part i, eller for å gjennomføre tiltak på den registrertes anmodning før en avtaleinngåelse',
+                                'Artikkel 6(1)(b) - Behandlingen er nødvendig for å oppfylle en avtale som den registrerte er part i, eller for å gjennomføre tiltak på den registrertes anmodning før en avtaleinngåelse',
                               value: '6.1.b'
                             },
                             {
                               label:
-                                'Artikkel 6.1.c - Behandlingen er nødvendig for å oppfylle en rettslig forpliktelse som påhviler den behandlingsansvarlige',
+                                'Artikkel 6(1)(c) - Behandlingen er nødvendig for å oppfylle en rettslig forpliktelse som påhviler den behandlingsansvarlige',
                               value: '6.1.c'
                             },
                             {
                               label:
-                                'Artikkel 6.1.d - Behandlingen er nødvendig for å verne den registrertes eller en annen fysisk persons vitale interesser',
+                                'Artikkel 6(1)(d) - Behandlingen er nødvendig for å verne den registrertes eller en annen fysisk persons vitale interesser',
                               value: '6.1.d'
                             },
                             {
                               label:
-                                'Artikkel 6.1.e - Behandlingen er nødvendig for å utføre en oppgave i allmennhetens interesse eller utøve offentlig myndighet som den behandlingsansvarlige er pålagt',
+                                'Artikkel 6(1)(e) - Behandlingen er nødvendig for å utføre en oppgave i allmennhetens interesse eller utøve offentlig myndighet som den behandlingsansvarlige er pålagt',
                               value: '6.1.e'
                             },
                             {
                               label:
-                                'Artikkel 6.1.f - Behandlingen er nødvendig for formål knyttet til de berettigede interessene som forfølges av den behandlingsansvarlige eller en tredjepart, med mindre den registrertes interesser eller grunnleggende rettigheter og friheter går foran og krever vern av personopplysninger, særlig dersom den registrerte er et barn',
+                                'Artikkel 6(1)(f) - Behandlingen er nødvendig for formål knyttet til de berettigede interessene som forfølges av den behandlingsansvarlige eller en tredjepart, med mindre den registrertes interesser eller grunnleggende rettigheter og friheter går foran og krever vern av personopplysninger, særlig dersom den registrerte er et barn',
                               value: '6.1.f'
                             }
                           ]}
