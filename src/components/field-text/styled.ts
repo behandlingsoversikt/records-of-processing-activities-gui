@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components';
 import { Field as FormikField } from 'formik';
+import { Colour, theme } from '@fellesdatakatalog/theme';
 
 const TextField = styled(FormikField)<{ error?: boolean }>`
   font-weight: 400;
   width: 100%;
   padding: 8px;
   border-radius: 5px;
-  border: 1px solid ${({ theme }) => theme.fdk.colors.neutrals.lightblue};
-  color: ${({ theme }) => theme.fdk.colors.text.default};
+  border: 1px solid ${({ theme: t }) => t.fdk.colors.neutrals.lightblue};
+  color: ${({ theme: t }) => t.fdk.colors.text.default};
 
   &:not(:disabled):focus {
     box-shadow: 0 0 0 0.1rem rgba(38, 128, 179, 0.5);
@@ -51,10 +52,23 @@ const ReadOnlyLabel = styled.span`
   text-align: justify;
 `;
 
+const Required = styled.div`
+  background-color: #fff2d8;
+  border-radius: 20px;
+  color: ${theme.colour(Colour.NEUTRAL, 'N70')};
+  display: inline-flex;
+  font-size: ${theme.fontSize('FS14')};
+  font-weight: ${theme.fontWeight('FW400')};
+  margin-bottom: ${theme.spacing('S6')};
+  margin-left: ${theme.spacing('S6')};
+  padding: 0 ${theme.spacing('S6')};
+`;
+
 export default {
   Field,
   TextField,
   Label,
   HelperText,
-  ReadOnlyLabel
+  ReadOnlyLabel,
+  Required
 };

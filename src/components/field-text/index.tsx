@@ -1,6 +1,7 @@
 import React, { memo, PropsWithChildren, ChangeEvent } from 'react';
 
 import SC from './styled';
+import { localization } from '../../lib/localization';
 
 interface Props {
   id?: string;
@@ -17,6 +18,7 @@ interface Props {
 
 const TextField = ({
   id,
+  required,
   name,
   value,
   error,
@@ -29,6 +31,7 @@ const TextField = ({
   <SC.Field error={error}>
     <SC.Label htmlFor={name}>
       {labelText ?? null}
+      {required && <SC.Required>{localization.required}</SC.Required>}
       {!isReadOnly ? (
         <SC.TextField
           id={id}

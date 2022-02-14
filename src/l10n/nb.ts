@@ -39,6 +39,7 @@ export default {
   dataProtectionOfficer: 'Personvernombud',
   articleNine: 'Artikkel 9',
   articleTen: 'Artikkel 10',
+  required: 'Obligatorisk',
   csvHeaders: {
     organizationName: 'Behandlingsansvarlig',
     organizationId: 'Organisasjonsnummer',
