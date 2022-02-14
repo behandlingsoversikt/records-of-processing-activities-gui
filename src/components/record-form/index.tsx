@@ -434,6 +434,7 @@ const RecordForm = ({
             ) && (
               <>
                 <TextField
+                  required
                   isReadOnly={isReadOnlyUser}
                   name='commonDataControllerContact.companies'
                   value={values.commonDataControllerContact.companies}
@@ -461,6 +462,7 @@ const RecordForm = ({
                           key={`commonDataControllerContact.contactPoints-${index}`}
                         >
                           <TextField
+                            required
                             isReadOnly={isReadOnlyUser}
                             name={`commonDataControllerContact.contactPoints[${index}].name`}
                             value={name}

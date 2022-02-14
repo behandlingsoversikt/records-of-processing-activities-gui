@@ -72,11 +72,11 @@ const RecordItemPure = ({
         </SC.SectionRow>
       </SC.Section>
 
-      {!requiredFieldsOnly && (
-        <SC.Section>
-          <SC.SectionTitle>{localization.dataProcessor}</SC.SectionTitle>
+      <SC.Section>
+        <SC.SectionTitle>{localization.dataProcessor}</SC.SectionTitle>
 
-          <SC.SectionRow>
+        <SC.SectionRow>
+          {!requiredFieldsOnly && (
             <SC.SectionContent>
               <SC.SectionSubTitle>
                 {localization.dataProcessorContactDetails}
@@ -88,7 +88,8 @@ const RecordItemPure = ({
                 />
               ))}
             </SC.SectionContent>
-
+          )}
+          {!requiredFieldsOnly && (
             <SC.SectionContent>
               <SC.SectionSubTitle>
                 {localization.dataProcessingAgreements}
@@ -109,55 +110,53 @@ const RecordItemPure = ({
                   </Fragment>
                 ))}
             </SC.SectionContent>
+          )}
 
-            <SC.SectionContent>
-              <SC.SectionSubTitle>
-                {localization.commonDataControllerContact}
-                <SC.RequiredLabel text='Obligatorisk' />
-              </SC.SectionSubTitle>
-              {commonDataControllerContact &&
-                typeof commonDataControllerContact.commonDataControllerChecked ===
-                  'boolean' &&
-                `${
-                  commonDataControllerContact.commonDataControllerChecked
-                    ? localization.yes
-                    : localization.no
-                }`}
+          <SC.SectionContent>
+            <SC.SectionSubTitle>
+              {localization.commonDataControllerContact}
+              <SC.RequiredLabel text='Obligatorisk' />
+            </SC.SectionSubTitle>
+            {commonDataControllerContact &&
+              typeof commonDataControllerContact.commonDataControllerChecked ===
+                'boolean' &&
+              `${
+                commonDataControllerContact.commonDataControllerChecked
+                  ? localization.yes
+                  : localization.no
+              }`}
 
-              {commonDataControllerContact &&
-                commonDataControllerContact.commonDataControllerChecked &&
-                commonDataControllerContact.companies && (
-                  <div>
-                    <span>{commonDataControllerContact.companies}</span>
-                  </div>
-                )}
-              {commonDataControllerContact &&
-                commonDataControllerContact.commonDataControllerChecked &&
-                commonDataControllerContact.distributionOfResponsibilities && (
-                  <div>
-                    <span>
-                      {
-                        commonDataControllerContact.distributionOfResponsibilities
-                      }
-                    </span>
-                  </div>
-                )}
+            {commonDataControllerContact &&
+              commonDataControllerContact.commonDataControllerChecked &&
+              commonDataControllerContact.companies && (
+                <div>
+                  <span>{commonDataControllerContact.companies}</span>
+                </div>
+              )}
+            {commonDataControllerContact &&
+              commonDataControllerContact.commonDataControllerChecked &&
+              commonDataControllerContact.distributionOfResponsibilities && (
+                <div>
+                  <span>
+                    {commonDataControllerContact.distributionOfResponsibilities}
+                  </span>
+                </div>
+              )}
 
-              {commonDataControllerContact &&
-                commonDataControllerContact.commonDataControllerChecked &&
-                commonDataControllerContact.contactPoints &&
-                commonDataControllerContact.contactPoints.map(
-                  (contactPoint, index) => (
-                    <ContactInformation
-                      key={`contactInformation-${index}`}
-                      contactDetailsInterface={contactPoint}
-                    />
-                  )
-                )}
-            </SC.SectionContent>
-          </SC.SectionRow>
-        </SC.Section>
-      )}
+            {commonDataControllerContact &&
+              commonDataControllerContact.commonDataControllerChecked &&
+              commonDataControllerContact.contactPoints &&
+              commonDataControllerContact.contactPoints.map(
+                (contactPoint, index) => (
+                  <ContactInformation
+                    key={`contactInformation-${index}`}
+                    contactDetailsInterface={contactPoint}
+                  />
+                )
+              )}
+          </SC.SectionContent>
+        </SC.SectionRow>
+      </SC.Section>
 
       <SC.Section>
         <SC.SectionTitle>{localization.records}</SC.SectionTitle>

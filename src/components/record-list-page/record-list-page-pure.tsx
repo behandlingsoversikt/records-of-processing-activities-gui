@@ -102,6 +102,9 @@ const RecordListPage = ({
     const variableHeaders = requiredFieldsOnly
       ? [
           localization.csvHeaders.purpose,
+          localization.csvHeaders.commonDataControllerChecked,
+          localization.csvHeaders.commonDataControllerCompanies,
+          localization.csvHeaders.commonDataControllerContact,
           localization.csvHeaders.categorySubjects,
           localization.csvHeaders.categoryPersonalData,
           localization.csvHeaders.plannedDeletion,
@@ -230,6 +233,16 @@ const RecordListPage = ({
                 representatives?.dataProtectionOfficer?.phone ?? '',
               title: record.title ?? '',
               purpose: record.purpose ?? '',
+              commonDataControllerChecked: yesNoOrEmpty(
+                record.commonDataControllerContact?.commonDataControllerChecked,
+                `${localization.yes}`
+              ),
+              commonDataControllerCompanies:
+                record.commonDataControllerContact?.companies ?? '',
+              commonDataControllerContact:
+                record.commonDataControllerContact?.contactPoints
+                  ?.map(item => item.name)
+                  ?.join(' | ') ?? '',
               categorySubjects:
                 record.categories
                   ?.map(item => item.dataSubjectCategories)
