@@ -1,22 +1,23 @@
-import React, { FC, memo, Fragment } from 'react';
+import React, { FC, memo, Fragment, useEffect } from 'react';
 import { compose } from 'redux';
 
 import CreateIconOutlined from '@material-ui/icons/CreateOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import withDatasets, { Props as DatasetsProps } from '../../with-datasets';
 
 import SC from './styled';
 import { localization } from '../../../lib/localization';
-import { Record } from '../../../types';
+import { Dataset, Record as ActivityRecord } from '../../../types';
 import { RecordStatus } from '../../../types/enums';
 import { ContactInformation } from '../contact-information';
 import { articleNineLabels } from '../../article-nine';
 
 interface ExternalProps {
-  record: Record;
+  record: ActivityRecord;
   requiredFieldsOnly?: boolean;
 }
 
-interface Props extends ExternalProps {}
+interface Props extends ExternalProps, DatasetsProps {}
 
 const statuses = {
   [RecordStatus.DRAFT]: {
@@ -31,6 +32,7 @@ const statuses = {
 
 const RecordItemPure: FC<Props> = ({
   record: {
+    organizationId,
     status,
     purpose,
     categories,
@@ -50,9 +52,20 @@ const RecordItemPure: FC<Props> = ({
     dataProtectionImpactAssessment,
     dataProcessingAgreements
   },
-  requiredFieldsOnly
+  requiredFieldsOnly,
+  datasets,
+  datasetsActions: { fetchAllDatasetsRequested: fetchAllDatasets }
 }) => {
   const { text: statusText, icon: StatusIcon } = statuses[status];
+
+  useEffect(() => {
+    fetchAllDatasets(organizationId);
+  }, []);
+
+  const datasetsMap = datasets?.reduce(
+    (previous, current) => ({ ...previous, [current.id]: current }),
+    {} as Record<string, Dataset>
+  );
 
   return (
     <>
@@ -298,7 +311,7 @@ const RecordItemPure: FC<Props> = ({
                       href={dataset}
                       rel='noopener noreferrer'
                     >
-                      {dataset}
+                      {datasetsMap[dataset]?.title?.nb ?? dataset}
                     </a>
                   </div>
                 ))}
@@ -432,4 +445,7 @@ const RecordItemPure: FC<Props> = ({
   );
 };
 
-export const RecordItem = compose<FC<ExternalProps>>(memo)(RecordItemPure);
+export const RecordItem = compose<FC<ExternalProps>>(
+  memo,
+  withDatasets
+)(RecordItemPure);
