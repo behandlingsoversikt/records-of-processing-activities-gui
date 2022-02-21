@@ -401,13 +401,15 @@ const RecordItemPure: FC<Props> = ({
           )}
         </SC.SectionContent>
 
-        <SC.SectionContent>
-          <SC.SectionSubTitle>
-            {localization.guarantees}
-            <SC.RequiredLabel text='Obligatorisk' />
-          </SC.SectionSubTitle>
-          {dataTransfers && dataTransfers.guarantees}
-        </SC.SectionContent>
+        {dataTransfers?.transferred && (
+          <SC.SectionContent>
+            <SC.SectionSubTitle>
+              {localization.guarantees}
+              <SC.RequiredLabel text='Obligatorisk' />
+            </SC.SectionSubTitle>
+            {dataTransfers && dataTransfers.guarantees}
+          </SC.SectionContent>
+        )}
       </SC.Section>
 
       <SC.Section>
