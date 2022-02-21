@@ -67,28 +67,28 @@
     },
     "1004946|showdown>yargs>cliui>strip-ansi>ansi-regex": {
       "decision": "ignore",
-      "madeAt": 1642683187949,
-      "expiresAt": 1645275181330
+      "madeAt": 1645432638208,
+      "expiresAt": 1648024628434
     },
     "1004946|showdown>yargs>cliui>string-width>strip-ansi>ansi-regex": {
       "decision": "ignore",
-      "madeAt": 1642683187949,
-      "expiresAt": 1645275181330
+      "madeAt": 1645432638208,
+      "expiresAt": 1648024628434
     },
     "1004946|showdown>yargs>cliui>wrap-ansi>strip-ansi>ansi-regex": {
       "decision": "ignore",
-      "madeAt": 1642683187949,
-      "expiresAt": 1645275181330
+      "madeAt": 1645432638208,
+      "expiresAt": 1648024628434
     },
     "1004946|showdown>yargs>cliui>wrap-ansi>string-width>strip-ansi>ansi-regex": {
       "decision": "ignore",
-      "madeAt": 1642683187949,
-      "expiresAt": 1645275181330
+      "madeAt": 1645432638208,
+      "expiresAt": 1648024628434
     },
     "1004946|showdown>yargs>string-width>strip-ansi>ansi-regex": {
       "decision": "ignore",
-      "madeAt": 1642683187949,
-      "expiresAt": 1645275181330
+      "madeAt": 1645432638208,
+      "expiresAt": 1648024628434
     },
     "1004946|commitizen>inquirer>string-width>strip-ansi>ansi-regex": {
       "decision": "ignore",
@@ -121,8 +121,8 @@
     },
     "1005018|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>axios": {
       "decision": "ignore",
-      "madeAt": 1642683192266,
-      "expiresAt": 1645275181330
+      "madeAt": 1645432642433,
+      "expiresAt": 1648024628434
     },
     "1005417|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
       "decision": "ignore",
