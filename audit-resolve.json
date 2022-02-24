@@ -126,8 +126,8 @@
     },
     "1005417|@fellesdatakatalog/internal-footer>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
       "decision": "ignore",
-      "madeAt": 1643015642196,
-      "expiresAt": 1645607624173
+      "madeAt": 1645689826741,
+      "expiresAt": 1648281811394
     },
     "1005417|@fellesdatakatalog/internal-header>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
       "decision": "ignore",
