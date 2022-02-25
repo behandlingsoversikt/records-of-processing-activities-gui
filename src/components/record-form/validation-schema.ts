@@ -46,6 +46,13 @@ export default Yup.object().shape({
     companies: Yup.string().when('commonDataControllerChecked', {
       is: true,
       then: Yup.string().ensure().required('Feltet må fylles ut')
-    })
+    }),
+    contactPoints: Yup.array()
+      .of(
+        Yup.object().shape({
+          name: Yup.string().required()
+        })
+      )
+      .nullable()
   })
 });
