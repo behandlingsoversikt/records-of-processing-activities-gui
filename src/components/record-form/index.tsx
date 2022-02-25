@@ -401,7 +401,19 @@ const RecordForm = ({
                 { label: 'Nei', value: false },
                 { label: 'Ja', value: true }
               ]}
-              onChange={e => handleBooleanRadioChange(e)}
+              onChange={e => {
+                handleBooleanRadioChange(e);
+                if (['false'].includes(e.target.value)) {
+                  setFieldValue(
+                    'commonDataControllerContact.contactPoints',
+                    []
+                  );
+                } else {
+                  setFieldValue('commonDataControllerContact.contactPoints', [
+                    { name: '', email: '', phone: '' }
+                  ]);
+                }
+              }}
             />
             {checkIfCommonDataControllerCheckedOrFieldValuesFilledFromBefore(
               values.commonDataControllerContact
