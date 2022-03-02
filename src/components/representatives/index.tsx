@@ -46,7 +46,7 @@ const Representatives = ({
         <RepresentativeForm
           isReadOnlyUser={isReadOnlyUser}
           type={RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE}
-          title='Behandlingsansvarlig'
+          title='Representant for behandlingsansvarlig'
           subtitle={localization.dataControllerRepresentativeAbstract}
           description={localization.dataControllerRepresentativeDescription}
           representative={dataControllerRepresentative ?? {}}
