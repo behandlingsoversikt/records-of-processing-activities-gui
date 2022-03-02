@@ -244,7 +244,7 @@ const RecordForm = ({
         </SC.RecordFormSection>
         <SC.RecordFormSection
           required
-          title='Behandlingsansvar og databehandler'
+          title='Daglig behandlingsansvar og databehandler'
           isExpanded={allExpanded[1]}
           onClick={() =>
             setAllExpanded(
