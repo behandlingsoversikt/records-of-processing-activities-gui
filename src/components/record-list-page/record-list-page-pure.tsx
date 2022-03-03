@@ -545,7 +545,7 @@ const RecordListPage = ({
                 onClick: () => downloadCSV(false)
               },
               {
-                name: 'Protokoll',
+                name: 'Protokoll - GDPR art. 30',
                 href: `/${organizationId}/report/required`,
                 external: true
               },
