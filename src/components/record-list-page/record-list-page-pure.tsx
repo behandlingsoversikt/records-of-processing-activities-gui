@@ -546,6 +546,7 @@ const RecordListPage = ({
               },
               {
                 name: 'Protokoll - GDPR art. 30',
+                tooltip: 'rapporten inneholder obligatoriske felter i alle godkjente behandlingsaktiviteter',
                 href: `/${organizationId}/report/required`,
                 external: true
               },
