@@ -215,9 +215,9 @@ const RecordItemPure: FC<Props> = ({
               {otherArticles && otherArticles.articleNine && (
                 <div style={{ marginBottom: '1em' }}>
                   <span>{localization.articleNine}:</span>
-                  {typeof otherArticles.articleNine.checked === 'boolean' && (
+                  {typeof otherArticles.articleNine?.checked === 'boolean' && (
                     <span>
-                      {otherArticles.articleNine.checked
+                      {otherArticles.articleNine?.checked
                         ? localization.yes
                         : localization.no}
                     </span>
@@ -234,7 +234,7 @@ const RecordItemPure: FC<Props> = ({
                       </a>
                     </div>
                   )}
-                  {otherArticles.articleNine.checked &&
+                  {otherArticles.articleNine?.checked &&
                     otherArticles.articleNine?.legalities?.map(
                       ({ legality, checked, referenceUrl }) => (
                         <>
@@ -265,15 +265,15 @@ const RecordItemPure: FC<Props> = ({
               {otherArticles && otherArticles.articleTen && (
                 <div>
                   <span>{localization.articleTen}: </span>
-                  {typeof otherArticles.articleTen.checked === 'boolean' && (
+                  {typeof otherArticles.articleTen?.checked === 'boolean' && (
                     <span>
-                      {otherArticles.articleTen.checked
+                      {otherArticles.articleTen?.checked
                         ? localization.yes
                         : localization.no}
                     </span>
                   )}
-                  {otherArticles.articleTen.checked &&
-                    otherArticles.articleTen.referenceUrl && (
+                  {otherArticles.articleTen?.checked &&
+                    otherArticles.articleTen?.referenceUrl && (
                       <div>
                         <span>Henvisning til annen lovgivning: </span>
                         <a
