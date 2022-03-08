@@ -1,6 +1,6 @@
 import React, { memo, FC } from 'react';
 import { compose } from 'redux';
-import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { Route, RouteProps } from 'react-router-dom';
 
 import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
 
@@ -16,10 +16,6 @@ const ProtectedRoute: FC<Props> = ({
   },
   ...props
 }) =>
-  authService.hasAccessRights(organizationId) ? (
-    <Route {...props} />
-  ) : (
-    <Redirect to='/login' />
-  );
+  authService.hasAccessRights(organizationId) ? <Route {...props} /> : null;
 
 export default compose<FC<ExternalProps>>(memo, withAuth)(ProtectedRoute);
