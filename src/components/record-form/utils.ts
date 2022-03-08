@@ -2,7 +2,13 @@ import { Record } from '../../types';
 import { ArticleNineCode, RecordStatus } from '../../types/enums';
 
 export const mapRecordToValues = (
-  {
+  record: Partial<Record>,
+  organizationId: string
+): Omit<Record, 'updatedAt'> => {
+  if (record.otherArticles && record.otherArticles.articleTen === null) {
+    record.otherArticles.articleTen = undefined;
+  }
+  const {
     id,
     status = RecordStatus.DRAFT,
     dataProcessorContactDetails = [{ name: '', phone: '', email: '' }],
@@ -60,49 +66,50 @@ export const mapRecordToValues = (
       thirdCountryRecipients = '',
       guarantees = ''
     } = {}
-  }: Partial<Record>,
-  organizationId: string
-): Omit<Record, 'updatedAt'> => ({
-  id,
-  status,
-  dataProcessorContactDetails,
-  organizationId,
-  dataProcessingAgreements,
-  categories,
-  commonDataControllerContact: {
-    commonDataControllerChecked,
-    companies,
-    distributionOfResponsibilities,
-    contactPoints
-  },
-  title,
-  purpose,
-  articleSixBasis,
-  otherArticles: {
-    articleNine: {
-      checked: articleNineChecked,
-      referenceUrl: articleNineReferenceUrl,
-      legalities
+  } = record;
+
+  return {
+    id,
+    status,
+    dataProcessorContactDetails,
+    organizationId,
+    dataProcessingAgreements,
+    categories,
+    commonDataControllerContact: {
+      commonDataControllerChecked,
+      companies,
+      distributionOfResponsibilities,
+      contactPoints
     },
-    articleTen: {
-      checked: articleTenChecked,
-      referenceUrl: articleTenReferenceUrl
+    title,
+    purpose,
+    articleSixBasis,
+    otherArticles: {
+      articleNine: {
+        checked: articleNineChecked,
+        referenceUrl: articleNineReferenceUrl,
+        legalities
+      },
+      articleTen: {
+        checked: articleTenChecked,
+        referenceUrl: articleTenReferenceUrl
+      }
+    },
+    businessAreas,
+    relatedDatasets,
+    securityMeasures,
+    plannedDeletion,
+    dataProtectionImpactAssessment: {
+      conducted,
+      assessmentReportUrl
+    },
+    personalDataSubjects,
+    privacyProcessingSystems,
+    recipientCategories,
+    dataTransfers: {
+      transferred,
+      thirdCountryRecipients,
+      guarantees
     }
-  },
-  businessAreas,
-  relatedDatasets,
-  securityMeasures,
-  plannedDeletion,
-  dataProtectionImpactAssessment: {
-    conducted,
-    assessmentReportUrl
-  },
-  personalDataSubjects,
-  privacyProcessingSystems,
-  recipientCategories,
-  dataTransfers: {
-    transferred,
-    thirdCountryRecipients,
-    guarantees
-  }
-});
+  };
+};
