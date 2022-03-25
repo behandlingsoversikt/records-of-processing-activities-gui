@@ -34,13 +34,13 @@ const labels = {
     phone: 'Virksomhetens telefon'
   },
   [RepresentativeType.DATA_CONTROLLER_REPRESENTATIVE_IN_EU]: {
-    name: 'Navn',
+    name: 'Navn på behandlingsansvarliges representant i EU',
     address: 'Postadresse',
     email: 'E-post',
     phone: 'Telefon'
   },
   [RepresentativeType.DATA_PROTECTION_OFFICER]: {
-    name: 'Navn',
+    name: 'Navn på personvernombud',
     address: 'Postadresse',
     email: 'E-post',
     phone: 'Telefon'
