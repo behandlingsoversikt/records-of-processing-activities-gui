@@ -47,7 +47,7 @@ const Field = styled.div<{ error?: boolean }>`
     `}
 `;
 
-const ReadOnlyLabel = styled.span`
+const ReadOnlyLabel = styled.div`
   min-height: 18.4px;
   text-align: justify;
 `;
