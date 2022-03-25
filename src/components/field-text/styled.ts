@@ -48,6 +48,7 @@ const Field = styled.div<{ error?: boolean }>`
 `;
 
 const ReadOnlyLabel = styled.div`
+  font-weight: ${theme.fontWeight('FW400')};
   min-height: 18.4px;
   text-align: justify;
 `;
