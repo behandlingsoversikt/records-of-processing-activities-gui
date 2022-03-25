@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Field as FormikField } from 'formik';
+import { theme as fdkTheme } from '@fellesdatakatalog/theme';
 
 const TextAreaField = styled(FormikField)<{ error?: boolean }>`
   font-weight: 400;
@@ -16,7 +17,8 @@ const TextAreaField = styled(FormikField)<{ error?: boolean }>`
   }
 `;
 
-const ReadOnlyLabel = styled.span`
+const ReadOnlyLabel = styled.div`
+  font-weight: ${fdkTheme.fontWeight('FW400')};
   min-height: 18.4px;
   text-align: justify;
 `;
