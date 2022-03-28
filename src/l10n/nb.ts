@@ -40,6 +40,10 @@ export default {
   articleNine: 'Artikkel 9',
   articleTen: 'Artikkel 10',
   required: 'Obligatorisk',
+  processStatus: {
+    APPROVED: 'Godkjent',
+    DRAFT: 'Utkast'
+  },
   csvHeaders: {
     organizationName: 'Behandlingsansvarlig',
     organizationId: 'Organisasjonsnummer',
@@ -96,7 +100,8 @@ export default {
     guarantees: 'Garantier ved overføring',
     securityMeasures: 'Tekniske og organisatoriske sikkerhetstiltak',
     dpiaConducted: 'Er det gjennomført DPIA?',
-    dpiaReference: 'Referanse til DPIA'
+    dpiaReference: 'Referanse til DPIA',
+    processStatus: 'Behandlingstatus'
   },
   articleNineCodes: {
     labels: {
