@@ -184,6 +184,7 @@ const RecordListPage = ({
       localization.csvHeaders.dataProtectionOfficerEmail,
       localization.csvHeaders.dataProtectionOfficerPhone,
       localization.csvHeaders.title,
+      localization.csvHeaders.processStatus,
       ...variableHeaders
     ];
 
@@ -232,6 +233,7 @@ const RecordListPage = ({
               dataProtectionOfficerPhone:
                 representatives?.dataProtectionOfficer?.phone ?? '',
               title: record.title ?? '',
+              processStatus: localization.processStatus[`${record.status}`],
               purpose: record.purpose ?? '',
               commonDataControllerChecked: yesNoOrEmpty(
                 record.commonDataControllerContact?.commonDataControllerChecked,
@@ -293,6 +295,7 @@ const RecordListPage = ({
               dataProtectionOfficerPhone:
                 representatives?.dataProtectionOfficer?.phone ?? '',
               title: record.title ?? '',
+              processStatus: localization.processStatus[`${record.status}`],
               dataProcessorName:
                 record.dataProcessorContactDetails
                   ?.map(item => item.name)
