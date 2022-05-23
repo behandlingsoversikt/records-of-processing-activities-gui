@@ -61,6 +61,7 @@ const RecordReportSubTitle = styled.h2`
 
 const RecordReportList = styled.div`
   margin-top: 2em;
+  word-break: break-word;
 `;
 
 const Root = styled(RootBase)`
