@@ -69,8 +69,6 @@ const SectionRow = styled.section`
 
 const SectionContent = styled.div`
   padding: 2em 1em 0.5em 1em;
-  max-height: 400px;
-  overflow-y: auto;
 `;
 
 const SectionTitle = styled.h3`
