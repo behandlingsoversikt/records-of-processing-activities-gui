@@ -34,6 +34,7 @@ import { fetchAllRepresentativesRequested } from '../representatives/redux/actio
 
 import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
 import { ArticleNineCode } from '../../types/enums';
+import { isValidRepresentatives } from './utils';
 
 const { FDK_REGISTRATION_BASE_URI } = env;
 
@@ -549,11 +550,13 @@ const RecordListPage = ({
               {
                 name: 'Protokoll',
                 href: `/${organizationId}/report/required`,
-                external: true
+                external: true,
+                disabled: !isValidRepresentatives(representatives)
               },
               {
                 name: 'Protokoll CSV',
-                onClick: () => downloadCSV(true)
+                onClick: () => downloadCSV(true),
+                disabled: !isValidRepresentatives(representatives)
               }
             ]}
           />

@@ -86,4 +86,9 @@ const FDKDropdownButton = styled.button<ButtonType>`
   }
 `;
 
-export default { FDKDropdownButton };
+const Disabled = styled.span`
+  color: grey;
+  cursor: auto;
+`;
+
+export default { FDKDropdownButton, Disabled };

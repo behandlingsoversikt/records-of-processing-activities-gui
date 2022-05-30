@@ -15,6 +15,7 @@ type SubButton = {
   href?: string;
   external?: boolean;
   onClick?: any;
+  disabled?: boolean;
 };
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -46,29 +47,32 @@ const FDKDropdownButton = ({
       {isExpanded ? <ArrowDropUp /> : <ArrowDropDown />}
       {isExpanded && (
         <ul>
-          {subButtons?.map(({ name, href, external, onClick }, index) => (
-            <li key={index}>
-              {href && (
-                <a
-                  rel='noreferrer'
-                  href={href}
-                  target={external ? '_blank' : ''}
-                >
-                  {name}
-                </a>
-              )}
-              {onClick && (
-                <span
-                  role='button'
-                  tabIndex={0}
-                  onClick={onClick}
-                  onKeyDown={onClick}
-                >
-                  {name}
-                </span>
-              )}
-            </li>
-          ))}
+          {subButtons?.map(
+            ({ name, href, external, onClick, disabled = false }, index) => (
+              <li key={index}>
+                {!disabled && href && (
+                  <a
+                    rel='noreferrer'
+                    href={href}
+                    target={external ? '_blank' : ''}
+                  >
+                    {name}
+                  </a>
+                )}
+                {!disabled && onClick && (
+                  <span
+                    role='button'
+                    tabIndex={0}
+                    onClick={onClick}
+                    onKeyDown={onClick}
+                  >
+                    {name}
+                  </span>
+                )}
+                {disabled && <SC.Disabled>{name}</SC.Disabled>}
+              </li>
+            )
+          )}
         </ul>
       )}
     </SC.FDKDropdownButton>
