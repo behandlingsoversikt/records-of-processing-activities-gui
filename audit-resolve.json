@@ -230,6 +230,36 @@
       "decision": "ignore",
       "madeAt": 1648121854292,
       "expiresAt": 1650713692234
+    },
+    "1070245|@fellesdatakatalog/internal-header>@fellesdatakatalog/skatteetaten-frontend-components>moment": {
+      "decision": "ignore",
+      "madeAt": 1652308148976,
+      "expiresAt": 1654900142467
+    },
+    "1070206|webpack-dev-server>portfinder>async": {
+      "decision": "ignore",
+      "madeAt": 1652308150822,
+      "expiresAt": 1654900142467
+    },
+    "1070245|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
+      "decision": "ignore",
+      "madeAt": 1652308152275,
+      "expiresAt": 1654900142467
+    },
+    "1067342|commitizen>minimist": {
+      "decision": "ignore",
+      "madeAt": 1652308153947,
+      "expiresAt": 1654900142467
+    },
+    "1067342|cz-conventional-changelog>commitizen>minimist": {
+      "decision": "ignore",
+      "madeAt": 1652308153947,
+      "expiresAt": 1654900142467
+    },
+    "1068192|@fellesdatakatalog/internal-header>@fellesdatakatalog/skatteetaten-frontend-components>react-i18next>html-parse-stringify2": {
+      "decision": "ignore",
+      "madeAt": 1652308155577,
+      "expiresAt": 1654900142467
     }
   },
   "rules": {},
