@@ -48,7 +48,7 @@ const FDKDropdownButton = ({
         <ul>
           {subButtons?.map(({ name, href, external, onClick }, index) => (
             <li key={index}>
-              {href ? (
+              {href && (
                 <a
                   rel='noreferrer'
                   href={href}
@@ -56,7 +56,8 @@ const FDKDropdownButton = ({
                 >
                   {name}
                 </a>
-              ) : (
+              )}
+              {onClick && (
                 <span
                   role='button'
                   tabIndex={0}
