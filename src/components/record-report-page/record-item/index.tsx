@@ -105,6 +105,8 @@ const RecordItemPure: FC<Props> = ({
               ))}
             </SC.SectionContent>
           )}
+        </SC.SectionRow>
+        <SC.SectionRow>
           {!requiredFieldsOnly && (
             <SC.SectionContent>
               <SC.SectionSubTitle>
@@ -127,7 +129,8 @@ const RecordItemPure: FC<Props> = ({
                 ))}
             </SC.SectionContent>
           )}
-
+        </SC.SectionRow>
+        <SC.SectionRow>
           <SC.SectionContent>
             <SC.SectionSubTitle>
               {localization.commonDataControllerContact}
