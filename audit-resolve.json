@@ -260,6 +260,16 @@
       "decision": "ignore",
       "madeAt": 1652308155577,
       "expiresAt": 1654900142467
+    },
+    "1070415|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
+      "decision": "ignore",
+      "madeAt": 1658845309901,
+      "expiresAt": 1661437305205
+    },
+    "1081761|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
+      "decision": "ignore",
+      "madeAt": 1658845311357,
+      "expiresAt": 1661437305205
     }
   },
   "rules": {},
