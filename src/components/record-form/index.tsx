@@ -270,7 +270,7 @@ const RecordForm = ({
                           isReadOnly={isReadOnlyUser}
                           name={`dataProcessorContactDetails[${index}].name`}
                           value={name}
-                          labelText='Navn på behandlingsansvarlig'
+                          labelText='Navn på daglig behandlingsansvarlig'
                           onChange={handleChange}
                         />
                         <SC.InlineFields>
@@ -296,7 +296,7 @@ const RecordForm = ({
                               onClick={() => arrayHelpers.remove(index)}
                             >
                               <RemoveIcon />
-                              Slett behandlingsansvarlig
+                              Slett daglig behandlingsansvarlig
                             </SC.RemoveButton>
                           )}
                       </Fragment>
@@ -317,7 +317,7 @@ const RecordForm = ({
                       }
                     >
                       <AddIcon />
-                      Legg til ny behandlingsansvarlig
+                      Legg til ny daglig behandlingsansvarlig
                     </SC.AddButton>
                   )}
                 </>
