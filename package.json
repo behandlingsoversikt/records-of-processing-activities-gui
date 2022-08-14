@@ -61,7 +61,7 @@
     "export-to-csv": "^0.2.1",
     "fast-json-patch": "^3.1.0",
     "formik": "^2.2.9",
-    "fsevents": "^2.1.2",
+    "fsevents": "^2.3.2",
     "immutable": "4.0.0-rc.12",
     "jwt-decode": "^3.1.2",
     "oidc-client": "^1.11.5",
@@ -141,6 +141,6 @@
     "webpack-merge": "^5.8.0"
   },
   "optionalDependencies": {
-    "fsevents": "^2.1.2"
+    "fsevents": "^2.3.2"
   }
 }
