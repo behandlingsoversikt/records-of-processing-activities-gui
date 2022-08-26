@@ -263,13 +263,13 @@
     },
     "1070415|react-svg-loader>react-svg-core>svgo>css-select>nth-check": {
       "decision": "ignore",
-      "madeAt": 1658845309901,
-      "expiresAt": 1661437305205
+      "madeAt": 1661513467038,
+      "expiresAt": 1664105458632
     },
     "1081761|@fellesdatakatalog/internal-footer>@skatteetaten/frontend-components>moment": {
       "decision": "ignore",
-      "madeAt": 1658845311357,
-      "expiresAt": 1661437305205
+      "madeAt": 1661513470325,
+      "expiresAt": 1664105458632
     }
   },
   "rules": {},
