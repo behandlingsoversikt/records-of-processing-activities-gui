@@ -8,7 +8,7 @@ import { SortField, SortOrder } from '../../../types/enums';
 
 const initialState = fromJS({
   records: []
-});
+}).toMap();
 
 export default function reducer(
   state = initialState,

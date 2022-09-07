@@ -1,13 +1,12 @@
 import LocalizedStrings, { LocalizedStringsMethods } from 'react-localization';
-import nb from '../l10n/nb';
-import { helptextsNb } from '../l10n/helptexts.nb';
+import nb from '../../l10n/nb';
 
 interface LocaleStrings extends LocalizedStringsMethods {
   [key: string]: any;
 }
 
 export const localization: LocaleStrings = new LocalizedStrings({
-  nb: { ...nb, ...helptextsNb }
+  nb: { ...nb }
 });
 
 localization.setLanguage('nb');

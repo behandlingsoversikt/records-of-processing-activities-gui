@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { theme } from '@fellesdatakatalog/theme';
+import FormPanelBase from '../form-panel';
 
 const Representatives = styled.div`
   display: flex;
@@ -18,7 +20,19 @@ const InlineFields = styled.div`
   }
 `;
 
+const FormPanel = styled(FormPanelBase)`
+  flex-basis: 49%;
+  width: auto;
+
+  &:nth-of-type(n + 2) {
+    margin-top: 0;
+  }
+
+  margin-bottom: ${theme.spacing('S24')};
+`;
+
 export default {
   Representatives,
-  InlineFields
+  InlineFields,
+  FormPanel
 };

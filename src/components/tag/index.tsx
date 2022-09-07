@@ -1,13 +1,18 @@
-import React, { memo } from 'react';
-
+import React, { FC, ReactElement } from 'react';
 import SC from './styled';
 
-interface Props {
+type Props = {
+  icon?: ReactElement;
   text: string;
-}
+  className?: string;
+};
 
-const Tag = ({ text, ...props }: Props): JSX.Element => (
-  <SC.Tag {...props}>{text}</SC.Tag>
+const Tag: FC<Props> = ({ icon, text, className }) => (
+  <SC.Tag className={className}>
+    {icon}
+    <SC.TagText>{text}</SC.TagText>
+  </SC.Tag>
 );
 
-export default memo(Tag);
+export { Props };
+export default Tag;

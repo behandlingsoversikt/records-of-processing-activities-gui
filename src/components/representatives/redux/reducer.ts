@@ -14,7 +14,7 @@ const initialState = fromJS({
     dataControllerRepresentativeInEU: {},
     dataProtectionOfficer: {}
   }
-});
+}).toMap();
 
 export default function reducer(
   state = initialState,

@@ -13,7 +13,7 @@ import { Actions } from '../../../types';
 
 const initialState = fromJS({
   record: null
-});
+}).toMap();
 
 export default function reducer(
   state = initialState,

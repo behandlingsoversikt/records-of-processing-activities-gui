@@ -1,14 +1,19 @@
 import * as Yup from 'yup';
+import { localization } from '../../utils/language/localization';
+
+const {
+  validation: { requiredError, phoneNumberError }
+} = localization;
 
 export default Yup.object().shape({
-  name: Yup.string().ensure().required('Feltet må fylles ut'),
-  address: Yup.string().ensure().required('Feltet må fylles ut'),
+  name: Yup.string().ensure().required(requiredError),
+  address: Yup.string().ensure().required(requiredError),
   email: Yup.string()
     .ensure()
-    .required('Feltet må fylles ut')
+    .required(requiredError)
     .email('E-post er ikke gyldig'),
   phone: Yup.string()
-    .matches(/^\+?[0-9\s]+$/, 'Telefonnummer er ikke gyldig')
+    .matches(/^\+?[0-9\s]+$/, phoneNumberError)
     .ensure()
-    .required('Feltet må fylles ut')
+    .required(requiredError)
 });

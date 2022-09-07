@@ -12,7 +12,7 @@ import withRecords, { Props as RecordsProps } from '../with-records';
 import SC from './styled';
 import { RecordItem } from './record-item';
 import { RepresentativesInterface } from '../../types';
-import { localization } from '../../lib/localization';
+import { localization } from '../../utils/language/localization';
 import { fetchAllRepresentativesRequested } from '../representatives/redux/actions';
 import { ReportRepresentatives } from './report-representatives';
 import { RecordStatus } from '../../types/enums';

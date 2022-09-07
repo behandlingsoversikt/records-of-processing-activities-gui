@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import SC from './styled';
 import { RepresentativesInterface } from '../../../types';
 import { RepresentativeItem } from './representative-item';
-import { localization } from '../../../lib/localization';
+import { localization } from '../../../utils/language/localization';
 
 interface Props {
   representatives: RepresentativesInterface;
