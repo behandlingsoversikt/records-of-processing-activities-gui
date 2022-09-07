@@ -3,7 +3,7 @@ import React, { ChangeEvent, FC, memo, useState } from 'react';
 import { ArticleNineCode } from '../../types/enums';
 import { Legality } from '../../types';
 
-import { localization } from '../../lib/localization';
+import { localization } from '../../utils/language/localization';
 
 import Checkbox from '../checkbox';
 import TextField from '../field-text';

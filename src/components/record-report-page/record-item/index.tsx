@@ -6,7 +6,7 @@ import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import withDatasets, { Props as DatasetsProps } from '../../with-datasets';
 
 import SC from './styled';
-import { localization } from '../../../lib/localization';
+import { localization } from '../../../utils/language/localization';
 import { Dataset, Record as ActivityRecord } from '../../../types';
 import { RecordStatus } from '../../../types/enums';
 import { ContactInformation } from '../contact-information';

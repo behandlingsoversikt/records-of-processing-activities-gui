@@ -7,7 +7,7 @@ import Alert, { Severity } from '@fellesdatakatalog/alert';
 import Root from '../root';
 
 import env from '../../env';
-import { localization } from '../../lib/localization';
+import { localization } from '../../utils/language/localization';
 
 import withDatasets, { Props as DatasetsProps } from '../with-datasets';
 import withOrganization, {

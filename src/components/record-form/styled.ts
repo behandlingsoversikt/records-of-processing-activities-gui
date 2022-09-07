@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Form } from 'formik';
 
-import ExpansionPanel from '../expansion-panel';
 import BaseFieldSet from '../fdk-fieldset';
 
 const RecordForm = styled(Form)`
@@ -27,14 +26,6 @@ const ExpandAllButton = styled.button`
     height: 16px;
     width: 16px;
     margin-left: 5px;
-  }
-`;
-
-const RecordFormSection = styled(ExpansionPanel)`
-  width: 100%;
-
-  &:nth-of-type(n + 2) {
-    margin-top: 20px;
   }
 `;
 
@@ -102,7 +93,6 @@ const RemoveButton = styled.button`
 export default {
   RecordForm,
   ExpandAllButton,
-  RecordFormSection,
   Fieldset,
   InlineFields,
   AddButton,

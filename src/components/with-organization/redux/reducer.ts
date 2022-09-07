@@ -7,7 +7,7 @@ import { Actions } from '../../../types';
 
 const initialState = fromJS({
   organization: null
-});
+}).toMap();
 
 export default function reducer(
   state = initialState,

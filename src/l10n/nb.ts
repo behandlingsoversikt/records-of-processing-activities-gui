@@ -142,5 +142,10 @@ export default {
   },
   showDetails: 'Vis detaljer',
   hideDetails: 'Skjul detaljer',
-  referenceToOtherLegalBasis: 'Henvisning til annet hjemmelsgrunnlag'
+  referenceToOtherLegalBasis: 'Henvisning til annet hjemmelsgrunnlag',
+  validation: {
+    requiredError: 'Feltet må fylles ut',
+    requiredFieldsError: 'Ett eller flere obligatoriske felt er ikke fylt ut',
+    phoneNumberError: 'Telefonnummer er ikke gyldig'
+  }
 };

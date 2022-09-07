@@ -1,7 +1,7 @@
 import React, { memo, PropsWithChildren, ChangeEvent } from 'react';
 
 import SC from './styled';
-import { localization } from '../../lib/localization';
+import { localization } from '../../utils/language/localization';
 
 interface Props {
   id?: string;

@@ -8,8 +8,9 @@ import React, {
 } from 'react';
 import { FormikProps, withFormik, FieldArray, FormikErrors } from 'formik';
 import { compare, Operation } from 'fast-json-patch';
+import _ from 'lodash';
 
-import { localization } from '../../lib/localization';
+import { localization } from '../../utils/language/localization';
 
 import withDatasets, { Props as DatasetsProps } from '../with-datasets';
 import withRecord, { Props as RecordProps } from '../with-record';
@@ -36,10 +37,12 @@ import {
   Record,
   Dataset,
   Categories,
-  CommonDataControllerContact
+  CommonDataControllerContact,
+  ContactDetailsInterface
 } from '../../types';
 import { DatasetStatus, RecordStatus } from '../../types/enums';
 import ArticleNine from '../article-nine';
+import FormPanel from '../form-panel';
 
 type FormValues = Omit<Record, 'updatedAt'>;
 
@@ -101,6 +104,8 @@ const RecordForm = ({
   ]);
   const [datasetSuggestions, setDatasetSuggestions] = useState<Dataset[]>([]);
   const [isWaitingForSuggestions, setIsWaitingForSuggestions] = useState(false);
+  const [formikErrors, setFormikErrors] =
+    useState<FormikErrors<FormValues> | null>(null);
 
   const mounted = useRef(false);
   const recordLoaded = useRef(false);
@@ -180,7 +185,14 @@ const RecordForm = ({
   useEffect(() => {
     const validateAndSave = async () => {
       const diff: Operation[] = compare(previousRecord.current, values);
-      const hasErrors = Object.keys(await validateForm(values)).length > 0;
+
+      setFormikErrors(await validateForm(values));
+      // eslint-disable-next-line no-console
+      console.log({ formikErrors });
+      const hasErrors = formikErrors
+        ? Object.keys(formikErrors).length > 0
+        : false;
+
       if (
         diff.length > 0 &&
         !(record?.status === RecordStatus.APPROVED && hasErrors)
@@ -213,10 +225,10 @@ const RecordForm = ({
           </span>
           {allFieldsExpanded ? <ExpandAllUpIcon /> : <ExpandAllDownIcon />}
         </SC.ExpandAllButton>
-        <SC.RecordFormSection
-          required
-          title='Behandlingen gjelder'
+        <FormPanel
+          headingTitle='Behandlingen gjelder'
           isExpanded={allExpanded[0]}
+          tag='mandatory'
           onClick={() =>
             setAllExpanded(
               allExpanded.map((expanded, index) =>
@@ -224,6 +236,7 @@ const RecordForm = ({
               )
             )
           }
+          hasError={touched.title && _.has(formikErrors, 'title')}
         >
           <SC.Fieldset
             required
@@ -236,15 +249,14 @@ const RecordForm = ({
               isReadOnly={isReadOnlyUser}
               name='title'
               value={values.title}
-              error={isApproved && touched.title && errors.title}
-              helperText={isApproved && touched.title && errors.title}
+              error={touched.title && errors.title}
+              helperText={touched.title && errors.title}
               onChange={handleChange}
             />
           </SC.Fieldset>
-        </SC.RecordFormSection>
-        <SC.RecordFormSection
-          required
-          title='Daglig behandlingsansvar og databehandler'
+        </FormPanel>
+        <FormPanel
+          headingTitle='Daglig behandlingsansvar og databehandler'
           isExpanded={allExpanded[1]}
           onClick={() =>
             setAllExpanded(
@@ -252,6 +264,10 @@ const RecordForm = ({
                 index === 1 ? !expanded : expanded
               )
             )
+          }
+          hasError={
+            _.has(touched, 'commonDataControllerContact') &&
+            _.has(formikErrors, 'commonDataControllerContact')
           }
         >
           <SC.Fieldset
@@ -401,6 +417,16 @@ const RecordForm = ({
                 { label: 'Nei', value: false },
                 { label: 'Ja', value: true }
               ]}
+              error={
+                touched.commonDataControllerContact
+                  ?.commonDataControllerChecked &&
+                errors.commonDataControllerContact?.commonDataControllerChecked
+              }
+              helperText={
+                touched.commonDataControllerContact
+                  ?.commonDataControllerChecked &&
+                errors.commonDataControllerContact?.commonDataControllerChecked
+              }
               onChange={e => {
                 handleBooleanRadioChange(e);
                 if (['false'].includes(e.target.value)) {
@@ -425,6 +451,14 @@ const RecordForm = ({
                   name='commonDataControllerContact.companies'
                   value={values.commonDataControllerContact.companies}
                   labelText='Virksomheter som har felles behandlingsansvar'
+                  error={
+                    touched.commonDataControllerContact?.companies &&
+                    errors.commonDataControllerContact?.companies
+                  }
+                  helperText={
+                    touched.commonDataControllerContact?.companies &&
+                    errors.commonDataControllerContact?.companies
+                  }
                   onChange={handleChange}
                 />
                 <TextField
@@ -453,6 +487,26 @@ const RecordForm = ({
                             name={`commonDataControllerContact.contactPoints[${index}].name`}
                             value={name}
                             labelText='Kontaktpunkt'
+                            error={
+                              touched.commonDataControllerContact
+                                ?.contactPoints?.[index]?.name &&
+                              (
+                                errors.commonDataControllerContact
+                                  ?.contactPoints?.[
+                                  index
+                                ] as FormikErrors<ContactDetailsInterface>
+                              )?.name
+                            }
+                            helperText={
+                              touched.commonDataControllerContact
+                                ?.contactPoints?.[index]?.name &&
+                              (
+                                errors.commonDataControllerContact
+                                  ?.contactPoints?.[
+                                  index
+                                ] as FormikErrors<ContactDetailsInterface>
+                              )?.name
+                            }
                             onChange={handleChange}
                           />
                           <SC.InlineFields>
@@ -461,6 +515,26 @@ const RecordForm = ({
                               name={`commonDataControllerContact.contactPoints[${index}].email`}
                               value={email}
                               labelText='E-post'
+                              error={
+                                touched.commonDataControllerContact
+                                  ?.contactPoints?.[index]?.email &&
+                                (
+                                  errors.commonDataControllerContact
+                                    ?.contactPoints?.[
+                                    index
+                                  ] as FormikErrors<ContactDetailsInterface>
+                                )?.email
+                              }
+                              helperText={
+                                touched.commonDataControllerContact
+                                  ?.contactPoints?.[index]?.email &&
+                                (
+                                  errors.commonDataControllerContact
+                                    ?.contactPoints?.[
+                                    index
+                                  ] as FormikErrors<ContactDetailsInterface>
+                                )?.email
+                              }
                               onChange={handleChange}
                             />
                             <TextField
@@ -468,6 +542,26 @@ const RecordForm = ({
                               name={`commonDataControllerContact.contactPoints[${index}].phone`}
                               value={phone}
                               labelText='Telefon'
+                              error={
+                                touched.commonDataControllerContact
+                                  ?.contactPoints?.[index]?.phone &&
+                                (
+                                  errors.commonDataControllerContact
+                                    ?.contactPoints?.[
+                                    index
+                                  ] as FormikErrors<ContactDetailsInterface>
+                                )?.phone
+                              }
+                              helperText={
+                                touched.commonDataControllerContact
+                                  ?.contactPoints?.[index]?.phone &&
+                                (
+                                  errors.commonDataControllerContact
+                                    ?.contactPoints?.[
+                                    index
+                                  ] as FormikErrors<ContactDetailsInterface>
+                                )?.phone
+                              }
                               onChange={handleChange}
                             />
                           </SC.InlineFields>
@@ -513,10 +607,9 @@ const RecordForm = ({
               </>
             )}
           </SC.Fieldset>
-        </SC.RecordFormSection>
-        <SC.RecordFormSection
-          required
-          title='Behandlingsaktiviteter'
+        </FormPanel>
+        <FormPanel
+          headingTitle='Behandlingsaktiviteter'
           isExpanded={allExpanded[2]}
           onClick={() =>
             setAllExpanded(
@@ -525,6 +618,7 @@ const RecordForm = ({
               )
             )
           }
+          hasError={_.has(touched, 'purpose') && _.has(formikErrors, 'purpose')}
         >
           <SC.Fieldset
             required
@@ -537,8 +631,8 @@ const RecordForm = ({
               isReadOnly={isReadOnlyUser}
               name='purpose'
               value={values.purpose}
-              error={isApproved && touched.purpose && errors.purpose}
-              helperText={isApproved && touched.purpose && errors.purpose}
+              error={touched.purpose && errors.purpose}
+              helperText={touched.purpose && errors.purpose}
               onChange={handleChange}
             />
           </SC.Fieldset>
@@ -797,10 +891,9 @@ const RecordForm = ({
               )}
             />
           </SC.Fieldset>
-        </SC.RecordFormSection>
-        <SC.RecordFormSection
-          required
-          title='Personopplysninger'
+        </FormPanel>
+        <FormPanel
+          headingTitle='Personopplysninger'
           isExpanded={allExpanded[3]}
           onClick={() =>
             setAllExpanded(
@@ -808,6 +901,16 @@ const RecordForm = ({
                 index === 3 ? !expanded : expanded
               )
             )
+          }
+          hasError={
+            (_.has(touched, 'categories') &&
+              _.has(formikErrors, 'categories')) ||
+            (_.has(touched, 'plannedDeletion') &&
+              _.has(formikErrors, 'plannedDeletion')) ||
+            (_.has(touched, 'recipientCategories') &&
+              _.has(formikErrors, 'recipientCategories')) ||
+            (_.has(touched, 'dataTransfers') &&
+              _.has(formikErrors, 'dataTransfers'))
           }
         >
           <SC.Fieldset
@@ -834,7 +937,6 @@ const RecordForm = ({
                           labelText='Kategori av registrerte'
                           value={dataSubjectCategories}
                           error={
-                            isApproved &&
                             touched.categories?.[index]
                               ?.dataSubjectCategories &&
                             (
@@ -844,7 +946,6 @@ const RecordForm = ({
                             )?.dataSubjectCategories
                           }
                           helperText={
-                            isApproved &&
                             touched.categories?.[index]
                               ?.dataSubjectCategories &&
                             (
@@ -946,12 +1047,8 @@ const RecordForm = ({
               isReadOnly={isReadOnlyUser}
               name='plannedDeletion'
               value={values.plannedDeletion}
-              error={
-                isApproved && touched.plannedDeletion && errors.plannedDeletion
-              }
-              helperText={
-                isApproved && touched.plannedDeletion && errors.plannedDeletion
-              }
+              error={touched.plannedDeletion && errors.plannedDeletion}
+              helperText={touched.plannedDeletion && errors.plannedDeletion}
               onChange={handleChange}
             />
           </SC.Fieldset>
@@ -981,10 +1078,9 @@ const RecordForm = ({
               onChange={handleChange}
             />
           </SC.Fieldset>
-        </SC.RecordFormSection>
-        <SC.RecordFormSection
-          required
-          title='Overføring av personopplysningene'
+        </FormPanel>
+        <FormPanel
+          headingTitle='Overføring av personopplysningene'
           isExpanded={allExpanded[4]}
           onClick={() =>
             setAllExpanded(
@@ -1009,14 +1105,10 @@ const RecordForm = ({
                   name='recipientCategories'
                   value={values.recipientCategories}
                   error={
-                    isApproved &&
-                    touched.recipientCategories &&
-                    errors.recipientCategories
+                    touched.recipientCategories && errors.recipientCategories
                   }
                   helperText={
-                    isApproved &&
-                    touched.recipientCategories &&
-                    errors.recipientCategories
+                    touched.recipientCategories && errors.recipientCategories
                   }
                   onAddTag={(tag: string) => {
                     arrayHelpers.push(tag);
@@ -1045,12 +1137,10 @@ const RecordForm = ({
                 { label: 'Ja', value: true }
               ]}
               error={
-                isApproved &&
                 touched.dataTransfers?.transferred &&
                 errors.dataTransfers?.transferred
               }
               helperText={
-                isApproved &&
                 touched?.dataTransfers?.transferred &&
                 errors?.dataTransfers?.transferred
               }
@@ -1109,10 +1199,9 @@ const RecordForm = ({
               />
             </SC.Fieldset>
           )}
-        </SC.RecordFormSection>
-        <SC.RecordFormSection
-          required
-          title='Sikkerhetstiltak og DPIA'
+        </FormPanel>
+        <FormPanel
+          headingTitle='Sikkerhetstiltak og DPIA'
           isExpanded={allExpanded[5]}
           onClick={() =>
             setAllExpanded(
@@ -1120,6 +1209,12 @@ const RecordForm = ({
                 index === 5 ? !expanded : expanded
               )
             )
+          }
+          hasError={
+            (_.has(touched, 'securityMeasures') &&
+              _.has(formikErrors, 'securityMeasures')) ||
+            (_.has(touched, 'dataProtectionImpactAssessment') &&
+              _.has(formikErrors, 'dataProtectionImpactAssessment'))
           }
         >
           <SC.Fieldset
@@ -1133,16 +1228,8 @@ const RecordForm = ({
               isReadOnly={isReadOnlyUser}
               name='securityMeasures'
               value={values.securityMeasures}
-              error={
-                isApproved &&
-                touched.securityMeasures &&
-                errors.securityMeasures
-              }
-              helperText={
-                isApproved &&
-                touched.securityMeasures &&
-                errors.securityMeasures
-              }
+              error={touched.securityMeasures && errors.securityMeasures}
+              helperText={touched.securityMeasures && errors.securityMeasures}
               onChange={handleChange}
             />
           </SC.Fieldset>
@@ -1160,12 +1247,10 @@ const RecordForm = ({
                 { label: 'Ja', value: true }
               ]}
               error={
-                isApproved &&
                 touched.dataProtectionImpactAssessment?.conducted &&
                 errors.dataProtectionImpactAssessment?.conducted
               }
               helperText={
-                isApproved &&
                 touched?.dataProtectionImpactAssessment?.conducted &&
                 errors?.dataProtectionImpactAssessment?.conducted
               }
@@ -1180,12 +1265,10 @@ const RecordForm = ({
                 }
                 labelText='Sak-/arkivreferanse eller lenke til vurdering av personvernkonsekvenser (DPIA)'
                 error={
-                  isApproved &&
                   touched.dataProtectionImpactAssessment?.assessmentReportUrl &&
                   errors.dataProtectionImpactAssessment?.assessmentReportUrl
                 }
                 helperText={
-                  isApproved &&
                   touched?.dataProtectionImpactAssessment
                     ?.assessmentReportUrl &&
                   errors?.dataProtectionImpactAssessment?.assessmentReportUrl
@@ -1194,7 +1277,7 @@ const RecordForm = ({
               />
             )}
           </SC.Fieldset>
-        </SC.RecordFormSection>
+        </FormPanel>
       </SC.RecordForm>
     )
   );
