@@ -6,7 +6,7 @@ interface EnvironmentVariables {
   DATASET_CATALOG_API: string;
   OIDC_ISSUER: string;
   OIDC_CLIENT_SECRET: string;
-  ORGANIZATION_API: string;
+  ORGANIZATION_CATALOG_URI: string;
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   SEARCH_HOST: string;
   USE_DEMO_LOGO: boolean;
@@ -21,8 +21,8 @@ const env = ((window as any).env || {
   OIDC_ISSUER:
     'https://sso.staging.fellesdatakatalog.digdir.no/auth/realms/fdk',
   OIDC_CLIENT_SECRET: '',
-  ORGANIZATION_API:
-    'https://organization-catalogue.staging.fellesdatakatalog.digdir.no',
+  ORGANIZATION_CATALOG_URI:
+    'https://organization-catalog.staging.fellesdatakatalog.digdir.no',
   RECORDS_OF_PROCESSING_ACTIVITIES_URL:
     'https://registrering-protokoll.staging.fellesdatakatalog.digdir.no',
 

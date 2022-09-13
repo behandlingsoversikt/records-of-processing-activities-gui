@@ -6,7 +6,7 @@ import env from '../../../env';
 import * as actions from './actions';
 import { FETCH_ORGANIZATION_REQUESTED } from './action-types';
 
-const { ORGANIZATION_API } = env;
+const { ORGANIZATION_CATALOG_URI } = env;
 
 function* fetchOrganizationRequested({
   payload: { id }
@@ -14,7 +14,7 @@ function* fetchOrganizationRequested({
   try {
     const { data, message } = yield call(
       axios.get,
-      `${ORGANIZATION_API}/organizations/${id}`,
+      `${ORGANIZATION_CATALOG_URI}/organizations/${id}`,
       {
         headers: {
           accept: 'application/json'
