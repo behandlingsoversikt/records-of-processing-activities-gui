@@ -17,7 +17,7 @@ services:
       RECORDS_OF_PROCESSING_ACTIVITIES_URL: 'http://localhost:8081'
       FDK_REGISTRATION_BASE_URI: 'https://registrering.staging.fellesdatakatalog.digdir.no'
       DATASET_CATALOG_API: 'http://localhost:8084'
-      ORGANIZATION_API: 'http://localhost:8082'
+      ORGANIZATION_CATALOG_URI: 'http://localhost:8082'
       SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no'
       ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no'
       USE_DEMO_LOGO: false

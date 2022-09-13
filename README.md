@@ -20,7 +20,7 @@ An application for managing records of processing activities.
 - Build a Docker container using the following command:
   - `docker build -t records-of-processing-activities-gui .`
 - Run the container using the following comand:
-  - `docker run -d -p 8141:8080 -e OIDC_ISSUER -e RECORDS_OF_PROCESSING_ACTIVITIES_URL -e FDK_REGISTRATION_BASE_URI -e ORGANIZATION_API records-of-processing-activities-gui`
+  - `docker run -d -p 8141:8080 -e OIDC_ISSUER -e RECORDS_OF_PROCESSING_ACTIVITIES_URL -e FDK_REGISTRATION_BASE_URI -e ORGANIZATION_CATALOG_URI records-of-processing-activities-gui`
 
 ### Running application using Docker Compose
 
@@ -70,7 +70,7 @@ USERS_CONFIGURATION_INLINE: |
 - `OIDC_ISSUER` - OIDC issuer URI
 - `RECORDS_OF_PROCESSING_ACTIVITIES_URL` - Base URL of Records of Processing Activities backend
 - `FDK_REGISTRATION_BASE_URI` - Base URI for registration clients
-- `ORGANIZATION_API` - Base URL of Organization backend
+- `ORGANIZATION_CATALOG_URI` - Base URL of Organization backend
 - `SEARCH_HOST` - FDK portal main page URL
 - `ADMIN_GUI_HOST` - FDK admin main page URL
 - `USE_DEMO_LOGO` - Boolean variable determining demo logo
