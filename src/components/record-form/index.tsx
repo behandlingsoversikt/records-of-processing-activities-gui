@@ -596,7 +596,7 @@ const RecordForm = ({
                           noOptionLabel='Velg artikkel fra listen'
                           onChange={handleChange}
                         />
-                        {['6.1.c', '6.1.e', '6.1.f'].includes(legality) && (
+                        {['6.1.c', '6.1.e'].includes(legality) && (
                           <TextField
                             isReadOnly={isReadOnlyUser}
                             name={`articleSixBasis[${index}].referenceUrl`}
@@ -605,6 +605,16 @@ const RecordForm = ({
                             onChange={handleChange}
                           />
                         )}
+                        {['6.1.f'].includes(legality) && referenceUrl && (
+                          <TextField
+                            isReadOnly={isReadOnlyUser}
+                            name={`articleSixBasis[${index}].referenceUrl`}
+                            value={referenceUrl}
+                            labelText='Henvisning til annen lovgivning (utdatert felt)'
+                            onChange={handleChange}
+                          />
+                        )}
+
                         {!isReadOnlyUser &&
                           (values.articleSixBasis || []).length > 1 && (
                             <SC.RemoveButton

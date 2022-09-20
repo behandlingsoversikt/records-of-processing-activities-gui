@@ -19,7 +19,7 @@ export const helptextsNb = {
   purposeDescription:
     'Alle formål skal være forklart på en måte som gjør at alle berørte har samme forståelse av hva personopplysningene skal brukes til. At formålet skal være legitimt innebærer at det i tillegg til å ha et rettslig grunnlag også skal være i samsvar med øvrige etiske og rettslige samfunnsnormer. Les mer om fastsettelse på [Datatilsynets nettsider](https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/fastsette-formal/) ',
   articleSixBasisAbstract: `All behandling av personopplysninger må ha et rettslig grunnlag, og er bare lovlig dersom minst ett av vilkårene i GDPR artikkel 6 nr. 1, bokstav a-f er oppfylt.`,
-  articleSixBasisDescription: `Det må finnes et behandlingsgrunnlag for behandling av hver enkelt personopplysning til hvert enkelt formål. Hvis behandlingen gjelder en rettslig forpliktelse, berettiget interesse med videre. (c, e, eller f) skal du også henvise til annen lovgivning.`,
+  articleSixBasisDescription: `Det må finnes et behandlingsgrunnlag for behandling av hver enkelt personopplysning til hvert enkelt formål. Hvis behandlingen gjelder en rettslig forpliktelse, berettiget interesse med videre. (c eller e) skal du også henvise til annen lovgivning.`,
   otherArticlesAbstract: `Det må foreligge et særskilt grunnlag i tillegg til behandlingsgrunnlag for å behandle denne typen opplysninger. Skriv inn henvisning også til annen lovgivning, dersom relevant.  `,
   otherArticlesDescription:
     'Les mer på [Datatilsynets nettsider](https://www.datatilsynet.no/rettigheter-og-plikter/virksomhetenes-plikter/behandlingsgrunnlag/veileder-om-behandlingsgrunnlag/?id=10832).',
