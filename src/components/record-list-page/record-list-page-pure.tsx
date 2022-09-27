@@ -1,8 +1,9 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { ExportToCsv } from 'export-to-csv';
 
+import Alert, { Severity } from '@fellesdatakatalog/alert';
 import Root from '../root';
 
 import env from '../../env';
@@ -34,7 +35,8 @@ import { fetchAllRepresentativesRequested } from '../representatives/redux/actio
 
 import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
 import { ArticleNineCode } from '../../types/enums';
-import { isValidRepresentatives } from './utils';
+
+import RepresentativeValidationSchema from '../representative-form/validation-schema';
 
 const { FDK_REGISTRATION_BASE_URI } = env;
 
@@ -53,6 +55,32 @@ interface Props
   records: Record[];
 }
 
+const validateRepresentatives = async (
+  representatives: RepresentativesInterface
+) => {
+  const {
+    dataControllerRepresentative,
+    dataControllerRepresentativeInEU,
+    dataProtectionOfficer
+  } = representatives;
+
+  return (
+    (await RepresentativeValidationSchema.isValid(
+      dataControllerRepresentative
+    )) &&
+    (!(
+      dataControllerRepresentativeInEU.name ||
+      dataControllerRepresentativeInEU.address ||
+      dataControllerRepresentativeInEU.email ||
+      dataControllerRepresentativeInEU.phone
+    ) ||
+      (await RepresentativeValidationSchema.isValid(
+        representatives.dataControllerRepresentativeInEU
+      ))) &&
+    RepresentativeValidationSchema.isValid(dataProtectionOfficer)
+  );
+};
+
 const RecordListPage = ({
   datasets,
   records,
@@ -68,6 +96,8 @@ const RecordListPage = ({
   organizationActions: { fetchOrganizationRequested },
   authService
 }: Props): JSX.Element => {
+  const [isValidRepresentatives, setIsValidRepresentatives] = useState(false);
+
   useEffect(() => {
     if (organizationId) {
       fetchAllDatasetsRequested(organizationId);
@@ -506,6 +536,10 @@ const RecordListPage = ({
 
   const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
 
+  validateRepresentatives(representatives).then(valid => {
+    setIsValidRepresentatives(valid);
+  });
+
   return (
     <Root id='content'>
       <SC.RecordListPage>
@@ -526,6 +560,12 @@ const RecordListPage = ({
           isReadOnlyUser={isReadOnlyUser}
           organizationId={organizationId}
         />
+        {!isValidRepresentatives && (
+          <Alert severity={Severity.WARNING}>
+            Ett eller flere obligatoriske felt er ikke fylt ut. For å generere
+            rapporter for protokoll må disse fylles ut.
+          </Alert>
+        )}
         <SC.RecordListActions>
           {!isReadOnlyUser && (
             <FDKButton
@@ -551,12 +591,12 @@ const RecordListPage = ({
                 name: 'Protokoll',
                 href: `/${organizationId}/report/required`,
                 external: true,
-                disabled: !isValidRepresentatives(representatives)
+                disabled: !isValidRepresentatives
               },
               {
                 name: 'Protokoll CSV',
                 onClick: () => downloadCSV(true),
-                disabled: !isValidRepresentatives(representatives)
+                disabled: !isValidRepresentatives
               }
             ]}
           />

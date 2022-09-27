@@ -50,6 +50,7 @@
     "axios": "^0.27.2"
   },
   "dependencies": {
+    "@fellesdatakatalog/alert": "^0.1.11",
     "@fellesdatakatalog/internal-footer": "^0.3.13",
     "@fellesdatakatalog/internal-header": "^0.5.5",
     "@fellesdatakatalog/link": "^0.2.7",

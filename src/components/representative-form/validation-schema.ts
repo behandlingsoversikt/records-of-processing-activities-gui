@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 
 export default Yup.object().shape({
-  name: Yup.string().ensure().required('Name is required'),
-  address: Yup.string().ensure().required('Address is required'),
+  name: Yup.string().ensure().required('Feltet må fylles ut'),
+  address: Yup.string().ensure().required('Feltet må fylles ut'),
   email: Yup.string()
     .ensure()
-    .required('Email is required')
-    .email('Enter a valid email address'),
-  phone: Yup.string().ensure().required('Phone number is required')
+    .required('Feltet må fylles ut')
+    .email('E-post er ikke gyldig'),
+  phone: Yup.string().ensure().required('Feltet må fylles ut')
 });
