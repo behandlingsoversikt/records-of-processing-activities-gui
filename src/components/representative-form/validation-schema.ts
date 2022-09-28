@@ -7,5 +7,8 @@ export default Yup.object().shape({
     .ensure()
     .required('Feltet må fylles ut')
     .email('E-post er ikke gyldig'),
-  phone: Yup.string().ensure().required('Feltet må fylles ut')
+  phone: Yup.string()
+    .matches(/^\+?[0-9\s]+$/, 'Telefonnummer er ikke gyldig')
+    .ensure()
+    .required('Feltet må fylles ut')
 });
