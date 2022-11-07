@@ -25,8 +25,16 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
     host: '0.0.0.0',
     port: 8141,
     hot: true,
-    onBeforeSetupMiddleware: devServer =>
-      devServer.app.get('/config.js', (_, res) => res.status(204).send()),
+    setupMiddlewares: (middlewares, devServer) => {
+      if (!devServer) {
+        throw new Error('webpack-dev-server is not defined');
+      }
+
+      // onBeforeSetupMiddleware
+      devServer?.app?.get('/config.js', (_, res) => res.status(204).send());
+
+      return middlewares;
+    },
     historyApiFallback: {
       rewrites: [
         { from: /^\/auth/, to: '/auth.html' },
@@ -60,12 +68,9 @@ const configuration: Configuration = mergeWithCustomize<Configuration>({
         test: /\.svg$/,
         use: [
           {
-            loader: 'babel-loader'
-          },
-          {
-            loader: 'react-svg-loader',
+            loader: '@svgr/webpack',
             options: {
-              jsx: true
+              typescript: true
             }
           }
         ],
