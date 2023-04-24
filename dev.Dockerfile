@@ -1,4 +1,4 @@
-FROM node:12.22.5 AS build
+FROM node:18.12.1 AS build
 RUN mkdir /app
 WORKDIR /app
 COPY package.json package-lock.json audit-resolve.json ./
