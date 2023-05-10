@@ -258,6 +258,7 @@ const RecordForm = ({
         <FormPanel
           headingTitle='Daglig behandlingsansvar og databehandler'
           isExpanded={allExpanded[1]}
+          tag='mandatory'
           onClick={() =>
             setAllExpanded(
               allExpanded.map((expanded, index) =>
@@ -611,6 +612,7 @@ const RecordForm = ({
         <FormPanel
           headingTitle='Behandlingsaktiviteter'
           isExpanded={allExpanded[2]}
+          tag='mandatory'
           onClick={() =>
             setAllExpanded(
               allExpanded.map((expanded, index) =>
@@ -895,6 +897,7 @@ const RecordForm = ({
         <FormPanel
           headingTitle='Personopplysninger'
           isExpanded={allExpanded[3]}
+          tag='mandatory'
           onClick={() =>
             setAllExpanded(
               allExpanded.map((expanded, index) =>
@@ -1082,6 +1085,7 @@ const RecordForm = ({
         <FormPanel
           headingTitle='Overføring av personopplysningene'
           isExpanded={allExpanded[4]}
+          tag='mandatory'
           onClick={() =>
             setAllExpanded(
               allExpanded.map((expanded, index) =>
@@ -1203,6 +1207,7 @@ const RecordForm = ({
         <FormPanel
           headingTitle='Sikkerhetstiltak og DPIA'
           isExpanded={allExpanded[5]}
+          tag='mandatory'
           onClick={() =>
             setAllExpanded(
               allExpanded.map((expanded, index) =>
