@@ -156,7 +156,7 @@ class AuthService {
     return this.hasResourceRole({
       resource: 'organization',
       resourceId,
-      role: 'admin'
+      role: 'write'
     });
   }
 
