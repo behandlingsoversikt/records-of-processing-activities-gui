@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import InternalHeader from '@fellesdatakatalog/internal-header';
 import Link from '@fellesdatakatalog/link';
 
+import { useLocation } from 'react-router-dom';
 import env from '../../env';
 
 import { withAuth, Props as AuthorizationProps } from '../../providers/auth';
@@ -15,12 +16,27 @@ const {
   ADMIN_GUI_HOST,
   FDK_REGISTRATION_BASE_URI,
   SEARCH_HOST,
-  USE_DEMO_LOGO
+  USE_DEMO_LOGO,
+  CATALOG_ADMIN_BASE_URI
 } = env;
 
 const Header: FC<Props> = ({ authService }) => {
   const userName = authService.getUserProfile()?.name;
   const logOutAndRedirect = () => authService.signOut();
+
+  const showManageConceptCatalogsUrl = () => {
+    const resourceRoles = authService.getResourceRoles();
+    const location = useLocation();
+    const pathParts = location.pathname.split('/');
+    const currentCatalogId = pathParts[1];
+
+    return resourceRoles.some(role => {
+      const roleCatalogId = role?.resourceId;
+      return authService.hasOrganizationAdminPermission(
+        currentCatalogId || roleCatalogId
+      );
+    });
+  };
 
   return (
     <>
@@ -34,6 +50,8 @@ const Header: FC<Props> = ({ authService }) => {
         username={userName}
         onLogout={logOutAndRedirect}
         useDemoLogo={USE_DEMO_LOGO}
+        showManageConceptCatalogsUrl={showManageConceptCatalogsUrl()}
+        manageConceptCatalogsUrl={CATALOG_ADMIN_BASE_URI}
       >
         <Link href={`${SEARCH_HOST}/guidance`}>Registrere data</Link>
         <Link href={ADMIN_GUI_HOST}>Høste data</Link>

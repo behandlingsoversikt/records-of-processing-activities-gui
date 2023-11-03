@@ -7,6 +7,7 @@ export interface Configuration {
   ORGANIZATION_CATALOG_URI: string;
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   SEARCH_HOST: string;
+  CATALOG_ADMIN_BASE_URI: string;
   USE_DEMO_LOGO: boolean;
 }
 
