@@ -50,7 +50,7 @@
     "moment": "^2.29.4"
   },
   "dependencies": {
-    "@fellesdatakatalog/alert": "^0.1.11",
+    "@fellesdatakatalog/alert": "^0.3.8",
     "@fellesdatakatalog/icons": "^0.6.0",
     "@fellesdatakatalog/internal-footer": "^0.4.0",
     "@fellesdatakatalog/internal-header": "^0.8.0",
