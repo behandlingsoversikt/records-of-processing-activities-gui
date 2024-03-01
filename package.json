@@ -78,7 +78,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-saga": "^1.2.2",
     "regenerator-runtime": "^0.13.9",
-    "sanitize-html": "^2.5.1",
+    "sanitize-html": "^2.12.1",
     "showdown": "^1.9.1",
     "styled-components": "^5.3.5",
     "yup": "^0.29.3"
