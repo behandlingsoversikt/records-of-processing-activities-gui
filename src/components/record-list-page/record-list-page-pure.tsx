@@ -1,8 +1,6 @@
 import React, { useEffect, memo, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { ExportToCsv } from 'export-to-csv';
-
 import Alert, { Severity } from '@fellesdatakatalog/alert';
 import Root from '../root';
 
@@ -37,6 +35,7 @@ import { withAuth, Props as AuthServiceProps } from '../../providers/auth';
 import { ArticleNineCode } from '../../types/enums';
 
 import RepresentativeValidationSchema from '../representative-form/validation-schema';
+import { CsvColumn, downloadCsv } from '../../utils/csv';
 
 const { FDK_REGISTRATION_BASE_URI } = env;
 
@@ -129,93 +128,324 @@ const RecordListPage = ({
     return '';
   };
 
-  const downloadCSV = (requiredFieldsOnly: boolean) => {
+  const downloadCSVExport = (requiredFieldsOnly: boolean) => {
     const variableHeaders = requiredFieldsOnly
       ? [
-          localization.csvHeaders.purpose,
-          localization.csvHeaders.commonDataControllerChecked,
-          localization.csvHeaders.commonDataControllerCompanies,
-          localization.csvHeaders.commonDataControllerContact,
-          localization.csvHeaders.categorySubjects,
-          localization.csvHeaders.categoryPersonalData,
-          localization.csvHeaders.plannedDeletion,
-          localization.csvHeaders.recipientCategories,
-          localization.csvHeaders.internationalReceivers,
-          localization.csvHeaders.guarantees,
-          localization.csvHeaders.securityMeasures
+          {
+            key: 'purpose',
+            title: localization.csvHeaders.purpose
+          },
+          {
+            key: 'commonDataControllerChecked',
+            title: localization.csvHeaders.commonDataControllerChecked
+          },
+          {
+            key: 'commonDataControllerCompanies',
+            title: localization.csvHeaders.commonDataControllerCompanies
+          },
+          {
+            key: 'commonDataControllerContact',
+            title: localization.csvHeaders.commonDataControllerContact
+          },
+          {
+            key: 'categorySubjects',
+            title: localization.csvHeaders.categorySubjects
+          },
+          {
+            key: 'categoryPersonalData',
+            title: localization.csvHeaders.categoryPersonalData
+          },
+          {
+            key: 'plannedDeletion',
+            title: localization.csvHeaders.plannedDeletion
+          },
+          {
+            key: 'recipientCategories',
+            title: localization.csvHeaders.recipientCategories
+          },
+          {
+            key: 'internationalReceivers',
+            title: localization.csvHeaders.internationalReceivers
+          },
+          {
+            key: 'guarantees',
+            title: localization.csvHeaders.guarantees
+          },
+          {
+            key: 'securityMeasures',
+            title: localization.csvHeaders.securityMeasures
+          }
         ]
       : [
-          localization.csvHeaders.processStatus,
-          localization.csvHeaders.dataProcessorName,
-          localization.csvHeaders.dataProcessorTlf,
-          localization.csvHeaders.dataProcessorEmail,
-          localization.csvHeaders.dataProcessorAgreementNames,
-          localization.csvHeaders.dataProcessorAgreementUrls,
-          localization.csvHeaders.commonDataControllerChecked,
-          localization.csvHeaders.commonDataControllerCompanies,
-          localization.csvHeaders.commonDataControllerResponsibilities,
-          localization.csvHeaders.commonDataControllerContact,
-          localization.csvHeaders.commonDataControllerEmail,
-          localization.csvHeaders.commonDataControllerTlf,
-          localization.csvHeaders.purpose,
-          localization.csvHeaders.articleSixBasis,
-          localization.csvHeaders.articleSixReference,
-          localization.csvHeaders.articleNineBasis,
-          localization.csvHeaders.articleNineReference,
-          localization.articleNineCodes.labels.a,
-          localization.articleNineCodes.labels.b,
-          localization.articleNineCodes.reference.b,
-          localization.articleNineCodes.labels.c,
-          localization.articleNineCodes.reference.c,
-          localization.articleNineCodes.labels.d,
-          localization.articleNineCodes.reference.d,
-          localization.articleNineCodes.labels.e,
-          localization.articleNineCodes.reference.e,
-          localization.articleNineCodes.labels.f,
-          localization.articleNineCodes.reference.f,
-          localization.articleNineCodes.labels.g,
-          localization.articleNineCodes.reference.g,
-          localization.articleNineCodes.labels.h,
-          localization.articleNineCodes.reference.h,
-          localization.articleNineCodes.labels.i,
-          localization.articleNineCodes.reference.i,
-          localization.articleNineCodes.labels.j,
-          localization.articleNineCodes.reference.j,
-          localization.csvHeaders.articleTenBasis,
-          localization.csvHeaders.articleTenReference,
-          localization.csvHeaders.businessAreas,
-          localization.csvHeaders.relatedDatasetsUrl,
-          localization.csvHeaders.relatedDatasetsName,
-          localization.csvHeaders.categorySubjects,
-          localization.csvHeaders.categoryPersonalData,
-          localization.csvHeaders.plannedDeletion,
-          localization.csvHeaders.personalDataSubjects,
-          localization.csvHeaders.privacyProcessingSystems,
-          localization.csvHeaders.recipientCategories,
-          localization.csvHeaders.internationalReceivers,
-          localization.csvHeaders.guarantees,
-          localization.csvHeaders.securityMeasures,
-          localization.csvHeaders.dpiaConducted,
-          localization.csvHeaders.dpiaReference
+          {
+            key: 'processStatus',
+            title: localization.csvHeaders.processStatus
+          },
+          {
+            key: 'dataProcessorName',
+            title: localization.csvHeaders.dataProcessorName
+          },
+          {
+            key: 'dataProcessorTlf',
+            title: localization.csvHeaders.dataProcessorTlf
+          },
+          {
+            key: 'dataProcessorEmail',
+            title: localization.csvHeaders.dataProcessorEmail
+          },
+          {
+            key: 'dataProcessorAgreementNames',
+            title: localization.csvHeaders.dataProcessorAgreementNames
+          },
+          {
+            key: 'dataProcessorAgreementUrls',
+            title: localization.csvHeaders.dataProcessorAgreementUrls
+          },
+          {
+            key: 'commonDataControllerChecked',
+            title: localization.csvHeaders.commonDataControllerChecked
+          },
+          {
+            key: 'commonDataControllerCompanies',
+            title: localization.csvHeaders.commonDataControllerCompanies
+          },
+          {
+            key: 'commonDataControllerResponsibilities',
+            title: localization.csvHeaders.commonDataControllerResponsibilities
+          },
+          {
+            key: 'commonDataControllerContact',
+            title: localization.csvHeaders.commonDataControllerContact
+          },
+          {
+            key: 'commonDataControllerEmail',
+            title: localization.csvHeaders.commonDataControllerEmail
+          },
+          {
+            key: 'commonDataControllerTlf',
+            title: localization.csvHeaders.commonDataControllerTlf
+          },
+          {
+            key: 'purpose',
+            title: localization.csvHeaders.purpose
+          },
+          {
+            key: 'articleSixBasis',
+            title: localization.csvHeaders.articleSixBasis
+          },
+          {
+            key: 'articleSixReference',
+            title: localization.csvHeaders.articleSixReference
+          },
+          {
+            key: 'articleNineBasis',
+            title: localization.csvHeaders.articleNineBasis
+          },
+          {
+            key: 'articleNineReference',
+            title: localization.csvHeaders.articleNineReference
+          },
+          {
+            key: 'articleNineLegalityA',
+            title: localization.articleNineCodes.labels.a
+          },
+          {
+            key: 'articleNineLegalityB',
+            title: localization.articleNineCodes.labels.b
+          },
+          {
+            key: 'articleNineLegalityBReference',
+            title: localization.articleNineCodes.reference.b
+          },
+          {
+            key: 'articleNineLegalityC',
+            title: localization.articleNineCodes.labels.c
+          },
+          {
+            key: 'articleNineLegalityCReference',
+            title: localization.articleNineCodes.reference.c
+          },
+          {
+            key: 'articleNineLegalityD',
+            title: localization.articleNineCodes.labels.d
+          },
+          {
+            key: 'articleNineLegalityDReference',
+            title: localization.articleNineCodes.reference.d
+          },
+          {
+            key: 'articleNineLegalityE',
+            title: localization.articleNineCodes.labels.e
+          },
+          {
+            key: 'articleNineLegalityEReference',
+            title: localization.articleNineCodes.reference.e
+          },
+          {
+            key: 'articleNineLegalityF',
+            title: localization.articleNineCodes.labels.f
+          },
+          {
+            key: 'articleNineLegalityFReference',
+            title: localization.articleNineCodes.reference.f
+          },
+          {
+            key: 'articleNineLegalityG',
+            title: localization.articleNineCodes.labels.g
+          },
+          {
+            key: 'articleNineLegalityGReference',
+            title: localization.articleNineCodes.reference.g
+          },
+          {
+            key: 'articleNineLegalityH',
+            title: localization.articleNineCodes.labels.h
+          },
+          {
+            key: 'articleNineLegalityHReference',
+            title: localization.articleNineCodes.reference.h
+          },
+          {
+            key: 'articleNineLegalityI',
+            title: localization.articleNineCodes.labels.i
+          },
+          {
+            key: 'articleNineLegalityIReference',
+            title: localization.articleNineCodes.reference.i
+          },
+          {
+            key: 'articleNineLegalityJ',
+            title: localization.articleNineCodes.labels.j
+          },
+          {
+            key: 'articleNineLegalityJReference',
+            title: localization.articleNineCodes.reference.j
+          },
+          {
+            key: 'articleTenBasis',
+            title: localization.csvHeaders.articleTenBasis
+          },
+          {
+            key: 'articleTenReference',
+            title: localization.csvHeaders.articleTenReference
+          },
+          {
+            key: 'businessAreas',
+            title: localization.csvHeaders.businessAreas
+          },
+          {
+            key: 'relatedDatasets',
+            title: localization.csvHeaders.relatedDatasetsUrl
+          },
+          {
+            key: 'relatedDatasetNames',
+            title: localization.csvHeaders.relatedDatasetsName
+          },
+          {
+            key: 'categorySubjects',
+            title: localization.csvHeaders.categorySubjects
+          },
+          {
+            key: 'categoryPersonalData',
+            title: localization.csvHeaders.categoryPersonalData
+          },
+          {
+            key: 'plannedDeletion',
+            title: localization.csvHeaders.plannedDeletion
+          },
+          {
+            key: 'personalDataSubjects',
+            title: localization.csvHeaders.personalDataSubjects
+          },
+          {
+            key: 'privacyProcessingSystems',
+            title: localization.csvHeaders.privacyProcessingSystems
+          },
+          {
+            key: 'recipientCategories',
+            title: localization.csvHeaders.recipientCategories
+          },
+          {
+            key: 'internationalReceivers',
+            title: localization.csvHeaders.internationalReceivers
+          },
+          {
+            key: 'guarantees',
+            title: localization.csvHeaders.guarantees
+          },
+          {
+            key: 'securityMeasures',
+            title: localization.csvHeaders.securityMeasures
+          },
+          {
+            key: 'dpiaConducted',
+            title: localization.csvHeaders.dpiaConducted
+          },
+          {
+            key: 'dpiaReference',
+            title: localization.csvHeaders.dpiaReference
+          }
         ];
 
-    const headers = [
-      localization.csvHeaders.organizationName,
-      localization.csvHeaders.organizationId,
-      localization.csvHeaders.dataControllerRepresentative,
-      localization.csvHeaders.dataControllerRepresentativeAddress,
-      localization.csvHeaders.dataControllerRepresentativeEmail,
-      localization.csvHeaders.dataControllerRepresentativePhone,
-      localization.csvHeaders.dataControllerRepresentativeInEU,
-      localization.csvHeaders.dataControllerRepresentativeInEUName,
-      localization.csvHeaders.dataControllerRepresentativeInEUAddress,
-      localization.csvHeaders.dataControllerRepresentativeInEUEmail,
-      localization.csvHeaders.dataControllerRepresentativeInEUPhone,
-      localization.csvHeaders.dataProtectionOfficerName,
-      localization.csvHeaders.dataProtectionOfficerAddress,
-      localization.csvHeaders.dataProtectionOfficerEmail,
-      localization.csvHeaders.dataProtectionOfficerPhone,
-      localization.csvHeaders.title,
+    const headers: CsvColumn[] = [
+      {
+        key: 'organizationName',
+        title: localization.csvHeaders.organizationName
+      },
+      { key: 'organizationId', title: localization.csvHeaders.organizationId },
+      {
+        key: 'dataControllerRepresentative',
+        title: localization.csvHeaders.dataControllerRepresentative
+      },
+      {
+        key: 'dataControllerRepresentativeAddress',
+        title: localization.csvHeaders.dataControllerRepresentativeAddress
+      },
+      {
+        key: 'dataControllerRepresentativeEmail',
+        title: localization.csvHeaders.dataControllerRepresentativeEmail
+      },
+      {
+        key: 'dataControllerRepresentativePhone',
+        title: localization.csvHeaders.dataControllerRepresentativePhone
+      },
+      {
+        key: 'outsideEU',
+        title: localization.csvHeaders.dataControllerRepresentativeInEU
+      },
+      {
+        key: 'euRepresentativeName',
+        title: localization.csvHeaders.dataControllerRepresentativeInEUName
+      },
+      {
+        key: 'euRepresentativeAddress',
+        title: localization.csvHeaders.dataControllerRepresentativeInEUAddress
+      },
+      {
+        key: 'euRepresentativeEmail',
+        title: localization.csvHeaders.dataControllerRepresentativeInEUEmail
+      },
+      {
+        key: 'euRepresentativePhone',
+        title: localization.csvHeaders.dataControllerRepresentativeInEUPhone
+      },
+      {
+        key: 'dataProtectionOfficerName',
+        title: localization.csvHeaders.dataProtectionOfficerName
+      },
+      {
+        key: 'dataProtectionOfficerAddress',
+        title: localization.csvHeaders.dataProtectionOfficerAddress
+      },
+      {
+        key: 'dataProtectionOfficerEmail',
+        title: localization.csvHeaders.dataProtectionOfficerEmail
+      },
+      {
+        key: 'dataProtectionOfficerPhone',
+        title: localization.csvHeaders.dataProtectionOfficerPhone
+      },
+      { key: 'title', title: localization.csvHeaders.title },
       ...variableHeaders
     ];
 
@@ -226,7 +456,7 @@ const RecordListPage = ({
       representatives?.dataControllerRepresentativeInEU?.phone
     );
 
-    const csvInput = records
+    const csvData = records
       .filter(record =>
         requiredFieldsOnly ? record.status === 'APPROVED' : true
       )
@@ -523,15 +753,11 @@ const RecordListPage = ({
             }
       );
 
-    const csvExporter = new ExportToCsv({
-      fieldSeparator: ';',
-      decimalSeparator: ',',
-      showLabels: true,
-      useBom: true,
-      filename: requiredFieldsOnly ? 'protokoll' : 'behandlingsoversikt',
-      headers
-    });
-    csvExporter.generateCsv(csvInput);
+    downloadCsv(
+      csvData,
+      headers,
+      requiredFieldsOnly ? 'protokoll' : 'behandlingsoversikt'
+    );
   };
 
   const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
@@ -585,7 +811,7 @@ const RecordListPage = ({
               },
               {
                 name: 'Behandlingsoversikt CSV',
-                onClick: () => downloadCSV(false)
+                onClick: () => downloadCSVExport(false)
               },
               {
                 name: 'Protokoll',
@@ -595,7 +821,7 @@ const RecordListPage = ({
               },
               {
                 name: 'Protokoll CSV',
-                onClick: () => downloadCSV(true),
+                onClick: () => downloadCSVExport(true),
                 disabled: !isValidRepresentatives
               }
             ]}

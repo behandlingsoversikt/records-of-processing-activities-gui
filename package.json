@@ -7,7 +7,9 @@
     "url": "git+https://github.com/Informasjonsforvaltning/records-of-processing-activities-gui.git"
   },
   "author": "Øyvind Isaksen",
-  "contributors": ["Jeff Reiffers"],
+  "contributors": [
+    "Jeff Reiffers"
+  ],
   "license": "ISC",
   "private": true,
   "engines": {
@@ -61,10 +63,8 @@
     "@material-ui/icons": "^4.11.3",
     "axios": "^1.6.8",
     "core-js": "^3.32.2",
-    "export-to-csv": "^0.2.1",
     "fast-json-patch": "^3.1.1",
     "formik": "^2.2.9",
-    "fsevents": "^2.3.2",
     "immutable": "4.2.2",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
