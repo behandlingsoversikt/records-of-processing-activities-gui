@@ -1,7 +1,8 @@
 import React, { useEffect, memo, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { ExportToCsv } from 'export-to-csv';
+// eslint-disable-next-line import/no-unresolved
+import { mkConfig, generateCsv, download } from 'export-to-csv';
 
 import Alert, { Severity } from '@fellesdatakatalog/alert';
 import Root from '../root';
@@ -226,7 +227,7 @@ const RecordListPage = ({
       representatives?.dataControllerRepresentativeInEU?.phone
     );
 
-    const csvInput = records
+    const csvData = records
       .filter(record =>
         requiredFieldsOnly ? record.status === 'APPROVED' : true
       )
@@ -523,15 +524,19 @@ const RecordListPage = ({
             }
       );
 
-    const csvExporter = new ExportToCsv({
+    const csvConfig = mkConfig({
       fieldSeparator: ';',
       decimalSeparator: ',',
-      showLabels: true,
+      quoteStrings: true,
+      showColumnHeaders: true,
+      useKeysAsHeaders: true, // Note. CSV is empty when not setting this to true
       useBom: true,
       filename: requiredFieldsOnly ? 'protokoll' : 'behandlingsoversikt',
-      headers
+      columnHeaders: headers
     });
-    csvExporter.generateCsv(csvInput);
+
+    const csv = generateCsv(csvConfig)(csvData);
+    download(csvConfig)(csv);
   };
 
   const isReadOnlyUser = authService.isReadOnlyUser(organizationId);
