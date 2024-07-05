@@ -1,5 +1,6 @@
 import React, { useEffect, memo } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import IconAlertWarning from '../../images/icon-alert-warning-md.svg';
 
@@ -53,6 +54,13 @@ const RecordReportPage = ({
 
   return (
     <SC.Root id='content'>
+      <Helmet>
+        <title>
+          {`${
+            requiredFieldsOnly ? localization.protocol : localization.overview
+          } for ${organization?.name ?? ''}`}
+        </title>
+      </Helmet>
       <SC.RecordReportPage>
         <SC.Logo />
         <SC.TitleWrapper>
