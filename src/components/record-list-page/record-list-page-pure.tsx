@@ -1,5 +1,6 @@
 import React, { useEffect, memo, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import Alert, { Severity } from '@fellesdatakatalog/alert';
 import Root from '../root';
@@ -756,7 +757,9 @@ const RecordListPage = ({
     downloadCsv(
       csvData,
       headers,
-      requiredFieldsOnly ? 'protokoll' : 'behandlingsoversikt'
+      `${
+        requiredFieldsOnly ? localization.protocol : localization.overview
+      } for ${organization?.name ?? ''}`
     );
   };
 
@@ -768,6 +771,9 @@ const RecordListPage = ({
 
   return (
     <Root id='content'>
+      <Helmet>
+        <title>{`Behandlingsoversikt for ${organization?.name ?? ''}`}</title>
+      </Helmet>
       <SC.RecordListPage>
         <BreadcrumbsBar
           breadcrumbs={[
