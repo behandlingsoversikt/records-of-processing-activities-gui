@@ -83,7 +83,7 @@
     "sanitize-html": "^2.13.0",
     "showdown": "^1.9.1",
     "styled-components": "^5.3.5",
-    "yup": "^0.29.3"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
