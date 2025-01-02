@@ -2,7 +2,6 @@ import { Configuration } from './types';
 
 interface EnvironmentVariables {
   ADMIN_GUI_HOST: string;
-  FDK_REGISTRATION_BASE_URI: string;
   DATASET_CATALOG_API: string;
   OIDC_ISSUER: string;
   OIDC_CLIENT_SECRET: string;
@@ -10,13 +9,12 @@ interface EnvironmentVariables {
   RECORDS_OF_PROCESSING_ACTIVITIES_URL: string;
   SEARCH_HOST: string;
   CATALOG_ADMIN_BASE_URI: string;
+  CATALOG_PORTAL_BASE_URI: string;
   USE_DEMO_LOGO: boolean;
 }
 
 const env = ((window as any).env || {
   ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no',
-  FDK_REGISTRATION_BASE_URI:
-    'https://registrering.staging.fellesdatakatalog.digdir.no',
   DATASET_CATALOG_API:
     'https://registrering.staging.fellesdatakatalog.digdir.no',
   OIDC_ISSUER:
@@ -30,6 +28,8 @@ const env = ((window as any).env || {
   SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no',
   CATALOG_ADMIN_BASE_URI:
     'https://catalog-admin.staging.fellesdatakatalog.digdir.no',
+  CATALOG_PORTAL_BASE_URI:
+    'https://catalog-portal.staging.fellesdatakatalog.digdir.no',
   USE_DEMO_LOGO: false
 }) as EnvironmentVariables;
 

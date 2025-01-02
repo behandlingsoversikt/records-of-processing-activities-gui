@@ -14,7 +14,7 @@ interface Props extends AuthorizationProps {}
 
 const {
   ADMIN_GUI_HOST,
-  FDK_REGISTRATION_BASE_URI,
+  CATALOG_PORTAL_BASE_URI,
   SEARCH_HOST,
   USE_DEMO_LOGO,
   CATALOG_ADMIN_BASE_URI
@@ -46,7 +46,7 @@ const Header: FC<Props> = ({ authService }) => {
         </SC.SkipLink>
       </SC.SkipLinkWrap>
       <InternalHeader
-        homeUrl={FDK_REGISTRATION_BASE_URI}
+        homeUrl={CATALOG_PORTAL_BASE_URI}
         username={userName}
         onLogout={logOutAndRedirect}
         useDemoLogo={USE_DEMO_LOGO}
