@@ -13,7 +13,7 @@ const RecordPage = lazy(() => import('../record-page'));
 const RecordReportPage = lazy(
   () => import('../record-report-page/record-report-page')
 );
-const { FDK_REGISTRATION_BASE_URI } = env;
+const { CATALOG_PORTAL_BASE_URI } = env;
 
 const Router = (): JSX.Element => (
   <BrowserRouter>
@@ -38,7 +38,7 @@ const Router = (): JSX.Element => (
         <Route
           path='/'
           component={() => {
-            window.location.href = FDK_REGISTRATION_BASE_URI;
+            window.location.href = CATALOG_PORTAL_BASE_URI;
             return null;
           }}
         />

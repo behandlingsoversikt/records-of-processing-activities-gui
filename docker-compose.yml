@@ -15,11 +15,11 @@ services:
       OIDC_ISSUER: 'http://localhost:4011'
       OIDC_CLIENT_SECRET: 'records-of-processing-activities-gui-secret'
       RECORDS_OF_PROCESSING_ACTIVITIES_URL: 'http://localhost:8081'
-      FDK_REGISTRATION_BASE_URI: 'https://registrering.staging.fellesdatakatalog.digdir.no'
       DATASET_CATALOG_API: 'http://localhost:8084'
       ORGANIZATION_CATALOG_URI: 'http://localhost:8082'
       SEARCH_HOST: 'https://staging.fellesdatakatalog.digdir.no'
       ADMIN_GUI_HOST: 'https://admin.staging.fellesdatakatalog.digdir.no'
+      CATALOG_PORTAL_BASE_URI: 'https://catalog-portal.staging.fellesdatakatalog.digdir.no'
       USE_DEMO_LOGO: false
     networks:
       - rop-net

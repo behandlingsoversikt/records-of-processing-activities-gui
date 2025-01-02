@@ -38,7 +38,7 @@ import { ArticleNineCode } from '../../types/enums';
 import RepresentativeValidationSchema from '../representative-form/validation-schema';
 import { CsvColumn, downloadCsv } from '../../utils/csv';
 
-const { FDK_REGISTRATION_BASE_URI } = env;
+const { CATALOG_PORTAL_BASE_URI } = env;
 
 interface RouteParams {
   organizationId: string;
@@ -779,7 +779,7 @@ const RecordListPage = ({
           breadcrumbs={[
             {
               title: 'Alle kataloger',
-              url: FDK_REGISTRATION_BASE_URI
+              url: CATALOG_PORTAL_BASE_URI
             },
             { title: 'Behandlingsoversikt', current: true }
           ]}

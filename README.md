@@ -69,7 +69,6 @@ USERS_CONFIGURATION_INLINE: |
 
 - `OIDC_ISSUER` - OIDC issuer URI
 - `RECORDS_OF_PROCESSING_ACTIVITIES_URL` - Base URL of Records of Processing Activities backend
-- `FDK_REGISTRATION_BASE_URI` - Base URI for registration clients
 - `ORGANIZATION_CATALOG_URI` - Base URL of Organization backend
 - `SEARCH_HOST` - FDK portal main page URL
 - `ADMIN_GUI_HOST` - FDK admin main page URL

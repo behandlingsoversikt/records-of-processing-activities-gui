@@ -20,7 +20,7 @@ import SC from './styled';
 
 import { RecordStatus } from '../../types/enums';
 
-const { FDK_REGISTRATION_BASE_URI } = env;
+const { CATALOG_PORTAL_BASE_URI } = env;
 
 interface RouteParams {
   organizationId: string;
@@ -100,7 +100,7 @@ const RecordPage = ({
           breadcrumbs={[
             {
               title: 'Alle kataloger',
-              url: FDK_REGISTRATION_BASE_URI
+              url: CATALOG_PORTAL_BASE_URI
             },
             {
               title: 'Behandlingsoversikt',
