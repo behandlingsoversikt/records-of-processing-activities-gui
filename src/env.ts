@@ -10,6 +10,7 @@ interface EnvironmentVariables {
   SEARCH_HOST: string;
   CATALOG_ADMIN_BASE_URI: string;
   CATALOG_PORTAL_BASE_URI: string;
+  ALLOW_LIST: string;
   USE_DEMO_LOGO: boolean;
 }
 
@@ -30,6 +31,7 @@ const env = ((window as any).env || {
     'https://catalog-admin.staging.fellesdatakatalog.digdir.no',
   CATALOG_PORTAL_BASE_URI:
     'https://catalog-portal.staging.fellesdatakatalog.digdir.no',
+  ALLOW_LIST: '910244132',
   USE_DEMO_LOGO: false
 }) as EnvironmentVariables;
 
