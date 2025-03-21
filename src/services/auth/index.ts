@@ -2,9 +2,12 @@ import { User, UserManager, Log } from 'oidc-client';
 import jwt_decode from 'jwt-decode';
 
 import config from './config';
+import env from '../../env';
 
 import type { UserProfile, ResourceRole } from './types';
 import { OidcError } from './enums';
+
+const { ALLOW_LIST } = env;
 
 class AuthService {
   private user: User | null;
@@ -146,6 +149,9 @@ class AuthService {
   }
 
   public hasOrganizationReadPermission(organizationNumber: string): boolean {
+    if (!ALLOW_LIST.includes(organizationNumber)) {
+      return false;
+    }
     return this.getResourceRoles().some(
       ({ resource, resourceId }) =>
         resource === 'organization' && resourceId === organizationNumber
@@ -153,6 +159,9 @@ class AuthService {
   }
 
   public hasOrganizationWritePermission(resourceId: string): boolean {
+    if (!ALLOW_LIST.includes(resourceId)) {
+      return false;
+    }
     return this.hasResourceRole({
       resource: 'organization',
       resourceId,
@@ -161,6 +170,9 @@ class AuthService {
   }
 
   public hasOrganizationAdminPermission(resourceId: string): boolean {
+    if (!ALLOW_LIST.includes(resourceId)) {
+      return false;
+    }
     return this.hasResourceRole({
       resource: 'organization',
       resourceId,

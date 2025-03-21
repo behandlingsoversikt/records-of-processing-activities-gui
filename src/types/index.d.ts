@@ -8,6 +8,7 @@ export interface Configuration {
   SEARCH_HOST: string;
   CATALOG_ADMIN_BASE_URI: string;
   CATALOG_PORTAL_BASE_URI: string;
+  ALLOW_LIST: string;
   USE_DEMO_LOGO: boolean;
 }
 
