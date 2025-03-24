@@ -149,7 +149,7 @@ class AuthService {
   }
 
   public hasOrganizationReadPermission(organizationNumber: string): boolean {
-    if (!ALLOW_LIST.includes(organizationNumber)) {
+    if (ALLOW_LIST.includes(organizationNumber)) {
       return false;
     }
     return this.getResourceRoles().some(
@@ -159,7 +159,7 @@ class AuthService {
   }
 
   public hasOrganizationWritePermission(resourceId: string): boolean {
-    if (!ALLOW_LIST.includes(resourceId)) {
+    if (ALLOW_LIST.includes(resourceId)) {
       return false;
     }
     return this.hasResourceRole({
@@ -170,7 +170,7 @@ class AuthService {
   }
 
   public hasOrganizationAdminPermission(resourceId: string): boolean {
-    if (!ALLOW_LIST.includes(resourceId)) {
+    if (ALLOW_LIST.includes(resourceId)) {
       return false;
     }
     return this.hasResourceRole({
