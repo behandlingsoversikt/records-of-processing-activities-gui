@@ -8,6 +8,7 @@ import type { UserProfile, ResourceRole } from './types';
 import { OidcError } from './enums';
 
 const { ALLOW_LIST } = env;
+const allowedOrgs: string[] = ALLOW_LIST.split(',');
 
 class AuthService {
   private user: User | null;
@@ -149,7 +150,7 @@ class AuthService {
   }
 
   public hasOrganizationReadPermission(organizationNumber: string): boolean {
-    if (ALLOW_LIST.includes(organizationNumber)) {
+    if (allowedOrgs.includes(organizationNumber)) {
       return false;
     }
     return this.getResourceRoles().some(
@@ -159,7 +160,7 @@ class AuthService {
   }
 
   public hasOrganizationWritePermission(resourceId: string): boolean {
-    if (ALLOW_LIST.includes(resourceId)) {
+    if (allowedOrgs.includes(resourceId)) {
       return false;
     }
     return this.hasResourceRole({
@@ -170,7 +171,7 @@ class AuthService {
   }
 
   public hasOrganizationAdminPermission(resourceId: string): boolean {
-    if (ALLOW_LIST.includes(resourceId)) {
+    if (allowedOrgs.includes(resourceId)) {
       return false;
     }
     return this.hasResourceRole({
